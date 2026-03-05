@@ -1,0 +1,372 @@
+﻿# Source: https://docs.docker.com/reference/compose-file/
+# Downloaded: 2026-02-16
+# This is the OFFICIAL documentation, not a summary.
+
+---
+
+Compose file reference | Docker Docs
+- 
+- 
+- 
+- 
+- 
+- 
+  
+    
+    
+      
+        
+          
+- 
+        
+      
+    
+  
+
+- 
+- 
+
+Ask AI
+
+Search {
+                localStorage.setItem('theme-preference', value);
+                document.firstElementChild.className = value;
+              })" @click="theme = (theme === 'dark' ? 'light' : 'dark')">
+
+ !m.isStreaming)
+
+      // Watch for store changes to focus input
+      this.$watch('$store.gordon.isOpen', (isOpen) => {
+        if (isOpen) {
+          this.$nextTick(() => {
+            this.$refs.input?.focus()
+          })
+        }
+      })
+
+      // Watch for query from store and populate input
+      this.$watch('$store.gordon.query', (query) => {
+        if (query) {
+          this.currentQuestion = query
+          const shouldAutoSubmit = this.$store.gordon.autoSubmit
+          this.$nextTick(() => {
+            if (shouldAutoSubmit) {
+              this.askQuestion()
+            } else {
+              this.$refs.input?.focus()
+              this.$refs.input?.select()
+            }
+          })
+          // Clear the store query and autoSubmit flag after using them
+          this.$store.gordon.query = ''
+          this.$store.gordon.autoSubmit = false
+        }
+      })
+    },
+
+    getTurnCount() {
+      return this.messages.filter(m => m.role === 'user').length
+    },
+
+    getRemainingTurns() {
+      return this.maxTurnsPerThread - this.getTurnCount()
+    },
+
+    isThreadLimitReached() {
+      return this.getTurnCount() >= this.maxTurnsPerThread
+    },
+
+    shouldShowCountdown() {
+      const remaining = this.getRemainingTurns()
+      return remaining > 0 && remaining  {
+        if (this.$refs.input) {
+          this.$refs.input.style.height = 'auto'
+        }
+      })
+      this.isLoading = true
+      this.error = null
+
+      // Add placeholder for assistant response
+      const responseIndex = this.messages.length
+      this.messages.push({
+        role: 'assistant',
+        content: '',
+        isStreaming: true,
+        questionAnswerId: null,
+        feedback: null,
+        copied: false
+      })
+
+      this.$nextTick(() => {
+        this.$refs.messagesContainer?.scrollTo({
+          top: this.$refs.messagesContainer.scrollHeight,
+          behavior: 'smooth'
+        })
+      })
+
+      try {
+        await this.streamGordonResponse(responseIndex)
+      } catch (err) {
+        // Only set error if messages weren't cleared
+        if (this.messages.length > 0) {
+          if (err.message === 'RATE_LIMIT_EXCEEDED') {
+            this.error = 'You\'ve exceeded your question quota for the day. Please come back tomorrow.'
+          } else {
+            this.error = 'Failed to get response. Please try again.'
+          }
+        }
+        console.error('Gordon API error:', err)
+        // Only try to remove message if it still exists
+        if (this.messages[responseIndex]) {
+          this.messages.splice(responseIndex, 1)
+        }
+      } finally {
+        this.isLoading = false
+      }
+    },
+
+    getSessionId() {
+      let sessionId = sessionStorage.getItem('gordon-session-id')
+      if (!sessionId) {
+        sessionId = `docs-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+        sessionStorage.setItem('gordon-session-id', sessionId)
+      }
+      return sessionId
+    },
+
+    async streamGordonResponse(responseIndex) {
+
+      // Build API request from messages, excluding the streaming placeholder
+      // The placeholder is at responseIndex, so we take everything before it
+      const conversationMessages = this.messages.slice(0, responseIndex).map((msg, i) => {
+        const message = {
+          role: msg.role,
+          content: msg.content
+        }
+
+        // Add copilot_references to the last message (most recent user question)
+        if (i === responseIndex - 1) {
+          message.copilot_references = [
+            {
+              data: {
+                origin: 'docs-website',
+                email: 'docs@docker.com',
+                uuid: this.getSessionId(),
+                action: 'AskGordon',
+                ...(this.includePageContext && {
+                  page_url: window.location.href,
+                  page_title: "Compose file reference"
+                })
+              }
+            }
+          ]
+        }
+
+        return message
+      })
+
+      const isNewConversation = !this.threadId
+      const payload = {
+        messages: conversationMessages,
+        ...(this.threadId && { thread_uuid: this.threadId })
+      }
+
+      const response = await fetch(window.GORDON_BASE_URL + '/public/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+
+      if (!response.ok) {
+        if (response.status === 429) {
+          throw new Error('RATE_LIMIT_EXCEEDED')
+        }
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+      }
+
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        const chunk = decoder.decode(value, { stream: true })
+        const lines = chunk.split('\n')
+
+        for (const line of lines) {
+          if (!line.trim() || !line.startsWith('data: ')) continue
+
+          const data = line.slice(6)
+          if (data === '[DONE]') continue
+
+          try {
+            const parsed = JSON.parse(data)
+
+            // Capture thread_id for new conversations
+            if (parsed.thread_id) {
+              if (isNewConversation) {
+                this.threadId = parsed.thread_id  // $persist auto-saves to sessionStorage
+              } else if (parsed.thread_id !== this.threadId) {
+                console.warn('Backend returned unexpected thread_id:', parsed.thread_id)
+              }
+              continue
+            }
+
+            // Capture question_answer_id for feedback
+            if (parsed.question_answer_id) {
+              this.messages[responseIndex].questionAnswerId = parsed.question_answer_id
+              continue
+            }
+
+            if (parsed.choices && parsed.choices[0]?.delta?.content) {
+              const content = parsed.choices[0].delta.content
+              this.messages[responseIndex].content += content
+
+              this.$nextTick(() => {
+                const container = this.$refs.messagesContainer
+                if (container) {
+                  const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight  {
+          setTimeout(() => {
+            message.copied = false
+          }, 2000)
+        })
+      } catch (err) {
+        console.error('Failed to copy:', err)
+      }
+    }
+  }" x-cloak @keydown.escape.window=$store.gordon.close()>
+
+- 
+
+ 0 }">
+
+### Ask me about Docker
+
+Get instant answers to your Docker questions. I can help with
+commands, concepts, troubleshooting, and best practices.
+
+Try asking:
+
+How do Docker Hardened Images work?
+
+What is MCP Toolkit?
+
+How do I create an org?
+
+Was this helpful?
+
+Helpful
+
+Not quite
+
+Copy
+
+remaining in this thread.
+
+You've reached the maximum of
+ questions per thread. For
+better answer quality, start a new thread.
+
+Start a new thread
+
+Context
+When enabled, Gordon considers the current page you're viewing
+to provide more relevant answers.
+Share feedbackAnswers are generated based on the documentation. {
+          const container = $el; // The div with overflow
+          const item = document.getElementById('sidebar-current-page')
+          if (item) {
+              const containerTop = container.scrollTop;
+              const containerBottom = containerTop + container.clientHeight;
+
+              const itemTop = item.offsetTop - container.offsetTop;
+              const itemBottom = itemTop + item.offsetHeight;
+
+              // Scroll only if the item is out of view
+              if (itemBottom > containerBottom - 200) {
+                  container.scrollTop = itemTop - (container.clientHeight / 2 - item.offsetHeight / 2);
+              }
+          }
+      })" class="bg-background-toc dark:bg-background-toc fixed top-0 z-40 hidden h-screen w-full flex-none overflow-x-hidden overflow-y-auto md:sticky md:top-16 md:z-auto md:block md:h-[calc(100vh-64px)] md:w-[320px]" :class="{ 'hidden': ! $store.showSidebar }">
+
+Back
+Reference
+
+- 
+Get started
+- 
+Guides
+- 
+Manuals
+# Compose file reference
+
+Copy as Markdown
+
+Open Markdown
+
+Ask Docs AI
+
+Claude
+
+Open in Claude
+**New to Docker Compose?**
+
+Find more information about the
+key features and use cases of Docker Compose or
+try the quickstart guide.
+
+The Compose Specification is the latest and recommended version of the Compose file format. It helps you define a
+Compose file which is used to configure your Docker applicationâs services, networks, volumes, and more.
+
+Legacy versions 2.x and 3.x of the Compose file format were merged into the Compose Specification. It is implemented in versions 1.27.0 and above (also known as Compose v2) of the Docker Compose CLI.
+
+The Compose Specification on Docker Docs is the Docker Compose implementation. If you wish to implement your own version of the Compose Specification, see the Compose Specification repository.
+
+Use the following links to navigate key sections of the Compose Specification.
+
+Tip
+Want a better editing experience for Compose files in VS Code?
+Check out the [Docker VS Code Extension (Beta)](https://marketplace.visualstudio.com/items?itemName=docker.docker) for linting, code navigation, and vulnerability scanning.
+
+### Version and name top-level element
+
+Understand version and name attributes for Compose.
+
+### Services top-level element
+
+Explore all services attributes for Compose.
+
+### Networks top-level element
+
+Find all networks attributes for Compose.
+
+### Volumes top-level element
+
+Explore all volumes attributes for Compose.
+
+### Configs top-level element
+
+Find out about configs in Compose.
+
+### Secrets top-level element
+
+Learn about secrets in Compose.
+
+Edit this page
+
+[Request changes](https://github.com/docker/docs/issues/new?template=doc_issue.yml&location=https%3a%2f%2fdocs.docker.com%2freference%2fcompose-file%2f&labels=status%2Ftriage)
+
+Product offerings
+Pricing
+About us
+llms.txt
+Cookies Settings
+
+|
+Terms of Service
+|
+Status
+|
+LegalCopyright Â© 2013-2026 Docker Inc. All rights
+reserved.

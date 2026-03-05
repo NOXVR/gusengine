@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GusEngine — Diagnostic Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f1117;
+            --bg-secondary: #1a1d27;
+            --bg-tertiary: #242836;
+            --bg-hover: #2d3244;
+            --text-primary: #e8eaed;
+            --text-secondary: #9aa0b0;
+            --text-muted: #5f6578;
+            --accent: #4f8cff;
+            --accent-hover: #6da0ff;
+            --accent-dim: rgba(79, 140, 255, 0.12);
+            --success: #34d399;
+            --warning: #fbbf24;
+            --error: #f87171;
+            --border: #2d3244;
+            --radius: 12px;
+            --radius-sm: 8px;
+            --transition: 0.2s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Layout */
+        .app {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: width var(--transition);
+            flex-shrink: 0;
+        }
+
+        .sidebar.collapsed {
+            width: 0;
+            overflow: hidden;
+            border: none;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sidebar-header h2 {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px;
+        }
+
+        /* Drop zone */
+        .drop-zone {
+            margin: 16px;
+            padding: 32px 16px;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .drop-zone:hover,
+        .drop-zone.drag-over {
+            border-color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .drop-zone-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .drop-zone-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .drop-zone-text strong {
+            color: var(--accent);
+        }
+
+        /* Stats */
+        .stats {
+            padding: 12px 16px;
+            margin: 0 16px;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+        }
+
+        .stat-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* File list */
+        .file-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 16px;
+            margin-top: 12px;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+
+        .file-item:hover {
+            background: var(--bg-hover);
+        }
+
+        .file-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .file-status.queued {
+            background: var(--text-muted);
+        }
+
+        .file-status.processing {
+            background: var(--warning);
+            animation: pulse 1s infinite;
+        }
+
+        .file-status.done {
+            background: var(--success);
+        }
+
+        .file-status.failed {
+            background: var(--error);
+        }
+
+        .file-name {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-secondary);
+        }
+
+        .file-label {
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        .file-label.queued {
+            background: var(--bg-hover);
+            color: var(--text-muted);
+        }
+
+        .file-label.processing {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--warning);
+        }
+
+        .file-label.done {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--success);
+        }
+
+        .file-label.failed {
+            background: rgba(248, 113, 113, 0.15);
+            color: var(--error);
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        /* Main chat area */
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+
+        /* Header */
+        .header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-secondary);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .version {
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg-tertiary);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-icon {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 8px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+        }
+
+        .btn-icon:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .health-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+
+        .health-dot.ok {
+            background: var(--success);
+        }
+
+        .health-dot.error {
+            background: var(--error);
+        }
+
+        /* Messages */
+        .messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .message {
+            max-width: 720px;
+            width: 100%;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .message.user {
+            align-self: flex-end;
+        }
+
+        .message.assistant {
+            align-self: flex-start;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-bubble {
+            padding: 14px 18px;
+            border-radius: var(--radius);
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .user .message-bubble {
+            background: var(--accent);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .assistant .message-bubble {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+
+        /* DAG Phase badge */
+        .phase-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .phase-badge.triage {
+            background: rgba(79, 140, 255, 0.15);
+            color: var(--accent);
+        }
+
+        .phase-badge.subsystem {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--warning);
+        }
+
+        .phase-badge.procedure {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--success);
+        }
+
+        .phase-badge.error {
+            background: rgba(248, 113, 113, 0.15);
+            color: var(--error);
+        }
+
+        /* Subsystems */
+        .subsystems {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .subsystem-tag {
+            font-size: 11px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        /* Answer paths */
+        .answer-paths {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .answer-path-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 13px;
+            text-align: left;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .answer-path-btn:hover {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+        }
+
+        .answer-path-btn .path-key {
+            background: var(--accent);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        /* Citations */
+        .citations {
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+
+        .citation-header {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .citation-item {
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding: 6px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition);
+        }
+
+        .citation-item:hover {
+            background: var(--accent-dim);
+            color: var(--text-primary);
+        }
+
+        .citation-item::before {
+            content: '📄';
+            font-size: 12px;
+        }
+
+        .citation-context {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* PDF Modal */
+        .pdf-modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .pdf-modal-overlay.active {
+            display: flex;
+        }
+
+        .pdf-modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            width: 90vw;
+            height: 90vh;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .pdf-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .pdf-modal-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pdf-modal-page {
+            font-size: 11px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .pdf-modal-close {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+        }
+
+        .pdf-modal-close:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .pdf-modal iframe {
+            flex: 1;
+            border: none;
+            width: 100%;
+        }
+
+        /* Ledger UI */
+        .ledger-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 6px 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+
+        .ledger-btn:hover {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .ledger-form {
+            margin-top: 10px;
+            padding: 12px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ledger-form label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .ledger-form input,
+        .ledger-form textarea {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 13px;
+            outline: none;
+            resize: vertical;
+        }
+
+        .ledger-form input:focus,
+        .ledger-form textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .ledger-form-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .ledger-submit {
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background var(--transition);
+        }
+
+        .ledger-submit:hover {
+            background: var(--accent-hover);
+        }
+
+        .ledger-cancel {
+            padding: 6px 14px;
+            font-size: 12px;
+            background: none;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .ledger-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 4px 0;
+        }
+
+        .ledger-token-meter {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .ledger-token-bar {
+            height: 4px;
+            background: var(--bg-hover);
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .ledger-token-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .ledger-token-fill.warning {
+            background: var(--warning);
+        }
+
+        .ledger-token-fill.danger {
+            background: var(--error);
+        }
+
+        /* Sidebar ledger section */
+        .sidebar-ledger {
+            padding: 12px 16px;
+            border-top: 1px solid var(--border);
+            margin-top: auto;
+        }
+
+        .sidebar-ledger h3 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 8px;
+        }
+
+        .ledger-result {
+            font-size: 12px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-top: 6px;
+        }
+
+        .ledger-result.success {
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--success);
+        }
+
+        .ledger-result.error {
+            background: rgba(248, 113, 113, 0.15);
+            color: var(--error);
+        }
+
+        /* Input area */
+        .input-area {
+            padding: 16px 24px 24px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+            max-width: 720px;
+        }
+
+        .input-wrapper textarea {
+            flex: 1;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            font-family: inherit;
+            font-size: 14px;
+            resize: none;
+            outline: none;
+            min-height: 48px;
+            max-height: 120px;
+            line-height: 1.5;
+            transition: border-color var(--transition);
+        }
+
+        .input-wrapper textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .input-wrapper textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .send-btn {
+            background: var(--accent);
+            border: none;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background var(--transition);
+            flex-shrink: 0;
+        }
+
+        .send-btn:hover {
+            background: var(--accent-hover);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* Loading dots */
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+            padding: 8px 0;
+        }
+
+        .loading-dots span {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+
+        .loading-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .loading-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0.6);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* Welcome screen */
+        .welcome {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .welcome-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .welcome h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            max-width: 420px;
+            line-height: 1.7;
+        }
+
+        .welcome-examples {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .welcome-example {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition);
+            text-align: left;
+        }
+
+        .welcome-example:hover {
+            background: var(--accent-dim);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                z-index: 10;
+                height: 100%;
+            }
+
+            .sidebar.collapsed {
+                width: 0;
+            }
+
+            .messages {
+                padding: 16px;
+            }
+
+            .input-area {
+                padding: 12px 16px 16px;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Sidebar: PDF Management -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>📁 Documents</h2>
+                <button class="sidebar-toggle" onclick="toggleSidebar()">✕</button>
+            </div>
+            <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                <div class="drop-zone-icon">📥</div>
+                <div class="drop-zone-text">Drop PDFs here or <strong>click to browse</strong></div>
+                <input type="file" id="fileInput" accept=".pdf" multiple hidden>
+            </div>
+            <div class="stats">
+                <div><span class="stat-label">Indexed</span><br><span class="stat-value" id="pointCount">—</span></div>
+                <div><span class="stat-label">Sources</span><br><span class="stat-value" id="sourceCount">—</span></div>
+                <div><span class="stat-label">Status</span><br><span class="stat-value" id="sysStatus">—</span></div>
+            </div>
+            <div class="file-list" id="fileList"></div>
+
+            <!-- Global Ledger Entry -->
+            <div class="sidebar-ledger">
+                <h3>📝 Shop Knowledge</h3>
+                <div class="ledger-token-meter" id="ledgerMeter"></div>
+                <div class="ledger-token-bar">
+                    <div class="ledger-token-fill" id="ledgerBar" style="width:0%"></div>
+                </div>
+                <button class="ledger-btn" style="width:100%;justify-content:center;margin-top:8px"
+                    onclick="toggleGlobalLedgerForm()">+ Add Knowledge</button>
+                <div id="globalLedgerForm" style="display:none">
+                    <div class="ledger-form">
+                        <label>Fault Symptom *</label>
+                        <input type="text" id="gl-symptom" placeholder="e.g. Hot start vapor lock">
+                        <label>OEM FSM Diagnosis</label>
+                        <input type="text" id="gl-oem" placeholder="What the manual says (optional)">
+                        <label>Master Tech Override *</label>
+                        <textarea id="gl-override" rows="2" placeholder="What actually works..."></textarea>
+                        <label>Verification Test</label>
+                        <input type="text" id="gl-verification" placeholder="How to confirm (optional)">
+                        <div class="ledger-form-actions">
+                            <button class="ledger-cancel" onclick="toggleGlobalLedgerForm()">Cancel</button>
+                            <button class="ledger-submit" onclick="submitGlobalLedger()">Add to Ledger</button>
+                        </div>
+                        <div id="globalLedgerResult"></div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat -->
+        <div class="main">
+            <div class="header">
+                <div class="header-left">
+                    <span class="logo">GusEngine</span>
+                    <span class="version">V10 Prototype</span>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-icon" onclick="toggleSidebar()">📁 Docs</button>
+                    <button class="btn-icon" onclick="newSession()">✨ New Session</button>
+                    <button class="btn-icon" id="healthBtn"><span class="health-dot" id="healthDot"></span>
+                        System</button>
+                </div>
+            </div>
+
+            <div class="messages" id="messages">
+                <div class="welcome" id="welcome">
+                    <div class="welcome-icon">🔧</div>
+                    <h2>GusEngine Diagnostic Assistant</h2>
+                    <p>Describe a symptom or issue and I'll guide you through the diagnostic process using factory
+                        service manual data.</p>
+                    <div class="welcome-examples">
+                        <div class="welcome-example" onclick="sendExample(this.textContent)">My engine is knocking at
+                            idle and losing power under acceleration</div>
+                        <div class="welcome-example" onclick="sendExample(this.textContent)">How do I check valve
+                            clearance on the M116?</div>
+                        <div class="welcome-example" onclick="sendExample(this.textContent)">Low compression on cylinder
+                            3 — what should I inspect?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="userInput" placeholder="Describe the symptom or issue..." rows="1"
+                        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"></textarea>
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Modal Viewer -->
+    <div class="pdf-modal-overlay" id="pdfModalOverlay" onclick="if(event.target===this)closePdfModal()">
+        <div class="pdf-modal">
+            <div class="pdf-modal-header">
+                <div class="pdf-modal-title">
+                    <span>📄</span>
+                    <span id="pdfModalTitle">Document</span>
+                    <span class="pdf-modal-page" id="pdfModalPage"></span>
+                </div>
+                <button class="pdf-modal-close" onclick="closePdfModal()">✕</button>
+            </div>
+            <iframe id="pdfModalFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // =============================================================================
+        // GusEngine V10 Prototype Frontend
+        // =============================================================================
+        const API_BASE = window.location.origin;
+        let chatHistory = [];
+        let isLoading = false;
+
+        // --- Health & Stats ---
+        async function checkHealth() {
+            try {
+                const r = await fetch(`${API_BASE}/api/health`);
+                const d = await r.json();
+                document.getElementById('healthDot').className = 'health-dot ok';
+                document.getElementById('sysStatus').textContent = 'Online';
+                document.getElementById('sysStatus').style.color = 'var(--success)';
+            } catch {
+                document.getElementById('healthDot').className = 'health-dot error';
+                document.getElementById('sysStatus').textContent = 'Offline';
+                document.getElementById('sysStatus').style.color = 'var(--error)';
+            }
+        }
+
+        async function updateStats() {
+            try {
+                const r = await fetch(`${API_BASE}/api/stats`);
+                if (r.ok) {
+                    const d = await r.json();
+                    document.getElementById('pointCount').textContent = d.points || '0';
+                    document.getElementById('sourceCount').textContent = d.sources || '0';
+                }
+            } catch { /* stats endpoint may not exist yet */ }
+        }
+
+        // --- Chat ---
+        function sendExample(text) {
+            document.getElementById('userInput').value = text;
+            sendMessage();
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text || isLoading) return;
+
+            // Hide welcome
+            const welcome = document.getElementById('welcome');
+            if (welcome) welcome.style.display = 'none';
+
+            // Add user message
+            addMessage('user', text);
+            chatHistory.push({ role: 'user', content: text });
+            input.value = '';
+            input.style.height = 'auto';
+
+            // Show loading
+            isLoading = true;
+            document.getElementById('sendBtn').disabled = true;
+            const loadingEl = addLoading();
+
+            try {
+                const r = await fetch(`${API_BASE}/api/chat`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text, chat_history: chatHistory })
+                });
+                const data = await r.json();
+                loadingEl.remove();
+
+                // Parse response — could be nested JSON string or direct object
+                let resp = data.response || data;
+                if (typeof resp === 'string') {
+                    try { resp = JSON.parse(resp); } catch { /* use as string */ }
+                }
+
+                // Render DAG response
+                renderAssistantResponse(resp, data);
+
+                // Add to history
+                const assistantContent = resp.mechanic_instructions || resp.response || JSON.stringify(resp);
+                chatHistory.push({ role: 'assistant', content: assistantContent });
+
+            } catch (e) {
+                loadingEl.remove();
+                addMessage('assistant', `<div class="phase-badge error">Error</div><p>Connection failed: ${e.message}</p>`);
+            }
+            isLoading = false;
+            document.getElementById('sendBtn').disabled = false;
+        }
+
+        function renderAssistantResponse(resp, rawData) {
+            const msgs = document.getElementById('messages');
+            const msg = document.createElement('div');
+            msg.className = 'message assistant';
+
+            let html = '<div class="message-bubble">';
+
+            // Phase badge
+            const state = resp.current_state || '';
+            if (state.includes('TRIAGE')) html += '<div class="phase-badge triage">Triage</div>';
+            else if (state.includes('SUBSYSTEM') || state.includes('PHASE_B')) html += '<div class="phase-badge subsystem">Subsystem Analysis</div>';
+            else if (state.includes('PROCEDURE') || state.includes('PHASE_C')) html += '<div class="phase-badge procedure">Procedure</div>';
+            else if (state.includes('ERROR')) html += '<div class="phase-badge error">Error</div>';
+            else if (state) html += `<div class="phase-badge triage">${state.replace('PHASE_', '').replace(/_/g, ' ')}</div>`;
+
+            // Mechanic instructions
+            const instructions = resp.mechanic_instructions || resp.response || '';
+            if (typeof instructions === 'string' && instructions.length > 0) {
+                html += `<p>${escapeHtml(instructions)}</p>`;
+            } else if (typeof resp === 'string') {
+                html += `<p>${escapeHtml(resp)}</p>`;
+            }
+
+            // Diagnostic reasoning (subtle)
+            if (resp.diagnostic_reasoning && !resp.diagnostic_reasoning.includes('LLM error')) {
+                html += `<p style="color:var(--text-muted);font-size:12px;margin-top:8px;font-style:italic">${escapeHtml(resp.diagnostic_reasoning)}</p>`;
+            }
+
+            // Intersecting subsystems
+            if (resp.intersecting_subsystems && resp.intersecting_subsystems.length) {
+                html += '<div class="subsystems">';
+                resp.intersecting_subsystems.forEach(s => {
+                    html += `<span class="subsystem-tag">${escapeHtml(s)}</span>`;
+                });
+                html += '</div>';
+            }
+
+            // Answer paths
+            if (resp.answer_path_prompts && resp.answer_path_prompts.length && resp.requires_input) {
+                html += '<div class="answer-paths">';
+                resp.answer_path_prompts.forEach(p => {
+                    const match = p.match(/^\[([A-Z])\]\s*(.*)/);
+                    const key = match ? match[1] : '?';
+                    const label = match ? match[2] : p;
+                    html += `<button class="answer-path-btn" onclick="selectPath('${escapeAttr(p)}')">
+        <span class="path-key">${key}</span>${escapeHtml(label)}
+      </button>`;
+                });
+                html += '</div>';
+            }
+
+            // Citations — clickable with context labels
+            const citations = resp.source_citations || rawData.citations || [];
+            if (citations.length) {
+                html += '<div class="citations"><div class="citation-header">Sources</div>';
+                citations.forEach(c => {
+                    const src = c.source || (typeof c === 'string' ? c : JSON.stringify(c));
+                    const page = c.page || (c.page_numbers && c.page_numbers[0]) || null;
+                    const ctx = c.context || '';
+                    const pageLabel = page ? ` (p. ${page})` : '';
+                    const ctxLabel = ctx ? ` <span class="citation-context">— ${escapeHtml(ctx)}</span>` : '';
+                    const onclick = `openPdfModal('${escapeAttr(src)}', ${page || 1}, '${escapeAttr(ctx)}')`;
+                    html += `<div class="citation-item" onclick="${onclick}">${escapeHtml(src)}${pageLabel}${ctxLabel}</div>`;
+                });
+                html += '</div>';
+            }
+            // Add to Ledger button (contextual)
+            const respData = JSON.stringify({
+                subsystems: resp.intersecting_subsystems || [],
+                citations: citations,
+                oem: resp.mechanic_instructions || '',
+            });
+            const msgId = 'ledger-' + Date.now();
+            html += `<div class="ledger-actions" id="${msgId}">`;
+            html += `<button class="ledger-btn" onclick="showContextualLedgerForm('${msgId}', ${escapeAttr(respData)})">📝 Add to Ledger</button>`;
+            html += '</div>';
+
+            html += '</div>';
+            msg.innerHTML = html;
+            msgs.appendChild(msg);
+            msgs.scrollTop = msgs.scrollHeight;
+        }
+
+        function selectPath(pathText) {
+            document.getElementById('userInput').value = pathText;
+            sendMessage();
+        }
+
+        function addMessage(role, content) {
+            const msgs = document.getElementById('messages');
+            const msg = document.createElement('div');
+            msg.className = `message ${role}`;
+            if (role === 'user') {
+                msg.innerHTML = `<div class="message-bubble">${escapeHtml(content)}</div>`;
+            } else {
+                msg.innerHTML = `<div class="message-bubble">${content}</div>`;
+            }
+            msgs.appendChild(msg);
+            msgs.scrollTop = msgs.scrollHeight;
+            return msg;
+        }
+
+        function addLoading() {
+            const msgs = document.getElementById('messages');
+            const el = document.createElement('div');
+            el.className = 'message assistant';
+            el.innerHTML = '<div class="message-bubble"><div class="loading-dots"><span></span><span></span><span></span></div></div>';
+            msgs.appendChild(el);
+            msgs.scrollTop = msgs.scrollHeight;
+            return el;
+        }
+
+        function newSession() {
+            chatHistory = [];
+            const msgs = document.getElementById('messages');
+            msgs.innerHTML = `<div class="welcome" id="welcome">
+    <div class="welcome-icon">🔧</div>
+    <h2>GusEngine Diagnostic Assistant</h2>
+    <p>Describe a symptom or issue and I'll guide you through the diagnostic process using factory service manual data.</p>
+    <div class="welcome-examples">
+      <div class="welcome-example" onclick="sendExample(this.textContent)">My engine is knocking at idle and losing power under acceleration</div>
+      <div class="welcome-example" onclick="sendExample(this.textContent)">How do I check valve clearance on the M116?</div>
+      <div class="welcome-example" onclick="sendExample(this.textContent)">Low compression on cylinder 3 — what should I inspect?</div>
+    </div>
+  </div>`;
+        }
+
+        // --- PDF Upload ---
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        ['dragenter', 'dragover'].forEach(e => {
+            dropZone.addEventListener(e, ev => { ev.preventDefault(); dropZone.classList.add('drag-over'); });
+        });
+        ['dragleave', 'drop'].forEach(e => {
+            dropZone.addEventListener(e, ev => { ev.preventDefault(); dropZone.classList.remove('drag-over'); });
+        });
+        dropZone.addEventListener('drop', ev => { handleFiles(ev.dataTransfer.files); });
+        fileInput.addEventListener('change', ev => { handleFiles(ev.target.files); fileInput.value = ''; });
+
+        async function handleFiles(files) {
+            for (const file of files) {
+                if (!file.name.endsWith('.pdf')) continue;
+                addFileToList(file.name, 'queued');
+                try {
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    updateFileStatus(file.name, 'processing');
+                    const r = await fetch(`${API_BASE}/api/upload`, { method: 'POST', body: formData });
+                    const d = await r.json();
+                    if (d.status === 'accepted' || d.status === 'ok') {
+                        updateFileStatus(file.name, 'done');
+                    } else {
+                        updateFileStatus(file.name, 'failed');
+                    }
+                } catch {
+                    updateFileStatus(file.name, 'failed');
+                }
+            }
+            updateStats();
+        }
+
+        function addFileToList(name, status) {
+            const list = document.getElementById('fileList');
+            const item = document.createElement('div');
+            item.className = 'file-item';
+            item.id = `file-${name.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            item.innerHTML = `<span class="file-status ${status}"></span>
+    <span class="file-name" title="${escapeAttr(name)}">${escapeHtml(name)}</span>
+    <span class="file-label ${status}">${status}</span>`;
+            list.prepend(item);
+        }
+
+        function updateFileStatus(name, status) {
+            const id = `file-${name.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            const item = document.getElementById(id);
+            if (item) {
+                item.querySelector('.file-status').className = `file-status ${status}`;
+                item.querySelector('.file-label').className = `file-label ${status}`;
+                item.querySelector('.file-label').textContent = status;
+            }
+        }
+
+        // --- Sidebar ---
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        }
+
+        // --- Helpers ---
+        function escapeHtml(s) {
+            if (!s) return '';
+            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+        function escapeAttr(s) {
+            if (!s) return '';
+            return s.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        }
+
+        // --- PDF Modal ---
+        function openPdfModal(source, page, context) {
+            const overlay = document.getElementById('pdfModalOverlay');
+            const frame = document.getElementById('pdfModalFrame');
+            const title = document.getElementById('pdfModalTitle');
+            const pageLabel = document.getElementById('pdfModalPage');
+
+            title.textContent = source;
+            pageLabel.textContent = page ? `Page ${page}` : '';
+            frame.src = `/pdfs/${encodeURIComponent(source)}#page=${page || 1}`;
+            overlay.classList.add('active');
+        }
+
+        function closePdfModal() {
+            const overlay = document.getElementById('pdfModalOverlay');
+            const frame = document.getElementById('pdfModalFrame');
+            overlay.classList.remove('active');
+            frame.src = '';
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closePdfModal();
+        });
+
+        // --- Ledger ---
+        function toggleGlobalLedgerForm() {
+            const form = document.getElementById('globalLedgerForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        async function submitGlobalLedger() {
+            const symptom = document.getElementById('gl-symptom').value.trim();
+            const override = document.getElementById('gl-override').value.trim();
+            const oem = document.getElementById('gl-oem').value.trim();
+            const verification = document.getElementById('gl-verification').value.trim();
+            const result = document.getElementById('globalLedgerResult');
+
+            if (!symptom || !override) {
+                result.className = 'ledger-result error';
+                result.textContent = 'Symptom and Override are required.';
+                return;
+            }
+
+            try {
+                const r = await fetch(`${API_BASE}/api/ledger`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symptom, override, oem_diagnosis: oem, verification, type: 'global' })
+                });
+                const d = await r.json();
+                if (d.status === 'accepted') {
+                    result.className = 'ledger-result success';
+                    result.textContent = `Added. ${d.remaining} tokens remaining.`;
+                    document.getElementById('gl-symptom').value = '';
+                    document.getElementById('gl-override').value = '';
+                    document.getElementById('gl-oem').value = '';
+                    document.getElementById('gl-verification').value = '';
+                    updateLedgerMeter();
+                } else {
+                    result.className = 'ledger-result error';
+                    result.textContent = d.message;
+                }
+            } catch (e) {
+                result.className = 'ledger-result error';
+                result.textContent = 'Failed to submit.';
+            }
+        }
+
+        function showContextualLedgerForm(containerId, respData) {
+            const container = document.getElementById(containerId);
+            const data = typeof respData === 'string' ? JSON.parse(respData) : respData;
+            const subsystemsStr = (data.subsystems || []).join(', ');
+            const citationsJson = JSON.stringify(data.citations || []);
+
+            container.innerHTML = `
+                <div class="ledger-form">
+                    <div class="ledger-meta">Adding knowledge from this diagnostic response</div>
+                    ${subsystemsStr ? `<div class="ledger-meta">Subsystems: ${escapeHtml(subsystemsStr)}</div>` : ''}
+                    <label>Fault Symptom *</label>
+                    <input type="text" id="${containerId}-symptom" placeholder="Describe the fault...">
+                    <label>Master Tech Override *</label>
+                    <textarea id="${containerId}-override" rows="2" placeholder="What actually works..."></textarea>
+                    <label>Verification Test</label>
+                    <input type="text" id="${containerId}-verify" placeholder="How to confirm (optional)">
+                    <input type="hidden" id="${containerId}-subs" value="${escapeAttr(subsystemsStr)}">
+                    <input type="hidden" id="${containerId}-cites" value='${citationsJson.replace(/'/g, "&#39;")}'>
+                    <input type="hidden" id="${containerId}-oem" value="${escapeAttr(data.oem || '')}">
+                    <div class="ledger-form-actions">
+                        <button class="ledger-cancel" onclick="document.getElementById('${containerId}').innerHTML='<button class=ledger-btn onclick=showContextualLedgerForm(&quot;${containerId}&quot;,${escapeAttr(JSON.stringify(data))})>📝 Add to Ledger</button>'">Cancel</button>
+                        <button class="ledger-submit" onclick="submitContextualLedger('${containerId}')">Add to Ledger</button>
+                    </div>
+                    <div id="${containerId}-result"></div>
+                </div>`;
+        }
+
+        async function submitContextualLedger(containerId) {
+            const symptom = document.getElementById(`${containerId}-symptom`).value.trim();
+            const override = document.getElementById(`${containerId}-override`).value.trim();
+            const verification = document.getElementById(`${containerId}-verify`).value.trim();
+            const subsStr = document.getElementById(`${containerId}-subs`).value;
+            const oem = document.getElementById(`${containerId}-oem`).value;
+            const result = document.getElementById(`${containerId}-result`);
+
+            let citations = [];
+            try { citations = JSON.parse(document.getElementById(`${containerId}-cites`).value || '[]'); } catch { }
+
+            if (!symptom || !override) {
+                result.className = 'ledger-result error';
+                result.textContent = 'Symptom and Override are required.';
+                return;
+            }
+
+            const subsystems = subsStr ? subsStr.split(', ').filter(Boolean) : [];
+
+            try {
+                const r = await fetch(`${API_BASE}/api/ledger`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ symptom, override, oem_diagnosis: oem, verification, subsystems, citations, type: 'contextual' })
+                });
+                const d = await r.json();
+                if (d.status === 'accepted') {
+                    result.className = 'ledger-result success';
+                    result.textContent = `✓ Added to ledger. ${d.remaining} tokens remaining.`;
+                    updateLedgerMeter();
+                } else {
+                    result.className = 'ledger-result error';
+                    result.textContent = d.message;
+                }
+            } catch (e) {
+                result.className = 'ledger-result error';
+                result.textContent = 'Failed to submit.';
+            }
+        }
+
+        async function updateLedgerMeter() {
+            try {
+                const r = await fetch(`${API_BASE}/api/ledger`);
+                if (r.ok) {
+                    const d = await r.json();
+                    const pct = Math.round((d.tokens / d.cap) * 100);
+                    const meter = document.getElementById('ledgerMeter');
+                    const bar = document.getElementById('ledgerBar');
+                    meter.textContent = `${d.tokens} / ${d.cap} tokens`;
+                    bar.style.width = `${pct}%`;
+                    bar.className = 'ledger-token-fill' + (pct > 90 ? ' danger' : pct > 70 ? ' warning' : '');
+                }
+            } catch { }
+        }
+
+        // --- Auto-resize textarea ---
+        const ta = document.getElementById('userInput');
+        ta.addEventListener('input', () => {
+            ta.style.height = 'auto';
+            ta.style.height = Math.min(ta.scrollHeight, 120) + 'px';
+        });
+
+        // --- Init ---
+        checkHealth();
+        updateStats();
+        updateLedgerMeter();
+        setInterval(checkHealth, 30000);
+        setInterval(updateStats, 15000);
+    </script>
+</body>
+
+</html>

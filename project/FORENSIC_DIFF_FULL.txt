@@ -1,0 +1,1037 @@
+﻿diff --git "a/.\\project\\ARCHITECTURE_V10_PRE_HOSTILE_AUDIT_FROZEN.md" "b/.\\project\\ARCHITECTURE_V10.md"
+index 6a600d2..27bfeae 100644
+--- "a/.\\project\\ARCHITECTURE_V10_PRE_HOSTILE_AUDIT_FROZEN.md"
++++ "b/.\\project\\ARCHITECTURE_V10.md"
+@@ -171 +171 @@ services:
+-      --gpu-memory-utilization 0.85
++      --gpu-memory-utilization 0.75  # AUDIT FIX: 0.85ΓåÆ0.80ΓåÆ0.75; GPU 0 needs room for TEI (2.5GB) + CUDA (1.5GB)
+@@ -172,0 +173 @@ services:
++      --served-model-name Qwen2.5-32B-Instruct-AWQ  # AUDIT FIX: without this, vLLM API model ID = file path, causing 404s
+@@ -176,0 +178,6 @@ services:
++    healthcheck:
++      test: ["CMD-SHELL", "curl -sf http://localhost:8000/health || exit 1"]
++      interval: 30s
++      timeout: 10s
++      retries: 5
++      start_period: 120s  # vLLM needs time to load 32B model
+@@ -203,0 +211,6 @@ services:
++    healthcheck:
++      test: ["CMD-SHELL", "curl -sf http://localhost:80/health || exit 1"]
++      interval: 15s
++      timeout: 5s
++      retries: 3
++      start_period: 30s
+@@ -222,0 +236,6 @@ services:
++    healthcheck:
++      test: ["CMD-SHELL", "curl -sf http://localhost:6333/healthz || exit 1"]
++      interval: 15s
++      timeout: 5s
++      retries: 3
++      start_period: 15s
+@@ -257,3 +276,6 @@ services:
+-      - vllm
+-      - tei
+-      - qdrant
++      vllm:
++        condition: service_healthy
++      tei:
++        condition: service_healthy
++      qdrant:
++        condition: service_healthy
+@@ -341,0 +364,5 @@ cd ./frontend && npm pack pdfjs-dist@4.0.379 && \
++# AUDIT FIX (DT-P3-06): DOMPurify for XSS sanitization (air-gap requirement).
++# renderGusResponse() calls DOMPurify.sanitize() throughout ΓÇö without this
++# dependency present, ReferenceError crashes the UI on first LLM response.
++cd ./frontend && npm install dompurify && cd ..
++
+@@ -377 +404,2 @@ from docling.chunking import HybridChunker
+-from transformers import AutoTokenizer
++from docling_core.transforms.chunker.tokenizer.huggingface import HuggingFaceTokenizer  # AUDIT FIX (DT-7)
++from backend.shared.tokenizer import TOKENIZER  # AUDIT FIX (P3-13): single shared instance
+@@ -380,8 +407,0 @@ import os
+-# Load native Qwen2.5 tokenizer for exact token counting
+-# AUDIT FIX (Opus + Gemini DT): Use AutoTokenizer, NOT tiktoken or linear regression
+-TOKENIZER = AutoTokenizer.from_pretrained(
+-    "/app/models/Qwen2.5-32B-Instruct-AWQ",
+-    trust_remote_code=True,
+-    local_files_only=True,
+-)
+-
+@@ -441 +461,3 @@ def parse_and_chunk(pdf_path: str, max_tokens: int = 512) -> list[dict]:
+-        tokenizer=TOKENIZER,
++        # AUDIT FIX (DT-7): Docling requires its own BaseTokenizer protocol.
++        # Raw HuggingFace AutoTokenizer throws TypeError/AttributeError.
++        tokenizer=HuggingFaceTokenizer(tokenizer=TOKENIZER),
+@@ -546 +568 @@ def create_collection(client: QdrantClient, collection_name: str = "fsm_corpus")
+-def index_chunk(client: QdrantClient, chunk: dict, chunk_id: int,
++def index_chunk(client: QdrantClient, chunk: dict, chunk_id: str,  # AUDIT FIX (P2-08): was int, now str (UUID)
+@@ -570,0 +593,107 @@ def index_chunk(client: QdrantClient, chunk: dict, chunk_id: int,
++### Shared Client Singletons
++
++> [!IMPORTANT]
++> **AUDIT FIX (P2-04):** Both `chat.py` and `ingest.py` reference `qdrant_client` but neither
++> defines it. This module provides a single shared instance imported by all routes.
++
++```python
++# backend/shared/clients.py
++import os
++from qdrant_client import QdrantClient
++
++qdrant_client = QdrantClient(url=os.environ.get("QDRANT_URL", "http://qdrant:6333"))
++```
++
++> [!NOTE]
++> **AUDIT FIX (P3-13): Shared tokenizer singleton.** Both `parser.py` and `context_builder.py`
++> previously instantiated their own `AutoTokenizer.from_pretrained()` ΓÇö loading ~50-100MB of
++> vocabulary data each. Now both import from a single module:
++
++```python
++# backend/shared/tokenizer.py
++import os
++import threading  # AUDIT FIX (P6-06)
++from transformers import AutoTokenizer
++
++# AUDIT FIX (P4-11 + DT-P5-06): Pre-check model directory with clear error message.
++# Without this, a missing volume mount produces a confusing ImportError
++# traceback deep in the transformers library. Matches P2-12 pattern.
++# DT-P5-06: SystemExit inherits from BaseException ΓÇö bypasses except ImportError
++# in validate_ledger.py's host-side fallback. RuntimeError is properly catchable.
++_MODEL_PATH = "/app/models/Qwen2.5-32B-Instruct-AWQ"
++if not os.path.isdir(_MODEL_PATH):
++    raise RuntimeError(
++        f"Fatal: tokenizer model directory not found at {_MODEL_PATH}. "
++        f"Ensure model weights are pre-downloaded to ./storage/models/."
++    )
++
++TOKENIZER = AutoTokenizer.from_pretrained(
++    _MODEL_PATH,
++    trust_remote_code=True,
++    local_files_only=True,
++)
++
++# AUDIT FIX (P6-06): Thread-safe token counting wrapper.
++# TOKENIZER.encode() is called from multiple async contexts that may run on
++# different threads via asyncio.to_thread(): chat handler, build_context(),
++# parse_and_chunk(), and eviction loop. HuggingFace provides NO thread-safety
++# guarantee for trust_remote_code tokenizers (Qwen2.5 loads custom Python code).
++# A threading.Lock prevents potential state corruption in the custom tokenization.
++_TOKENIZER_LOCK = threading.Lock()
++
++def count_tokens(text: str) -> int:
++    """Thread-safe token counting."""
++    with _TOKENIZER_LOCK:
++        return len(TOKENIZER.encode(text))
++```
++
++> [!IMPORTANT]
++> **AUDIT FIX (P3-03): Collection auto-creation at startup.** Without this, a fresh deployment
++> receiving a `/api/chat` request before any PDF is ingested hits a Qdrant 404 on the
++> non-existent `fsm_corpus` collection. The error handler returns PHASE_ERROR but with a
++> misleading "search system temporarily unavailable" message.
++
++```python
++# backend/main.py (startup hook)
++from backend.shared.clients import qdrant_client
++from backend.indexing.qdrant_setup import create_collection
++from qdrant_client.http.exceptions import UnexpectedResponse
++import asyncio
++
++@app.on_event("startup")
++async def ensure_qdrant_collection():
++    """Create collection if it doesn't exist. Retry on transient failure."""
++    # AUDIT FIX (P3-03 + P4-07 + P5-08): Idempotent collection creation with retry.
++    # P3-03: Fresh deployment hits 404 without this.
++    # P4-07: If Qdrant is still loading persistence, create_collection() fails.
++    # P5-08: Extended from 5ΓåÆ10 attempts with 60s cap to outlast large persistence loads.
++    # Total max wait: 1+2+4+8+16+32+60+60+60+60 = ~303s (~5 minutes)
++    for attempt in range(10):
++        try:
++            qdrant_client.get_collection("fsm_corpus")
++            logger.info("Qdrant collection 'fsm_corpus' verified.")
++            return
++        except Exception:
++            try:
++                create_collection(qdrant_client)
++                logger.info("Qdrant collection 'fsm_corpus' created.")
++                return
++            except Exception as e:
++                wait = min(2 ** attempt, 60)  # Cap at 60 seconds per wait
++                logger.warning(f"Qdrant not ready (attempt {attempt+1}/10): {e}")
++                await asyncio.sleep(wait)
++    logger.critical("FATAL: Could not verify/create Qdrant collection after 10 attempts (~5 min).")
++    raise SystemExit("Qdrant collection setup failed ΓÇö aborting startup.")
++```
++
++```python
++# AUDIT FIX (P5-05): Graceful shutdown ΓÇö close persistent httpx connections.
++from backend.embedding.client import close_embed_client
++
++@app.on_event("shutdown")
++async def cleanup_clients():
++    """Close persistent httpx clients to prevent connection leaks."""
++    await close_embed_client()
++    logger.info("Persistent httpx clients closed.")
++```
++
+@@ -585,0 +715,26 @@ TEI_BASE_URL = "http://tei:80"
++# AUDIT FIX (P3-05): Persistent httpx client instead of per-call instantiation.
++# During bulk ingestion (100K+ chunks), creating/destroying an HTTP client per
++# embed call exhausts ephemeral ports and accumulates TIME_WAIT sockets.
++_http_client: httpx.AsyncClient | None = None
++
++async def _get_client() -> httpx.AsyncClient:
++    global _http_client
++    if _http_client is None or _http_client.is_closed:
++        # AUDIT FIX (P5-05): Explicit pool limits prevent unbounded connection growth
++        # during bulk ingestion. 100 max connections is generous for single-TEI setups;
++        # 20 max keepalive prevents idle socket accumulation.
++        # AUDIT FIX (P6-08): Reduced timeout from 30s to 10s (connect: 5s) ΓÇö fail-fast
++        # on stale keep-alive connections after TEI container restart.
++        _http_client = httpx.AsyncClient(
++            timeout=httpx.Timeout(10.0, connect=5.0),
++            limits=httpx.Limits(max_connections=100, max_keepalive_connections=20),
++        )
++    return _http_client
++
++async def close_embed_client():
++    """AUDIT FIX (P5-05): Graceful shutdown ΓÇö close persistent httpx client."""
++    global _http_client
++    if _http_client is not None and not _http_client.is_closed:
++        await _http_client.aclose()
++        _http_client = None
++
+@@ -605,4 +760,14 @@ async def embed_text(
+-    async with httpx.AsyncClient(timeout=30.0) as client:
+-        # Dense embedding
+-        dense_response = await client.post(
+-            f"{base_url}/embed",
++    client = await _get_client()  # AUDIT FIX (P3-05)
++    # Dense embedding
++    dense_response = await client.post(
++        f"{base_url}/embed",
++        json={"inputs": text},
++    )
++    dense_response.raise_for_status()
++    dense_vector = dense_response.json()[0]  # List[float], 1024-dim
++    
++    # Sparse embedding
++    sparse_vector = None
++    try:
++        sparse_response = await client.post(
++            f"{base_url}/embed_sparse",
+@@ -611,21 +776,11 @@ async def embed_text(
+-        dense_response.raise_for_status()
+-        dense_vector = dense_response.json()[0]  # List[float], 1024-dim
+-        
+-        # Sparse embedding
+-        sparse_vector = None
+-        try:
+-            sparse_response = await client.post(
+-                f"{base_url}/embed_sparse",
+-                json={"inputs": text},
+-            )
+-            sparse_response.raise_for_status()
+-            sparse_data = sparse_response.json()[0]  # List[{index, value}]
+-            sparse_vector = {
+-                "indices": [entry["index"] for entry in sparse_data],
+-                "values": [entry["value"] for entry in sparse_data],
+-            }
+-        except (httpx.HTTPStatusError, KeyError) as e:
+-            # TEI version may not support sparse; degrade to dense-only
+-            logger.warning(f"TEI /embed_sparse failed ({e}) ΓÇö falling back to dense-only search")
+-        
+-        return dense_vector, sparse_vector
++        sparse_response.raise_for_status()
++        sparse_data = sparse_response.json()[0]  # List[{index, value}]
++        sparse_vector = {
++            "indices": [entry["index"] for entry in sparse_data],
++            "values": [entry["value"] for entry in sparse_data],
++        }
++    except (httpx.HTTPStatusError, KeyError) as e:
++        # TEI version may not support sparse; degrade to dense-only
++        logger.warning(f"TEI /embed_sparse failed ({e}) ΓÇö falling back to dense-only search")
++    
++    return dense_vector, sparse_vector
+@@ -638,0 +794 @@ import asyncio
++import uuid
+@@ -647 +803,14 @@ logger = logging.getLogger(__name__)
+-async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) -> int:
++# AUDIT FIX (DT-P2-04): Limit concurrent ingestion workers to prevent OOM.
++# The V9 daemon fires 500+ POST /api/ingest requests in seconds (HTTP 202 returns instantly).
++# Without a semaphore, asyncio.to_thread spawns ~32 concurrent Docling/EasyOCR workers,
++# each consuming ~2GB RAM. On a 64GB host, this instantly triggers the Linux OOM Killer.
++# Limit to 2 concurrent jobs ΓÇö each Docling+EasyOCR process needs ~2GB for PDF parsing + OCR.
++INGEST_SEMAPHORE = asyncio.Semaphore(2)
++
++# AUDIT FIX (P3-04): Rate-limit concurrent TEI embedding requests.
++# The INGEST_SEMAPHORE gates parse_and_chunk (CPU-bound) but the embed loop runs
++# outside it. With 500+ PDFs queued, dozens enter the embed phase simultaneously,
++# flooding TEI with concurrent HTTP requests and causing httpx timeouts.
++EMBED_SEMAPHORE = asyncio.Semaphore(8)  # TEI handles ~8 concurrent requests efficiently
++
++async def ingest_pdf(pdf_path: str, client: QdrantClient) -> int:
+@@ -651,0 +821,5 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
++    
++    AUDIT FIX (DT-3): Uses deterministic UUID5 based on (pdf_path, chunk_index)
++    so that re-ingesting the same PDF produces the same IDs (idempotent upsert),
++    but different PDFs never collide. Previous sequential IDs (start_id + i)
++    caused every PDF to overwrite chunks 0, 1, 2... destroying the entire DB.
+@@ -656 +830,9 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
+-    chunks = await asyncio.to_thread(parse_and_chunk, pdf_path)
++    # AUDIT FIX (DT-P2-04): Acquire semaphore to limit concurrent OCR workers.
++    # Only the CPU-bound parse_and_chunk is gated ΓÇö embed/index are I/O-bound.
++    async with INGEST_SEMAPHORE:
++        chunks = await asyncio.to_thread(parse_and_chunk, pdf_path)
++    
++    if not chunks:
++        # AUDIT FIX (DT-5b): Zero extractable text = silent failure.
++        # Raise IngestionError so the V9 quarantine logic activates.
++        raise IngestionError(f"No chunks extracted from {pdf_path} ΓÇö likely blank/corrupt PDF")
+@@ -657,0 +840,5 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
++    # AUDIT FIX (P5-01): Track actual indexed vs failed counts. Previously reported
++    # len(chunks) which is the PARSED count, not the indexed count. Silent partial
++    # ingestion: TEI down ΓåÆ 0 indexed, 200 reported ΓåÆ entire FSM corpus missing.
++    indexed_count = 0
++    failed_count = 0
+@@ -659,2 +846,3 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
+-        dense, sparse = await embed_text(chunk["text"])
+-        sparse_dict = sparse or {"indices": [], "values": []}
++        # AUDIT FIX (DT-3): Deterministic UUID from (path, index).
++        # AUDIT FIX (P2-08): Use str() not .hex ΓÇö Qdrant needs hyphenated UUID format.
++        chunk_id = str(uuid.uuid5(uuid.NAMESPACE_URL, f"{pdf_path}_{i}"))
+@@ -662,7 +850,25 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
+-        index_chunk(
+-            client=client,
+-            chunk=chunk,
+-            chunk_id=start_id + i,
+-            dense_vector=dense,
+-            sparse_vector=sparse_dict,
+-        )
++        # AUDIT FIX (P4-08): Per-chunk error handling for embed+index.
++        # Without this, a single TEI crash (ConnectError) during bulk ingestion
++        # kills the entire PDF ΓÇö all remaining chunks are skipped. Now each
++        # chunk failure is logged and skipped; the rest of the PDF proceeds.
++        try:
++            # AUDIT FIX (P3-04): Rate-limit TEI requests to prevent timeout cascade
++            async with EMBED_SEMAPHORE:
++                dense, sparse = await embed_text(chunk["text"])
++            sparse_dict = sparse or {"indices": [], "values": []}
++            
++            # AUDIT FIX: index_chunk() uses synchronous client.upsert() ΓÇö dispatch
++            # to threadpool to avoid blocking the event loop during bulk ingestion.
++            await asyncio.to_thread(
++                index_chunk,
++                client=client,
++                chunk=chunk,
++                chunk_id=chunk_id,
++                dense_vector=dense,
++                sparse_vector=sparse_dict,
++            )
++            indexed_count += 1  # AUDIT FIX (P5-01)
++        except Exception as e:
++            failed_count += 1  # AUDIT FIX (P5-01)
++            logger.warning(f"Chunk {i}/{len(chunks)} failed for {pdf_path}: {e} ΓÇö skipping")
++            continue
+@@ -670,2 +876,51 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
+-    logger.info(f"Indexed {len(chunks)} chunks from {pdf_path}")
+-    return len(chunks)
++    # AUDIT FIX (P5-01): Report actual indexed count, not len(chunks)
++    logger.info(
++        f"Indexed {indexed_count}/{len(chunks)} chunks from {pdf_path}"
++        f"{f' ({failed_count} failed)' if failed_count else ''}"
++    )
++    # AUDIT FIX (P6-03): Only write PARTIAL manifest entry when some chunks succeeded.
++    # When ALL chunks fail (indexed_count == 0), DT-P5-04 raises IngestionError which
++    # the background wrapper catches and writes to the manifest ΓÇö don't double-write.
++    if failed_count > 0 and indexed_count > 0:
++        logger.warning(
++            f"PARTIAL INGESTION: {pdf_path} ΓÇö {failed_count}/{len(chunks)} chunks failed. "
++            f"Re-ingest after resolving TEI/Qdrant issues."
++        )
++        # Write partial failure to manifest so operator can identify and re-ingest
++        with open(FAILURE_MANIFEST_PATH, "a") as f:
++            f.write(f"{pdf_path}\tPARTIAL: {indexed_count}/{len(chunks)} indexed, {failed_count} failed\n")
++    # AUDIT FIX (DT-P5-04): If EVERY chunk failed, raise IngestionError so the
++    # P2-06 background wrapper logs it and writes to the failure manifest.
++    # No silent errors ΓÇö a 100% failure rate is never "success".
++    if indexed_count == 0 and len(chunks) > 0:
++        raise IngestionError(
++            f"All {len(chunks)} chunks failed to index for {pdf_path} ΓÇö "
++            f"TEI or Qdrant may be down."
++        )
++    return indexed_count  # AUDIT FIX (P5-01): was len(chunks)
++
++# AUDIT FIX (P2-06): Background task wrapper with error handling.
++# When called via FastAPI BackgroundTasks, exceptions are silently swallowed.
++# This wrapper catches IngestionError, logs it, and writes to a failure manifest
++# so the V9 daemon (or operator) can identify failed ingestions.
++# AUDIT FIX (P5-10): Path constant ΓÇö was "/app/storage/extracted/" which doesn't
++# match the Docker volume mount (./storage/extracted:/app/extracted). Failures
++# were written to an unmounted path and lost on container restart.
++FAILURE_MANIFEST_PATH = "/app/extracted/.ingest_failures.log"
++
++async def ingest_pdf_background(pdf_path: str, client: QdrantClient):
++    """Wrapper for BackgroundTask execution with error handling."""
++    try:
++        count = await ingest_pdf(pdf_path, client)
++        logger.info(f"Background ingestion complete: {pdf_path} ({count} chunks)")
++    except IngestionError as e:
++        logger.error(f"INGESTION FAILED (quarantine candidate): {pdf_path} ΓÇö {e}")
++        # Write to failure manifest for operator/daemon re-check
++        with open(FAILURE_MANIFEST_PATH, "a") as f:  # AUDIT FIX (P5-10)
++            f.write(f"{pdf_path}\t{e}\n")
++    except Exception as e:
++        logger.error(f"UNEXPECTED INGESTION ERROR: {pdf_path} ΓÇö {e}", exc_info=True)
++        # AUDIT FIX (P3-09): Also log unexpected errors to failure manifest
++        # (previously only IngestionError was written ΓÇö operator would miss these)
++        with open(FAILURE_MANIFEST_PATH, "a") as f:  # AUDIT FIX (P5-10)
++            f.write(f"{pdf_path}\tUNEXPECTED: {e}\n")
+@@ -674,2 +929,7 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
+-> [!NOTE]
+-> **Query-time embedding:** In `backend/routes/chat.py`, user queries are embedded the same way before search:
++> [!IMPORTANT]
++> **AUDIT FIX (DT-5): Ingestion endpoint MUST use FastAPI BackgroundTasks.**
++> Docling+EasyOCR processes 1-3 minutes per page (20-60 hours for full corpus).
++> If the HTTP request stays open, Nginx's 60s timeout drops the connection.
++> The V9 daemon interprets this as failure and retries, spawning infinite
++> concurrent OCR threads until the host CPU locks up.
++>
+@@ -677,2 +937,33 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
+-> query_dense, query_sparse = await embed_text(user_query)
+-> results = hybrid_search(client, query_dense, query_sparse)
++> # backend/routes/ingest.py
++> import os
++> from fastapi import APIRouter, BackgroundTasks, Request
++> from backend.shared.clients import qdrant_client  # AUDIT FIX (P2-04)
++> 
++> router = APIRouter()
++> ALLOWED_PDF_DIR = "/app/pdfs"  # AUDIT FIX (P2-11): path traversal prevention
++> 
++> @router.post("/api/ingest", status_code=202)
++> async def ingest(request: Request, background_tasks: BackgroundTasks):
++>     body = await request.json()
++>     # AUDIT FIX (DT-P4-04 + DT-P5-05): The host daemon sends absolute HOST paths
++>     # (e.g. /home/user/storage/pdfs/engine/manual.pdf). The container volume mount
++>     # maps that directory to /app/pdfs. Extract the relative path AFTER "pdfs/"
++>     # to preserve subdirectory structure. Fallback to basename if "pdfs/" not found.
++>     # DT-P5-05: basename() flattens subdirs ΓÇö /app/pdfs/engine/manual.pdf becomes
++>     # /app/pdfs/manual.pdf which doesn't exist.
++>     raw_path = body["pdf_path"]
++>     # AUDIT FIX (P6-07): Null bytes in paths cause os.path.realpath() to raise
++>     # ValueError("embedded null character") ΓÇö unhandled, producing HTTP 500 with
++>     # traceback. Reject early with a clean response.
++>     if "\x00" in raw_path:
++>         return {"status": "rejected", "message": "Invalid path"}
++>     rel_path = raw_path.split("pdfs/", 1)[-1] if "pdfs/" in raw_path else os.path.basename(raw_path)
++>     pdf_path = os.path.realpath(os.path.join(ALLOWED_PDF_DIR, rel_path))
++>     # AUDIT FIX (P2-11 + DT-P3-04): Validate path is within allowed directory.
++>     # DT-P3-04: Trailing slash prevents sibling dir bypass ("/app/pdfs_keys/...")
++>     if not pdf_path.startswith(ALLOWED_PDF_DIR + "/"):
++>         return {"status": "rejected", "message": "Path outside allowed directory"}
++>     if not pdf_path.endswith(".pdf"):
++>         return {"status": "rejected", "message": "Not a PDF file"}
++>     background_tasks.add_task(ingest_pdf_background, pdf_path, qdrant_client)
++>     return {"status": "accepted", "message": f"Ingestion queued for {pdf_path}"}
+@@ -680,0 +972,254 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, start_id: int = 0) ->
++> [!NOTE]
++> **Chat Handler (Complete Assembly):** The chat route is the single orchestration point
++> where ALL components converge. The ledger, RAG context, chat history, and system prompt
++> are assembled here in a specific order.
++
++```python
++# backend/routes/chat.py
++import asyncio  # AUDIT FIX (P4-01): Required by P3-08's asyncio.to_thread() search dispatch
++import json
++import os
++from concurrent.futures import ThreadPoolExecutor  # AUDIT FIX (P6-05)
++import logging
++from fastapi import APIRouter, Request
++from backend.embedding.client import embed_text
++from backend.search import hybrid_search
++from backend.inference.context import build_context, load_ledger, TOKENIZER  # AUDIT FIX (P2-03)
++from backend.inference.llm import generate_response
++from backend.shared.clients import qdrant_client  # AUDIT FIX (P2-04)
++
++logger = logging.getLogger(__name__)
++
++# AUDIT FIX (P6-05): Dedicated thread pool for chat-path search.
++# The default ThreadPoolExecutor is shared with ingestion's index_chunk() calls.
++# During bulk ingestion (200+ chunks ├ù 2 concurrent PDFs), index_chunk to_thread()
++# dispatches can saturate the default pool, queuing chat search requests behind them.
++# This dedicated pool guarantees chat search always has threads available.
++_SEARCH_POOL = ThreadPoolExecutor(max_workers=4, thread_name_prefix="chat-search")
++
++router = APIRouter()
++
++# AUDIT FIX (P2-12): Explicit startup failure instead of confusing ImportError
++_PROMPT_PATH = "/app/config/system_prompt.txt"
++if os.path.exists(_PROMPT_PATH):
++    SYSTEM_PROMPT = open(_PROMPT_PATH).read()
++else:
++    logger.critical(f"SYSTEM PROMPT NOT FOUND: {_PROMPT_PATH}")
++    raise SystemExit(f"Fatal: system prompt missing at {_PROMPT_PATH}")
++
++@router.post("/api/chat")
++async def chat(request: Request):
++    body = await request.json()
++    user_query = body["message"]
++    chat_history = body.get("chat_history", [])
++    
++    # Step 1: Load ledger (may be empty if file missing ΓÇö degrades gracefully)
++    ledger_text = load_ledger()
++    ledger_tokens = len(TOKENIZER.encode(ledger_text)) if ledger_text else 0
++    
++    # Step 2: Compute chat history token cost
++    chat_history_tokens = sum(
++        len(TOKENIZER.encode(m["content"])) for m in chat_history
++    )
++    
++    # AUDIT FIX (P2-02): Physically truncate chat_history array to match budget cap.
++    # Without this, build_context() caps the budget MATH at 8000 tokens but
++    # generate_response() still sends ALL messages to vLLM, overshooting 32K.
++    # Evict oldest messages first (preserve recent diagnostic context).
++    MAX_CHAT_HISTORY_TOKENS = 8000
++    if chat_history_tokens > MAX_CHAT_HISTORY_TOKENS:
++        truncated = []
++        running = 0
++        for msg in reversed(chat_history):
++            msg_tokens = len(TOKENIZER.encode(msg["content"]))
++            if running + msg_tokens > MAX_CHAT_HISTORY_TOKENS and truncated:
++                break  # AUDIT FIX (DT-P5-01): Reverted from continue to preserve contiguous role alternation
++            truncated.insert(0, msg)
++            running += msg_tokens
++        # AUDIT FIX (DT-P3-07 + DT-P5-07 + P6-02): Eviction may split a user/assistant pair,
++        # leaving a dangling assistant message first. Qwen2.5 chat template expects
++        # user-first after system prompt ΓÇö strip ALL leading orphan assistants.
++        # DT-P5-07: Removed P4-03 len>1 guard. An empty history (DAG reset) is always
++        # safer than injecting a broken assistant message that poisons LLM context.
++        # P6-02: Changed ifΓåÆwhile to handle consecutive assistant messages (malformed
++        # frontend payload ΓÇö stale cache, bug, or manipulation).
++        while truncated and truncated[0]["role"] == "assistant":
++            chat_history_tokens_removed = len(TOKENIZER.encode(truncated[0]["content"]))
++            truncated.pop(0)
++            running -= chat_history_tokens_removed
++        chat_history = truncated
++        chat_history_tokens = running
++    
++    # AUDIT FIX (P6-01, CRITICAL): Hard budget enforcement after eviction.
++    # When P3-02 guard preserves a single oversized message (>8000 tokens),
++    # build_context() only clamps the MATH to 8000 but generate_response()
++    # still sends the actual (oversized) message to vLLM. The prompt can
++    # exceed --max-model-len 32768, causing HTTP 400 from vLLM.
++    # Option (b): Reject with PHASE_ERROR ΓÇö safer for a life-safety system
++    # than silently truncating potentially critical diagnostic context.
++    if chat_history_tokens > MAX_CHAT_HISTORY_TOKENS:
++        return {"response": json.dumps({
++            "current_state": "PHASE_ERROR",
++            "mechanic_instructions": "Your conversation history is too large. Please start a new diagnostic session.",
++            "diagnostic_reasoning": f"Chat history ({chat_history_tokens} tokens) exceeds {MAX_CHAT_HISTORY_TOKENS}-token limit after eviction.",
++            "requires_input": False,
++            "answer_path_prompts": [],
++            "source_citations": [],
++            "intersecting_subsystems": [],
++        })}
++    
++    # AUDIT FIX (DT-P6-02): Query length validation moved ABOVE embed call.
++    # TEI has an absolute 8192-token input limit. The previous placement at
++    # Step 5 (after embedding) meant a 9500-token query would crash the TEI
++    # request with HTTP 400 before reaching the length validator, producing a
++    # misleading "search system unavailable" error instead of "message too long."
++    # Cap reduced from 10000 ΓåÆ 8000 to align with TEI's hardware limit.
++    user_query_tokens = len(TOKENIZER.encode(user_query))
++    MAX_USER_QUERY_TOKENS = 8000
++    if user_query_tokens > MAX_USER_QUERY_TOKENS:
++        return {"response": json.dumps({
++            "current_state": "PHASE_ERROR",
++            "mechanic_instructions": "Your message is too long for me to process. Please shorten your question or paste smaller sections of diagnostic data.",
++            "diagnostic_reasoning": f"User query ({user_query_tokens} tokens) exceeds {MAX_USER_QUERY_TOKENS}-token safety limit.",
++            "requires_input": False,
++            "answer_path_prompts": [],
++            "source_citations": [],
++            "intersecting_subsystems": [],
++        })}
++    
++    # AUDIT FIX (H09/H10/H13): Comprehensive error handling for the entire
++    # embed ΓåÆ search ΓåÆ generate pipeline. Without this, TEI crash, Qdrant 404,
++    # or vLLM OOM all produce raw HTTP 500 with Python tracebacks visible to
++    # the mechanic. Each failure now returns structured JSON with PHASE_ERROR.
++    try:
++        # Step 3: Embed user query for retrieval
++        # AUDIT FIX (P4-05): Acquire EMBED_SEMAPHORE so chat competes fairly
++        # with ingestion. Without this, during bulk ingestion all 8 permits are
++        # held and chat sends an unthrottled 9th request ΓåÆ TEI overload.
++        from backend.ingestion.pipeline import EMBED_SEMAPHORE
++        async with EMBED_SEMAPHORE:
++            query_dense, query_sparse = await embed_text(user_query)
++    except Exception as e:
++        logger.error(f"Embedding failed: {e}", exc_info=True)
++        return {"response": json.dumps({
++            "current_state": "PHASE_ERROR",
++            "mechanic_instructions": "The search system is temporarily unavailable. Please try again in a moment.",
++            "diagnostic_reasoning": f"Embedding service error: {type(e).__name__}",
++            "requires_input": False,  # AUDIT FIX (P2-10)
++            "answer_path_prompts": [],
++            "source_citations": [],
++            "intersecting_subsystems": [],
++        })}
++    
++    try:
++        # Step 4: Hybrid search (dense + sparse with RRF fusion)
++        # AUDIT FIX (P3-08 + P6-05): hybrid_search() uses synchronous QdrantClient ΓÇö
++        # dispatch to dedicated search pool to avoid blocking event loop.
++        # P6-05: Uses _SEARCH_POOL instead of default to_thread() pool to prevent
++        # ingestion index_chunk() calls from starving chat search.
++        loop = asyncio.get_event_loop()
++        results = await loop.run_in_executor(
++            _SEARCH_POOL,
++            hybrid_search, qdrant_client, query_dense, query_sparse
++        )
++    except Exception as e:
++        logger.error(f"Search failed: {e}", exc_info=True)
++        return {"response": json.dumps({
++            "current_state": "PHASE_ERROR",
++            "mechanic_instructions": "The document search system is temporarily unavailable. Please try again in a moment.",
++            "diagnostic_reasoning": f"Search error: {type(e).__name__}",
++            "requires_input": False,  # AUDIT FIX (P2-10)
++            "answer_path_prompts": [],
++            "source_citations": [],
++            "intersecting_subsystems": [],
++        })}
++    
++    # Step 5: Build RAG context within token budget
++    # AUDIT FIX (P2-01): user_query_tokens already computed above (DT-P6-02 moved it before embed)
++    # AUDIT FIX (P3-01): build_context() returns tuple[str, list[dict]].
++    # Destructure the return value ΓÇö without this, `context` is the raw tuple
++    # and f-string formatting injects Python tuple repr into the LLM prompt.
++    context, used_chunks = build_context(
++        results,
++        ledger_tokens=ledger_tokens,
++        chat_history_tokens=chat_history_tokens,
++        user_query_tokens=user_query_tokens,
++    )
++    
++    # Step 6: Assemble system prompt WITH ledger (injection point)
++    # Ledger goes INSIDE the system prompt, before RAG context
++    system_prompt = SYSTEM_PROMPT
++    if ledger_text:
++        system_prompt += f"\n\nMASTER_LEDGER.md:\n{ledger_text}"
++    
++    try:
++        # Step 7: Generate LLM response (context appended in generate_response)
++        # AUDIT FIX (P6-09): chat_history may be empty after orphan strip
++        # (e.g., single-assistant history). This produces valid [system, user]
++        # ChatML for Qwen2.5 ΓÇö this is intentional, not a bug.
++        response = await generate_response(
++            system_prompt=system_prompt,
++            context=context,
++            user_message=user_query,
++            chat_history=chat_history,
++        )
++    except Exception as e:
++        logger.error(f"LLM generation failed: {e}", exc_info=True)
++        return {"response": json.dumps({
++            "current_state": "PHASE_ERROR",
++            "mechanic_instructions": "The AI engine is temporarily unavailable. Please try again in a moment.",
++            "diagnostic_reasoning": f"LLM error: {type(e).__name__}",
++            "requires_input": False,  # AUDIT FIX (P2-10)
++            "answer_path_prompts": [],
++            "source_citations": [],
++            "intersecting_subsystems": [],
++        })}
++    
++    # AUDIT FIX (P3-12 + P4-10 + DT-P4-06): Validate LLM output is valid JSON with required schema.
++    # P3-12: Qwen2.5 may ignore JSON instruction and return prose.
++    # P4-10: Even valid JSON may have wrong schema (e.g. {"answer":"yes"}).
++    # DT-P4-06: LLMs frequently wrap valid JSON in ```json ... ``` fences.
++    # Strip fences first so the validation doesn't reject salvageable output.
++    import re
++    stripped = re.sub(r'^```(?:json)?\s*\n?', '', response.strip())
++    stripped = re.sub(r'\n?```\s*$', '', stripped)
++    try:
++        parsed = json.loads(stripped)
++        if not isinstance(parsed, dict) or "current_state" not in parsed:
++            raise ValueError("Missing required 'current_state' field")
++        response = stripped  # Use the fence-stripped version
++    except (json.JSONDecodeError, ValueError):
++        # AUDIT FIX (P5-03): Secondary extraction ΓÇö find first { to last } in case
++        # the LLM prepended prose before the JSON fence (e.g., "Here is the response:\n```json\n{...}\n```").
++        # Replicates the frontend's parseGusResponse() brace-scanning server-side.
++        recovered = False
++        brace_start = stripped.find('{')
++        brace_end = stripped.rfind('}')
++        if brace_start != -1 and brace_end > brace_start:
++            candidate = stripped[brace_start:brace_end + 1]
++            try:
++                parsed = json.loads(candidate)
++                if isinstance(parsed, dict) and "current_state" in parsed:
++                    response = candidate
++                    recovered = True
++                    logger.info("Recovered JSON via brace extraction after fence-strip failure (P5-03)")
++                else:
++                    raise ValueError("Missing current_state in extracted JSON")
++            except (json.JSONDecodeError, ValueError):
++                pass  # Fall through to PHASE_ERROR below
++
++        if not recovered:
++            logger.warning(f"LLM returned invalid/malformed response: {response[:200]}")
++            response = json.dumps({
++                "current_state": "PHASE_ERROR",
++                "mechanic_instructions": "The AI produced an unexpected response format. Please rephrase your question.",
++                "diagnostic_reasoning": "LLM output failed schema validation ΓÇö may indicate prompt compliance failure.",
++                "requires_input": False,
++                "answer_path_prompts": [],
++                "source_citations": [],
++                "intersecting_subsystems": [],
++            })
++    
++    return {"response": response}
++```
++
+@@ -695,0 +1241 @@ The retrieval pipeline implements Reciprocal Rank Fusion (RRF) to combine dense
++import logging  # AUDIT FIX (P2-07)
+@@ -700,0 +1247,2 @@ from qdrant_client.models import (
++logger = logging.getLogger(__name__)  # AUDIT FIX (P2-07)
++
+@@ -706,0 +1255 @@ def hybrid_search(
++    min_absolute_score: float = 0.013,  # AUDIT FIX (P2-14): raised from 0.005 (dead code ΓÇö RRF min is 0.0125)
+@@ -714,0 +1264,2 @@ def hybrid_search(
++        min_absolute_score: Absolute RRF score floor ΓÇö discard ALL results if
++            top score is below this value (handles off-topic queries)
+@@ -720,8 +1271,14 @@ def hybrid_search(
+-    results = client.query_points(
+-        collection_name="fsm_corpus",
+-        prefetch=[
+-            Prefetch(
+-                query=query_dense,
+-                using="dense",
+-                limit=top_k,
+-            ),
++    # AUDIT FIX (DT-8): Build prefetch list conditionally. Qdrant's Rust backend
++    # rejects empty SparseVector arrays ({indices:[], values:[]}) with HTTP 400.
++    # When TEI degrades and sparse vector is None, omit the sparse prefetch
++    # entirely and fall back to dense-only search.
++    prefetch_list = [
++        Prefetch(
++            query=query_dense,
++            using="dense",
++            limit=top_k,
++        ),
++    ]
++    
++    if query_sparse and query_sparse.get("indices"):
++        prefetch_list.append(
+@@ -730,4 +1287,2 @@ def hybrid_search(
+-                    # AUDIT FIX: Guard against None sparse vector if TEI
+-                    # /embed_sparse endpoint degrades (embed_text returns None).
+-                    indices=query_sparse["indices"] if query_sparse else [],
+-                    values=query_sparse["values"] if query_sparse else [],
++                    indices=query_sparse["indices"],
++                    values=query_sparse["values"],
+@@ -737,5 +1292,23 @@ def hybrid_search(
+-            ),
+-        ],
+-        query=FusionQuery(fusion=Fusion.RRF),
+-        limit=top_k,
+-    )
++            )
++        )
++    else:
++        logger.warning("Sparse vector unavailable ΓÇö falling back to dense-only search")
++    
++    # AUDIT FIX (DT-P4-02): Qdrant requires ΓëÑ2 prefetch queries for RRF fusion.
++    # When TEI sparse degrades and the sparse prefetch is dropped, a single-signal
++    # FusionQuery crashes with HTTP 400. Conditionally use direct query for fallback.
++    if len(prefetch_list) >= 2:
++        results = client.query_points(
++            collection_name="fsm_corpus",
++            prefetch=prefetch_list,
++            query=FusionQuery(fusion=Fusion.RRF),
++            limit=top_k,
++        )
++    else:
++        # Dense-only fallback ΓÇö no fusion needed
++        results = client.query_points(
++            collection_name="fsm_corpus",
++            query=prefetch_list[0].query,
++            using="dense",
++            limit=top_k,
++        )
+@@ -746 +1319,15 @@ def hybrid_search(
+-    # Dynamic threshold: keep chunks within 30% of top RRF score
++    # AUDIT FIX (P5-04 + P6-04): Mode-adaptive absolute score floor.
++    # RRF scores cluster in [0.0125, 0.0164] ΓÇö 0.013 catches off-topic queries.
++    # Dense cosine scores range [0, 1] ΓÇö for BGE-M3 1024-dim L2-normalized vectors,
++    # random-pair cosine similarity clusters at 0.25ΓÇô0.45. P6-04 raised from 0.35
++    # (inside noise band) to 0.50 (above noise, below relevant-pair minimum ~0.60).
++    effective_min_absolute = min_absolute_score if len(prefetch_list) >= 2 else 0.50
++    top_score = results.points[0].score
++    if top_score < effective_min_absolute:
++        logger.warning(
++            f"Top score {top_score:.4f} below absolute floor {effective_min_absolute} "
++            f"({'RRF' if len(prefetch_list) >= 2 else 'dense-only'} mode) ΓÇö discarding all results"
++        )
++        return []
++    
++    # Dynamic threshold: keep chunks within 30% of top score
+@@ -751,3 +1338,7 @@ def hybrid_search(
+-    # For more aggressive filtering, raise to 0.85 or add a rank-based cutoff.
+-    top_score = results.points[0].score
+-    threshold = top_score * min_score_ratio
++    # AUDIT FIX (DT-P6-05): Mode-adaptive dynamic ratio.
++    # In cosine space (dense-only), scores range widely (0.3ΓÇô1.0). A 0.70 ratio
++    # on a top score of 0.90 = threshold 0.63, brutally discarding chunks at 0.60
++    # that are still highly relevant. Disable ratio in dense-only mode ΓÇö let the
++    # absolute floor (P6-04: 0.50) and top_k handle filtering.
++    effective_ratio = min_score_ratio if len(prefetch_list) >= 2 else 0.0
++    threshold = top_score * effective_ratio
+@@ -777 +1368,2 @@ def hybrid_search(
+-from transformers import AutoTokenizer
++import logging  # AUDIT FIX (P3-06)
++from backend.shared.tokenizer import TOKENIZER  # AUDIT FIX (P3-13): single shared instance
+@@ -779,5 +1371,8 @@ from transformers import AutoTokenizer
+-TOKENIZER = AutoTokenizer.from_pretrained(
+-    "/app/models/Qwen2.5-32B-Instruct-AWQ",
+-    trust_remote_code=True,
+-    local_files_only=True,
+-)
++logger = logging.getLogger(__name__)  # AUDIT FIX (P3-06)
++
++# AUDIT FIX (H11): Runtime RAG budget floor ΓÇö prevents long conversations from
++# silently pushing RAG context to zero or negative. The ledger validator uses
++# MIN_RAG_BUDGET=20000, but at runtime we use a lower floor to allow some
++# degradation before hard-cutting chat history.
++MIN_RAG_FLOOR = 5000  # Minimum tokens reserved for RAG context at runtime
++MAX_CHAT_HISTORY_TOKENS = 8000  # AUDIT FIX (H12): Hard cap on chat history
+@@ -791,0 +1387 @@ def build_context(
++    user_query_tokens: int = 0,  # AUDIT FIX (P2-01): user message budget
+@@ -800,0 +1397,8 @@ def build_context(
++    # AUDIT FIX (H12): Cap chat history to prevent unbounded growth
++    if chat_history_tokens > MAX_CHAT_HISTORY_TOKENS:
++        logger.warning(
++            f"Chat history ({chat_history_tokens} tokens) exceeds cap "
++            f"({MAX_CHAT_HISTORY_TOKENS}). Truncating to cap."
++        )
++        chat_history_tokens = MAX_CHAT_HISTORY_TOKENS
++    
+@@ -805 +1409,11 @@ def build_context(
+-                 - chat_history_tokens)
++                 - chat_history_tokens
++                 - user_query_tokens)  # AUDIT FIX (P2-01)
++    
++    # AUDIT FIX (H11): Enforce minimum RAG budget floor at runtime.
++    # If available < MIN_RAG_FLOOR after all deductions, warn and enforce.
++    if available < MIN_RAG_FLOOR:
++        logger.warning(
++            f"RAG budget ({available} tokens) below floor ({MIN_RAG_FLOOR}). "
++            f"Chat history may need eviction upstream."
++        )
++        available = MIN_RAG_FLOOR
+@@ -807,2 +1421,2 @@ def build_context(
+-    # Default (chat_history_tokens=0): 32768 - 900 - 2550 - 2000 = 27,318 tokens for RAG
+-    # Typical case (with ~1000 chat history): 26,318 tokens ΓÇö see budget diagram below
++    # Typical (with ledger, no chat): 32768 - 900 - 2550 - 2000 - 0 = 27,318 tokens for RAG
++    # Typical (with ledger + chat ~1000): 26,318 tokens ΓÇö see budget diagram below
+@@ -814,0 +1429,6 @@ def build_context(
++    # AUDIT FIX (P5-11): Cache separator token cost. The "\n\n---\n\n".join() between
++    # chunks was previously unbudgeted ΓÇö N-1 separators ├ù ~5 tokens each = 30-95
++    # unbudgeted tokens in tight scenarios, causing context window overflow.
++    SEPARATOR = "\n\n---\n\n"
++    SEPARATOR_TOKENS = len(TOKENIZER.encode(SEPARATOR))
++    
+@@ -819,6 +1438,0 @@ def build_context(
+-        # Add formatting overhead (~20 tokens for header + separator)
+-        total_cost = chunk_tokens + 20
+-        
+-        if used_tokens + total_cost > available:
+-            break
+-        
+@@ -833,0 +1448,10 @@ def build_context(
++        # AUDIT FIX: Compute actual header token cost instead of hardcoded 20.
++        # Headers with long filenames, multiple pages, or deep headings can
++        # exceed 50 tokens ΓÇö hardcoding risks context window overflow.
++        header_tokens = len(TOKENIZER.encode(header + "\n\n"))
++        separator_cost = SEPARATOR_TOKENS if context_parts else 0  # AUDIT FIX (P5-11)
++        total_cost = chunk_tokens + header_tokens + separator_cost
++        
++        if used_tokens + total_cost > available:
++            break
++        
+@@ -838 +1462 @@ def build_context(
+-    context_string = "\n\n---\n\n".join(context_parts)
++    context_string = SEPARATOR.join(context_parts)  # AUDIT FIX (P5-11): uses cached constant
+@@ -876 +1500 @@ V9 comparison:
+-| GPU Memory Utilization | 0.85 | Leaves 15% headroom per GPU |
++| GPU Memory Utilization | 0.75 | AUDIT FIX: 0.85ΓåÆ0.75 to prevent GPU 0 OOM after TEI |
+@@ -886,0 +1511,11 @@ VLLM_BASE_URL = "http://vllm:8000/v1"
++# AUDIT FIX (P4-06): Persistent httpx client singleton, matching P3-05 pattern
++# in embed_text(). Per-call instantiation accumulates TIME_WAIT sockets on port
++# 8000 during rapid diagnostic sessions. Singleton reuses connection pool.
++_llm_client: httpx.AsyncClient | None = None
++
++async def _get_llm_client() -> httpx.AsyncClient:
++    global _llm_client
++    if _llm_client is None or _llm_client.is_closed:
++        _llm_client = httpx.AsyncClient(timeout=120.0)
++    return _llm_client
++
+@@ -902,0 +1538,4 @@ async def generate_response(
++    # AUDIT FIX (P2-05): ALWAYS include the RETRIEVED DOCUMENTS header.
++    # Without it, the system prompt's ZERO-RETRIEVAL SAFEGUARD condition
++    # ("section is empty") never matches ("section is absent"), and the LLM
++    # hallucsinates a diagnostic instead of emitting RETRIEVAL_FAILURE.
+@@ -904,0 +1544,4 @@ async def generate_response(
++    else:
++        # AUDIT FIX (P3-07): Empty section (no placeholder text) so the system
++        # prompt's ZERO-RETRIEVAL SAFEGUARD trigger ("section is empty") matches.
++        system_content += "\n\nRETRIEVED DOCUMENTS:\n\n"
+@@ -916,13 +1559,13 @@ async def generate_response(
+-    async with httpx.AsyncClient(timeout=120.0) as client:
+-        response = await client.post(
+-            f"{VLLM_BASE_URL}/chat/completions",
+-            json={
+-                "model": "Qwen2.5-32B-Instruct-AWQ",
+-                "messages": messages,
+-                "max_tokens": max_tokens,
+-                "temperature": temperature,
+-                "stop": ["\n\n\n"],  # Prevent runaway generation
+-            }
+-        )
+-        response.raise_for_status()
+-        return response.json()["choices"][0]["message"]["content"]
++    client = await _get_llm_client()  # AUDIT FIX (P4-06)
++    response = await client.post(
++        f"{VLLM_BASE_URL}/chat/completions",
++        json={
++            "model": "Qwen2.5-32B-Instruct-AWQ",
++            "messages": messages,
++            "max_tokens": max_tokens,
++            "temperature": temperature,
++            "stop": ["\n\n\n"],  # Prevent runaway generation
++        }
++    )
++    response.raise_for_status()
++    return response.json()["choices"][0]["message"]["content"]
+@@ -951 +1594 @@ EPISTEMOLOGICAL OVERRIDE:
+-   b) Use the "page_numbers" field from chunk metadata for page citations. If multiple pages, cite the range.
++   b) Use the "page_numbers" field from chunk metadata for page citations. If multiple pages, cite ONLY the first page as an integer. Do NOT use ranges like "47-48" ΓÇö the frontend requires an integer.
+@@ -964,0 +1608,2 @@ DAG STATE TRANSITION MATRIX (ABSOLUTE LAW):
++- AUDIT FIX (P3-11): After PHASE_ERROR, if the user sends a new message, RESET to the last valid phase from chat_history. If no valid phase exists, RESET to PHASE_A_TRIAGE.
++- AUDIT FIX (P3-11): After RETRIEVAL_FAILURE, if the user sends a new message, RESET to PHASE_A_TRIAGE.
+@@ -1015,0 +1661,88 @@ The following V9 functions are **PRESERVED** in the React frontend (core logic u
++### DOMPurify Integration (V10 Addition)
++
++```javascript
++// V10 ADDITION: Sanitize ALL LLM-controlled strings before innerHTML.
++// Prevents XSS from prompt injection or model-echoed payloads.
++import DOMPurify from 'dompurify';  // AUDIT FIX (DT-P3-06): Must be installed, not commented out
++
++function renderGusResponse(gus, containerEl, textInputEl) {
++  containerEl.innerHTML = '';  // Clear previous response
++  
++  // State badge (LLM-controlled string ΓåÆ sanitize)
++  const badge = document.createElement('div');
++  badge.className = 'gus-state-badge';
++  badge.textContent = gus.current_state;  // textContent is XSS-safe
++  containerEl.appendChild(badge);
++  
++  // Mechanic instructions (LLM-generated plain text).
++  // AUDIT FIX (P4-04): Use textContent instead of innerHTML+DOMPurify.
++  // DOMPurify strips automotive angle-bracket notations (<B+>, <GND>, <12V)
++  // which are common terminal designations in FSM diagnostic content.
++  // textContent is inherently XSS-safe AND preserves all content.
++  if (gus.mechanic_instructions) {
++    const instructions = document.createElement('div');
++    instructions.className = 'gus-instructions';
++    instructions.textContent = gus.mechanic_instructions;
++    containerEl.appendChild(instructions);
++  }
++  
++  // Diagnostic reasoning (LLM-generated plain text ΓÇö same P4-04 rationale)
++  if (gus.diagnostic_reasoning) {
++    const reasoning = document.createElement('div');
++    reasoning.className = 'gus-reasoning';
++    reasoning.textContent = gus.diagnostic_reasoning;  // AUDIT FIX (P4-04)
++    containerEl.appendChild(reasoning);
++  }
++  
++  // Citations (source names are from indexed metadata, not LLM ΓÇö lower risk
++  // but sanitize anyway for defense-in-depth)
++  if (gus.source_citations) {
++    const citationsDiv = document.createElement('div');
++    citationsDiv.className = 'gus-citations';
++    gus.source_citations.forEach(c => {
++      citationsDiv.appendChild(renderCitation(c, window.pdfViewerRef));
++    });
++    containerEl.appendChild(citationsDiv);
++  }
++  
++  // Answer path buttons (LLM-controlled button text ΓåÆ sanitize)
++  if (gus.answer_path_prompts && gus.requires_input) {
++    const buttonsDiv = document.createElement('div');
++    buttonsDiv.className = 'gus-buttons';
++    gus.answer_path_prompts.forEach(opt => {
++      const btn = document.createElement('button');
++      btn.className = 'gus-answer-btn';
++      btn.textContent = opt;  // AUDIT FIX (P5-09): textContent is XSS-safe; DOMPurify strips <B+>/<GND>
++      btn.onclick = () => {
++        const msg = buildUserMessage(opt, gus);
++        sendMessage(msg);
++      };
++      buttonsDiv.appendChild(btn);
++    });
++    containerEl.appendChild(buttonsDiv);
++  }
++  
++  // AUDIT FIX (P2-09): Completion state handling (PHASE_D)
++  if (gus.current_state === 'PHASE_D_CONCLUSION') {
++    const complete = document.createElement('div');
++    complete.className = 'gus-complete';
++    complete.textContent = 'Diagnostic Complete';
++    containerEl.appendChild(complete);
++  }
++  
++  // AUDIT FIX (P2-09): RETRIEVAL_FAILURE distinct error display
++  if (gus.current_state === 'RETRIEVAL_FAILURE') {
++    const noData = document.createElement('div');
++    noData.className = 'gus-retrieval-failure';
++    noData.textContent = 'No matching documentation found. Please verify the vehicle details.';
++    containerEl.appendChild(noData);
++  }
++  
++  // AUDIT FIX (P2-09): Text input toggle ΓÇö hide during button selection, show on completion/error
++  if (textInputEl) {
++    const hideInput = gus.requires_input && gus.answer_path_prompts && gus.answer_path_prompts.length > 0;
++    textInputEl.style.display = hideInput ? 'none' : 'block';
++  }
++}
++```
++
+@@ -1065 +1798,2 @@ All V9 CSS classes are preserved: `gus-error`, `gus-state-badge`, `gus-instructi
+-from transformers import AutoTokenizer
++# AUDIT FIX (P4-09): Import from shared module when available (container),
++# fallback to local instantiation (host). Aligns with P3-13 single-instance design.
+@@ -1068,10 +1802,14 @@ import os
+-MODEL_PATH = os.environ.get(
+-    "TOKENIZER_MODEL_PATH",
+-    "./storage/models/Qwen2.5-32B-Instruct-AWQ"  # host path (default)
+-)
+-
+-TOKENIZER = AutoTokenizer.from_pretrained(
+-    MODEL_PATH,
+-    trust_remote_code=True,
+-    local_files_only=True,
+-)
++try:
++    from backend.shared.tokenizer import TOKENIZER
++except (ImportError, RuntimeError):  # AUDIT FIX (DT-P6-03): DT-P5-06 raises RuntimeError, not ImportError
++    # Running on host ΓÇö instantiate locally
++    from transformers import AutoTokenizer
++    MODEL_PATH = os.environ.get(
++        "TOKENIZER_MODEL_PATH",
++        "./storage/models/Qwen2.5-32B-Instruct-AWQ"  # host path (default)
++    )
++    TOKENIZER = AutoTokenizer.from_pretrained(
++        MODEL_PATH,
++        trust_remote_code=True,
++        local_files_only=True,
++    )

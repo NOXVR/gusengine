@@ -1,0 +1,29 @@
+# === Large binary data (models, PDFs, vector DB) ===
+*.pdf
+storage/pdfs/
+storage/models/
+storage/easyocr_models/
+storage/qdrant/
+storage/snapshots/
+storage/extracted/
+storage/pdf_batch_*.py
+storage/pdf_transfer.py
+
+# === Secrets ===
+.env
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+
+# === IDE / Agent metadata ===
+.agent/
+.agents/
+
+# === Certs (generated per pod) ===
+certs/
+
+# === OS ===
+Thumbs.db
+.DS_Store
