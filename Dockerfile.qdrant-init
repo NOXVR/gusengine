@@ -1,0 +1,20 @@
+# GusEngine V10 — Qdrant Init Dockerfile
+# One-shot container that restores Qdrant backup data on first boot
+FROM alpine:3.19
+
+WORKDIR /restore
+
+# Copy the backup
+COPY storage/backups/qdrant_backup.tar.gz .
+
+# Restore script: extract backup into the Qdrant volume if empty
+CMD ["sh", "-c", "\
+    if [ -d /qdrant/storage/collections/fsm_corpus ]; then \
+    echo 'Qdrant data already exists, skipping restore'; \
+    else \
+    echo 'Restoring Qdrant data from backup...'; \
+    tar xzf /restore/qdrant_backup.tar.gz -C /qdrant/storage --strip-components=1; \
+    echo 'Qdrant data restored successfully'; \
+    ls -la /qdrant/storage/collections/; \
+    fi \
+    "]
