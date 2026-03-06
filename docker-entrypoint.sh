@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Always work from /app
+cd /app
+
 # Restore Qdrant backup on first boot if collection doesn't exist
 echo "Checking Qdrant status..."
 for i in {1..30}; do
@@ -20,10 +23,9 @@ for i in {1..30}; do
         # Restore from backup if we have one
         if [ -f /app/storage/backups/qdrant_backup.tar.gz ]; then
             echo "Restoring Qdrant data from backup..."
-            # Upload snapshot via Qdrant API
             SNAP_DIR="/tmp/qdrant_restore"
             mkdir -p "$SNAP_DIR"
-            cd "$SNAP_DIR" && tar xzf /app/storage/backups/qdrant_backup.tar.gz
+            tar xzf /app/storage/backups/qdrant_backup.tar.gz -C "$SNAP_DIR"
             
             # Find and upload snapshot files
             if ls "$SNAP_DIR"/*.snapshot 1>/dev/null 2>&1; then

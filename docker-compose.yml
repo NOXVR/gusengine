@@ -41,7 +41,8 @@ services:
     ports:
       - "8888:8888"
     env_file:
-      - .env
+      - path: .env
+        required: false
     environment:
       - VLLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai
       - VLLM_MODEL=gemini-2.5-flash
