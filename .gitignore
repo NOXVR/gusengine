@@ -1,4 +1,4 @@
-# === Models (re-downloadable from HuggingFace, too large for LFS) ===
+# === Models (re-downloadable from HuggingFace, too large for git) ===
 storage/models/
 storage/snapshots/
 storage/extracted/
@@ -8,7 +8,12 @@ storage/create_batches.py
 storage/encode_pdfs.py
 storage/upload_transfer.py
 
-# === Live Qdrant DB (backup is committed instead) ===
+# === Large binary files (managed outside git) ===
+storage/pdfs/
+storage/backups/
+storage/easyocr_models/
+
+# === Live Qdrant DB ===
 storage/qdrant/
 
 # === Secrets ===

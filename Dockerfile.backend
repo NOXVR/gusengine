@@ -1,5 +1,5 @@
 # GusEngine V10 — Backend Dockerfile
-# Self-contained: downloads tokenizer during build, includes Qdrant restore
+# Self-contained: downloads tokenizer during build
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -21,13 +21,7 @@ COPY backend/ backend/
 COPY frontend/ frontend/
 COPY config/ config/
 
-# Qdrant backup for first-boot restore
-COPY storage/backups/ storage/backups/
-
-# PDFs for deep reference
-COPY storage/pdfs/ storage/pdfs/
-
-# Entrypoint script that restores Qdrant backup if needed, then starts the server
+# Entrypoint script
 COPY docker-entrypoint.sh .
 RUN chmod +x docker-entrypoint.sh
 
