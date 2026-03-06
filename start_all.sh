@@ -42,6 +42,8 @@ echo "[1/3] Starting Qdrant..."
 if curl -s http://localhost:6333/healthz > /dev/null 2>&1; then
     echo "  -> Qdrant already running"
 else
+    ulimit -n 65535 2>/dev/null
+    QDRANT__STORAGE__STORAGE_PATH="$WORKSPACE/storage/qdrant" \
     nohup /workspace/qdrant > "$LOG_DIR/qdrant.log" 2>&1 &
     echo "  -> Waiting for Qdrant..."
     for i in $(seq 1 30); do
