@@ -1,13 +1,15 @@
-# === Large binary data (models, PDFs, vector DB) ===
-*.pdf
-storage/pdfs/
+# === Models (re-downloadable from HuggingFace, too large for LFS) ===
 storage/models/
-storage/easyocr_models/
-storage/qdrant/
 storage/snapshots/
 storage/extracted/
 storage/pdf_batch_*.py
 storage/pdf_transfer.py
+storage/create_batches.py
+storage/encode_pdfs.py
+storage/upload_transfer.py
+
+# === Live Qdrant DB (backup is committed instead) ===
+storage/qdrant/
 
 # === Secrets ===
 .env
@@ -26,3 +28,7 @@ certs/
 # === OS ===
 Thumbs.db
 .DS_Store
+
+# === Supervisord runtime ===
+*.pid
+*.log
