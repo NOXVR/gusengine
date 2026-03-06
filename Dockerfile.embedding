@@ -13,10 +13,10 @@ RUN apt-get update && \
 RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 
 # Pin transformers to version compatible with FlagEmbedding
-RUN pip install --no-cache-dir transformers==4.40.0
-
-# Install FlagEmbedding (depends on torch + transformers)
-RUN pip install --no-cache-dir --no-deps FlagEmbedding
+# Install FlagEmbedding (will pull its deps including datasets)
+# Then re-pin transformers to avoid the is_torch_fx_available error
+RUN pip install --no-cache-dir FlagEmbedding && \
+    pip install --no-cache-dir transformers==4.40.0
 
 # Download BGE-M3 model files to a known local directory
 RUN pip install --no-cache-dir huggingface_hub && \
