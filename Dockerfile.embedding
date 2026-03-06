@@ -1,5 +1,5 @@
 # GusEngine V10 — Embedding Server Dockerfile
-# Self-contained: downloads BGE-M3 model during build
+# Self-contained: downloads BGE-M3 model files during build
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -15,8 +15,10 @@ RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/wh
 # Install FlagEmbedding (depends on torch)
 RUN pip install --no-cache-dir FlagEmbedding
 
-# Download BGE-M3 model at build time (cached in Docker layer)
-RUN python -c "from FlagEmbedding import BGEM3FlagModel; BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)"
+# Download BGE-M3 model files at build time (NOT loading into memory)
+# This just fetches the weights to HuggingFace cache, ~2GB download
+RUN pip install --no-cache-dir huggingface_hub && \
+    python -c "from huggingface_hub import snapshot_download; snapshot_download('BAAI/bge-m3')"
 
 # Application code
 COPY bge_m3_server.py .
