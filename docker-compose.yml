@@ -21,12 +21,6 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
     restart: unless-stopped
-    healthcheck:
-      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:6333/healthz || exit 1" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
 
   # --- BGE-M3 Embedding Server ---
   embedding:
@@ -36,15 +30,8 @@ services:
     ports:
       - "8080:8080"
     restart: unless-stopped
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8080/health" ]
-      interval: 15s
-      timeout: 10s
-      retries: 10
-      start_period: 120s
     depends_on:
-      qdrant:
-        condition: service_healthy
+      - qdrant
 
   # --- FastAPI Backend ---
   backend:
@@ -70,17 +57,9 @@ services:
       - ALLOWED_PDF_DIR=/app/storage/pdfs
       - LEDGER_PATH=/app/config/MASTER_LEDGER.md
     restart: unless-stopped
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8888/api/health" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 30s
     depends_on:
-      qdrant:
-        condition: service_healthy
-      embedding:
-        condition: service_healthy
+      - qdrant
+      - embedding
 
 volumes:
   qdrant_data:
