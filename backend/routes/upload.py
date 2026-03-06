@@ -1,11 +1,13 @@
 # backend/routes/upload.py
 # V10 PROTOTYPE: File upload endpoint for browser-based PDF uploads
+# V10 FIREWALL: Vehicle-scoped collection routing for uploads
 import os
 import shutil
 import logging
-from fastapi import APIRouter, UploadFile, File, BackgroundTasks
+from fastapi import APIRouter, UploadFile, File, Form, BackgroundTasks
 from backend.shared.clients import qdrant_ingest_client
 from backend.ingestion.pipeline import ingest_pdf_background
+from backend.routes.vehicle import get_vehicle, get_default_vehicle_id
 
 router = APIRouter()
 logger = logging.getLogger(__name__)
@@ -16,7 +18,8 @@ ALLOWED_PDF_DIR = os.environ.get("ALLOWED_PDF_DIR", "/app/pdfs")
 @router.post("/api/upload")
 async def upload_pdf(
     background_tasks: BackgroundTasks,
-    file: UploadFile = File(...)
+    file: UploadFile = File(...),
+    vehicle_id: str = Form(default=""),
 ):
     """Upload a PDF from the browser, save it, and queue for ingestion."""
     if not file.filename or not file.filename.lower().endswith(".pdf"):
@@ -40,10 +43,15 @@ async def upload_pdf(
     finally:
         await file.close()
 
+    # V10 FIREWALL: Resolve collection from vehicle_id
+    if not vehicle_id:
+        vehicle_id = get_default_vehicle_id()
+    vehicle = get_vehicle(vehicle_id)
+    collection_name = vehicle["collection"] if vehicle else "fsm_corpus"
     # Queue for ingestion
-    background_tasks.add_task(ingest_pdf_background, dest_path, qdrant_ingest_client)
+    background_tasks.add_task(ingest_pdf_background, dest_path, qdrant_ingest_client, collection_name)
     return {
         "status": "accepted",
-        "message": f"Uploaded and queued for ingestion: {safe_name}",
+        "message": f"Uploaded and queued for ingestion: {safe_name} (collection: {collection_name})",
         "filename": safe_name
     }

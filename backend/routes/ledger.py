@@ -1,5 +1,6 @@
 # backend/routes/ledger.py
 # V10: API endpoints for Master Ledger tribal knowledge management
+# V10 FIREWALL: Vehicle-scoped ledger file resolution
 import json
 import os
 import logging
@@ -7,19 +8,31 @@ from datetime import datetime
 from fastapi import APIRouter, Request
 
 from backend.shared.tokenizer import count_tokens
+from backend.routes.vehicle import get_vehicle, get_default_vehicle_id
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-LEDGER_PATH = os.environ.get("LEDGER_PATH", "/app/config/MASTER_LEDGER.md")
+# V10 FIREWALL: LEDGER_DIR is the base directory; vehicle-scoped filenames are resolved per request.
+LEDGER_DIR = os.path.dirname(os.environ.get("LEDGER_PATH", "/app/config/MASTER_LEDGER.md"))
 LEDGER_MAX_TOKENS = int(os.environ.get("LEDGER_MAX_TOKENS", "2550"))
 
 
-def _read_ledger() -> str:
-    """Read the current ledger content."""
-    if os.path.exists(LEDGER_PATH):
-        with open(LEDGER_PATH, 'r') as f:
+def _resolve_ledger_path(vehicle_id: str | None = None) -> str:
+    """Resolve the ledger file path for a given vehicle."""
+    if vehicle_id:
+        v = get_vehicle(vehicle_id)
+        if v:
+            return os.path.join(LEDGER_DIR, v.get("ledger_filename", "MASTER_LEDGER.md"))
+    return os.path.join(LEDGER_DIR, "MASTER_LEDGER.md")
+
+
+def _read_ledger(vehicle_id: str | None = None) -> str:
+    """Read the current ledger content for a vehicle."""
+    path = _resolve_ledger_path(vehicle_id)
+    if os.path.exists(path):
+        with open(path, 'r') as f:
             return f.read()
     return ""
 
@@ -82,15 +95,20 @@ def _format_entry(body: dict) -> str:
 
 
 @router.get("/api/ledger")
-async def get_ledger():
-    """Return current ledger content and token metrics."""
-    content = _read_ledger()
+async def get_ledger(request: Request):
+    """Return current ledger content and token metrics.
+
+    V10 FIREWALL: Accepts vehicle_id query param for vehicle-scoped ledger.
+    """
+    vehicle_id = request.query_params.get("vehicle_id", get_default_vehicle_id())
+    content = _read_ledger(vehicle_id)
     token_count = count_tokens(content) if content else 0
     return {
         "content": content,
         "tokens": token_count,
         "cap": LEDGER_MAX_TOKENS,
         "remaining": max(0, LEDGER_MAX_TOKENS - token_count),
+        "vehicle_id": vehicle_id,
     }
 
 
@@ -99,14 +117,16 @@ async def add_ledger_entry(request: Request):
     """Add a new Fault Signature entry to the Master Ledger.
 
     Validates that the entry won't exceed the token cap before appending.
+    V10 FIREWALL: Accepts vehicle_id for vehicle-scoped ledger.
     """
     body = await request.json()
+    vehicle_id = body.get("vehicle_id", get_default_vehicle_id())
 
     entry_text = _format_entry(body)
     if not entry_text:
         return {"status": "rejected", "message": "Symptom and override are required."}
 
-    current = _read_ledger()
+    current = _read_ledger(vehicle_id)
     proposed = current + entry_text
 
     proposed_tokens = count_tokens(proposed)
@@ -121,12 +141,13 @@ async def add_ledger_entry(request: Request):
             "cap": LEDGER_MAX_TOKENS,
         }
 
-    # Append the entry
-    os.makedirs(os.path.dirname(LEDGER_PATH), exist_ok=True)
-    with open(LEDGER_PATH, 'a') as f:
+    # Append the entry to the vehicle-scoped ledger
+    ledger_path = _resolve_ledger_path(vehicle_id)
+    os.makedirs(os.path.dirname(ledger_path), exist_ok=True)
+    with open(ledger_path, 'a') as f:
         f.write(entry_text)
 
-    logger.info(f"Ledger entry added: {body.get('symptom', '')[:60]} ({proposed_tokens} total tokens)")
+    logger.info(f"Ledger entry added [{vehicle_id}]: {body.get('symptom', '')[:60]} ({proposed_tokens} total tokens)")
 
     return {
         "status": "accepted",
@@ -134,4 +155,5 @@ async def add_ledger_entry(request: Request):
         "tokens": proposed_tokens,
         "cap": LEDGER_MAX_TOKENS,
         "remaining": LEDGER_MAX_TOKENS - proposed_tokens,
+        "vehicle_id": vehicle_id,
     }

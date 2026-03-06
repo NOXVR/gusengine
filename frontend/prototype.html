@@ -940,6 +940,84 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--text-muted);
         }
+
+        /* Vehicle Selector */
+        .vehicle-select-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .vehicle-select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 32px 8px 12px;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            transition: all var(--transition);
+            min-width: 180px;
+        }
+
+        .vehicle-select:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent);
+        }
+
+        .vehicle-select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-dim);
+        }
+
+        .vehicle-select-wrapper::after {
+            content: '▾';
+            position: absolute;
+            right: 12px;
+            pointer-events: none;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        .vehicle-select optgroup {
+            font-weight: 600;
+            color: var(--text-secondary);
+            background: var(--bg-secondary);
+        }
+
+        .vehicle-select option {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: 4px 8px;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--accent);
+            color: var(--text-primary);
+            padding: 12px 20px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            z-index: 2000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .toast.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 
@@ -1000,6 +1078,11 @@
                     <span class="version">V10 Prototype</span>
                 </div>
                 <div class="header-actions">
+                    <div class="vehicle-select-wrapper">
+                        <select class="vehicle-select" id="vehicleSelect" onchange="switchVehicle(this.value)">
+                            <option value="">Loading vehicles...</option>
+                        </select>
+                    </div>
                     <button class="btn-icon" onclick="toggleSidebar()">📁 Docs</button>
                     <button class="btn-icon" onclick="newSession()">✨ New Session</button>
                     <button class="btn-icon" id="healthBtn"><span class="health-dot" id="healthDot"></span>
@@ -1049,13 +1132,19 @@
         </div>
     </div>
 
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
     <script>
         // =============================================================================
         // GusEngine V10 Prototype Frontend
+        // V10 FIREWALL: Vehicle-scoped state management
         // =============================================================================
         const API_BASE = window.location.origin;
         let chatHistory = [];
         let isLoading = false;
+        let activeVehicleId = '';  // V10 FIREWALL: Active vehicle ID
+        let vehicleRegistry = [];  // V10 FIREWALL: Cached vehicle list
 
         // --- Health & Stats ---
         async function checkHealth() {
@@ -1074,13 +1163,85 @@
 
         async function updateStats() {
             try {
-                const r = await fetch(`${API_BASE}/api/stats`);
+                // V10 FIREWALL: Use vehicle-scoped stats endpoint
+                const url = activeVehicleId
+                    ? `${API_BASE}/api/stats/${activeVehicleId}`
+                    : `${API_BASE}/api/stats`;
+                const r = await fetch(url);
                 if (r.ok) {
                     const d = await r.json();
                     document.getElementById('pointCount').textContent = d.points || '0';
                     document.getElementById('sourceCount').textContent = d.sources || '0';
                 }
             } catch { /* stats endpoint may not exist yet */ }
+        }
+
+        // --- V10 FIREWALL: Vehicle Management ---
+        async function loadVehicles() {
+            try {
+                const r = await fetch(`${API_BASE}/api/vehicles`);
+                if (!r.ok) return;
+                const data = await r.json();
+                vehicleRegistry = data.vehicles || [];
+                activeVehicleId = data.default_vehicle_id || '';
+
+                // Build dropdown with optgroups by make
+                const select = document.getElementById('vehicleSelect');
+                select.innerHTML = '';
+                const byMake = {};
+                vehicleRegistry.forEach(v => {
+                    if (!byMake[v.make]) byMake[v.make] = [];
+                    byMake[v.make].push(v);
+                });
+
+                // Sort makes alphabetically, then models within each make
+                Object.keys(byMake).sort().forEach(make => {
+                    const group = document.createElement('optgroup');
+                    group.label = make;
+                    byMake[make]
+                        .sort((a, b) => a.model.localeCompare(b.model) || a.year - b.year)
+                        .forEach(v => {
+                            const opt = document.createElement('option');
+                            opt.value = v.id;
+                            opt.textContent = `${v.model} (${v.year})`;
+                            if (v.id === activeVehicleId) opt.selected = true;
+                            group.appendChild(opt);
+                        });
+                    select.appendChild(group);
+                });
+
+                // Load stats for default vehicle
+                updateStats();
+                updateLedgerMeter();
+            } catch (e) {
+                console.error('Failed to load vehicle registry:', e);
+            }
+        }
+
+        function switchVehicle(vehicleId) {
+            if (vehicleId === activeVehicleId) return;
+            activeVehicleId = vehicleId;
+
+            // Find vehicle label for toast
+            const v = vehicleRegistry.find(v => v.id === vehicleId);
+            const label = v ? `${v.year} ${v.make} ${v.model}` : vehicleId;
+
+            // Clear chat (cross-vehicle history is meaningless)
+            newSession();
+
+            // Refresh stats and ledger for new vehicle
+            updateStats();
+            updateLedgerMeter();
+
+            // Show toast
+            showToast(`🔧 Switched to ${label}`);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('visible');
+            setTimeout(() => toast.classList.remove('visible'), 2500);
         }
 
         // --- Chat ---
@@ -1113,7 +1274,11 @@
                 const r = await fetch(`${API_BASE}/api/chat`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text, chat_history: chatHistory })
+                    body: JSON.stringify({
+                        message: text,
+                        chat_history: chatHistory,
+                        vehicle_id: activeVehicleId  // V10 FIREWALL
+                    })
                 });
                 const data = await r.json();
                 loadingEl.remove();
@@ -1286,6 +1451,7 @@
                 try {
                     const formData = new FormData();
                     formData.append('file', file);
+                    formData.append('vehicle_id', activeVehicleId);  // V10 FIREWALL
                     updateFileStatus(file.name, 'processing');
                     const r = await fetch(`${API_BASE}/api/upload`, { method: 'POST', body: formData });
                     const d = await r.json();
@@ -1384,7 +1550,11 @@
                 const r = await fetch(`${API_BASE}/api/ledger`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ symptom, override, oem_diagnosis: oem, verification, type: 'global' })
+                    body: JSON.stringify({
+                        symptom, override, oem_diagnosis: oem, verification,
+                        type: 'global',
+                        vehicle_id: activeVehicleId  // V10 FIREWALL
+                    })
                 });
                 const d = await r.json();
                 if (d.status === 'accepted') {
@@ -1455,7 +1625,12 @@
                 const r = await fetch(`${API_BASE}/api/ledger`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ symptom, override, oem_diagnosis: oem, verification, subsystems, citations, type: 'contextual' })
+                    body: JSON.stringify({
+                        symptom, override, oem_diagnosis: oem, verification,
+                        subsystems, citations,
+                        type: 'contextual',
+                        vehicle_id: activeVehicleId  // V10 FIREWALL
+                    })
                 });
                 const d = await r.json();
                 if (d.status === 'accepted') {
@@ -1474,7 +1649,11 @@
 
         async function updateLedgerMeter() {
             try {
-                const r = await fetch(`${API_BASE}/api/ledger`);
+                // V10 FIREWALL: Scope ledger meter to active vehicle
+                const url = activeVehicleId
+                    ? `${API_BASE}/api/ledger?vehicle_id=${activeVehicleId}`
+                    : `${API_BASE}/api/ledger`;
+                const r = await fetch(url);
                 if (r.ok) {
                     const d = await r.json();
                     const pct = Math.round((d.tokens / d.cap) * 100);
@@ -1495,9 +1674,8 @@
         });
 
         // --- Init ---
+        loadVehicles();  // V10 FIREWALL: Load registry first (also triggers stats + ledger)
         checkHealth();
-        updateStats();
-        updateLedgerMeter();
         setInterval(checkHealth, 30000);
         setInterval(updateStats, 15000);
     </script>

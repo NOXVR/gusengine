@@ -9,24 +9,34 @@ echo "Checking Qdrant status..."
 for i in {1..30}; do
     if curl -sf http://qdrant:6333/healthz > /dev/null 2>&1; then
         echo "Qdrant is healthy"
-        # Check if collection exists
-        COLLECTION_STATUS=$(curl -sf http://qdrant:6333/collections/fsm_corpus 2>/dev/null || echo "NOT_FOUND")
-        if echo "$COLLECTION_STATUS" | grep -q '"status":"ok"'; then
-            POINTS=$(echo "$COLLECTION_STATUS" | python3 -c "import sys,json; print(json.load(sys.stdin).get('result',{}).get('points_count',0))" 2>/dev/null || echo "0")
-            echo "Collection fsm_corpus exists with $POINTS points"
-            if [ "$POINTS" -gt "0" ]; then
-                echo "Data already loaded, skipping restore"
-                break
-            fi
+
+        # V10 FIREWALL: Check all registered vehicle collections
+        REGISTRY="/app/config/vehicle_registry.json"
+        if [ -f "$REGISTRY" ]; then
+            COLLECTIONS=$(python3 -c "import json; r=json.load(open('$REGISTRY')); print(' '.join(v['collection'] for v in r.get('vehicles',[])))" 2>/dev/null || echo "fsm_corpus")
+        else
+            COLLECTIONS="fsm_corpus"
         fi
-        
-        # Restore from backup if we have one
-        if [ -f /app/storage/backups/qdrant_backup.tar.gz ]; then
+
+        ALL_EXIST=true
+        for COLL in $COLLECTIONS; do
+            COLL_STATUS=$(curl -sf "http://qdrant:6333/collections/$COLL" 2>/dev/null || echo "NOT_FOUND")
+            if echo "$COLL_STATUS" | grep -q '"status":"ok"'; then
+                POINTS=$(echo "$COLL_STATUS" | python3 -c "import sys,json; print(json.load(sys.stdin).get('result',{}).get('points_count',0))" 2>/dev/null || echo "0")
+                echo "Collection $COLL exists with $POINTS points"
+            else
+                echo "Collection $COLL does not exist yet (will be created by backend)"
+                ALL_EXIST=false
+            fi
+        done
+
+        # Restore from backup if we have one and any collection is missing data
+        if [ "$ALL_EXIST" = false ] && [ -f /app/storage/backups/qdrant_backup.tar.gz ]; then
             echo "Restoring Qdrant data from backup..."
             SNAP_DIR="/tmp/qdrant_restore"
             mkdir -p "$SNAP_DIR"
             tar xzf /app/storage/backups/qdrant_backup.tar.gz -C "$SNAP_DIR"
-            
+
             # Find and upload snapshot files
             if ls "$SNAP_DIR"/*.snapshot 1>/dev/null 2>&1; then
                 for snap in "$SNAP_DIR"/*.snapshot; do

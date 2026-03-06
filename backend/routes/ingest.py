@@ -1,11 +1,13 @@
 # backend/routes/ingest.py
 # V10 SPEC: PDF ingestion endpoint with BackgroundTasks and cleanup
+# V10 FIREWALL: Vehicle-scoped collection routing for ingestion
 import asyncio
 import os
 from fastapi import APIRouter, BackgroundTasks, Request
 from qdrant_client import models
 from backend.shared.clients import qdrant_ingest_client
 from backend.ingestion.pipeline import ingest_pdf_background
+from backend.routes.vehicle import get_vehicle, get_default_vehicle_id
 import logging
 
 router = APIRouter()
@@ -37,9 +39,14 @@ async def ingest(request: Request, background_tasks: BackgroundTasks):
         return {"status": "rejected", "message": "Not a PDF file"}
     if not os.path.isfile(pdf_path):
         return {"status": "rejected", "message": f"PDF not found: {rel_path}"}
+    # V10 FIREWALL: Resolve collection from vehicle_id
+    vehicle_id = body.get("vehicle_id", get_default_vehicle_id())
+    vehicle = get_vehicle(vehicle_id)
+    collection_name = vehicle["collection"] if vehicle else "fsm_corpus"
+    logger.info(f"Ingestion queued: {pdf_path} → collection '{collection_name}'")
     # AUDIT FIX (P10-25): Use qdrant_ingest_client for write operations.
-    background_tasks.add_task(ingest_pdf_background, pdf_path, qdrant_ingest_client)
-    return {"status": "accepted", "message": f"Ingestion queued for {pdf_path}"}
+    background_tasks.add_task(ingest_pdf_background, pdf_path, qdrant_ingest_client, collection_name)
+    return {"status": "accepted", "message": f"Ingestion queued for {pdf_path} (collection: {collection_name})"}
 
 
 # AUDIT FIX (DT-P8-05): Ghost chunk cleanup endpoint.
@@ -51,10 +58,14 @@ async def cleanup_document(request: Request):
     source = body.get("source")
     if not source or not isinstance(source, str):
         return {"status": "rejected", "message": "Missing or invalid 'source' field"}
+    # V10 FIREWALL: Resolve collection from vehicle_id
+    vehicle_id = body.get("vehicle_id", get_default_vehicle_id())
+    vehicle = get_vehicle(vehicle_id)
+    collection_name = vehicle["collection"] if vehicle else "fsm_corpus"
     # AUDIT FIX (P9-04): Wrap synchronous Qdrant delete in asyncio.to_thread().
     await asyncio.to_thread(
         qdrant_ingest_client.delete,
-        collection_name="fsm_corpus",
+        collection_name=collection_name,
         points_selector=models.FilterSelector(
             filter=models.Filter(
                 must=[models.FieldCondition(
@@ -64,4 +75,4 @@ async def cleanup_document(request: Request):
             )
         ),
     )
-    return {"status": "success", "message": f"All chunks with source='{source}' deleted"}
+    return {"status": "success", "message": f"All chunks with source='{source}' deleted from {collection_name}"}

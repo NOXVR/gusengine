@@ -52,7 +52,7 @@ FAILURE_MANIFEST_PATH = os.environ.get(
 _manifest_lock = threading.Lock()
 
 
-async def ingest_pdf(pdf_path: str, client: QdrantClient) -> int:
+async def ingest_pdf(pdf_path: str, client: QdrantClient, collection_name: str = "fsm_corpus") -> int:
     """Full ingestion pipeline: parse → embed → index.
 
     Returns number of chunks indexed.
@@ -101,6 +101,7 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient) -> int:
                 chunk_id=chunk_id,
                 dense_vector=dense,
                 sparse_vector=sparse_dict,
+                collection_name=collection_name,
             )
             indexed_count += 1
             consecutive_failures = 0  # reset on success
@@ -146,10 +147,10 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient) -> int:
 
 # AUDIT FIX (P2-06): Background task wrapper with error handling.
 # When called via FastAPI BackgroundTasks, exceptions are silently swallowed.
-async def ingest_pdf_background(pdf_path: str, client: QdrantClient):
+async def ingest_pdf_background(pdf_path: str, client: QdrantClient, collection_name: str = "fsm_corpus"):
     """Wrapper for BackgroundTask execution with error handling."""
     try:
-        count = await ingest_pdf(pdf_path, client)
+        count = await ingest_pdf(pdf_path, client, collection_name=collection_name)
         logger.info(f"Background ingestion complete: {pdf_path} ({count} chunks)")
     except IngestionError as e:
         logger.error(f"INGESTION FAILED (quarantine candidate): {pdf_path} — {e}")

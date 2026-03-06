@@ -29,7 +29,8 @@ def create_collection(client: QdrantClient, collection_name: str = "fsm_corpus")
 
 
 def index_chunk(client: QdrantClient, chunk: dict, chunk_id: str,
-                dense_vector: list[float], sparse_vector: dict | None):
+                dense_vector: list[float], sparse_vector: dict | None,
+                collection_name: str = "fsm_corpus"):
     """Index a single chunk with both dense and sparse vectors."""
     # AUDIT FIX (DT-P8-06): Conditionally construct vector dict.
     # When TEI degrades, sparse_vector is None or {"indices":[], "values":[]}.
@@ -45,7 +46,7 @@ def index_chunk(client: QdrantClient, chunk: dict, chunk_id: str,
     # qdrant-client >= 1.7.0 enforces Pydantic validation.
     # Raw dicts crash with ValidationError or AttributeError, halting ingestion.
     client.upsert(
-        collection_name="fsm_corpus",
+        collection_name=collection_name,
         points=[models.PointStruct(
             id=chunk_id,
             vector=vector_data,

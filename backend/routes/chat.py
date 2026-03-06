@@ -1,5 +1,6 @@
 # backend/routes/chat.py
 # V10 SPEC: Full chat orchestration — DAG, ledger, budget, JSON validation
+# V10 FIREWALL: Vehicle-scoped collection routing, identity swap, scoped ledger
 import asyncio
 import json
 import os
@@ -13,6 +14,7 @@ from backend.search.context_builder import build_context
 from backend.shared.tokenizer import TOKENIZER, count_tokens, _TOKENIZER_LOCK
 from backend.inference.llm import generate_response
 from backend.shared.clients import qdrant_search_client
+from backend.routes.vehicle import get_vehicle, get_default_vehicle_id
 
 logger = logging.getLogger(__name__)
 
@@ -32,13 +34,13 @@ router = APIRouter()
 _PROMPT_PATH = os.environ.get("SYSTEM_PROMPT_PATH", "/app/config/system_prompt.txt")
 if os.path.exists(_PROMPT_PATH):
     with open(_PROMPT_PATH) as f:
-        SYSTEM_PROMPT = f.read()
+        _BASE_SYSTEM_PROMPT = f.read()
 else:
     logger.critical(f"SYSTEM PROMPT NOT FOUND: {_PROMPT_PATH}")
     raise SystemExit(f"Fatal: system prompt missing at {_PROMPT_PATH}")
 
 # AUDIT FIX (P8-09): Verify system prompt token count at startup.
-_actual_prompt_tokens = count_tokens(SYSTEM_PROMPT)
+_actual_prompt_tokens = count_tokens(_BASE_SYSTEM_PROMPT)
 _configured_prompt_tokens = int(os.environ.get("SYSTEM_PROMPT_TOKENS", "900"))
 if _actual_prompt_tokens > _configured_prompt_tokens:
     logger.critical(
@@ -47,14 +49,43 @@ if _actual_prompt_tokens > _configured_prompt_tokens:
     )
     raise SystemExit(f"System prompt exceeds token budget: {_actual_prompt_tokens} > {_configured_prompt_tokens}")
 
+# V10 FIREWALL: For backward compat, keep SYSTEM_PROMPT as a public name
+SYSTEM_PROMPT = _BASE_SYSTEM_PROMPT
+
 # Ledger loading
-LEDGER_PATH = os.environ.get("LEDGER_PATH", "/app/config/MASTER_LEDGER.md")
+# V10 FIREWALL: LEDGER_DIR is the base directory; vehicle-scoped filenames are resolved at runtime.
+LEDGER_DIR = os.path.dirname(os.environ.get("LEDGER_PATH", "/app/config/MASTER_LEDGER.md"))
 
 
-def load_ledger() -> str:
-    """Load pinned ledger for injection into system prompt context."""
-    if os.path.exists(LEDGER_PATH):
-        with open(LEDGER_PATH, 'r') as f:
+def _build_vehicle_prompt(vehicle: dict) -> str:
+    """Swap the identity line in the system prompt for the active vehicle.
+
+    V10 FIREWALL: The base prompt is vehicle-agnostic except for line 1
+    (YOUR IDENTITY). At request time, we replace it with the vehicle's
+    identity string from the registry.
+    """
+    lines = _BASE_SYSTEM_PROMPT.split("\n")
+    # Line 1 is the YOUR IDENTITY line — replace it
+    if lines and lines[0].startswith("YOUR IDENTITY:"):
+        lines[0] = f"YOUR IDENTITY: {vehicle['identity']}"
+    else:
+        # Fallback: prepend identity if format changed
+        lines.insert(0, f"YOUR IDENTITY: {vehicle['identity']}")
+    return "\n".join(lines)
+
+
+def load_ledger(vehicle: dict | None = None) -> str:
+    """Load pinned ledger for injection into system prompt context.
+
+    V10 FIREWALL: If a vehicle is provided, load its scoped ledger file.
+    Falls back to the default MASTER_LEDGER.md for backward compat.
+    """
+    if vehicle:
+        ledger_path = os.path.join(LEDGER_DIR, vehicle.get("ledger_filename", "MASTER_LEDGER.md"))
+    else:
+        ledger_path = os.path.join(LEDGER_DIR, "MASTER_LEDGER.md")
+    if os.path.exists(ledger_path):
+        with open(ledger_path, 'r') as f:
             return f.read()
     return ""
 
@@ -82,6 +113,17 @@ async def chat(request: Request):
             "Empty or missing query."
         )
 
+    # V10 FIREWALL: Resolve active vehicle from request (default: Mercedes)
+    vehicle_id = body.get("vehicle_id", get_default_vehicle_id())
+    vehicle = get_vehicle(vehicle_id)
+    if not vehicle:
+        return _make_phase_error(
+            f"Unknown vehicle: {vehicle_id}. Select a valid vehicle from the dropdown.",
+            f"Vehicle ID '{vehicle_id}' not found in registry."
+        )
+    active_collection = vehicle["collection"]
+    logger.info(f"Chat request for vehicle '{vehicle_id}' → collection '{active_collection}'")
+
     # AUDIT FIX (P7-15): Validate chat_history schema before processing.
     raw_history = body.get("chat_history", [])
     if not isinstance(raw_history, list):
@@ -96,8 +138,8 @@ async def chat(request: Request):
         else:
             logger.warning(f"Malformed chat_history entry dropped: {type(m)}")
 
-    # Step 1: Load ledger (may be empty if file missing — degrades gracefully)
-    ledger_text = load_ledger()
+    # Step 1: Load vehicle-scoped ledger (may be empty if file missing — degrades gracefully)
+    ledger_text = load_ledger(vehicle)
     ledger_tokens = count_tokens(ledger_text) if ledger_text else 0
 
     # AUDIT FIX (P7-11): Runtime ledger cap enforcement.
@@ -193,8 +235,11 @@ async def chat(request: Request):
         loop = asyncio.get_event_loop()
         results = await loop.run_in_executor(
             _SEARCH_POOL,
-            hybrid_search, qdrant_search_client, query_dense, query_sparse,
-            60,  # AUDIT FIX (DT-P9-05): top_k=60
+            lambda: hybrid_search(
+                qdrant_search_client, query_dense, query_sparse,
+                top_k=60,  # AUDIT FIX (DT-P9-05): top_k=60
+                collection_name=active_collection,  # V10 FIREWALL
+            ),
         )
     except Exception as e:
         logger.error(f"Search failed: {e}", exc_info=True)
@@ -225,7 +270,8 @@ async def chat(request: Request):
         )
 
     # Step 6: Assemble system prompt WITH ledger (injection point)
-    system_prompt = SYSTEM_PROMPT
+    # V10 FIREWALL: Swap identity line for the active vehicle
+    system_prompt = _build_vehicle_prompt(vehicle)
     if ledger_text:
         system_prompt += f"\n\nMASTER_LEDGER.md:\n{ledger_text}"
 

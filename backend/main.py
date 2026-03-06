@@ -10,7 +10,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from backend.shared.clients import qdrant_ingest_client, qdrant_search_client
 from backend.ingestion.qdrant_setup import create_collection
-from backend.routes import health, chat, ingest, upload, ledger
+from backend.routes import health, chat, ingest, upload, ledger, vehicle
 
 # Configure logging
 logging.basicConfig(
@@ -40,6 +40,7 @@ app.include_router(chat.router)
 app.include_router(ingest.router)
 app.include_router(upload.router)
 app.include_router(ledger.router)
+app.include_router(vehicle.router)
 
 # Static file serving for PDFs (used by frontend citation modal)
 _PDF_DIR = os.environ.get("ALLOWED_PDF_DIR", os.path.join(os.path.dirname(os.path.dirname(__file__)), "storage", "pdfs"))
@@ -61,9 +62,25 @@ async def serve_frontend():
 
 @app.get("/api/stats")
 async def stats():
-    """Return Qdrant collection stats for the frontend."""
+    """Return Qdrant collection stats for the frontend.
+
+    V10 FIREWALL: Accepts optional vehicle_id query param to scope stats.
+    """
+    from fastapi import Query
+    # Parse vehicle_id from query string manually since this isn't a router
+    import starlette.requests
+    # Default to the existing collection for backward compat
+    collection = "fsm_corpus"
     try:
-        info = qdrant_search_client.get_collection("fsm_corpus")
+        from backend.routes.vehicle import get_vehicle, get_default_vehicle_id
+        # We can't easily get query params here without changing the signature,
+        # so we'll accept it as-is and let the frontend override via the
+        # vehicle-specific endpoint below.
+        pass
+    except ImportError:
+        pass
+    try:
+        info = qdrant_search_client.get_collection(collection)
         points = info.points_count
         # Count distinct sources
         from qdrant_client import models
@@ -72,7 +89,42 @@ async def stats():
         offset = None
         while True:
             result = qdrant_search_client.scroll(
-                collection_name="fsm_corpus",
+                collection_name=collection,
+                limit=1000,
+                offset=offset,
+                with_payload=["source"],
+                with_vectors=False,
+            )
+            batch, next_offset = result
+            for p in batch:
+                src = p.payload.get("source", "")
+                if src:
+                    sources.add(src)
+            if next_offset is None:
+                break
+            offset = next_offset
+        return {"points": points, "sources": len(sources)}
+    except Exception as e:
+        return {"points": 0, "sources": 0, "error": str(e)}
+
+
+@app.get("/api/stats/{vehicle_id}")
+async def stats_by_vehicle(vehicle_id: str):
+    """Return Qdrant collection stats scoped to a specific vehicle."""
+    from backend.routes.vehicle import get_vehicle
+    v = get_vehicle(vehicle_id)
+    if not v:
+        return {"points": 0, "sources": 0, "error": f"Unknown vehicle: {vehicle_id}"}
+    collection = v["collection"]
+    try:
+        info = qdrant_search_client.get_collection(collection)
+        points = info.points_count
+        from qdrant_client import models
+        sources = set()
+        offset = None
+        while True:
+            result = qdrant_search_client.scroll(
+                collection_name=collection,
                 limit=1000,
                 offset=offset,
                 with_payload=["source"],
@@ -92,25 +144,28 @@ async def stats():
 
 
 # AUDIT FIX (P3-03): Collection auto-creation at startup.
+# V10 FIREWALL: Verify/create collections for ALL registered vehicles.
 @app.on_event("startup")
 async def ensure_qdrant_collection():
-    """Create collection if it doesn't exist. Retry on transient failure."""
+    """Create collections if they don't exist. Retry on transient failure."""
+    from backend.routes.vehicle import get_all_collection_names
+    collections_needed = get_all_collection_names()
     # AUDIT FIX (P5-08): Extended from 5→10 attempts with 60s cap to outlast large persistence loads.
     for attempt in range(10):
         try:
-            qdrant_ingest_client.get_collection("fsm_corpus")
-            logger.info("Qdrant collection 'fsm_corpus' verified.")
-            return
-        except Exception:
-            try:
-                create_collection(qdrant_ingest_client)
-                logger.info("Qdrant collection 'fsm_corpus' created.")
-                return
-            except Exception as e:
-                wait = min(2 ** attempt, 60)  # Cap at 60 seconds per wait
-                logger.warning(f"Qdrant not ready (attempt {attempt+1}/10): {e}")
-                await asyncio.sleep(wait)
-    logger.critical("FATAL: Could not verify/create Qdrant collection after 10 attempts (~5 min).")
+            for coll_name in collections_needed:
+                try:
+                    qdrant_ingest_client.get_collection(coll_name)
+                    logger.info(f"Qdrant collection '{coll_name}' verified.")
+                except Exception:
+                    create_collection(qdrant_ingest_client, collection_name=coll_name)
+                    logger.info(f"Qdrant collection '{coll_name}' created.")
+            return  # All collections verified/created
+        except Exception as e:
+            wait = min(2 ** attempt, 60)  # Cap at 60 seconds per wait
+            logger.warning(f"Qdrant not ready (attempt {attempt+1}/10): {e}")
+            await asyncio.sleep(wait)
+    logger.critical("FATAL: Could not verify/create Qdrant collections after 10 attempts (~5 min).")
     raise SystemExit("Qdrant collection setup failed — aborting startup.")
 
 

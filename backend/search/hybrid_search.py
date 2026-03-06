@@ -16,6 +16,7 @@ def hybrid_search(
     top_k: int = 60,  # AUDIT FIX (P10-15): was 20, starves RAG budget (DT-P9-05)
     min_score_ratio: float = 0.70,
     min_absolute_score: float = 0.013,  # AUDIT FIX (P2-14): raised from 0.005
+    collection_name: str = "fsm_corpus",  # V10 FIREWALL: Vehicle-scoped collection
 ) -> list[dict]:
     """Execute hybrid dense + sparse search with RRF fusion.
 
@@ -26,6 +27,7 @@ def hybrid_search(
         min_score_ratio: Keep chunks scoring >= this fraction of top RRF score
         min_absolute_score: Absolute RRF score floor — discard ALL results if
             top score is below this value (handles off-topic queries)
+        collection_name: Qdrant collection to search (vehicle-scoped firewall)
 
     Returns:
         List of chunks sorted by RRF score, filtered by dynamic threshold
@@ -59,7 +61,7 @@ def hybrid_search(
     # When TEI sparse degrades, conditionally use direct query for fallback.
     if len(prefetch_list) >= 2:
         results = client.query_points(
-            collection_name="fsm_corpus",
+            collection_name=collection_name,
             prefetch=prefetch_list,
             query=FusionQuery(fusion=Fusion.RRF),
             limit=top_k,
@@ -67,7 +69,7 @@ def hybrid_search(
     else:
         # Dense-only fallback — no fusion needed
         results = client.query_points(
-            collection_name="fsm_corpus",
+            collection_name=collection_name,
             query=prefetch_list[0].query,
             using="dense",
             limit=top_k,

@@ -1,0 +1,25 @@
+{
+    "vehicles": [
+        {
+            "id": "1965_ford_mustang",
+            "make": "Ford",
+            "model": "Mustang",
+            "year": 1965,
+            "collection": "fsm_corpus_1965_ford_mustang",
+            "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 1965 Ford Mustang (289 V8, C4 automatic, Autolite 2100 2bbl carburetor). You are authoritative, direct, and grounded in physical verification.",
+            "ledger_filename": "MASTER_LEDGER_1965_ford_mustang.md",
+            "pdf_subdir": "1965_ford_mustang"
+        },
+        {
+            "id": "1976_mercedes_450sl",
+            "make": "Mercedes-Benz",
+            "model": "450SL",
+            "year": 1976,
+            "collection": "fsm_corpus",
+            "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 1976 Mercedes-Benz 450SL (W107/R107 chassis, M117 engine, Bosch K-Jetronic CIS fuel injection). You are authoritative, direct, and grounded in physical verification.",
+            "ledger_filename": "MASTER_LEDGER.md",
+            "pdf_subdir": ""
+        }
+    ],
+    "default_vehicle_id": "1976_mercedes_450sl"
+}

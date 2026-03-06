@@ -143,17 +143,28 @@ echo "    tail -f /workspace/{qdrant,tei,backend}.log"
 echo "  Backend API: http://localhost:8888"
 echo "=========================================="
 
-# --- 7. Qdrant Backup (only if collection has data) ---
+# --- 7. Qdrant Backup (all vehicle collections) ---
+# V10 FIREWALL: Back up all registered vehicle collections, not just fsm_corpus.
 if curl -s http://localhost:6333/healthz > /dev/null 2>&1; then
     echo ""
-    POINTS=$(curl -s http://localhost:6333/collections/fsm_corpus 2>/dev/null | python3 -c "import sys,json; print(json.load(sys.stdin).get('result',{}).get('points_count',0))" 2>/dev/null || echo "0")
-    if [ "$POINTS" -gt "0" ] 2>/dev/null; then
-        echo "[backup] fsm_corpus has $POINTS points — creating backup..."
-        curl -s -X POST http://localhost:6333/collections/fsm_corpus/snapshots > /dev/null 2>&1
-        cd "$WORKSPACE/storage" && tar czf /workspace/qdrant_backup.tar.gz qdrant/ 2>/dev/null
-        BACKUP_SIZE=$(ls -lh /workspace/qdrant_backup.tar.gz 2>/dev/null | awk '{print $5}')
-        echo "  -> Backup saved: /workspace/qdrant_backup.tar.gz ($BACKUP_SIZE)"
+    # Read collection names from vehicle registry
+    REGISTRY_PATH="$WORKSPACE/config/vehicle_registry.json"
+    if [ -f "$REGISTRY_PATH" ]; then
+        COLLECTIONS=$(python3 -c "import json; r=json.load(open('$REGISTRY_PATH')); print(' '.join(v['collection'] for v in r.get('vehicles',[])))" 2>/dev/null || echo "fsm_corpus")
     else
-        echo "[backup] fsm_corpus has 0 points — SKIPPING backup to preserve existing backup"
+        COLLECTIONS="fsm_corpus"
     fi
+    for COLL in $COLLECTIONS; do
+        POINTS=$(curl -s "http://localhost:6333/collections/$COLL" 2>/dev/null | python3 -c "import sys,json; print(json.load(sys.stdin).get('result',{}).get('points_count',0))" 2>/dev/null || echo "0")
+        if [ "$POINTS" -gt "0" ] 2>/dev/null; then
+            echo "[backup] $COLL has $POINTS points — creating snapshot..."
+            curl -s -X POST "http://localhost:6333/collections/$COLL/snapshots" > /dev/null 2>&1
+        else
+            echo "[backup] $COLL has 0 points — skipping"
+        fi
+    done
+    # Full Qdrant storage backup
+    cd "$WORKSPACE/storage" && tar czf /workspace/qdrant_backup.tar.gz qdrant/ 2>/dev/null
+    BACKUP_SIZE=$(ls -lh /workspace/qdrant_backup.tar.gz 2>/dev/null | awk '{print $5}')
+    echo "  -> Full backup saved: /workspace/qdrant_backup.tar.gz ($BACKUP_SIZE)"
 fi
