@@ -247,7 +247,9 @@ async def chat(request: Request):
 
     # AUDIT FIX (P3-12 + P4-10 + DT-P4-06): Validate LLM output is valid JSON.
     # DT-P4-06: Strip ```json fences first.
-    stripped = re.sub(r'^```(?:json)?\s*\n?', '', response.strip())
+    # GEMINI FIX: Strip <think>...</think> blocks from Gemini 2.5 Flash thinking output.
+    stripped = re.sub(r'<think>.*?</think>', '', response.strip(), flags=re.DOTALL)
+    stripped = re.sub(r'^```(?:json)?\s*\n?', '', stripped.strip())
     stripped = re.sub(r'\n?```\s*$', '', stripped)
     try:
         parsed = json.loads(stripped)
@@ -255,22 +257,32 @@ async def chat(request: Request):
             raise ValueError("Missing required 'current_state' field")
         response = stripped  # Use the fence-stripped version
     except (json.JSONDecodeError, ValueError):
-        # AUDIT FIX (P5-03): Secondary extraction — find first { to last }
+        # AUDIT FIX (P5-03): Secondary extraction — find JSON objects containing current_state
         recovered = False
-        brace_start = stripped.find('{')
-        brace_end = stripped.rfind('}')
-        if brace_start != -1 and brace_end > brace_start:
-            candidate = stripped[brace_start:brace_end + 1]
-            try:
-                parsed = json.loads(candidate)
-                if isinstance(parsed, dict) and "current_state" in parsed:
-                    response = candidate
-                    recovered = True
-                    logger.info("Recovered JSON via brace extraction after fence-strip failure (P5-03)")
-                else:
-                    raise ValueError("Missing current_state in extracted JSON")
-            except (json.JSONDecodeError, ValueError):
-                pass
+        # Try each { in the string as a potential JSON start
+        for i in range(len(stripped)):
+            if stripped[i] == '{':
+                # Find matching closing brace using depth tracking
+                depth = 0
+                for j in range(i, len(stripped)):
+                    if stripped[j] == '{':
+                        depth += 1
+                    elif stripped[j] == '}':
+                        depth -= 1
+                        if depth == 0:
+                            candidate = stripped[i:j + 1]
+                            try:
+                                parsed = json.loads(candidate)
+                                if isinstance(parsed, dict) and "current_state" in parsed:
+                                    response = candidate
+                                    recovered = True
+                                    logger.info("Recovered JSON via balanced-brace extraction (P5-03)")
+                                    break
+                            except (json.JSONDecodeError, ValueError):
+                                pass
+                            break
+                if recovered:
+                    break
 
         if not recovered:
             logger.warning(f"LLM returned invalid/malformed response: {response[:200]}")
