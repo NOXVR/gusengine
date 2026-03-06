@@ -135,19 +135,18 @@ fi
 echo "  Backend API: http://localhost:8888"
 echo "=========================================="
 
-# --- Qdrant Backup (runs only if Qdrant is healthy) ---
+# --- Qdrant Backup (only if collection has data) ---
 if [ $PASS -ge 1 ] && curl -s http://localhost:6333/healthz > /dev/null 2>&1; then
     echo ""
-    echo "[backup] Creating Qdrant snapshot..."
-    SNAP=$(curl -s -X POST http://localhost:6333/collections/fsm_corpus/snapshots 2>/dev/null)
-    if echo "$SNAP" | grep -q '"ok"'; then
-        echo "  -> Snapshot created"
-        # Compress Qdrant storage to a portable backup
+    POINTS=$(curl -s http://localhost:6333/collections/fsm_corpus 2>/dev/null | python3 -c "import sys,json; print(json.load(sys.stdin).get('result',{}).get('points_count',0))" 2>/dev/null || echo "0")
+    if [ "$POINTS" -gt "0" ] 2>/dev/null; then
+        echo "[backup] fsm_corpus has $POINTS points — creating backup..."
+        curl -s -X POST http://localhost:6333/collections/fsm_corpus/snapshots > /dev/null 2>&1
         cd "$WORKSPACE/storage" && tar czf /workspace/qdrant_backup.tar.gz qdrant/ 2>/dev/null
         BACKUP_SIZE=$(ls -lh /workspace/qdrant_backup.tar.gz 2>/dev/null | awk '{print $5}')
         echo "  -> Backup saved: /workspace/qdrant_backup.tar.gz ($BACKUP_SIZE)"
     else
-        echo "  -> Snapshot failed (collection may not exist yet)"
+        echo "[backup] fsm_corpus has 0 points — SKIPPING backup to preserve existing backup"
     fi
 fi
 
