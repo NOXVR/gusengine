@@ -49,7 +49,7 @@ services:
       - QDRANT_URL=http://qdrant:6333
       - TEI_BASE_URL=http://embedding:8080
       - EMBEDDING_URL=http://embedding:8080
-      - TOKENIZER_MODEL_PATH=Qwen/Qwen2.5-32B-Instruct-AWQ
+      - TOKENIZER_MODEL_PATH=/models/tokenizer
       - SYSTEM_PROMPT_PATH=/app/config/system_prompt.txt
       - SYSTEM_PROMPT_TOKENS=1800
       - MAX_CONTEXT_TOKENS=32768

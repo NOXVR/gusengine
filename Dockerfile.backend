@@ -13,8 +13,8 @@ RUN apt-get update && \
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Download Qwen tokenizer at build time (for token counting)
-RUN python -c "from transformers import AutoTokenizer; AutoTokenizer.from_pretrained('Qwen/Qwen2.5-32B-Instruct-AWQ')"
+# Download Qwen tokenizer to a known local directory (for token counting)
+RUN python -c "from transformers import AutoTokenizer; t = AutoTokenizer.from_pretrained('Qwen/Qwen2.5-32B-Instruct-AWQ', trust_remote_code=True); t.save_pretrained('/models/tokenizer')"
 
 # Application code
 COPY backend/ backend/
@@ -23,6 +23,9 @@ COPY config/ config/
 
 # Qdrant backup for first-boot restore
 COPY storage/backups/ storage/backups/
+
+# PDFs for deep reference
+COPY storage/pdfs/ storage/pdfs/
 
 # Entrypoint script that restores Qdrant backup if needed, then starts the server
 COPY docker-entrypoint.sh .

@@ -12,19 +12,21 @@ RUN apt-get update && \
 # Install PyTorch CPU first (large download, cached in its own layer)
 RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
 
-# Install FlagEmbedding (depends on torch)
-RUN pip install --no-cache-dir FlagEmbedding
+# Pin transformers to version compatible with FlagEmbedding
+RUN pip install --no-cache-dir transformers==4.40.0
 
-# Download BGE-M3 model files at build time (NOT loading into memory)
-# This just fetches the weights to HuggingFace cache, ~2GB download
+# Install FlagEmbedding (depends on torch + transformers)
+RUN pip install --no-cache-dir --no-deps FlagEmbedding
+
+# Download BGE-M3 model files to a known local directory
 RUN pip install --no-cache-dir huggingface_hub && \
-    python -c "from huggingface_hub import snapshot_download; snapshot_download('BAAI/bge-m3')"
+    python -c "from huggingface_hub import snapshot_download; snapshot_download('BAAI/bge-m3', local_dir='/models/bge-m3')"
 
 # Application code
 COPY bge_m3_server.py .
 
-# Set model path to HuggingFace cache
-ENV BGE_M3_MODEL_PATH=BAAI/bge-m3
+# Point to the local model directory
+ENV BGE_M3_MODEL_PATH=/models/bge-m3
 ENV TEI_PORT=8080
 
 EXPOSE 8080
