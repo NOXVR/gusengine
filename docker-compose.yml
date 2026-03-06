@@ -3,7 +3,6 @@
 #
 # Self-contained deployment:
 #   - Models download automatically during build
-#   - Qdrant data restores from backup on first boot
 #   - Only requirement: set LLM_API_KEY in .env
 #
 # Usage:
@@ -13,14 +12,6 @@
 # =============================================================================
 
 services:
-  # --- Qdrant Data Init (one-shot, restores backup on first boot) ---
-  qdrant-init:
-    build:
-      context: .
-      dockerfile: Dockerfile.qdrant-init
-    volumes:
-      - qdrant_data:/qdrant/storage
-
   # --- Qdrant Vector Database ---
   qdrant:
     image: qdrant/qdrant:v1.12.4
@@ -29,9 +20,6 @@ services:
     volumes:
       - qdrant_data:/qdrant/storage
     restart: unless-stopped
-    depends_on:
-      qdrant-init:
-        condition: service_completed_successfully
 
   # --- BGE-M3 Embedding Server ---
   embedding:
