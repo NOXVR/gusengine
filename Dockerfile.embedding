@@ -1,19 +1,26 @@
 # GusEngine V10 — Embedding Server Dockerfile
-# For non-RunPod Docker Compose deployments
+# Self-contained: downloads BGE-M3 model during build
 FROM python:3.11-slim
 
 WORKDIR /app
 
 # System dependencies
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
+    apt-get install -y --no-install-recommends curl git-lfs && \
     rm -rf /var/lib/apt/lists/*
 
 # Python dependencies (FlagEmbedding + torch for BGE-M3)
-RUN pip install --no-cache-dir FlagEmbedding torch
+RUN pip install --no-cache-dir FlagEmbedding torch --index-url https://download.pytorch.org/whl/cpu
+
+# Download BGE-M3 model at build time (cached in Docker layer)
+RUN python -c "from FlagEmbedding import BGEM3FlagModel; BGEM3FlagModel('BAAI/bge-m3', use_fp16=True)"
 
 # Application code
 COPY bge_m3_server.py .
+
+# Set model path to HuggingFace cache
+ENV BGE_M3_MODEL_PATH=BAAI/bge-m3
+ENV TEI_PORT=8080
 
 EXPOSE 8080
 

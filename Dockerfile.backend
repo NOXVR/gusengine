@@ -1,5 +1,5 @@
 # GusEngine V10 — Backend Dockerfile
-# For non-RunPod Docker Compose deployments
+# Self-contained: downloads tokenizer during build, includes Qdrant restore
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -13,11 +13,21 @@ RUN apt-get update && \
 COPY backend/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Download Qwen tokenizer at build time (for token counting)
+RUN python -c "from transformers import AutoTokenizer; AutoTokenizer.from_pretrained('Qwen/Qwen2.5-32B-Instruct-AWQ')"
+
 # Application code
 COPY backend/ backend/
 COPY frontend/ frontend/
 COPY config/ config/
 
+# Qdrant backup for first-boot restore
+COPY storage/backups/ storage/backups/
+
+# Entrypoint script that restores Qdrant backup if needed, then starts the server
+COPY docker-entrypoint.sh .
+RUN chmod +x docker-entrypoint.sh
+
 EXPOSE 8888
 
-CMD ["python", "-m", "uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8888"]
+ENTRYPOINT ["./docker-entrypoint.sh"]
