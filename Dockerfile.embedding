@@ -1,0 +1,20 @@
+# GusEngine V10 — Embedding Server Dockerfile
+# For non-RunPod Docker Compose deployments
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# System dependencies
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Python dependencies (FlagEmbedding + torch for BGE-M3)
+RUN pip install --no-cache-dir FlagEmbedding torch
+
+# Application code
+COPY bge_m3_server.py .
+
+EXPOSE 8080
+
+CMD ["python", "bge_m3_server.py"]

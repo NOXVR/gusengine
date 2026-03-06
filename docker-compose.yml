@@ -1,184 +1,97 @@
-# docker-compose.yml — GusEngine V10 PROTOTYPE (RunPod A100 80GB)
-# Pre-requisite: RunPod pod with A100 80GB GPU
-# Pre-requisite: Download models to ./storage/models/ before first launch
-
-# AUDIT FIX (P10-19): Removed deprecated 'version: "3.8"'
+# =============================================================================
+# GusEngine V10 — Docker Compose (Non-RunPod Deployments)
+#
+# Usage:
+#   docker compose up -d
+#   docker compose logs -f backend
+#   docker compose down
+#
+# Prerequisites:
+#   - Copy .env.template to .env and set LLM_API_KEY
+#   - Place BGE-M3 model in ./storage/models/bge-m3/
+#   - Place PDFs in ./storage/pdfs/
+#   - Qdrant data in ./storage/qdrant/ (or ingest fresh)
+# =============================================================================
 
 services:
-  # ─── LLM Inference (vLLM) ───
-  vllm:
-    # AUDIT FIX (P9-07): Pin to tested version
-    image: vllm/vllm-openai:v0.7.2
-    container_name: gus_vllm
-    restart: always
-    ports:
-      - "127.0.0.1:8000:8000"
-    volumes:
-      - ./storage/models:/models:ro
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=all
-      - PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [ gpu ]
-    command: >
-      --model /models/Qwen2.5-32B-Instruct-AWQ --quantization awq_marlin --dtype float16 --tensor-parallel-size 1 --max-model-len 32768 --gpu-memory-utilization 0.60 --port 8000 --served-model-name Qwen2.5-32B-Instruct-AWQ --trust-remote-code --disable-log-requests
-    networks:
-      - gus_internal
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:8000/v1/models || exit 1" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-      start_period: 120s
-    logging:
-      driver: json-file
-      options:
-        max-size: "50m"
-        max-file: "3"
-
-  # ─── Embedding Server (TEI) ───
-  tei:
-    image: ghcr.io/huggingface/text-embeddings-inference:1.5.0
-    container_name: gus_tei
-    restart: always
-    ports:
-      - "127.0.0.1:8080:80"
-    volumes:
-      - ./storage/models/bge-m3:/model:ro
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [ gpu ]
-    environment:
-      - NVIDIA_VISIBLE_DEVICES=0
-    command: --model-id /model --port 80
-    networks:
-      - gus_internal
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:80/health || exit 1" ]
-      interval: 15s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
-    logging:
-      driver: json-file
-      options:
-        max-size: "50m"
-        max-file: "3"
-
-  # ─── Vector Store (Qdrant) ───
+  # --- Qdrant Vector Database ---
   qdrant:
-    image: qdrant/qdrant:v1.15.2
-    container_name: gus_qdrant
-    restart: always
+    image: qdrant/qdrant:v1.12.4
     ports:
-      - "127.0.0.1:6333:6333"
+      - "6333:6333"
     volumes:
       - ./storage/qdrant:/qdrant/storage
-      - ./storage/snapshots:/qdrant/snapshots
     environment:
-      - QDRANT__SERVICE__GRPC_PORT=6334
-    networks:
-      - gus_internal
+      - QDRANT__STORAGE__STORAGE_PATH=/qdrant/storage
+    restart: unless-stopped
     healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:6333/healthz || exit 1" ]
-      interval: 15s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
-    logging:
-      driver: json-file
-      options:
-        max-size: "50m"
-        max-file: "3"
-
-  # ─── GusEngine Backend (FastAPI) ───
-  gusengine:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: gus_backend
-    restart: always
-    ports:
-      - "127.0.0.1:8888:8888"
-    volumes:
-      - ./storage/pdfs:/app/pdfs:ro
-      - ./storage/extracted:/app/extracted
-      - ./config:/app/config:ro
-      - ./storage/models:/app/models:ro
-      - ./storage/easyocr_models:/app/.EasyOCR/model:ro
-    environment:
-      - VLLM_BASE_URL=http://vllm:8000/v1
-      - TEI_BASE_URL=http://tei:80
-      - QDRANT_URL=http://qdrant:6333
-      - EASYOCR_MODULE_PATH=/app/.EasyOCR
-      - VLLM_MODEL=Qwen2.5-32B-Instruct-AWQ
-      - MAX_CONTEXT_TOKENS=32768
-      - SYSTEM_PROMPT_TOKENS=900
-      - RESPONSE_BUDGET_TOKENS=2000
-      - LEDGER_MAX_TOKENS=2550
-      - HF_HUB_OFFLINE=1
-      - TRANSFORMERS_OFFLINE=1
-    depends_on:
-      vllm:
-        condition: service_healthy
-      tei:
-        condition: service_healthy
-      qdrant:
-        condition: service_healthy
-    networks:
-      - gus_internal
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:8888/api/health || exit 1" ]
-      interval: 15s
+      test: ["CMD", "curl", "-f", "http://localhost:6333/healthz"]
+      interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 360s
-    logging:
-      driver: json-file
-      options:
-        max-size: "50m"
-        max-file: "3"
-
-  # ─── Frontend (React + Nginx) ───
-  # PROTOTYPE: HTTP-only for RunPod (no TLS certs yet)
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: gus_frontend
-    restart: always
-    ports:
-      - "80:80"
-    volumes:
-      - ./storage/pdfs:/usr/share/nginx/pdfs:ro
-      - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      gusengine:
-        condition: service_healthy
-    networks:
-      - gus_internal
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -sf http://localhost:80/ || exit 1" ]
-      interval: 15s
-      timeout: 5s
-      retries: 3
       start_period: 10s
-    logging:
-      driver: json-file
-      options:
-        max-size: "50m"
-        max-file: "3"
 
-networks:
-  gus_internal:
-    driver: bridge
-    internal: true # Air-gap enforcement — blocks container egress
+  # --- BGE-M3 Embedding Server ---
+  embedding:
+    build:
+      context: .
+      dockerfile: Dockerfile.embedding
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./storage/models/bge-m3:/models/bge-m3:ro
+    environment:
+      - BGE_M3_MODEL_PATH=/models/bge-m3
+      - TEI_PORT=8080
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 45s
+    depends_on:
+      qdrant:
+        condition: service_healthy
+
+  # --- FastAPI Backend ---
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./storage/pdfs:/app/storage/pdfs:ro
+      - ./config:/app/config:ro
+      - ./frontend:/app/frontend:ro
+    env_file:
+      - .env
+    environment:
+      - VLLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai
+      - VLLM_MODEL=gemini-2.5-flash
+      - QDRANT_URL=http://qdrant:6333
+      - TEI_BASE_URL=http://embedding:8080
+      - EMBEDDING_URL=http://embedding:8080
+      - TOKENIZER_MODEL_PATH=/app/storage/models/tokenizer
+      - SYSTEM_PROMPT_PATH=/app/config/system_prompt.txt
+      - SYSTEM_PROMPT_TOKENS=1800
+      - MAX_CONTEXT_TOKENS=32768
+      - RESPONSE_BUDGET_TOKENS=8192
+      - LEDGER_MAX_TOKENS=2550
+      - ALLOWED_PDF_DIR=/app/storage/pdfs
+      - LEDGER_PATH=/app/config/MASTER_LEDGER.md
+      - HF_HUB_OFFLINE=1
+      - TRANSFORMERS_OFFLINE=1
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    depends_on:
+      qdrant:
+        condition: service_healthy
+      embedding:
+        condition: service_healthy
