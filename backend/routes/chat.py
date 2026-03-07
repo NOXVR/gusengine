@@ -14,7 +14,8 @@ from backend.search.context_builder import build_context
 from backend.shared.tokenizer import TOKENIZER, count_tokens, _TOKENIZER_LOCK
 from backend.inference.llm import generate_response
 from backend.shared.clients import qdrant_search_client
-from backend.routes.vehicle import get_vehicle, get_default_vehicle_id
+from backend.routes.vehicle import get_vehicle, get_default_vehicle_id, get_all_vehicles
+from backend.routes.vehicle_linter import lint_vehicle_mismatch
 
 logger = logging.getLogger(__name__)
 
@@ -208,6 +209,31 @@ async def chat(request: Request):
             f"User query ({user_query_tokens} tokens) exceeds {MAX_USER_QUERY_TOKENS}-token safety limit."
         )
 
+    # VEHICLE MISMATCH FIREWALL: Pre-LLM query linter.
+    # Runs BEFORE embedding/search/LLM — zero cost if mismatch detected.
+    # [BYPASS_VEHICLE_CHECK] prefix = user acknowledged the mismatch and chose to continue.
+    bypass_vehicle_check = user_query.startswith("[BYPASS_VEHICLE_CHECK]")
+    if bypass_vehicle_check:
+        user_query = user_query.replace("[BYPASS_VEHICLE_CHECK]", "").strip()
+        logger.info("Vehicle mismatch bypass acknowledged by user")
+    
+    if not bypass_vehicle_check:
+        mismatch = lint_vehicle_mismatch(user_query, vehicle, get_all_vehicles())
+        if mismatch:
+            logger.warning(f"Vehicle mismatch firewall triggered: {mismatch['detail']}")
+            return {"response": json.dumps({
+                "current_state": "VEHICLE_MISMATCH",
+                "mechanic_instructions": mismatch["warning"],
+                "diagnostic_reasoning": mismatch["detail"],
+                "detected_vehicle": mismatch["detected"],
+                "detected_terms": mismatch["detected_terms"],
+                "active_vehicle": mismatch["active"],
+                "requires_input": False,
+                "answer_path_prompts": [],
+                "source_citations": [],
+                "intersecting_subsystems": [],
+            })}
+
     # AUDIT FIX (H09/H10/H13): Comprehensive error handling for embed → search → generate
     try:
         # Step 3: Embed user query for retrieval
@@ -275,63 +301,78 @@ async def chat(request: Request):
     if ledger_text:
         system_prompt += f"\n\nMASTER_LEDGER.md:\n{ledger_text}"
 
-    try:
-        # Step 7: Generate LLM response
-        response = await generate_response(
-            system_prompt=system_prompt,
-            context=context,
-            user_message=user_query,
-            chat_history=chat_history,
-            max_tokens=_RESPONSE_BUDGET_TOKENS,
-        )
-    except Exception as e:
-        logger.error(f"LLM generation failed: {e}", exc_info=True)
-        return _make_phase_error(
-            "The AI engine is temporarily unavailable. Please try again in a moment.",
-            f"LLM error: {type(e).__name__}"
-        )
+    # SCHEMA RETRY: If first attempt fails JSON validation, retry once.
+    # This handles rare edge cases where Gemini's json_object mode still misfires.
+    _MAX_LLM_ATTEMPTS = 2
+    for _attempt in range(1, _MAX_LLM_ATTEMPTS + 1):
+        try:
+            # Step 7: Generate LLM response (with single retry for schema failures)
+            response = await generate_response(
+                system_prompt=system_prompt,
+                context=context,
+                user_message=user_query,
+                chat_history=chat_history,
+                max_tokens=_RESPONSE_BUDGET_TOKENS,
+            )
+        except Exception as e:
+            logger.error(f"LLM generation failed: {e}", exc_info=True)
+            return _make_phase_error(
+                "The AI engine is temporarily unavailable. Please try again in a moment.",
+                f"LLM error: {type(e).__name__}"
+            )
 
-    # AUDIT FIX (P3-12 + P4-10 + DT-P4-06): Validate LLM output is valid JSON.
-    # DT-P4-06: Strip ```json fences first.
-    # GEMINI FIX: Strip <think>...</think> blocks from Gemini 2.5 Flash thinking output.
-    stripped = re.sub(r'<think>.*?</think>', '', response.strip(), flags=re.DOTALL)
-    stripped = re.sub(r'^```(?:json)?\s*\n?', '', stripped.strip())
-    stripped = re.sub(r'\n?```\s*$', '', stripped)
-    try:
-        parsed = json.loads(stripped)
-        if not isinstance(parsed, dict) or "current_state" not in parsed:
-            raise ValueError("Missing required 'current_state' field")
-        response = stripped  # Use the fence-stripped version
-    except (json.JSONDecodeError, ValueError):
-        # AUDIT FIX (P5-03): Secondary extraction — find JSON objects containing current_state
-        recovered = False
-        # Try each { in the string as a potential JSON start
-        for i in range(len(stripped)):
-            if stripped[i] == '{':
-                # Find matching closing brace using depth tracking
-                depth = 0
-                for j in range(i, len(stripped)):
-                    if stripped[j] == '{':
-                        depth += 1
-                    elif stripped[j] == '}':
-                        depth -= 1
-                        if depth == 0:
-                            candidate = stripped[i:j + 1]
-                            try:
-                                parsed = json.loads(candidate)
-                                if isinstance(parsed, dict) and "current_state" in parsed:
-                                    response = candidate
-                                    recovered = True
-                                    logger.info("Recovered JSON via balanced-brace extraction (P5-03)")
-                                    break
-                            except (json.JSONDecodeError, ValueError):
-                                pass
-                            break
-                if recovered:
-                    break
+        # AUDIT FIX (P3-12 + P4-10 + DT-P4-06): Validate LLM output is valid JSON.
+        # DT-P4-06: Strip ```json fences first.
+        # GEMINI FIX: Strip <think>...</think> blocks from Gemini 2.5 Flash thinking output.
+        stripped = re.sub(r'<think>.*?</think>', '', response.strip(), flags=re.DOTALL)
+        stripped = re.sub(r'^```(?:json)?\s*\n?', '', stripped.strip())
+        stripped = re.sub(r'\n?```\s*$', '', stripped)
+        try:
+            parsed = json.loads(stripped)
+            if not isinstance(parsed, dict) or "current_state" not in parsed:
+                raise ValueError("Missing required 'current_state' field")
+            response = stripped  # Use the fence-stripped version
+            break  # Valid JSON — exit retry loop
+        except (json.JSONDecodeError, ValueError):
+            # AUDIT FIX (P5-03): Secondary extraction — find JSON objects containing current_state
+            recovered = False
+            # Try each { in the string as a potential JSON start
+            for i in range(len(stripped)):
+                if stripped[i] == '{':
+                    # Find matching closing brace using depth tracking
+                    depth = 0
+                    for j in range(i, len(stripped)):
+                        if stripped[j] == '{':
+                            depth += 1
+                        elif stripped[j] == '}':
+                            depth -= 1
+                            if depth == 0:
+                                candidate = stripped[i:j + 1]
+                                try:
+                                    parsed = json.loads(candidate)
+                                    if isinstance(parsed, dict) and "current_state" in parsed:
+                                        response = candidate
+                                        recovered = True
+                                        logger.info("Recovered JSON via balanced-brace extraction (P5-03)")
+                                        break
+                                except (json.JSONDecodeError, ValueError):
+                                    pass
+                                break
+                    if recovered:
+                        break
 
-        if not recovered:
-            logger.warning(f"LLM returned invalid/malformed response: {response[:200]}")
+            if recovered:
+                break  # Valid JSON recovered — exit retry loop
+
+            if _attempt < _MAX_LLM_ATTEMPTS:
+                logger.warning(
+                    f"LLM schema validation failed (attempt {_attempt}/{_MAX_LLM_ATTEMPTS}), "
+                    f"retrying: {response[:200]}"
+                )
+                continue  # Retry
+
+            # All attempts exhausted — return error
+            logger.warning(f"LLM returned invalid/malformed response after {_MAX_LLM_ATTEMPTS} attempts: {response[:200]}")
             response = json.dumps({
                 "current_state": "PHASE_ERROR",
                 "mechanic_instructions": "The AI produced an unexpected response format. Please rephrase your question.",
@@ -343,3 +384,4 @@ async def chat(request: Request):
             })
 
     return {"response": response}
+

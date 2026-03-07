@@ -402,6 +402,79 @@
             color: var(--error);
         }
 
+        .phase-badge.mismatch {
+            background: rgba(251, 146, 60, 0.25);
+            color: #fb923c;
+            font-size: 11px;
+            padding: 4px 12px;
+        }
+
+        .vehicle-mismatch-banner {
+            background: rgba(251, 146, 60, 0.08);
+            border: 2px solid rgba(251, 146, 60, 0.5);
+            border-radius: 8px;
+            padding: 16px;
+            margin: 10px 0;
+            animation: mismatch-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes mismatch-pulse {
+
+            0%,
+            100% {
+                border-color: rgba(251, 146, 60, 0.5);
+            }
+
+            50% {
+                border-color: rgba(248, 113, 113, 0.8);
+            }
+        }
+
+        .vehicle-mismatch-banner .mismatch-detected {
+            font-weight: 700;
+            color: #fb923c;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .vehicle-mismatch-banner .mismatch-detail {
+            color: var(--text-muted);
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .vehicle-mismatch-banner .mismatch-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .vehicle-mismatch-banner .btn-switch-vehicle {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .vehicle-mismatch-banner .btn-continue-anyway {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .vehicle-mismatch-banner .btn-continue-anyway:hover {
+            border-color: rgba(248, 113, 113, 0.5);
+            color: var(--error);
+        }
+
         /* Subsystems */
         .subsystems {
             display: flex;
@@ -1292,9 +1365,16 @@
                 // Render DAG response
                 renderAssistantResponse(resp, data);
 
-                // Add to history
-                const assistantContent = resp.mechanic_instructions || resp.response || JSON.stringify(resp);
-                chatHistory.push({ role: 'assistant', content: assistantContent });
+                // Track last query for vehicle mismatch bypass
+                if (resp.current_state === 'VEHICLE_MISMATCH') {
+                    _lastMismatchQuery = text;
+                }
+
+                // Add to history (skip mismatch — it's not a real diagnostic turn)
+                if (resp.current_state !== 'VEHICLE_MISMATCH') {
+                    const assistantContent = resp.mechanic_instructions || resp.response || JSON.stringify(resp);
+                    chatHistory.push({ role: 'assistant', content: assistantContent });
+                }
 
             } catch (e) {
                 loadingEl.remove();
@@ -1313,6 +1393,23 @@
 
             // Phase badge
             const state = resp.current_state || '';
+            if (state === 'VEHICLE_MISMATCH') {
+                html += '<div class="phase-badge mismatch">⚠ Vehicle Mismatch</div>';
+                html += '<div class="vehicle-mismatch-banner">';
+                html += `<div class="mismatch-detected">🚨 Wrong Vehicle Detected</div>`;
+                const instructions = resp.mechanic_instructions || '';
+                html += `<p>${escapeHtml(instructions)}</p>`;
+                html += `<div class="mismatch-detail">Detected: <strong>${escapeHtml(resp.detected_vehicle || '?')}</strong> | Selected: <strong>${escapeHtml(resp.active_vehicle || '?')}</strong></div>`;
+                html += '<div class="mismatch-actions">';
+                html += '<button class="btn-switch-vehicle" onclick="document.getElementById(\'vehicleSelect\').focus();document.getElementById(\'vehicleSelect\').click();">Switch Vehicle</button>';
+                html += `<button class="btn-continue-anyway" onclick="continueAnywayMismatch()">Continue Anyway →</button>`;
+                html += '</div></div>';
+                html += '</div>';
+                msg.innerHTML = html;
+                msgs.appendChild(msg);
+                msgs.scrollTop = msgs.scrollHeight;
+                return;
+            }
             if (state.includes('TRIAGE')) html += '<div class="phase-badge triage">Triage</div>';
             else if (state.includes('SUBSYSTEM') || state.includes('PHASE_B')) html += '<div class="phase-badge subsystem">Subsystem Analysis</div>';
             else if (state.includes('PROCEDURE') || state.includes('PHASE_C')) html += '<div class="phase-badge procedure">Procedure</div>';
@@ -1389,6 +1486,17 @@
 
         function selectPath(pathText) {
             document.getElementById('userInput').value = pathText;
+            sendMessage();
+        }
+
+        // Vehicle mismatch bypass — store the blocked query and re-send with bypass flag
+        let _lastMismatchQuery = '';
+
+        function continueAnywayMismatch() {
+            if (!_lastMismatchQuery) return;
+            // Re-send with [BYPASS_VEHICLE_CHECK] prefix that the backend will recognize
+            document.getElementById('userInput').value = '[BYPASS_VEHICLE_CHECK] ' + _lastMismatchQuery;
+            _lastMismatchQuery = '';
             sendMessage();
         }
 
