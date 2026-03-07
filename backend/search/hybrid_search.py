@@ -15,7 +15,7 @@ def hybrid_search(
     query_sparse: dict | None,  # AUDIT FIX (OP-P11-06): None when TEI sparse degrades
     top_k: int = 60,  # AUDIT FIX (P10-15): was 20, starves RAG budget (DT-P9-05)
     min_score_ratio: float = 0.70,
-    min_absolute_score: float = 0.013,  # AUDIT FIX (P2-14): raised from 0.005
+    min_absolute_score: float = 0.011,  # AUDIT FIX (P2-14): lowered from 0.013 — 0.013 rejected valid single-signal RRF matches (~0.0125)
     collection_name: str = "fsm_corpus",  # V10 FIREWALL: Vehicle-scoped collection
 ) -> list[dict]:
     """Execute hybrid dense + sparse search with RRF fusion.
