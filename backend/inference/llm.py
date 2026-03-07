@@ -111,6 +111,10 @@ async def generate_response(
             "messages": messages,
             "max_tokens": max_tokens,
             "temperature": temperature,
+            # SCHEMA FIX: Force JSON output mode for remote LLM providers (Gemini, GPT-4o).
+            # Without this, Gemini 2.5 Flash intermittently returns prose instead of JSON,
+            # causing PHASE_ERROR "unexpected response format" for every query.
+            "response_format": {"type": "json_object"},
         }
         # AUDIT FIX (P10-21): Stop sequence only needed for local Qwen models.
         # Qwen2.5 can emit \n\n\n inside JSON string values, truncating mid-JSON.
