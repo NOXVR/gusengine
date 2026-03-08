@@ -383,5 +383,21 @@ async def chat(request: Request):
                 "intersecting_subsystems": [],
             })
 
-    return {"response": response}
+    # Return response with RAG context metadata for forensic analysis.
+    # rag_context is a backward-compatible addition — frontend can ignore it.
+    rag_sources = []
+    for chunk in used_chunks:
+        rag_sources.append({
+            "source": chunk.get("source", ""),
+            "page_numbers": chunk.get("page_numbers", []),
+            "headings": chunk.get("headings", []),
+        })
+    return {
+        "response": response,
+        "rag_context": {
+            "chunk_count": len(used_chunks),
+            "total_tokens_used": sum(c.get("token_count", 0) for c in used_chunks),
+            "sources": rag_sources,
+        },
+    }
 
