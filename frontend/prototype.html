@@ -1091,6 +1091,38 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Confidence Indicator */
+        .confidence-banner {
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 12px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .confidence-banner.verified {
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            color: #81c784;
+        }
+
+        .confidence-banner.general-knowledge {
+            background: rgba(255, 183, 0, 0.12);
+            border: 1px solid rgba(255, 183, 0, 0.4);
+            color: #ffcc40;
+        }
+
+        .confidence-banner .confidence-icon {
+            margin-right: 6px;
+        }
+
+        .confidence-disclaimer {
+            margin-top: 6px;
+            font-size: 12px;
+            opacity: 0.85;
+            font-style: italic;
+        }
     </style>
 </head>
 
@@ -1415,6 +1447,21 @@
             else if (state.includes('PROCEDURE') || state.includes('PHASE_C')) html += '<div class="phase-badge procedure">Procedure</div>';
             else if (state.includes('ERROR')) html += '<div class="phase-badge error">Error</div>';
             else if (state) html += `<div class="phase-badge triage">${state.replace('PHASE_', '').replace(/_/g, ' ')}</div>`;
+
+            // Confidence indicator
+            const confidence = resp.confidence || '';
+            if (confidence === 'general_knowledge') {
+                html += '<div class="confidence-banner general-knowledge">';
+                html += '<span class="confidence-icon">⚠️</span><strong>General Knowledge</strong> — This response is based on general mechanical knowledge, not a verified FSM procedure for your vehicle.';
+                if (resp.confidence_disclaimer) {
+                    html += `<div class="confidence-disclaimer">${escapeHtml(resp.confidence_disclaimer)}</div>`;
+                }
+                html += '</div>';
+            } else if (confidence === 'verified') {
+                html += '<div class="confidence-banner verified">';
+                html += '<span class="confidence-icon">✅</span><strong>FSM Verified</strong> — This diagnosis is backed by your vehicle\'s Factory Service Manual.';
+                html += '</div>';
+            }
 
             // Mechanic instructions
             const instructions = resp.mechanic_instructions || resp.response || '';
