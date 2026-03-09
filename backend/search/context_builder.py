@@ -74,11 +74,27 @@ def build_context(
     #   32768 - 900 - 2550 - 2000 - 50 - 10 - 15 = 27,243 tokens for RAG
     # This is ~16.4× the V9 budget of 1,600 tokens
 
+    # LAYER 2 FIX: Source-balanced interleaving.
+    # Instead of pure score-order (which lets one keyword-dense FSM section
+    # monopolize the context window), round-robin from each source PDF.
+    # This ensures the LLM sees procedures from multiple FSM sections.
+    from collections import defaultdict
+    by_source = defaultdict(list)
+    for chunk in chunks:
+        by_source[chunk["source"]].append(chunk)
+    # Each source's chunks are already in score order from hybrid_search
+    interleaved = []
+    max_depth = max((len(v) for v in by_source.values()), default=0)
+    for depth in range(max_depth):
+        for source_key in by_source:
+            if depth < len(by_source[source_key]):
+                interleaved.append(by_source[source_key][depth])
+
     used_tokens = 0
     used_chunks = []
     context_parts = []
 
-    for i, chunk in enumerate(chunks):
+    for i, chunk in enumerate(interleaved):
         # Use pre-computed token count from ingestion
         chunk_tokens = chunk["token_count"]
 

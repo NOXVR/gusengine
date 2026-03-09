@@ -295,6 +295,40 @@ async def chat(request: Request):
             str(e)
         )
 
+    # LAYER 1 FIX: Backend RETRIEVAL_FAILURE enforcement.
+    # The LLM should NEVER decide whether retrieval failed — the backend decides.
+    # If Qdrant returned chunks but none survived context budgeting, or if search
+    # returned nothing, we short-circuit here BEFORE calling the LLM.
+    if not used_chunks:
+        logger.warning(
+            f"RETRIEVAL_FAILURE (backend-enforced): search returned {len(results)} chunks, "
+            f"0 survived context budgeting for query: {user_query[:100]}"
+        )
+        return {
+            "response": json.dumps({
+                "current_state": "RETRIEVAL_FAILURE",
+                "mechanic_instructions": (
+                    "I don't have FSM documentation covering this specific topic for your vehicle. "
+                    "This means either the Factory Service Manual doesn't include a procedure for this, "
+                    "or the search couldn't find a strong enough match. "
+                    "Try rephrasing with more specific symptoms — describe what you hear, see, or feel."
+                ),
+                "diagnostic_reasoning": (
+                    f"Hybrid search returned {len(results)} raw chunks but 0 survived "
+                    f"context budgeting. This indicates a genuine FSM content gap for this topic."
+                ),
+                "requires_input": False,
+                "answer_path_prompts": [],
+                "source_citations": [],
+                "intersecting_subsystems": [],
+            }),
+            "rag_context": {
+                "chunk_count": 0,
+                "total_tokens_used": 0,
+                "sources": [],
+            },
+        }
+
     # Step 6: Assemble system prompt WITH ledger (injection point)
     # V10 FIREWALL: Swap identity line for the active vehicle
     system_prompt = _build_vehicle_prompt(vehicle)
