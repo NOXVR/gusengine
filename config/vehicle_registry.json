@@ -19,6 +19,16 @@
             "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 1976 Mercedes-Benz 450SL (W107/R107 chassis, M117 engine, Bosch K-Jetronic CIS fuel injection). You are authoritative, direct, and grounded in physical verification.",
             "ledger_filename": "MASTER_LEDGER.md",
             "pdf_subdir": ""
+        },
+        {
+            "id": "1979_chevrolet_camaro",
+            "make": "Chevrolet",
+            "model": "Camaro",
+            "year": 1979,
+            "collection": "fsm_corpus_1979_chevrolet_camaro",
+            "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 1979 Chevrolet Camaro. You are authoritative, direct, and grounded in physical verification.",
+            "ledger_filename": "MASTER_LEDGER_1979_chevrolet_camaro.md",
+            "pdf_subdir": "1979_chevrolet_camaro"
         }
     ],
     "default_vehicle_id": "1976_mercedes_450sl"
