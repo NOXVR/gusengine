@@ -100,6 +100,21 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, collection_name: str =
     async with (await _get_ingest_semaphore()):
         chunks = await asyncio.to_thread(parse_and_chunk, pdf_path)
 
+    # IMAGE CATALOG: Extract image references for searchable diagrams/figures
+    try:
+        from backend.ingestion.image_catalog import extract_image_references
+        source = os.path.basename(pdf_path)
+        for prefix in ["/app/pdfs/", "/app/storage/pdfs/"]:
+            if prefix in pdf_path:
+                source = pdf_path.split(prefix, 1)[-1]
+                break
+        image_refs = await asyncio.to_thread(extract_image_references, pdf_path, source)
+        if image_refs:
+            logger.info(f"Adding {len(image_refs)} image reference chunks")
+            chunks.extend(image_refs)
+    except Exception as e:
+        logger.warning(f"Image catalog extraction failed (non-fatal): {e}")
+
     if not chunks:
         # AUDIT FIX (DT-5b): Zero extractable text = silent failure.
         raise IngestionError(f"No chunks extracted from {pdf_path} — likely blank/corrupt PDF")
