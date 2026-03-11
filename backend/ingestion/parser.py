@@ -126,8 +126,9 @@ def _extract_text_pymupdf(pdf_path: str) -> list[dict]:
             "headings": headings,
         })
     
+    total_doc_pages = len(doc)
     doc.close()
-    logger.info(f"PyMuPDF extracted text from {len(pages)}/{len(doc)} pages")
+    logger.info(f"PyMuPDF extracted text from {len(pages)}/{total_doc_pages} pages")
     return pages
 
 
