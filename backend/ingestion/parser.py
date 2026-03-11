@@ -502,6 +502,13 @@ def parse_and_chunk(pdf_path: str, max_tokens: int = 512) -> list[dict]:
     Returns list of chunks with metadata.
     Raises IngestionError if parsing fails.
     """
+    import traceback
+    
+    logger.info(f"parse_and_chunk called for: {pdf_path}")
+    logger.info(f"  File exists: {os.path.isfile(pdf_path)}")
+    if os.path.isfile(pdf_path):
+        logger.info(f"  File size: {os.path.getsize(pdf_path)} bytes")
+    
     pdf_type, total_pages = _detect_pdf_type(pdf_path)
     
     if pdf_type == PdfType.DIGITAL or pdf_type == PdfType.MIXED:
@@ -511,11 +518,14 @@ def parse_and_chunk(pdf_path: str, max_tokens: int = 512) -> list[dict]:
             return _parse_digital_pdf(pdf_path, max_tokens)
         except IngestionError:
             if pdf_type == PdfType.MIXED:
-                # Mixed PDFs might fail on PyMuPDF — fall back to Docling
                 logger.warning(f"PyMuPDF failed on mixed PDF, falling back to Docling: {pdf_path}")
                 return _parse_scanned_pdf(pdf_path, max_tokens)
             raise
+        except Exception as e:
+            logger.error(f"UNEXPECTED ERROR in PyMuPDF path: {e}\n{traceback.format_exc()}")
+            raise IngestionError(f"PyMuPDF failed for {pdf_path}: {e}") from e
     else:
         # Scanned: use Docling OCR path
         logger.info(f"Routing {pdf_path} to Docling OCR path ({pdf_type.value})")
         return _parse_scanned_pdf(pdf_path, max_tokens)
+
