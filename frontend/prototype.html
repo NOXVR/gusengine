@@ -1068,6 +1068,140 @@
             padding: 4px 8px;
         }
 
+        /* Add Vehicle Button */
+        .btn-add-vehicle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            width: 34px;
+            height: 34px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            margin-left: 4px;
+            flex-shrink: 0;
+        }
+
+        .btn-add-vehicle:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* Add Vehicle Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            width: 380px;
+            max-width: 90vw;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .modal h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .modal-field {
+            margin-bottom: 14px;
+        }
+
+        .modal-field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .modal-field input {
+            width: 100%;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition: all var(--transition);
+        }
+
+        .modal-field input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent-dim);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 10px;
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .btn-modal-cancel {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .btn-modal-cancel:hover {
+            background: var(--bg-hover);
+        }
+
+        .btn-modal-submit {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent) !important;
+        }
+
+        .btn-modal-submit:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-modal-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         /* Toast notification */
         .toast {
             position: fixed;
@@ -1187,6 +1321,7 @@
                         <select class="vehicle-select" id="vehicleSelect" onchange="switchVehicle(this.value)">
                             <option value="">Loading vehicles...</option>
                         </select>
+                        <button class="btn-add-vehicle" onclick="showAddVehicleModal()" title="Add New Vehicle">➕</button>
                     </div>
                     <button class="btn-icon" onclick="toggleSidebar()">📁 Docs</button>
                     <button class="btn-icon" onclick="newSession()">✨ New Session</button>
@@ -1239,6 +1374,29 @@
 
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
+
+    <!-- Add Vehicle Modal -->
+    <div class="modal-overlay" id="addVehicleModal">
+        <div class="modal">
+            <h3>🚗 Add New Vehicle</h3>
+            <div class="modal-field">
+                <label for="newVehicleYear">Year</label>
+                <input type="number" id="newVehicleYear" placeholder="1979" min="1900" max="2030">
+            </div>
+            <div class="modal-field">
+                <label for="newVehicleMake">Make</label>
+                <input type="text" id="newVehicleMake" placeholder="Chevrolet">
+            </div>
+            <div class="modal-field">
+                <label for="newVehicleModel">Model</label>
+                <input type="text" id="newVehicleModel" placeholder="Camaro">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="hideAddVehicleModal()">Cancel</button>
+                <button class="btn-modal-submit" id="btnAddVehicle" onclick="submitAddVehicle()">Add Vehicle</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // =============================================================================
@@ -1322,6 +1480,68 @@
                 console.error('Failed to load vehicle registry:', e);
             }
         }
+
+        // --- Add Vehicle Modal ---
+        function showAddVehicleModal() {
+            document.getElementById('addVehicleModal').classList.add('active');
+            document.getElementById('newVehicleYear').focus();
+        }
+
+        function hideAddVehicleModal() {
+            document.getElementById('addVehicleModal').classList.remove('active');
+            document.getElementById('newVehicleYear').value = '';
+            document.getElementById('newVehicleMake').value = '';
+            document.getElementById('newVehicleModel').value = '';
+        }
+
+        async function submitAddVehicle() {
+            const year = parseInt(document.getElementById('newVehicleYear').value);
+            const make = document.getElementById('newVehicleMake').value.trim();
+            const model = document.getElementById('newVehicleModel').value.trim();
+
+            if (!year || !make || !model) {
+                showToast('Please fill in all fields', 'warning');
+                return;
+            }
+
+            const btn = document.getElementById('btnAddVehicle');
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+
+            try {
+                const r = await fetch(`${API_BASE}/api/vehicles`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ year, make, model }),
+                });
+                const data = await r.json();
+                if (data.status === 'ok') {
+                    hideAddVehicleModal();
+                    showToast(`✓ Added ${year} ${make} ${model}`, 'success');
+                    // Reload vehicles and switch to the new one
+                    await loadVehicles();
+                    switchVehicle(data.vehicle.id);
+                    document.getElementById('vehicleSelect').value = data.vehicle.id;
+                } else {
+                    showToast(data.message || 'Failed to add vehicle', 'error');
+                }
+            } catch (e) {
+                showToast('Error adding vehicle: ' + e.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Add Vehicle';
+            }
+        }
+
+        // Close modal on overlay click
+        document.getElementById('addVehicleModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) hideAddVehicleModal();
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') hideAddVehicleModal();
+        });
 
         function switchVehicle(vehicleId) {
             if (vehicleId === activeVehicleId) return;
