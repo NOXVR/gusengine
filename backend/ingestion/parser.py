@@ -148,38 +148,37 @@ def _resolve_source(pdf_path: str) -> str:
             break
     return source
 
+def parse_and_chunk(pdf_path: str, max_tokens: int = 512) -> list[dict]:
+    """Parse a PDF with Docling and chunk using HybridChunker.
 
-def _process_window(pdf_path: str, page_range: tuple[int, int] | None,
-                    chunker, source: str, window_label: str) -> list[dict]:
-    """Process a single page window through Docling and return chunks.
-    
-    Args:
-        page_range: 1-indexed inclusive tuple (start, end) or None for full document.
-    
-    MEMORY OPT: Creates and destroys the converter per window to force
-    memory release of Docling's internal document representation.
+    Converts the entire document in a single pass. Memory cleanup is performed
+    after conversion via explicit deletion and gc.collect().
+
+    Returns list of chunks with metadata:
+    - text: chunk text content
+    - source: relative path under storage/pdfs/
+    - page_numbers: list of page numbers this chunk spans
+    - headings: hierarchical heading path
+    - token_count: exact token count via native tokenizer
+
+    Raises:
+        IngestionError: If parsing fails. Caller should quarantine.
     """
-    if page_range:
-        logger.info(f"  {window_label}: Parsing pages {page_range[0]}-{page_range[1]}...")
-    else:
-        logger.info(f"  {window_label}: Parsing full document...")
+    source = _resolve_source(pdf_path)
+    chunker = _build_chunker(max_tokens)
+    total_pages = _get_pdf_page_count(pdf_path)
+    logger.info(f"Parsing {pdf_path} ({total_pages} pages) in single pass")
 
     converter = _create_converter()
     try:
-        if page_range:
-            result = converter.convert(pdf_path, page_range=page_range)
-        else:
-            result = converter.convert(pdf_path)
+        result = converter.convert(pdf_path)
     except Exception as e:
-        label = f"pages {page_range[0]}-{page_range[1]}" if page_range else "full"
-        logger.error(f"DOCLING PARSE FAILURE: {pdf_path} {label} — {e}")
-        raise IngestionError(f"Failed to parse {pdf_path} {label}: {e}") from e
+        logger.error(f"DOCLING PARSE FAILURE: {pdf_path} — {e}")
+        raise IngestionError(f"Failed to parse {pdf_path}: {e}") from e
 
     doc = result.document
     if doc is None:
-        label = f"pages {page_range[0]}-{page_range[1]}" if page_range else "full"
-        logger.warning(f"DOCLING EMPTY WINDOW: {pdf_path} {label} — skipping")
-        return []
+        raise IngestionError(f"Docling returned empty document for {pdf_path}")
 
     chunks = []
     try:
@@ -207,65 +206,16 @@ def _process_window(pdf_path: str, page_range: tuple[int, int] | None,
                 "token_count": token_count,
             })
     except Exception as e:
-        label = f"pages {page_range[0]}-{page_range[1]}" if page_range else "full"
-        logger.error(f"CHUNKER FAILURE: {pdf_path} {label} — {e}")
-        raise IngestionError(f"Chunking failed for {pdf_path} {label}: {e}") from e
-
-    logger.info(f"  {window_label}: Extracted {len(chunks)} chunks")
+        logger.error(f"CHUNKER FAILURE: {pdf_path} — {e}")
+        raise IngestionError(f"Chunking failed for {pdf_path}: {e}") from e
 
     # MEMORY OPT: Explicitly delete converter and doc to release Docling internals
     del converter, result, doc
     gc.collect()
 
-    return chunks
-
-
-def parse_and_chunk(pdf_path: str, max_tokens: int = 512) -> list[dict]:
-    """Parse a PDF with Docling and chunk using HybridChunker.
-
-    MEMORY OPT: Processes the PDF in page windows (default 20 pages at a time)
-    to limit peak RAM. Each window creates/destroys its own converter instance,
-    forcing memory release of Docling's internal representations between windows.
-
-    Returns list of chunks with metadata:
-    - text: chunk text content
-    - source: relative path under storage/pdfs/
-    - page_numbers: list of page numbers this chunk spans
-    - headings: hierarchical heading path
-    - token_count: exact token count via native tokenizer
-
-    Raises:
-        IngestionError: If parsing fails. Caller should quarantine.
-    """
-    source = _resolve_source(pdf_path)
-    chunker = _build_chunker(max_tokens)
-    total_pages = _get_pdf_page_count(pdf_path)
-
-    # Small PDFs or unknown page count: process in one shot (no page_range filter)
-    if total_pages <= PAGE_WINDOW_SIZE or total_pages == 0:
-        logger.info(f"Parsing {pdf_path} ({total_pages} pages) in single pass")
-        return _process_window(pdf_path, None,
-                              chunker, source, "single-pass")
-
-    # Large PDFs: process in page windows
-    num_windows = (total_pages + PAGE_WINDOW_SIZE - 1) // PAGE_WINDOW_SIZE
-    logger.info(f"Parsing {pdf_path} ({total_pages} pages) in {num_windows} windows of {PAGE_WINDOW_SIZE}")
-
-    all_chunks = []
-    for window_idx in range(num_windows):
-        # Docling page_range is 1-indexed inclusive: (start_page, end_page)
-        page_start = window_idx * PAGE_WINDOW_SIZE + 1
-        page_end = min(page_start + PAGE_WINDOW_SIZE - 1, total_pages)
-        window_label = f"[{window_idx+1}/{num_windows}]"
-
-        window_chunks = _process_window(
-            pdf_path, (page_start, page_end),
-            chunker, source, window_label
-        )
-        all_chunks.extend(window_chunks)
-
-    if not all_chunks:
+    if not chunks:
         raise IngestionError(f"No chunks extracted from {pdf_path} — likely blank/corrupt PDF")
 
-    logger.info(f"Total: {len(all_chunks)} chunks from {total_pages} pages")
-    return all_chunks
+    logger.info(f"Total: {len(chunks)} chunks from {total_pages} pages")
+    return chunks
+
