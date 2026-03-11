@@ -131,8 +131,11 @@ def _build_chunker(max_tokens: int):
             merge_peers=True,
         )
     else:
+        # Fallback: pass raw TOKENIZER directly — LockedTokenizer wrapper fails
+        # Pydantic isinstance(PreTrainedTokenizerBase) validation in newer Docling.
+        # Thread safety is guaranteed by the ingest semaphore (max 1 concurrent job).
         return HybridChunker(
-            tokenizer=LockedTokenizer(TOKENIZER),
+            tokenizer=TOKENIZER,
             max_tokens=max_tokens,
             merge_peers=True,
         )
