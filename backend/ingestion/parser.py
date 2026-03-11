@@ -61,11 +61,6 @@ def _create_converter():
         ocr_options=EasyOcrOptions(
             lang=["en"],
             use_gpu=False,  # OCR on CPU — no GPU on Hetzner VPS
-            # MEMORY OPT: Single-threaded OCR inference
-            accelerator_options=AcceleratorOptions(
-                num_threads=1,
-                device=AcceleratorDevice.CPU,
-            ),
         ),
         do_table_structure=True,
         table_structure_options=TableStructureOptions(mode=TableFormerMode.ACCURATE),
