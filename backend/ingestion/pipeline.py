@@ -13,6 +13,37 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+# ──────────────────────────────────────────────────────────────────────────────
+# INGESTION STATUS TRACKING
+# In-memory dict tracking per-file ingestion state so the frontend can poll
+# for real progress instead of showing "processing" forever on silent crashes.
+# ──────────────────────────────────────────────────────────────────────────────
+_ingestion_status: dict[str, dict] = {}
+_status_lock = threading.Lock()
+
+
+def _update_status(filename: str, **kwargs):
+    """Thread-safe update of ingestion status for a file."""
+    with _status_lock:
+        if filename not in _ingestion_status:
+            _ingestion_status[filename] = {}
+        _ingestion_status[filename].update(kwargs)
+
+
+def get_ingestion_status() -> dict:
+    """Return a snapshot of all ingestion statuses."""
+    with _status_lock:
+        return dict(_ingestion_status)
+
+
+def clear_ingestion_status(filename: str | None = None):
+    """Clear ingestion status for a specific file or all files."""
+    with _status_lock:
+        if filename:
+            _ingestion_status.pop(filename, None)
+        else:
+            _ingestion_status.clear()
+
 # AUDIT FIX (DT-P2-04): Limit concurrent ingestion workers to prevent OOM.
 # Without a semaphore, asyncio.to_thread spawns ~32 concurrent Docling/EasyOCR workers,
 # each consuming ~2GB RAM. Limit to 2 concurrent jobs.
@@ -52,7 +83,8 @@ FAILURE_MANIFEST_PATH = os.environ.get(
 _manifest_lock = threading.Lock()
 
 
-async def ingest_pdf(pdf_path: str, client: QdrantClient, collection_name: str = "fsm_corpus") -> int:
+async def ingest_pdf(pdf_path: str, client: QdrantClient, collection_name: str = "fsm_corpus",
+                     status_filename: str | None = None) -> int:
     """Full ingestion pipeline: parse → embed → index.
 
     Returns number of chunks indexed.
@@ -105,6 +137,11 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, collection_name: str =
             )
             indexed_count += 1
             consecutive_failures = 0  # reset on success
+            # Update status progress
+            if status_filename:
+                pct = int((i + 1) / len(chunks) * 100)
+                _update_status(status_filename, status="indexing", progress=pct,
+                               chunks_indexed=indexed_count)
             # THROTTLE FIX: Sleep 250ms between upserts to prevent Qdrant deadlock.
             # Without this, hundreds of rapid-fire upserts overwhelm Qdrant's WAL
             # and cause it to hang indefinitely (observed at ~1100 points).
@@ -148,18 +185,25 @@ async def ingest_pdf(pdf_path: str, client: QdrantClient, collection_name: str =
 # AUDIT FIX (P2-06): Background task wrapper with error handling.
 # When called via FastAPI BackgroundTasks, exceptions are silently swallowed.
 async def ingest_pdf_background(pdf_path: str, client: QdrantClient, collection_name: str = "fsm_corpus"):
-    """Wrapper for BackgroundTask execution with error handling."""
+    """Wrapper for BackgroundTask execution with error handling and status tracking."""
+    filename = os.path.basename(pdf_path)
+    _update_status(filename, status="parsing", progress=0, chunks_indexed=0,
+                   error=None, started_at=time.time(), collection=collection_name)
     try:
-        count = await ingest_pdf(pdf_path, client, collection_name=collection_name)
+        count = await ingest_pdf(pdf_path, client, collection_name=collection_name,
+                                 status_filename=filename)
+        _update_status(filename, status="complete", progress=100, chunks_indexed=count,
+                       completed_at=time.time())
         logger.info(f"Background ingestion complete: {pdf_path} ({count} chunks)")
     except IngestionError as e:
+        _update_status(filename, status="failed", error=str(e), completed_at=time.time())
         logger.error(f"INGESTION FAILED (quarantine candidate): {pdf_path} — {e}")
         with _manifest_lock:
             with open(FAILURE_MANIFEST_PATH, "a") as f:
                 f.write(f"{pdf_path}\t{e}\n")
     except Exception as e:
+        _update_status(filename, status="failed", error=str(e), completed_at=time.time())
         logger.error(f"UNEXPECTED INGESTION ERROR: {pdf_path} — {e}", exc_info=True)
-        # AUDIT FIX (P3-09): Also log unexpected errors to failure manifest
         with _manifest_lock:
             with open(FAILURE_MANIFEST_PATH, "a") as f:
                 f.write(f"{pdf_path}\tUNEXPECTED: {e}\n")

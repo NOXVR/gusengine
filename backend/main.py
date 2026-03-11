@@ -10,7 +10,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from backend.shared.clients import qdrant_ingest_client, qdrant_search_client
 from backend.ingestion.qdrant_setup import create_collection
-from backend.routes import health, chat, ingest, upload, ledger, vehicle, admin
+from backend.routes import health, chat, ingest, upload, ledger, vehicle, admin, ingestion_status
 
 # Configure logging
 logging.basicConfig(
@@ -42,6 +42,7 @@ app.include_router(upload.router)
 app.include_router(ledger.router)
 app.include_router(vehicle.router)
 app.include_router(admin.router)
+app.include_router(ingestion_status.router)
 
 # Static file serving for PDFs (used by frontend citation modal)
 _PDF_DIR = os.environ.get("ALLOWED_PDF_DIR", os.path.join(os.path.dirname(os.path.dirname(__file__)), "storage", "pdfs"))

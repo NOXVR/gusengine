@@ -1602,24 +1602,58 @@
         async function handleFiles(files) {
             for (const file of files) {
                 if (!file.name.endsWith('.pdf')) continue;
-                addFileToList(file.name, 'queued');
+                addFileToList(file.name, 'uploading');
                 try {
                     const formData = new FormData();
                     formData.append('file', file);
                     formData.append('vehicle_id', activeVehicleId);  // V10 FIREWALL
-                    updateFileStatus(file.name, 'processing');
                     const r = await fetch(`${API_BASE}/api/upload`, { method: 'POST', body: formData });
                     const d = await r.json();
                     if (d.status === 'accepted' || d.status === 'ok') {
-                        updateFileStatus(file.name, 'done');
+                        updateFileStatus(file.name, 'parsing', 'parsing...');
+                        // Start polling for real ingestion progress
+                        pollIngestionStatus(file.name);
                     } else {
-                        updateFileStatus(file.name, 'failed');
+                        updateFileStatus(file.name, 'failed', d.message || 'rejected');
                     }
-                } catch {
-                    updateFileStatus(file.name, 'failed');
+                } catch (e) {
+                    updateFileStatus(file.name, 'failed', 'upload error');
                 }
             }
-            updateStats();
+        }
+
+        // Poll /api/ingestion/status for real-time progress on a specific file
+        function pollIngestionStatus(filename) {
+            const pollInterval = setInterval(async () => {
+                try {
+                    const r = await fetch(`${API_BASE}/api/ingestion/status`);
+                    if (!r.ok) return;
+                    const statuses = await r.json();
+                    const s = statuses[filename];
+                    if (!s) return; // Not yet registered
+
+                    if (s.status === 'parsing') {
+                        updateFileStatus(filename, 'processing', 'parsing PDF...');
+                    } else if (s.status === 'indexing') {
+                        const pct = s.progress || 0;
+                        const chunks = s.chunks_indexed || 0;
+                        updateFileStatus(filename, 'processing', `indexing ${pct}% (${chunks} chunks)`);
+                    } else if (s.status === 'complete') {
+                        updateFileStatus(filename, 'done', `✓ ${s.chunks_indexed} chunks`);
+                        clearInterval(pollInterval);
+                        updateStats();
+                    } else if (s.status === 'failed') {
+                        const errMsg = s.error ? s.error.substring(0, 60) : 'ingestion failed';
+                        updateFileStatus(filename, 'failed', errMsg);
+                        clearInterval(pollInterval);
+                    }
+                } catch { /* polling error — keep trying */ }
+            }, 3000); // Poll every 3 seconds
+
+            // Safety: stop polling after 30 minutes (prevents zombie intervals)
+            setTimeout(() => {
+                clearInterval(pollInterval);
+            }, 30 * 60 * 1000);
         }
 
         function addFileToList(name, status) {
@@ -1633,13 +1667,13 @@
             list.prepend(item);
         }
 
-        function updateFileStatus(name, status) {
+        function updateFileStatus(name, status, label) {
             const id = `file-${name.replace(/[^a-zA-Z0-9]/g, '_')}`;
             const item = document.getElementById(id);
             if (item) {
                 item.querySelector('.file-status').className = `file-status ${status}`;
                 item.querySelector('.file-label').className = `file-label ${status}`;
-                item.querySelector('.file-label').textContent = status;
+                item.querySelector('.file-label').textContent = label || status;
             }
         }
 
