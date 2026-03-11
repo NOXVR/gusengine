@@ -10,7 +10,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from backend.shared.clients import qdrant_ingest_client, qdrant_search_client
 from backend.ingestion.qdrant_setup import create_collection
-from backend.routes import health, chat, ingest, upload, ledger, vehicle, admin, ingestion_status
+from backend.routes import health, chat, ingest, ingest_direct, upload, ledger, vehicle, admin, ingestion_status
 
 # Configure logging
 logging.basicConfig(
@@ -38,6 +38,7 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(chat.router)
 app.include_router(ingest.router)
+app.include_router(ingest_direct.router)
 app.include_router(upload.router)
 app.include_router(ledger.router)
 app.include_router(vehicle.router)
