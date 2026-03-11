@@ -156,17 +156,22 @@ def _detect_headings(text: str) -> list[str]:
 
 
 def _smart_chunk_text(pages: list[dict], source: str, max_tokens: int = 512) -> list[dict]:
-    """Split extracted text into search-optimized chunks.
+    """Split extracted text into search-optimized chunks with sliding window overlap.
     
-    Strategy matching HybridChunker quality:
-    1. Split each page into paragraphs (double newline or heading boundaries)
-    2. Group paragraphs into chunks up to max_tokens
-    3. Never split mid-paragraph — prefer slightly under-sized chunks
-    4. Each chunk gets page numbers and heading hierarchy
+    Two-pass strategy:
+    1. PASS 1 — Build primary chunks at paragraph boundaries (max_tokens limit)
+    2. PASS 2 — Create overlap chunks between consecutive primary chunks
+       (tail of chunk N + head of chunk N+1, capped at max_tokens)
     
-    Target: ~4.4 chunks per page (matching Docling's HybridChunker baseline).
+    The overlap pass ensures no content falls in a boundary gap. If a torque spec
+    sentence sits right at the split between two primary chunks, the overlap chunk
+    captures both sides together — acting as retrieval insurance.
+    
+    Primary chunks are untouched. Overlap chunks are purely additive.
+    Target: ~4-5 chunks per page (matching Docling's HybridChunker baseline).
     """
-    chunks = []
+    # ── PASS 1: Build primary chunks (same logic as before) ──
+    primary_chunks = []
     
     for page_data in pages:
         page_text = page_data["text"]
@@ -190,7 +195,7 @@ def _smart_chunk_text(pages: list[dict], source: str, max_tokens: int = 512) -> 
             if para_tokens > max_tokens:
                 # Flush current buffer first
                 if current_text.strip():
-                    chunks.append({
+                    primary_chunks.append({
                         "text": current_text.strip(),
                         "source": source,
                         "page_numbers": [page_num],
@@ -204,7 +209,7 @@ def _smart_chunk_text(pages: list[dict], source: str, max_tokens: int = 512) -> 
                 sentence_chunks = _split_long_text(para, max_tokens)
                 for sc in sentence_chunks:
                     sc_tokens = count_tokens(sc)
-                    chunks.append({
+                    primary_chunks.append({
                         "text": sc,
                         "source": source,
                         "page_numbers": [page_num],
@@ -215,7 +220,7 @@ def _smart_chunk_text(pages: list[dict], source: str, max_tokens: int = 512) -> 
             
             # Would adding this paragraph exceed the limit?
             if current_tokens + para_tokens > max_tokens and current_text.strip():
-                chunks.append({
+                primary_chunks.append({
                     "text": current_text.strip(),
                     "source": source,
                     "page_numbers": [page_num],
@@ -230,7 +235,7 @@ def _smart_chunk_text(pages: list[dict], source: str, max_tokens: int = 512) -> 
         
         # Flush remaining text for this page
         if current_text.strip():
-            chunks.append({
+            primary_chunks.append({
                 "text": current_text.strip(),
                 "source": source,
                 "page_numbers": [page_num],
@@ -238,7 +243,102 @@ def _smart_chunk_text(pages: list[dict], source: str, max_tokens: int = 512) -> 
                 "token_count": current_tokens,
             })
     
-    return chunks
+    # ── PASS 2: Create overlap chunks between consecutive primary chunks ──
+    overlap_chunks = _build_overlap_chunks(primary_chunks, max_tokens)
+    
+    # Combine: all primary chunks + all overlap chunks
+    all_chunks = primary_chunks + overlap_chunks
+    logger.info(
+        f"SmartChunk: {len(primary_chunks)} primary + "
+        f"{len(overlap_chunks)} overlap = {len(all_chunks)} total chunks"
+    )
+    return all_chunks
+
+
+def _build_overlap_chunks(primary_chunks: list[dict], max_tokens: int) -> list[dict]:
+    """Build overlap chunks from consecutive primary chunk pairs.
+    
+    For each pair (chunk_i, chunk_i+1) that share the same source:
+    - Take the last ~40% of chunk_i's text
+    - Take the first ~40% of chunk_i+1's text
+    - Combine them into an overlap chunk (capped at max_tokens)
+    - The overlap chunk inherits page numbers from both chunks
+    
+    This ensures content at chunk boundaries always has a dedicated
+    chunk where it appears in full context — not split across two.
+    """
+    if len(primary_chunks) < 2:
+        return []
+    
+    overlaps = []
+    
+    for i in range(len(primary_chunks) - 1):
+        chunk_a = primary_chunks[i]
+        chunk_b = primary_chunks[i + 1]
+        
+        # Only overlap chunks from the same source file
+        if chunk_a["source"] != chunk_b["source"]:
+            continue
+        
+        # Get the tail of chunk A and head of chunk B
+        text_a = chunk_a["text"]
+        text_b = chunk_b["text"]
+        
+        # Split into sentences for clean boundaries
+        sentences_a = re.split(r'(?<=[.!?])\s+', text_a)
+        sentences_b = re.split(r'(?<=[.!?])\s+', text_b)
+        
+        # Take roughly the last 40% of sentences from A
+        tail_count = max(1, len(sentences_a) * 2 // 5)
+        tail_sentences = sentences_a[-tail_count:]
+        
+        # Take roughly the first 40% of sentences from B
+        head_count = max(1, len(sentences_b) * 2 // 5)
+        head_sentences = sentences_b[:head_count]
+        
+        # Combine
+        overlap_text = " ".join(tail_sentences) + "\n\n" + " ".join(head_sentences)
+        overlap_text = overlap_text.strip()
+        
+        if not overlap_text:
+            continue
+        
+        overlap_tokens = count_tokens(overlap_text)
+        
+        # Cap at max_tokens — trim from the edges if needed
+        if overlap_tokens > max_tokens:
+            # Trim sentences from both ends proportionally
+            while overlap_tokens > max_tokens and (len(tail_sentences) > 1 or len(head_sentences) > 1):
+                if len(tail_sentences) > len(head_sentences) and len(tail_sentences) > 1:
+                    tail_sentences = tail_sentences[1:]  # Drop oldest sentence from tail
+                elif len(head_sentences) > 1:
+                    head_sentences = head_sentences[:-1]  # Drop newest sentence from head
+                else:
+                    break
+                overlap_text = " ".join(tail_sentences) + "\n\n" + " ".join(head_sentences)
+                overlap_tokens = count_tokens(overlap_text.strip())
+            overlap_text = overlap_text.strip()
+            overlap_tokens = count_tokens(overlap_text)
+        
+        # Skip tiny overlaps that add no value
+        if overlap_tokens < 30:
+            continue
+        
+        # Merge page numbers from both chunks
+        page_numbers = sorted(set(chunk_a["page_numbers"] + chunk_b["page_numbers"]))
+        
+        # Merge headings (prefer chunk B's headings as they're "entering" that section)
+        headings = chunk_b["headings"] if chunk_b["headings"] else chunk_a["headings"]
+        
+        overlaps.append({
+            "text": overlap_text,
+            "source": chunk_a["source"],
+            "page_numbers": page_numbers,
+            "headings": headings,
+            "token_count": overlap_tokens,
+        })
+    
+    return overlaps
 
 
 def _split_into_paragraphs(text: str) -> list[str]:
