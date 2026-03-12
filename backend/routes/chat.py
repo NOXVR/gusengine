@@ -341,7 +341,7 @@ async def chat(request: Request):
         from backend.db import format_modifications_context
         mod_context = format_modifications_context(customer_vin)
         if mod_context:
-            system_prompt += f"\n\n{mod_context}"
+            system_prompt += f"\n\n---\nSOURCE: Vehicle Modification Records (NOT from FSM or Master Ledger)\n{mod_context}\nWhen answering from this data, cite 'Vehicle Modification Records' as the source, NOT the Master Ledger or FSM."
             logger.info(f"Injected modification context for VIN {customer_vin}")
 
     # SCHEMA RETRY: If first attempt fails JSON validation, retry once.

@@ -1263,13 +1263,13 @@
 <body>
     <div class="app">
         <!-- Sidebar: PDF Management -->
-        <aside class="sidebar" id="sidebar">
+        <aside class="sidebar collapsed" id="sidebar">
             <div class="sidebar-header">
-                <h2>📁 Documents</h2>
+                <h2>Documents</h2>
                 <button class="sidebar-toggle" onclick="toggleSidebar()">✕</button>
             </div>
             <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
-                <div class="drop-zone-icon">📥</div>
+                <div class="drop-zone-icon" style="font-size:20px;">Upload</div>
                 <div class="drop-zone-text">Drop PDFs here or <strong>click to browse</strong></div>
                 <input type="file" id="fileInput" accept=".pdf" multiple hidden>
             </div>
@@ -1282,7 +1282,7 @@
 
             <!-- Global Ledger Entry -->
             <div class="sidebar-ledger">
-                <h3>📝 Shop Knowledge</h3>
+                <h3>Shop Knowledge</h3>
                 <div class="ledger-token-meter" id="ledgerMeter"></div>
                 <div class="ledger-token-bar">
                     <div class="ledger-token-fill" id="ledgerBar" style="width:0%"></div>
@@ -1321,12 +1321,12 @@
                         <select class="vehicle-select" id="vehicleSelect" onchange="switchVehicle(this.value)">
                             <option value="">Loading vehicles...</option>
                         </select>
-                        <button class="btn-add-vehicle" onclick="showAddVehicleModal()" title="Add Shop Vehicle">➕</button>
-                        <button class="btn-add-vehicle" onclick="showCustomerModal()" title="Add Customer Vehicle">👤</button>
-                        <button class="btn-add-vehicle" id="btnMods" onclick="showModificationsModal()" title="Vehicle Modifications" style="display:none;">🔧</button>
+                        <button class="btn-add-vehicle" onclick="showAddVehicleModal()" title="Add Shop Vehicle">+</button>
+                        <button class="btn-add-vehicle" onclick="showCustomerModal()" title="Add Customer Vehicle">Customer</button>
+                        <button class="btn-add-vehicle" id="btnMods" onclick="showModificationsModal()" title="Vehicle Modifications" style="display:none;">Mods</button>
                     </div>
-                    <button class="btn-icon" onclick="toggleSidebar()">📁 Docs</button>
-                    <button class="btn-icon" onclick="newSession()">✨ New Session</button>
+                    <button class="btn-icon" onclick="toggleSidebar()">Docs</button>
+                    <button class="btn-icon" onclick="newSession()">New Session</button>
                     <button class="btn-icon" id="healthBtn"><span class="health-dot" id="healthDot"></span>
                         System</button>
                 </div>
@@ -1334,7 +1334,7 @@
 
             <div class="messages" id="messages">
                 <div class="welcome" id="welcome">
-                    <div class="welcome-icon">🔧</div>
+                    <div class="welcome-icon" style="font-size:32px;font-weight:600;">GUS</div>
                     <h2>GusEngine Diagnostic Assistant</h2>
                     <p>Describe a symptom or issue and I'll guide you through the diagnostic process using factory
                         service manual data.</p>
@@ -1380,7 +1380,7 @@
     <!-- Add Vehicle Modal -->
     <div class="modal-overlay" id="addVehicleModal">
         <div class="modal">
-            <h3>🚗 Add New Vehicle</h3>
+            <h3>Add New Vehicle</h3>
             <div class="modal-field">
                 <label for="newVehicleYear">Year</label>
                 <input type="number" id="newVehicleYear" placeholder="1979" min="1900" max="2030">
@@ -1403,7 +1403,7 @@
     <!-- Add Customer Vehicle Modal -->
     <div class="modal-overlay" id="addCustomerModal">
         <div class="modal">
-            <h3>👤 Add Customer Vehicle</h3>
+            <h3>Add Customer Vehicle</h3>
             <div class="modal-field">
                 <label for="customerVIN">VIN</label>
                 <input type="text" id="customerVIN" placeholder="WDB10704412345" maxlength="17" style="text-transform: uppercase;">
@@ -1432,10 +1432,10 @@
     <!-- Modifications Panel Modal -->
     <div class="modal-overlay" id="modificationsModal">
         <div class="modal" style="max-width: 560px;">
-            <h3>🔧 Vehicle Modifications — <span id="modVinLabel"></span></h3>
+            <h3>Vehicle Modifications — <span id="modVinLabel"></span></h3>
             <div id="modificationsList" style="max-height: 200px; overflow-y: auto; margin-bottom: 12px;"></div>
             <details style="margin-bottom: 8px;">
-                <summary style="cursor:pointer; color: var(--accent); font-weight: 500;">➕ Add Modification</summary>
+                <summary style="cursor:pointer; color: var(--accent); font-weight: 500;">+ Add Modification</summary>
                 <div style="margin-top: 8px;">
                     <div class="modal-field">
                         <label for="modSystem">System</label>
@@ -1968,12 +1968,19 @@
 
             // Confidence indicator
             const confidence = resp.confidence || '';
+            // Check if answer came from vehicle modification records (not FSM)
+            const sourcesText = JSON.stringify(resp.source_citations || []);
+            const isModRecord = sourcesText.includes('Vehicle Modification') || sourcesText.includes('VEHICLE-SPECIFIC');
             if (confidence === 'general_knowledge') {
                 html += '<div class="confidence-banner general-knowledge">';
                 html += '<span class="confidence-icon">⚠️</span><strong>General Knowledge</strong> — This response is based on general mechanical knowledge, not a verified FSM procedure for your vehicle.';
                 if (resp.confidence_disclaimer) {
                     html += `<div class="confidence-disclaimer">${escapeHtml(resp.confidence_disclaimer)}</div>`;
                 }
+                html += '</div>';
+            } else if (isModRecord) {
+                html += '<div class="confidence-banner verified" style="background: linear-gradient(135deg, rgba(99,102,241,0.18), rgba(99,102,241,0.08));">';
+                html += '<span class="confidence-icon">📋</span><strong>Vehicle Record</strong> — This response is based on modifications recorded for this specific vehicle.';
                 html += '</div>';
             } else if (confidence === 'verified') {
                 html += '<div class="confidence-banner verified">';
