@@ -150,7 +150,12 @@ async def stats_by_vehicle(vehicle_id: str):
 # V10 FIREWALL: Verify/create collections for ALL registered vehicles.
 @app.on_event("startup")
 async def ensure_qdrant_collection():
-    """Create collections if they don't exist. Retry on transient failure."""
+    """Initialize database and create Qdrant collections if needed."""
+    # Initialize SQLite database (migrates from JSON on first boot)
+    from backend.db import init_db
+    init_db()
+    logger.info("SQLite database initialized")
+    
     from backend.routes.vehicle import get_all_collection_names
     collections_needed = get_all_collection_names()
     # AUDIT FIX (P5-08): Extended from 5→10 attempts with 60s cap to outlast large persistence loads.

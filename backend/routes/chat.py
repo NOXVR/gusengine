@@ -335,6 +335,15 @@ async def chat(request: Request):
     if ledger_text:
         system_prompt += f"\n\nMASTER_LEDGER.md:\n{ledger_text}"
 
+    # CUSTOMER VEHICLE: Inject modification context if this is a VIN-scoped vehicle
+    customer_vin = vehicle.get("_customer_vin")
+    if customer_vin:
+        from backend.db import format_modifications_context
+        mod_context = format_modifications_context(customer_vin)
+        if mod_context:
+            system_prompt += f"\n\n{mod_context}"
+            logger.info(f"Injected modification context for VIN {customer_vin}")
+
     # SCHEMA RETRY: If first attempt fails JSON validation, retry once.
     # This handles rare edge cases where Gemini's json_object mode still misfires.
     _MAX_LLM_ATTEMPTS = 2

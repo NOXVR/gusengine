@@ -1321,7 +1321,9 @@
                         <select class="vehicle-select" id="vehicleSelect" onchange="switchVehicle(this.value)">
                             <option value="">Loading vehicles...</option>
                         </select>
-                        <button class="btn-add-vehicle" onclick="showAddVehicleModal()" title="Add New Vehicle">➕</button>
+                        <button class="btn-add-vehicle" onclick="showAddVehicleModal()" title="Add Shop Vehicle">➕</button>
+                        <button class="btn-add-vehicle" onclick="showCustomerModal()" title="Add Customer Vehicle">👤</button>
+                        <button class="btn-add-vehicle" id="btnMods" onclick="showModificationsModal()" title="Vehicle Modifications" style="display:none;">🔧</button>
                     </div>
                     <button class="btn-icon" onclick="toggleSidebar()">📁 Docs</button>
                     <button class="btn-icon" onclick="newSession()">✨ New Session</button>
@@ -1398,6 +1400,99 @@
         </div>
     </div>
 
+    <!-- Add Customer Vehicle Modal -->
+    <div class="modal-overlay" id="addCustomerModal">
+        <div class="modal">
+            <h3>👤 Add Customer Vehicle</h3>
+            <div class="modal-field">
+                <label for="customerVIN">VIN</label>
+                <input type="text" id="customerVIN" placeholder="WDB10704412345" maxlength="17" style="text-transform: uppercase;">
+            </div>
+            <div class="modal-field">
+                <label for="customerBaseVehicle">Base Vehicle</label>
+                <select id="customerBaseVehicle" class="vehicle-select" style="width:100%;">
+                    <option value="">Select base vehicle...</option>
+                </select>
+            </div>
+            <div class="modal-field">
+                <label for="customerName">Customer Name</label>
+                <input type="text" id="customerName" placeholder="Johnson">
+            </div>
+            <div class="modal-field">
+                <label for="customerNotes">Notes (optional)</label>
+                <input type="text" id="customerNotes" placeholder="Regular customer, bought car in 2020">
+            </div>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="hideCustomerModal()">Cancel</button>
+                <button class="btn-modal-submit" id="btnAddCustomer" onclick="submitAddCustomer()">Add Customer</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modifications Panel Modal -->
+    <div class="modal-overlay" id="modificationsModal">
+        <div class="modal" style="max-width: 560px;">
+            <h3>🔧 Vehicle Modifications — <span id="modVinLabel"></span></h3>
+            <div id="modificationsList" style="max-height: 200px; overflow-y: auto; margin-bottom: 12px;"></div>
+            <details style="margin-bottom: 8px;">
+                <summary style="cursor:pointer; color: var(--accent); font-weight: 500;">➕ Add Modification</summary>
+                <div style="margin-top: 8px;">
+                    <div class="modal-field">
+                        <label for="modSystem">System</label>
+                        <select id="modSystem" class="vehicle-select" style="width:100%;">
+                            <option value="Engine">Engine</option>
+                            <option value="Transmission">Transmission</option>
+                            <option value="Brakes">Brakes</option>
+                            <option value="Steering">Steering</option>
+                            <option value="Electrical">Electrical</option>
+                            <option value="Cooling">Cooling</option>
+                            <option value="Exhaust">Exhaust</option>
+                            <option value="Suspension">Suspension</option>
+                            <option value="Fuel">Fuel</option>
+                            <option value="Body">Body</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="modComponent">Component</label>
+                        <input type="text" id="modComponent" placeholder="Steering Column">
+                    </div>
+                    <div class="modal-field">
+                        <label for="modType">Modification Type</label>
+                        <select id="modType" class="vehicle-select" style="width:100%;">
+                            <option value="Replacement">Replacement</option>
+                            <option value="Upgrade">Upgrade</option>
+                            <option value="Repair">Repair</option>
+                            <option value="Removal">Removal</option>
+                        </select>
+                    </div>
+                    <div class="modal-field">
+                        <label for="modOemSpec">OEM Spec</label>
+                        <input type="text" id="modOemSpec" placeholder="Factory 36-tooth coupler, 25 ft-lbs">
+                    </div>
+                    <div class="modal-field">
+                        <label for="modActualSpec">Actual Spec (installed)</label>
+                        <input type="text" id="modActualSpec" placeholder="Flaming River 28-tooth, 20 ft-lbs">
+                    </div>
+                    <div class="modal-field">
+                        <label for="modDate">Date Applied</label>
+                        <input type="date" id="modDate">
+                    </div>
+                    <div class="modal-field">
+                        <label for="modTech">Tech Name</label>
+                        <input type="text" id="modTech" placeholder="Mike">
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn-modal-submit" onclick="submitAddModification()">Save Modification</button>
+                    </div>
+                </div>
+            </details>
+            <div class="modal-actions">
+                <button class="btn-modal-cancel" onclick="hideModificationsModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // =============================================================================
         // GusEngine V10 Prototype Frontend
@@ -1408,6 +1503,7 @@
         let isLoading = false;
         let activeVehicleId = '';  // V10 FIREWALL: Active vehicle ID
         let vehicleRegistry = [];  // V10 FIREWALL: Cached vehicle list
+        let customerRegistry = []; // Customer vehicles (VIN-scoped)
 
         // --- Health & Stats ---
         async function checkHealth() {
@@ -1448,29 +1544,55 @@
                 vehicleRegistry = data.vehicles || [];
                 activeVehicleId = data.default_vehicle_id || '';
 
-                // Build dropdown with optgroups by make
+                // Build dropdown with Shop Vehicles + Customer Vehicles sections
                 const select = document.getElementById('vehicleSelect');
                 select.innerHTML = '';
+
+                // ── Shop Vehicles (grouped by make) ──
+                const shopGroup = document.createElement('optgroup');
+                shopGroup.label = '── Shop Vehicles ──';
                 const byMake = {};
                 vehicleRegistry.forEach(v => {
                     if (!byMake[v.make]) byMake[v.make] = [];
                     byMake[v.make].push(v);
                 });
-
-                // Sort makes alphabetically, then models within each make
                 Object.keys(byMake).sort().forEach(make => {
-                    const group = document.createElement('optgroup');
-                    group.label = make;
                     byMake[make]
                         .sort((a, b) => a.model.localeCompare(b.model) || a.year - b.year)
                         .forEach(v => {
                             const opt = document.createElement('option');
                             opt.value = v.id;
-                            opt.textContent = `${v.model} (${v.year})`;
+                            opt.textContent = `${make} ${v.model} (${v.year})`;
                             if (v.id === activeVehicleId) opt.selected = true;
-                            group.appendChild(opt);
+                            shopGroup.appendChild(opt);
                         });
-                    select.appendChild(group);
+                });
+                select.appendChild(shopGroup);
+
+                // ── Customer Vehicles ──
+                customerRegistry = data.customers || [];
+                if (customerRegistry.length > 0) {
+                    const custGroup = document.createElement('optgroup');
+                    custGroup.label = '── Customer Vehicles ──';
+                    customerRegistry.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c.vin;  // VIN is the ID for customer vehicles
+                        const shortVin = c.vin.length > 8 ? '...' + c.vin.slice(-6) : c.vin;
+                        opt.textContent = `${c.base_vehicle.model} — ${shortVin} (${c.customer_name})`;
+                        if (c.vin === activeVehicleId) opt.selected = true;
+                        custGroup.appendChild(opt);
+                    });
+                    select.appendChild(custGroup);
+                }
+
+                // Populate the base vehicle selector in the Add Customer modal
+                const baseSelect = document.getElementById('customerBaseVehicle');
+                baseSelect.innerHTML = '<option value="">Select base vehicle...</option>';
+                vehicleRegistry.forEach(v => {
+                    const opt = document.createElement('option');
+                    opt.value = v.id;
+                    opt.textContent = `${v.year} ${v.make} ${v.model}`;
+                    baseSelect.appendChild(opt);
                 });
 
                 // Load stats for default vehicle
@@ -1518,12 +1640,11 @@
                 if (data.status === 'ok') {
                     hideAddVehicleModal();
                     showToast(`✓ Added ${year} ${make} ${model}`, 'success');
-                    // Reload vehicles and switch to the new one
                     await loadVehicles();
                     switchVehicle(data.vehicle.id);
                     document.getElementById('vehicleSelect').value = data.vehicle.id;
                 } else {
-                    showToast(data.message || 'Failed to add vehicle', 'error');
+                    showToast(data.detail || data.message || 'Failed to add vehicle', 'error');
                 }
             } catch (e) {
                 showToast('Error adding vehicle: ' + e.message, 'error');
@@ -1533,23 +1654,200 @@
             }
         }
 
-        // Close modal on overlay click
+        // --- Add Customer Vehicle Modal ---
+        function showCustomerModal() {
+            document.getElementById('addCustomerModal').classList.add('active');
+            document.getElementById('customerVIN').focus();
+        }
+
+        function hideCustomerModal() {
+            document.getElementById('addCustomerModal').classList.remove('active');
+            document.getElementById('customerVIN').value = '';
+            document.getElementById('customerBaseVehicle').value = '';
+            document.getElementById('customerName').value = '';
+            document.getElementById('customerNotes').value = '';
+        }
+
+        async function submitAddCustomer() {
+            const vin = document.getElementById('customerVIN').value.trim().toUpperCase();
+            const baseId = document.getElementById('customerBaseVehicle').value;
+            const name = document.getElementById('customerName').value.trim();
+            const notes = document.getElementById('customerNotes').value.trim();
+
+            if (!vin || !baseId || !name) {
+                showToast('VIN, base vehicle, and customer name are required', 'warning');
+                return;
+            }
+
+            const btn = document.getElementById('btnAddCustomer');
+            btn.disabled = true;
+            btn.textContent = 'Adding...';
+
+            try {
+                const r = await fetch(`${API_BASE}/api/customers`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ vin, base_vehicle_id: baseId, customer_name: name, notes }),
+                });
+                const data = await r.json();
+                if (data.status === 'ok') {
+                    hideCustomerModal();
+                    showToast(`✓ Added customer vehicle: ${vin} (${name})`, 'success');
+                    await loadVehicles();
+                    switchVehicle(vin);
+                    document.getElementById('vehicleSelect').value = vin;
+                } else {
+                    showToast(data.detail || 'Failed to add customer', 'error');
+                }
+            } catch (e) {
+                showToast('Error adding customer: ' + e.message, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Add Customer';
+            }
+        }
+
+        // --- Modifications Modal ---
+        let activeModVin = '';
+
+        function showModificationsModal() {
+            // Find the current customer vehicle's VIN
+            const cust = customerRegistry.find(c => c.vin === activeVehicleId);
+            if (!cust) {
+                showToast('Select a customer vehicle first', 'warning');
+                return;
+            }
+            activeModVin = cust.vin;
+            document.getElementById('modVinLabel').textContent = `${cust.base_vehicle.model} — ${cust.vin} (${cust.customer_name})`;
+            document.getElementById('modificationsModal').classList.add('active');
+            loadModifications(cust.vin);
+        }
+
+        function hideModificationsModal() {
+            document.getElementById('modificationsModal').classList.remove('active');
+            activeModVin = '';
+        }
+
+        async function loadModifications(vin) {
+            const list = document.getElementById('modificationsList');
+            list.innerHTML = '<div style="color: var(--text-secondary); padding: 8px;">Loading...</div>';
+            try {
+                const r = await fetch(`${API_BASE}/api/customers/${vin}/modifications`);
+                const data = await r.json();
+                const mods = data.modifications || [];
+                if (mods.length === 0) {
+                    list.innerHTML = '<div style="color: var(--text-secondary); padding: 8px; font-style: italic;">No modifications recorded yet.</div>';
+                    return;
+                }
+                list.innerHTML = mods.map(m => `
+                    <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px; margin-bottom: 6px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <strong style="color: var(--accent);">[${m.system}] ${m.component} — ${m.mod_type}</strong>
+                            <button onclick="deleteMod(${m.id})" style="background:none; border:none; color: var(--text-secondary); cursor:pointer; font-size: 14px;" title="Delete">🗑️</button>
+                        </div>
+                        ${m.oem_spec ? `<div style="color: var(--text-secondary); font-size: 12px;">OEM: ${m.oem_spec}</div>` : ''}
+                        ${m.actual_spec ? `<div style="color: var(--success); font-size: 12px;">ACTUAL: ${m.actual_spec}</div>` : ''}
+                        ${m.date_applied ? `<div style="color: var(--text-secondary); font-size: 11px; margin-top: 4px;">Applied: ${m.date_applied}${m.tech_name ? ` by ${m.tech_name}` : ''}</div>` : ''}
+                    </div>
+                `).join('');
+            } catch (e) {
+                list.innerHTML = '<div style="color: var(--error);">Failed to load modifications</div>';
+            }
+        }
+
+        async function submitAddModification() {
+            if (!activeModVin) return;
+            const system = document.getElementById('modSystem').value;
+            const component = document.getElementById('modComponent').value.trim();
+            const mod_type = document.getElementById('modType').value;
+            const oem_spec = document.getElementById('modOemSpec').value.trim();
+            const actual_spec = document.getElementById('modActualSpec').value.trim();
+            const date_applied = document.getElementById('modDate').value;
+            const tech_name = document.getElementById('modTech').value.trim();
+
+            if (!component) {
+                showToast('Component name is required', 'warning');
+                return;
+            }
+
+            try {
+                const r = await fetch(`${API_BASE}/api/customers/${activeModVin}/modifications`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ system, component, mod_type, oem_spec, actual_spec, date_applied, tech_name }),
+                });
+                const data = await r.json();
+                if (data.status === 'ok') {
+                    showToast(`✓ Added modification: ${system} / ${component}`, 'success');
+                    // Clear form
+                    document.getElementById('modComponent').value = '';
+                    document.getElementById('modOemSpec').value = '';
+                    document.getElementById('modActualSpec').value = '';
+                    document.getElementById('modDate').value = '';
+                    document.getElementById('modTech').value = '';
+                    // Reload list
+                    loadModifications(activeModVin);
+                } else {
+                    showToast(data.detail || 'Failed to add modification', 'error');
+                }
+            } catch (e) {
+                showToast('Error adding modification: ' + e.message, 'error');
+            }
+        }
+
+        async function deleteMod(modId) {
+            if (!confirm('Delete this modification?')) return;
+            try {
+                const r = await fetch(`${API_BASE}/api/modifications/${modId}`, { method: 'DELETE' });
+                const data = await r.json();
+                if (data.status === 'ok') {
+                    showToast('Modification deleted', 'success');
+                    loadModifications(activeModVin);
+                }
+            } catch (e) {
+                showToast('Error deleting modification', 'error');
+            }
+        }
+
+        // --- Modal close handlers ---
         document.getElementById('addVehicleModal').addEventListener('click', (e) => {
             if (e.target.classList.contains('modal-overlay')) hideAddVehicleModal();
         });
+        document.getElementById('addCustomerModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) hideCustomerModal();
+        });
+        document.getElementById('modificationsModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) hideModificationsModal();
+        });
 
-        // Close modal on Escape key
+        // Close any modal on Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') hideAddVehicleModal();
+            if (e.key === 'Escape') {
+                hideAddVehicleModal();
+                hideCustomerModal();
+                hideModificationsModal();
+            }
         });
 
         function switchVehicle(vehicleId) {
             if (vehicleId === activeVehicleId) return;
             activeVehicleId = vehicleId;
 
-            // Find vehicle label for toast
-            const v = vehicleRegistry.find(v => v.id === vehicleId);
-            const label = v ? `${v.year} ${v.make} ${v.model}` : vehicleId;
+            // Determine if this is a customer vehicle (VIN) or a shop vehicle (ID)
+            const isCustomer = customerRegistry.some(c => c.vin === vehicleId);
+            const cust = isCustomer ? customerRegistry.find(c => c.vin === vehicleId) : null;
+
+            // Show/hide mods button
+            document.getElementById('btnMods').style.display = isCustomer ? 'inline-flex' : 'none';
+
+            // Build label
+            let label;
+            if (cust) {
+                label = `${cust.base_vehicle.year} ${cust.base_vehicle.make} ${cust.base_vehicle.model} (${cust.customer_name})`;
+            } else {
+                const v = vehicleRegistry.find(v => v.id === vehicleId);
+                label = v ? `${v.year} ${v.make} ${v.model}` : vehicleId;
+            }
 
             // Clear chat (cross-vehicle history is meaningless)
             newSession();
