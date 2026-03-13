@@ -2,7 +2,9 @@
 # V10 SPEC: Full chat orchestration — DAG, ledger, budget, JSON validation
 # V10 FIREWALL: Vehicle-scoped collection routing, identity swap, scoped ledger
 # V11 MULTI-PASS: Internal self-verification before response delivery
+# V12 COGNITIVE QUERY EXPANSION: Pre-retrieval mechanic reasoning
 import asyncio
+import hashlib
 import json
 import os
 import re
@@ -76,6 +78,28 @@ else:
             f"{_VERIFICATION_PROMPT_PATH} — falling back to single-pass"
         )
         _ENABLE_VERIFICATION = False
+
+# V12 COGNITIVE QUERY EXPANSION: Load expansion prompt for pre-retrieval reasoning.
+# Feature flag: ENABLE_QUERY_EXPANSION=true enables Pass 0 query expansion.
+_ENABLE_QUERY_EXPANSION = os.environ.get("ENABLE_QUERY_EXPANSION", "true").lower() == "true"
+_EXPANSION_PROMPT_PATH = os.environ.get(
+    "QUERY_EXPANSION_PROMPT_PATH", "/app/config/query_expansion_prompt.txt"
+)
+_EXPANSION_PROMPT = ""
+if os.path.exists(_EXPANSION_PROMPT_PATH):
+    with open(_EXPANSION_PROMPT_PATH) as f:
+        _EXPANSION_PROMPT = f.read()
+    logger.info(
+        f"V12 EXPANSION: Query expansion prompt loaded ({count_tokens(_EXPANSION_PROMPT)} tokens), "
+        f"enabled={_ENABLE_QUERY_EXPANSION}"
+    )
+else:
+    if _ENABLE_QUERY_EXPANSION:
+        logger.warning(
+            f"V12 EXPANSION: Enabled but prompt not found at "
+            f"{_EXPANSION_PROMPT_PATH} — falling back to single-query"
+        )
+        _ENABLE_QUERY_EXPANSION = False
 
 # Ledger loading
 # V10 FIREWALL: LEDGER_DIR is the base directory; vehicle-scoped filenames are resolved at runtime.
@@ -195,6 +219,54 @@ def _extract_json(raw: str) -> dict | None:
                     continue
 
     return None
+
+
+async def _expand_queries(user_query: str) -> list[str]:
+    """V12 COGNITIVE QUERY EXPANSION: Generate subsystem-targeted search queries.
+
+    Pass 0: Before touching the vector DB, ask the LLM to reason about what
+    physical systems could produce the reported symptoms, then generate
+    5 targeted search queries — one per subsystem.
+
+    Returns the original query + 5 expanded queries (6 total).
+    Falls back to [user_query] if expansion fails.
+    """
+    if not _ENABLE_QUERY_EXPANSION or not _EXPANSION_PROMPT:
+        return [user_query]
+
+    t0 = time.monotonic()
+    try:
+        raw = await generate_response(
+            system_prompt=_EXPANSION_PROMPT,
+            context="",
+            user_message=user_query,
+            chat_history=[],
+            max_tokens=512,
+            temperature=0.3,  # Slightly higher for diverse queries
+        )
+    except Exception as e:
+        logger.warning(f"V12 EXPANSION: LLM call failed ({type(e).__name__}), using original query")
+        return [user_query]
+    elapsed = time.monotonic() - t0
+
+    # Parse the JSON array of queries
+    try:
+        # Strip fences/think blocks
+        stripped = _strip_llm_fences(raw)
+        queries = json.loads(stripped)
+        if isinstance(queries, list) and all(isinstance(q, str) for q in queries):
+            # Always include the original query + expanded queries
+            all_queries = [user_query] + queries[:5]
+            logger.info(
+                f"V12 EXPANSION: Generated {len(queries)} queries in {elapsed:.1f}s: "
+                + " | ".join(q[:60] for q in queries[:5])
+            )
+            return all_queries
+    except (json.JSONDecodeError, ValueError):
+        pass
+
+    logger.warning(f"V12 EXPANSION: Failed to parse queries ({elapsed:.1f}s), using original: {raw[:200]}")
+    return [user_query]
 
 
 async def _verify_diagnostic(
@@ -471,9 +543,13 @@ async def chat(request: Request):
                 "intersecting_subsystems": [],
             })}
 
+    # V12 COGNITIVE QUERY EXPANSION: Generate expanded search queries (Pass 0)
+    search_queries = await _expand_queries(user_query)
+    expansion_active = len(search_queries) > 1
+
     # AUDIT FIX (H09/H10/H13): Comprehensive error handling for embed → search → generate
     try:
-        # Step 3: Embed user query for retrieval
+        # Step 3: Embed queries for retrieval
         # AUDIT FIX (P4-05 + P7-05): Acquire EMBED_SEMAPHORE with timeout
         from backend.ingestion.pipeline import _get_embed_semaphore
         _embed_sem = await _get_embed_semaphore()
@@ -482,7 +558,9 @@ async def chat(request: Request):
         except asyncio.TimeoutError:
             raise RuntimeError("Embedding service at capacity — all permits held by ingestion")
         try:
-            query_dense, query_sparse = await embed_text(user_query)
+            # V12: Parallel embedding of all queries
+            embed_tasks = [embed_text(q) for q in search_queries]
+            embed_results = await asyncio.gather(*embed_tasks)
         finally:
             _embed_sem.release()
     except Exception as e:
@@ -494,16 +572,50 @@ async def chat(request: Request):
 
     try:
         # Step 4: Hybrid search (dense + sparse with RRF fusion)
-        # AUDIT FIX (P3-08 + P6-05): Dispatch to dedicated search pool
+        # V12: Run parallel searches for each expanded query
         loop = asyncio.get_event_loop()
-        results = await loop.run_in_executor(
-            _SEARCH_POOL,
-            lambda: hybrid_search(
-                qdrant_search_client, query_dense, query_sparse,
-                top_k=60,  # AUDIT FIX (DT-P9-05): top_k=60
-                collection_name=active_collection,  # V10 FIREWALL
-            ),
-        )
+        per_query_top_k = 20 if expansion_active else 60
+
+        async def _search_one(dense, sparse, query_text):
+            return await loop.run_in_executor(
+                _SEARCH_POOL,
+                lambda: hybrid_search(
+                    qdrant_search_client, dense, sparse,
+                    top_k=per_query_top_k,
+                    collection_name=active_collection,  # V10 FIREWALL
+                ),
+            )
+
+        search_tasks = [
+            _search_one(er["dense"], er["sparse"], sq)
+            for er, sq in zip(embed_results, search_queries)
+        ]
+        all_search_results = await asyncio.gather(*search_tasks)
+
+        # V12: Deduplicate and merge results across all queries
+        if expansion_active:
+            seen_hashes = set()
+            merged = []
+            per_query_counts = []
+            for i, query_results in enumerate(all_search_results):
+                count = 0
+                for chunk in query_results:
+                    chunk_hash = hashlib.md5(chunk["text"][:200].encode()).hexdigest()
+                    if chunk_hash not in seen_hashes:
+                        seen_hashes.add(chunk_hash)
+                        merged.append(chunk)
+                        count += 1
+                per_query_counts.append(count)
+            # Sort by score descending, take top 60
+            merged.sort(key=lambda c: c["score"], reverse=True)
+            results = merged[:60]
+            logger.info(
+                f"V12 EXPANSION SEARCH: {len(search_queries)} queries → "
+                f"{sum(per_query_counts)} unique chunks (per-query: {per_query_counts}), "
+                f"merged to {len(results)}"
+            )
+        else:
+            results = all_search_results[0] if all_search_results else []
     except Exception as e:
         logger.error(f"Search failed: {e}", exc_info=True)
         return _make_phase_error(

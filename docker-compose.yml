@@ -54,6 +54,9 @@ services:
       # V11 MULTI-PASS: Internal self-verification
       - ENABLE_VERIFICATION=true
       - VERIFICATION_PROMPT_PATH=/app/config/verification_prompt.txt
+      # V12 COGNITIVE QUERY EXPANSION: Pre-retrieval mechanic reasoning
+      - ENABLE_QUERY_EXPANSION=true
+      - QUERY_EXPANSION_PROMPT_PATH=/app/config/query_expansion_prompt.txt
       - MAX_CONTEXT_TOKENS=32768
       - RESPONSE_BUDGET_TOKENS=8192
       - LEDGER_MAX_TOKENS=2550
