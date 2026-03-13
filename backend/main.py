@@ -51,6 +51,33 @@ if os.path.isdir(_PDF_DIR):
     app.mount("/pdfs", StaticFiles(directory=_PDF_DIR), name="pdfs")
 
 
+@app.get("/api/pdf/{source:path}")
+async def serve_pdf(source: str):
+    """Serve a PDF by source name, searching across vehicle subdirectories and split folders.
+
+    Citations stored in Qdrant use relative paths like 'filename.pdf' or
+    'vehicle_id/.splits_foo/filename.pdf'. This endpoint finds the actual file
+    regardless of how deep it's nested — handles hidden .splits_ directories
+    that StaticFiles won't traverse.
+    """
+    from pathlib import Path
+    base = Path(_PDF_DIR)
+
+    # Strategy 1: Direct path match (source already contains relative path)
+    direct = base / source
+    if direct.is_file():
+        return FileResponse(str(direct), media_type="application/pdf")
+
+    # Strategy 2: Search by basename across all subdirectories
+    target_name = Path(source).name
+    for path in base.rglob(target_name):
+        if path.is_file() and path.suffix.lower() == '.pdf':
+            return FileResponse(str(path), media_type="application/pdf")
+
+    from fastapi.responses import JSONResponse
+    return JSONResponse({"detail": "PDF not found", "source": source}, status_code=404)
+
+
 # Prototype frontend serving
 FRONTEND_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend", "prototype.html")
 
