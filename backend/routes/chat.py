@@ -133,12 +133,15 @@ def _strip_llm_fences(raw: str) -> str:
     stripped = re.sub(r'<think>.*?</think>', '', raw.strip(), flags=re.DOTALL)
     stripped = re.sub(r'^```(?:json)?\s*\n?', '', stripped.strip())
     stripped = re.sub(r'\n?```\s*$', '', stripped)
-    return stripped
+    return stripped.strip()
 
 
 def _extract_json(raw: str) -> dict | None:
-    """Parse JSON from LLM output, with balanced-brace recovery."""
+    """Parse JSON from LLM output, with balanced-brace recovery and truncation handling."""
     stripped = _strip_llm_fences(raw)
+    if not stripped:
+        return None
+
     # Direct parse
     try:
         parsed = json.loads(stripped)
@@ -146,6 +149,7 @@ def _extract_json(raw: str) -> dict | None:
             return parsed
     except (json.JSONDecodeError, ValueError):
         pass
+
     # Balanced-brace extraction (P5-03)
     for i in range(len(stripped)):
         if stripped[i] == '{':
@@ -163,6 +167,33 @@ def _extract_json(raw: str) -> dict | None:
                         except (json.JSONDecodeError, ValueError):
                             pass
                         break
+
+    # V11 FIX: Handle truncated JSON (max_tokens cut off mid-response).
+    # Find the first '{' and try to close unclosed braces/brackets.
+    first_brace = stripped.find('{')
+    if first_brace >= 0:
+        fragment = stripped[first_brace:]
+        # Count unclosed braces and brackets
+        open_braces = fragment.count('{') - fragment.count('}')
+        open_brackets = fragment.count('[') - fragment.count(']')
+        # Strip any trailing incomplete string (cut after last comma or colon)
+        # Find last complete key-value pair
+        repair = fragment.rstrip()
+        # Remove trailing partial content after last comma
+        for trim_char in [',', ':', '"']:
+            last_pos = repair.rfind(trim_char)
+            if last_pos > 0:
+                test = repair[:last_pos].rstrip()
+                # Close it up
+                closure = ']' * max(0, open_brackets) + '}' * max(0, open_braces)
+                try:
+                    parsed = json.loads(test + closure)
+                    if isinstance(parsed, dict):
+                        logger.info(f"V11 FIX: Recovered truncated JSON (trimmed at '{trim_char}', added {len(closure)} closers)")
+                        return parsed
+                except (json.JSONDecodeError, ValueError):
+                    continue
+
     return None
 
 
@@ -194,16 +225,24 @@ async def _verify_diagnostic(
             context="",  # Context is embedded in the user message
             user_message=verification_input,
             chat_history=[],  # No history for verification pass
-            max_tokens=2000,
+            max_tokens=4096,  # V11 FIX: 2000 was truncating the 4-check output
         )
     except Exception as e:
         logger.warning(f"V11 verification call failed ({type(e).__name__}), skipping verification")
         return None
     elapsed = time.monotonic() - t0
 
+    logger.debug(
+        f"V11 VERIFY raw response: len={len(raw_response)}, "
+        f"starts='{raw_response[:50]}...', ends='...{raw_response[-50:]}'"
+    )
+
     result = _extract_json(raw_response)
     if result is None:
-        logger.warning(f"V11 verification returned non-JSON, skipping: {raw_response[:200]}")
+        logger.warning(
+            f"V11 verification returned non-JSON (len={len(raw_response)}), "
+            f"skipping: {raw_response[:300]}"
+        )
         return None
 
     passed = result.get("verification_passed", True)
