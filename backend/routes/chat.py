@@ -221,7 +221,7 @@ def _extract_json(raw: str) -> dict | None:
     return None
 
 
-async def _expand_queries(user_query: str) -> list[str]:
+async def _expand_queries(user_query: str) -> tuple[list[str], dict]:
     """V12 COGNITIVE QUERY EXPANSION: Generate subsystem-targeted search queries.
 
     Pass 0: Before touching the vector DB, ask the LLM to reason about what
@@ -235,11 +235,13 @@ async def _expand_queries(user_query: str) -> list[str]:
     - The empty RETRIEVED DOCUMENTS section triggers diagnostic-mode reasoning
     The expansion needs a clean prompt → JSON array response, nothing else.
 
-    Returns the original query + 5 expanded queries (6 total).
+    Returns tuple of:
+      - list: original query + expanded queries (6 total)
+      - dict: metadata about the expansion (method, query_count, queries)
     Falls back to [user_query] if expansion fails.
     """
     if not _ENABLE_QUERY_EXPANSION or not _EXPANSION_PROMPT:
-        return [user_query]
+        return [user_query], {"method": "disabled", "query_count": 1, "queries": [user_query]}
 
     t0 = time.monotonic()
     try:
@@ -261,7 +263,7 @@ async def _expand_queries(user_query: str) -> list[str]:
         raw = response.json()["choices"][0]["message"]["content"]
     except Exception as e:
         logger.warning(f"V12 EXPANSION: LLM call failed ({type(e).__name__}), using original query")
-        return [user_query]
+        return [user_query], {"method": "llm_error", "error": str(e), "query_count": 1, "queries": [user_query]}
     elapsed = time.monotonic() - t0
     logger.info(f"V12 EXPANSION raw ({elapsed:.1f}s, {len(raw)} chars): {raw[:500]}")
 
@@ -305,11 +307,12 @@ async def _expand_queries(user_query: str) -> list[str]:
             queries = json.loads(candidate)
             if isinstance(queries, list) and len(queries) >= 3 and all(isinstance(q, str) for q in queries):
                 all_queries = [user_query] + queries[:5]
+                method = "balanced_bracket" if candidate != stripped else "json_parse"
                 logger.info(
-                    f"V12 EXPANSION: Generated {len(queries)} queries in {elapsed:.1f}s: "
+                    f"V12 EXPANSION ({method}): Generated {len(queries)} queries in {elapsed:.1f}s: "
                     + " | ".join(q[:60] for q in queries[:5])
                 )
-                return all_queries
+                return all_queries, {"method": method, "query_count": len(all_queries), "queries": all_queries, "time": round(elapsed, 1)}
         except (json.JSONDecodeError, ValueError):
             continue
 
@@ -320,13 +323,13 @@ async def _expand_queries(user_query: str) -> list[str]:
         queries = quoted[:5]
         all_queries = [user_query] + queries
         logger.info(
-            f"V12 EXPANSION (regex fallback): Extracted {len(queries)} queries in {elapsed:.1f}s: "
+            f"V12 EXPANSION (regex_fallback): Extracted {len(queries)} queries in {elapsed:.1f}s: "
             + " | ".join(q[:60] for q in queries)
         )
-        return all_queries
+        return all_queries, {"method": "regex_fallback", "query_count": len(all_queries), "queries": all_queries, "time": round(elapsed, 1)}
 
     logger.warning(f"V12 EXPANSION: Failed to parse queries ({elapsed:.1f}s), using original: {raw[:500]}")
-    return [user_query]
+    return [user_query], {"method": "fallback_original", "query_count": 1, "queries": [user_query], "time": round(elapsed, 1), "raw_preview": raw[:200]}
 
 
 async def _verify_diagnostic(
@@ -604,7 +607,7 @@ async def chat(request: Request):
             })}
 
     # V12 COGNITIVE QUERY EXPANSION: Generate expanded search queries (Pass 0)
-    search_queries = await _expand_queries(user_query)
+    search_queries, expansion_info = await _expand_queries(user_query)
     expansion_active = len(search_queries) > 1
 
     # AUDIT FIX (H09/H10/H13): Comprehensive error handling for embed → search → generate
@@ -868,5 +871,6 @@ async def chat(request: Request):
             "total_tokens_used": sum(c.get("token_count", 0) for c in used_chunks),
             "sources": rag_sources,
         },
+        "expansion_info": expansion_info,
     }
 
