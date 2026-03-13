@@ -263,25 +263,47 @@ async def _expand_queries(user_query: str) -> list[str]:
         logger.warning(f"V12 EXPANSION: LLM call failed ({type(e).__name__}), using original query")
         return [user_query]
     elapsed = time.monotonic() - t0
-    logger.info(f"V12 EXPANSION raw ({elapsed:.1f}s): {raw[:300]}")
+    logger.info(f"V12 EXPANSION raw ({elapsed:.1f}s, {len(raw)} chars): {raw[:500]}")
 
-    # Parse the JSON array of queries — try multiple extraction strategies
+    # Parse the JSON array of queries — multiple extraction strategies
     stripped = _strip_llm_fences(raw)
 
-    # Strategy 1: Direct parse of stripped response
-    # Strategy 2: Find first [...] bracket pair in the text
+    # Build candidate strings to try parsing
     candidates = [stripped]
+
+    # Strategy 2: Balanced-bracket extraction — walk from first '[' counting
+    # depth to find the exact matching ']'. rfind(']') fails when the LLM
+    # appends commentary containing brackets after the JSON array.
     bracket_start = stripped.find("[")
     if bracket_start >= 0:
-        bracket_end = stripped.rfind("]")
-        if bracket_end > bracket_start:
-            candidates.append(stripped[bracket_start:bracket_end + 1])
+        depth = 0
+        in_string = False
+        escape_next = False
+        for i in range(bracket_start, len(stripped)):
+            c = stripped[i]
+            if escape_next:
+                escape_next = False
+                continue
+            if c == '\\':
+                escape_next = True
+                continue
+            if c == '"' and not escape_next:
+                in_string = not in_string
+                continue
+            if in_string:
+                continue
+            if c == '[':
+                depth += 1
+            elif c == ']':
+                depth -= 1
+                if depth == 0:
+                    candidates.append(stripped[bracket_start:i + 1])
+                    break
 
     for candidate in candidates:
         try:
             queries = json.loads(candidate)
             if isinstance(queries, list) and len(queries) >= 3 and all(isinstance(q, str) for q in queries):
-                # Always include the original query + expanded queries
                 all_queries = [user_query] + queries[:5]
                 logger.info(
                     f"V12 EXPANSION: Generated {len(queries)} queries in {elapsed:.1f}s: "
@@ -291,7 +313,19 @@ async def _expand_queries(user_query: str) -> list[str]:
         except (json.JSONDecodeError, ValueError):
             continue
 
-    logger.warning(f"V12 EXPANSION: Failed to parse queries ({elapsed:.1f}s), using original: {raw[:300]}")
+    # Strategy 3: Regex fallback — extract quoted strings directly.
+    # Handles cases where trailing commas or minor formatting breaks JSON.
+    quoted = re.findall(r'"([^"]{10,})"', stripped)
+    if len(quoted) >= 3:
+        queries = quoted[:5]
+        all_queries = [user_query] + queries
+        logger.info(
+            f"V12 EXPANSION (regex fallback): Extracted {len(queries)} queries in {elapsed:.1f}s: "
+            + " | ".join(q[:60] for q in queries)
+        )
+        return all_queries
+
+    logger.warning(f"V12 EXPANSION: Failed to parse queries ({elapsed:.1f}s), using original: {raw[:500]}")
     return [user_query]
 
 
