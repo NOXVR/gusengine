@@ -10,25 +10,61 @@ for i in {1..30}; do
     if curl -sf http://qdrant:6333/healthz > /dev/null 2>&1; then
         echo "Qdrant is healthy"
 
-        # V10 FIREWALL: Check all registered vehicle collections
+        # V11 HARDENING: Check ALL registered vehicle collections and warn loudly
         REGISTRY="/app/config/vehicle_registry.json"
         if [ -f "$REGISTRY" ]; then
             COLLECTIONS=$(python3 -c "import json; r=json.load(open('$REGISTRY')); print(' '.join(v['collection'] for v in r.get('vehicles',[])))" 2>/dev/null || echo "fsm_corpus")
+            VEHICLE_COUNT=$(python3 -c "import json; r=json.load(open('$REGISTRY')); print(len(r.get('vehicles',[])))" 2>/dev/null || echo "0")
         else
             COLLECTIONS="fsm_corpus"
+            VEHICLE_COUNT="1"
+            echo "WARNING: vehicle_registry.json not found, using fallback"
         fi
 
+        HEALTHY=0
+        UNHEALTHY=0
+        MISSING_LIST=""
+        EMPTY_LIST=""
         ALL_EXIST=true
+
         for COLL in $COLLECTIONS; do
             COLL_STATUS=$(curl -sf "http://qdrant:6333/collections/$COLL" 2>/dev/null || echo "NOT_FOUND")
             if echo "$COLL_STATUS" | grep -q '"status":"ok"'; then
                 POINTS=$(echo "$COLL_STATUS" | python3 -c "import sys,json; print(json.load(sys.stdin).get('result',{}).get('points_count',0))" 2>/dev/null || echo "0")
-                echo "Collection $COLL exists with $POINTS points"
+                if [ "$POINTS" -gt 0 ] 2>/dev/null; then
+                    echo "[OK] Collection $COLL: $POINTS points"
+                    HEALTHY=$((HEALTHY + 1))
+                else
+                    echo "[WARN] Collection $COLL exists but has 0 points!"
+                    EMPTY_LIST="$EMPTY_LIST $COLL"
+                    UNHEALTHY=$((UNHEALTHY + 1))
+                fi
             else
-                echo "Collection $COLL does not exist yet (will be created by backend)"
+                echo "[MISS] Collection $COLL does not exist (will be created by backend)"
+                MISSING_LIST="$MISSING_LIST $COLL"
                 ALL_EXIST=false
+                UNHEALTHY=$((UNHEALTHY + 1))
             fi
         done
+
+        echo ""
+        echo "=== DEPLOYMENT INTEGRITY CHECK ==="
+        echo "  Registered vehicles: $VEHICLE_COUNT"
+        echo "  Collections healthy: $HEALTHY"
+        echo "  Collections issues:  $UNHEALTHY"
+        if [ -n "$MISSING_LIST" ]; then
+            echo "  MISSING:$MISSING_LIST"
+        fi
+        if [ -n "$EMPTY_LIST" ]; then
+            echo "  EMPTY:$EMPTY_LIST"
+        fi
+        if [ "$UNHEALTHY" -gt 0 ]; then
+            echo "  >>> WARNING: $UNHEALTHY collection(s) need attention! <<<"
+        else
+            echo "  >>> ALL COLLECTIONS VERIFIED <<<"
+        fi
+        echo "==================================="
+        echo ""
 
         # Restore from backup if we have one and any collection is missing data
         if [ "$ALL_EXIST" = false ] && [ -f /app/storage/backups/qdrant_backup.tar.gz ]; then

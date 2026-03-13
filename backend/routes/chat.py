@@ -232,9 +232,9 @@ async def _verify_diagnostic(
         return None
     elapsed = time.monotonic() - t0
 
-    logger.debug(
+    logger.info(
         f"V11 VERIFY raw response: len={len(raw_response)}, "
-        f"starts='{raw_response[:50]}...', ends='...{raw_response[-50:]}'"
+        f"starts='{raw_response[:80]}...', ends='...{raw_response[-80:]}'"
     )
 
     result = _extract_json(raw_response)
@@ -249,17 +249,42 @@ async def _verify_diagnostic(
     revision_required = result.get("revision_required", False)
     checks = result.get("checks", {})
 
-    # Log check results
+    # Log the full structure of what the LLM returned for debugging
+    logger.info(f"V11 VERIFY response keys: {list(result.keys())}")
+
+    # Log individual check results — handle various LLM response formats
     check_summary = []
-    for check_name, check_data in checks.items():
-        if isinstance(check_data, dict):
-            status = "PASS" if check_data.get("passed", True) else "FAIL"
-            check_summary.append(f"{check_name}={status}")
-    summary_str = ", ".join(check_summary) if check_summary else "no-checks-parsed"
+    if isinstance(checks, dict) and checks:
+        for check_name, check_data in checks.items():
+            if isinstance(check_data, dict):
+                check_passed = check_data.get("passed", True)
+                status = "PASS" if check_passed else "FAIL"
+                check_summary.append(f"{check_name}={status}")
+                # Log details for failed checks
+                if not check_passed:
+                    details = {k: v for k, v in check_data.items() if k != "passed"}
+                    logger.warning(f"V11 CHECK FAILED [{check_name}]: {json.dumps(details, default=str)[:500]}")
+                else:
+                    logger.info(f"V11 CHECK PASSED [{check_name}]")
+            else:
+                # LLM returned a non-dict value for this check
+                check_summary.append(f"{check_name}={check_data}")
+                logger.info(f"V11 CHECK [{check_name}]: {check_data}")
+    else:
+        logger.warning(
+            f"V11 VERIFY: 'checks' field missing or not a dict. "
+            f"Type={type(checks).__name__}, raw_keys={list(result.keys())}"
+        )
+
+    summary_str = ", ".join(check_summary) if check_summary else "no-checks-found"
+
+    # Log revision instructions if any
+    rev_instructions = result.get("revision_instructions", "")
+    rev_note = f", revision_note='{rev_instructions[:100]}'" if rev_instructions else ""
 
     logger.info(
-        f"V11 VERIFY: passed={passed}, revision={revision_required}, "
-        f"checks=[{summary_str}], latency={elapsed:.1f}s"
+        f"V11 VERIFY SUMMARY: passed={passed}, revision={revision_required}, "
+        f"checks=[{summary_str}], latency={elapsed:.1f}s{rev_note}"
     )
     return result
 
