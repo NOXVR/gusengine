@@ -50,7 +50,10 @@ services:
       - EMBEDDING_URL=http://embedding:8080
       - TOKENIZER_MODEL_PATH=/models/tokenizer
       - SYSTEM_PROMPT_PATH=/app/config/system_prompt.txt
-      - SYSTEM_PROMPT_TOKENS=1800
+      - SYSTEM_PROMPT_TOKENS=2800
+      # V11 MULTI-PASS: Internal self-verification
+      - ENABLE_VERIFICATION=true
+      - VERIFICATION_PROMPT_PATH=/app/config/verification_prompt.txt
       - MAX_CONTEXT_TOKENS=32768
       - RESPONSE_BUDGET_TOKENS=8192
       - LEDGER_MAX_TOKENS=2550

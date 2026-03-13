@@ -1,10 +1,12 @@
 # backend/routes/chat.py
 # V10 SPEC: Full chat orchestration — DAG, ledger, budget, JSON validation
 # V10 FIREWALL: Vehicle-scoped collection routing, identity swap, scoped ledger
+# V11 MULTI-PASS: Internal self-verification before response delivery
 import asyncio
 import json
 import os
 import re
+import time
 from concurrent.futures import ThreadPoolExecutor  # AUDIT FIX (P6-05)
 import logging
 from fastapi import APIRouter, Request
@@ -52,6 +54,28 @@ if _actual_prompt_tokens > _configured_prompt_tokens:
 
 # V10 FIREWALL: For backward compat, keep SYSTEM_PROMPT as a public name
 SYSTEM_PROMPT = _BASE_SYSTEM_PROMPT
+
+# V11 MULTI-PASS: Load verification prompt for internal self-check.
+# Feature flag: ENABLE_VERIFICATION=true enables Pass 2 verification.
+_ENABLE_VERIFICATION = os.environ.get("ENABLE_VERIFICATION", "true").lower() == "true"
+_VERIFICATION_PROMPT_PATH = os.environ.get(
+    "VERIFICATION_PROMPT_PATH", "/app/config/verification_prompt.txt"
+)
+_VERIFICATION_PROMPT = ""
+if os.path.exists(_VERIFICATION_PROMPT_PATH):
+    with open(_VERIFICATION_PROMPT_PATH) as f:
+        _VERIFICATION_PROMPT = f.read()
+    logger.info(
+        f"V11 MULTI-PASS: Verification prompt loaded ({count_tokens(_VERIFICATION_PROMPT)} tokens), "
+        f"enabled={_ENABLE_VERIFICATION}"
+    )
+else:
+    if _ENABLE_VERIFICATION:
+        logger.warning(
+            f"V11 MULTI-PASS: Verification enabled but prompt not found at "
+            f"{_VERIFICATION_PROMPT_PATH} — falling back to single-pass"
+        )
+        _ENABLE_VERIFICATION = False
 
 # Ledger loading
 # V10 FIREWALL: LEDGER_DIR is the base directory; vehicle-scoped filenames are resolved at runtime.
@@ -102,6 +126,155 @@ def _make_phase_error(instructions: str, reasoning: str) -> dict:
         "source_citations": [],
         "intersecting_subsystems": [],
     })}
+
+
+def _strip_llm_fences(raw: str) -> str:
+    """Strip markdown fences and <think> blocks from LLM output."""
+    stripped = re.sub(r'<think>.*?</think>', '', raw.strip(), flags=re.DOTALL)
+    stripped = re.sub(r'^```(?:json)?\s*\n?', '', stripped.strip())
+    stripped = re.sub(r'\n?```\s*$', '', stripped)
+    return stripped
+
+
+def _extract_json(raw: str) -> dict | None:
+    """Parse JSON from LLM output, with balanced-brace recovery."""
+    stripped = _strip_llm_fences(raw)
+    # Direct parse
+    try:
+        parsed = json.loads(stripped)
+        if isinstance(parsed, dict):
+            return parsed
+    except (json.JSONDecodeError, ValueError):
+        pass
+    # Balanced-brace extraction (P5-03)
+    for i in range(len(stripped)):
+        if stripped[i] == '{':
+            depth = 0
+            for j in range(i, len(stripped)):
+                if stripped[j] == '{':
+                    depth += 1
+                elif stripped[j] == '}':
+                    depth -= 1
+                    if depth == 0:
+                        try:
+                            parsed = json.loads(stripped[i:j + 1])
+                            if isinstance(parsed, dict):
+                                return parsed
+                        except (json.JSONDecodeError, ValueError):
+                            pass
+                        break
+    return None
+
+
+async def _verify_diagnostic(
+    draft_json: str,
+    user_query: str,
+    context: str,
+) -> dict | None:
+    """V11 MULTI-PASS: Run internal verification against the diagnostic draft.
+
+    Pass 2: Feeds the draft back to the LLM with the verification prompt.
+    Returns the verification result dict, or None if verification is disabled
+    or the verification call fails.
+    """
+    if not _ENABLE_VERIFICATION or not _VERIFICATION_PROMPT:
+        return None
+
+    # Build the verification input: draft + original complaint + RAG context
+    verification_input = (
+        f"CUSTOMER COMPLAINT:\n{user_query}\n\n"
+        f"DIAGNOSTIC DRAFT (Gus's Pass 1 output):\n{draft_json}\n\n"
+        f"RAG CONTEXT (retrieved FSM documents):\n{context}"
+    )
+
+    t0 = time.monotonic()
+    try:
+        raw_response = await generate_response(
+            system_prompt=_VERIFICATION_PROMPT,
+            context="",  # Context is embedded in the user message
+            user_message=verification_input,
+            chat_history=[],  # No history for verification pass
+            max_tokens=2000,
+        )
+    except Exception as e:
+        logger.warning(f"V11 verification call failed ({type(e).__name__}), skipping verification")
+        return None
+    elapsed = time.monotonic() - t0
+
+    result = _extract_json(raw_response)
+    if result is None:
+        logger.warning(f"V11 verification returned non-JSON, skipping: {raw_response[:200]}")
+        return None
+
+    passed = result.get("verification_passed", True)
+    revision_required = result.get("revision_required", False)
+    checks = result.get("checks", {})
+
+    # Log check results
+    check_summary = []
+    for check_name, check_data in checks.items():
+        if isinstance(check_data, dict):
+            status = "PASS" if check_data.get("passed", True) else "FAIL"
+            check_summary.append(f"{check_name}={status}")
+    summary_str = ", ".join(check_summary) if check_summary else "no-checks-parsed"
+
+    logger.info(
+        f"V11 VERIFY: passed={passed}, revision={revision_required}, "
+        f"checks=[{summary_str}], latency={elapsed:.1f}s"
+    )
+    return result
+
+
+async def _revise_diagnostic(
+    system_prompt: str,
+    context: str,
+    user_query: str,
+    chat_history: list[dict],
+    verification_result: dict,
+    max_tokens: int,
+) -> str | None:
+    """V11 MULTI-PASS: Pass 3 — regenerate with verification feedback.
+
+    Appends the verification findings to the RAG context so the model
+    knows what it got wrong on the first pass.
+    """
+    revision_instructions = verification_result.get("revision_instructions", "")
+    if not revision_instructions:
+        return None
+
+    # Build revision context: original RAG + what went wrong
+    checks = verification_result.get("checks", {})
+    failed_checks = []
+    for check_name, check_data in checks.items():
+        if isinstance(check_data, dict) and not check_data.get("passed", True):
+            failed_checks.append(f"- {check_name}: {json.dumps(check_data, indent=2)}")
+
+    revision_context = (
+        f"{context}\n\n"
+        f"--- INTERNAL VERIFICATION FEEDBACK (DO NOT SHOW TO USER) ---\n"
+        f"Your previous diagnostic draft FAILED internal verification.\n"
+        f"You MUST correct the following issues:\n\n"
+        f"{revision_instructions}\n\n"
+        f"Failed checks:\n{''.join(failed_checks)}\n\n"
+        f"Generate a CORRECTED diagnostic response that addresses ALL flagged issues.\n"
+        f"--- END VERIFICATION FEEDBACK ---"
+    )
+
+    t0 = time.monotonic()
+    try:
+        response = await generate_response(
+            system_prompt=system_prompt,
+            context=revision_context,
+            user_message=user_query,
+            chat_history=chat_history,
+            max_tokens=max_tokens,
+        )
+    except Exception as e:
+        logger.error(f"V11 revision call failed ({type(e).__name__}), returning original draft")
+        return None
+    elapsed = time.monotonic() - t0
+    logger.info(f"V11 REVISE: Pass 3 completed in {elapsed:.1f}s")
+    return response
 
 
 @router.post("/api/chat")
@@ -347,10 +520,13 @@ async def chat(request: Request):
     # SCHEMA RETRY: If first attempt fails JSON validation, retry once.
     # This handles rare edge cases where Gemini's json_object mode still misfires.
     _MAX_LLM_ATTEMPTS = 2
+    t0_pass1 = time.monotonic()
+    response = None
+    parsed = None
     for _attempt in range(1, _MAX_LLM_ATTEMPTS + 1):
         try:
-            # Step 7: Generate LLM response (with single retry for schema failures)
-            response = await generate_response(
+            # Step 7: Generate LLM response (Pass 1 — diagnostic draft)
+            raw_response = await generate_response(
                 system_prompt=system_prompt,
                 context=context,
                 user_message=user_query,
@@ -365,66 +541,80 @@ async def chat(request: Request):
             )
 
         # AUDIT FIX (P3-12 + P4-10 + DT-P4-06): Validate LLM output is valid JSON.
-        # DT-P4-06: Strip ```json fences first.
-        # GEMINI FIX: Strip <think>...</think> blocks from Gemini 2.5 Flash thinking output.
-        stripped = re.sub(r'<think>.*?</think>', '', response.strip(), flags=re.DOTALL)
-        stripped = re.sub(r'^```(?:json)?\s*\n?', '', stripped.strip())
-        stripped = re.sub(r'\n?```\s*$', '', stripped)
-        try:
-            parsed = json.loads(stripped)
-            if not isinstance(parsed, dict) or "current_state" not in parsed:
-                raise ValueError("Missing required 'current_state' field")
-            response = stripped  # Use the fence-stripped version
+        parsed = _extract_json(raw_response)
+        if parsed and "current_state" in parsed:
+            response = json.dumps(parsed)  # Canonical JSON string
             break  # Valid JSON — exit retry loop
-        except (json.JSONDecodeError, ValueError):
-            # AUDIT FIX (P5-03): Secondary extraction — find JSON objects containing current_state
-            recovered = False
-            # Try each { in the string as a potential JSON start
-            for i in range(len(stripped)):
-                if stripped[i] == '{':
-                    # Find matching closing brace using depth tracking
-                    depth = 0
-                    for j in range(i, len(stripped)):
-                        if stripped[j] == '{':
-                            depth += 1
-                        elif stripped[j] == '}':
-                            depth -= 1
-                            if depth == 0:
-                                candidate = stripped[i:j + 1]
-                                try:
-                                    parsed = json.loads(candidate)
-                                    if isinstance(parsed, dict) and "current_state" in parsed:
-                                        response = candidate
-                                        recovered = True
-                                        logger.info("Recovered JSON via balanced-brace extraction (P5-03)")
-                                        break
-                                except (json.JSONDecodeError, ValueError):
-                                    pass
-                                break
-                    if recovered:
-                        break
 
-            if recovered:
-                break  # Valid JSON recovered — exit retry loop
+        if _attempt < _MAX_LLM_ATTEMPTS:
+            logger.warning(
+                f"LLM schema validation failed (attempt {_attempt}/{_MAX_LLM_ATTEMPTS}), "
+                f"retrying: {raw_response[:200]}"
+            )
+            continue  # Retry
 
-            if _attempt < _MAX_LLM_ATTEMPTS:
-                logger.warning(
-                    f"LLM schema validation failed (attempt {_attempt}/{_MAX_LLM_ATTEMPTS}), "
-                    f"retrying: {response[:200]}"
-                )
-                continue  # Retry
+        # All attempts exhausted — return error
+        logger.warning(f"LLM returned invalid/malformed response after {_MAX_LLM_ATTEMPTS} attempts: {raw_response[:200]}")
+        response = json.dumps({
+            "current_state": "PHASE_ERROR",
+            "mechanic_instructions": "The AI produced an unexpected response format. Please rephrase your question.",
+            "diagnostic_reasoning": "LLM output failed schema validation — may indicate prompt compliance failure.",
+            "requires_input": False,
+            "answer_path_prompts": [],
+            "source_citations": [],
+            "intersecting_subsystems": [],
+        })
+        parsed = None
 
-            # All attempts exhausted — return error
-            logger.warning(f"LLM returned invalid/malformed response after {_MAX_LLM_ATTEMPTS} attempts: {response[:200]}")
-            response = json.dumps({
-                "current_state": "PHASE_ERROR",
-                "mechanic_instructions": "The AI produced an unexpected response format. Please rephrase your question.",
-                "diagnostic_reasoning": "LLM output failed schema validation — may indicate prompt compliance failure.",
-                "requires_input": False,
-                "answer_path_prompts": [],
-                "source_citations": [],
-                "intersecting_subsystems": [],
-            })
+    pass1_elapsed = time.monotonic() - t0_pass1
+    logger.info(f"V11 Pass 1 (draft): {pass1_elapsed:.1f}s")
+
+    # ═══════════════════════════════════════════════════════════════════
+    # V11 MULTI-PASS: Internal self-verification (Pass 2 + optional Pass 3)
+    # Only runs for PHASE_A_TRIAGE — follow-up turns are already narrowed.
+    # ═══════════════════════════════════════════════════════════════════
+    if (
+        _ENABLE_VERIFICATION
+        and parsed
+        and parsed.get("current_state") == "PHASE_A_TRIAGE"
+    ):
+        logger.info("V11 MULTI-PASS: Running Pass 2 verification on PHASE_A_TRIAGE draft")
+
+        # Pass 2: Verify the draft
+        verification = await _verify_diagnostic(
+            draft_json=response,
+            user_query=user_query,
+            context=context,
+        )
+
+        if verification and verification.get("revision_required", False):
+            logger.warning(
+                f"V11 MULTI-PASS: Verification FAILED — triggering Pass 3 revision. "
+                f"Instructions: {verification.get('revision_instructions', '')[:200]}"
+            )
+
+            # Pass 3: Revise with verification feedback
+            revised_response = await _revise_diagnostic(
+                system_prompt=system_prompt,
+                context=context,
+                user_query=user_query,
+                chat_history=chat_history,
+                verification_result=verification,
+                max_tokens=_RESPONSE_BUDGET_TOKENS,
+            )
+
+            if revised_response:
+                revised_parsed = _extract_json(revised_response)
+                if revised_parsed and "current_state" in revised_parsed:
+                    response = json.dumps(revised_parsed)
+                    parsed = revised_parsed
+                    logger.info("V11 MULTI-PASS: Using Pass 3 revised response")
+                else:
+                    logger.warning("V11 MULTI-PASS: Pass 3 returned invalid JSON, keeping Pass 1 draft")
+            else:
+                logger.warning("V11 MULTI-PASS: Pass 3 failed, keeping Pass 1 draft")
+        elif verification:
+            logger.info("V11 MULTI-PASS: Verification PASSED — using Pass 1 draft as-is")
 
     # Return response with RAG context metadata for forensic analysis.
     # rag_context is a backward-compatible addition — frontend can ignore it.
