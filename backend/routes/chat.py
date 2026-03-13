@@ -228,6 +228,13 @@ async def _expand_queries(user_query: str) -> list[str]:
     physical systems could produce the reported symptoms, then generate
     5 targeted search queries — one per subsystem.
 
+    IMPORTANT: This uses a DEDICATED LLM call — NOT generate_response().
+    generate_response() injects "RETRIEVED DOCUMENTS:" sections and forces
+    response_format: json_object. Both corrupt the expansion output:
+    - json_object mode constrains output to {} objects — bare JSON arrays [] are rejected
+    - The empty RETRIEVED DOCUMENTS section triggers diagnostic-mode reasoning
+    The expansion needs a clean prompt → JSON array response, nothing else.
+
     Returns the original query + 5 expanded queries (6 total).
     Falls back to [user_query] if expansion fails.
     """
@@ -236,14 +243,22 @@ async def _expand_queries(user_query: str) -> list[str]:
 
     t0 = time.monotonic()
     try:
-        raw = await generate_response(
-            system_prompt=_EXPANSION_PROMPT,
-            context="",
-            user_message=user_query,
-            chat_history=[],
-            max_tokens=512,
-            temperature=0.3,  # Slightly higher for diverse queries
-        )
+        # Direct LLM call — bypass generate_response() entirely
+        from backend.inference.llm import _get_llm_client, _flush_llm_client, VLLM_BASE_URL, VLLM_MODEL
+        client = await _get_llm_client()
+        payload = {
+            "model": VLLM_MODEL,
+            "messages": [
+                {"role": "system", "content": _EXPANSION_PROMPT},
+                {"role": "user", "content": user_query},
+            ],
+            "max_tokens": 512,
+            "temperature": 0.3,
+            # NO response_format — we need a bare JSON array, not a json_object
+        }
+        response = await client.post(f"{VLLM_BASE_URL}/chat/completions", json=payload)
+        response.raise_for_status()
+        raw = response.json()["choices"][0]["message"]["content"]
     except Exception as e:
         logger.warning(f"V12 EXPANSION: LLM call failed ({type(e).__name__}), using original query")
         return [user_query]

@@ -2276,7 +2276,9 @@
 
             title.textContent = source;
             pageLabel.textContent = page ? `Page ${page}` : '';
-            frame.src = `/pdfs/${encodeURIComponent(source)}#page=${page || 1}`;
+            // PDFs stored in /pdfs/{vehicle_id}/filename.pdf subdirectories
+            const vehiclePrefix = (activeVehicleId && !source.includes('/')) ? `${activeVehicleId}/` : '';
+            frame.src = `/pdfs/${vehiclePrefix}${encodeURIComponent(source)}#page=${page || 1}`;
             overlay.classList.add('active');
         }
 
