@@ -248,24 +248,35 @@ async def _expand_queries(user_query: str) -> list[str]:
         logger.warning(f"V12 EXPANSION: LLM call failed ({type(e).__name__}), using original query")
         return [user_query]
     elapsed = time.monotonic() - t0
+    logger.info(f"V12 EXPANSION raw ({elapsed:.1f}s): {raw[:300]}")
 
-    # Parse the JSON array of queries
-    try:
-        # Strip fences/think blocks
-        stripped = _strip_llm_fences(raw)
-        queries = json.loads(stripped)
-        if isinstance(queries, list) and all(isinstance(q, str) for q in queries):
-            # Always include the original query + expanded queries
-            all_queries = [user_query] + queries[:5]
-            logger.info(
-                f"V12 EXPANSION: Generated {len(queries)} queries in {elapsed:.1f}s: "
-                + " | ".join(q[:60] for q in queries[:5])
-            )
-            return all_queries
-    except (json.JSONDecodeError, ValueError):
-        pass
+    # Parse the JSON array of queries — try multiple extraction strategies
+    stripped = _strip_llm_fences(raw)
 
-    logger.warning(f"V12 EXPANSION: Failed to parse queries ({elapsed:.1f}s), using original: {raw[:200]}")
+    # Strategy 1: Direct parse of stripped response
+    # Strategy 2: Find first [...] bracket pair in the text
+    candidates = [stripped]
+    bracket_start = stripped.find("[")
+    if bracket_start >= 0:
+        bracket_end = stripped.rfind("]")
+        if bracket_end > bracket_start:
+            candidates.append(stripped[bracket_start:bracket_end + 1])
+
+    for candidate in candidates:
+        try:
+            queries = json.loads(candidate)
+            if isinstance(queries, list) and len(queries) >= 3 and all(isinstance(q, str) for q in queries):
+                # Always include the original query + expanded queries
+                all_queries = [user_query] + queries[:5]
+                logger.info(
+                    f"V12 EXPANSION: Generated {len(queries)} queries in {elapsed:.1f}s: "
+                    + " | ".join(q[:60] for q in queries[:5])
+                )
+                return all_queries
+        except (json.JSONDecodeError, ValueError):
+            continue
+
+    logger.warning(f"V12 EXPANSION: Failed to parse queries ({elapsed:.1f}s), using original: {raw[:300]}")
     return [user_query]
 
 
