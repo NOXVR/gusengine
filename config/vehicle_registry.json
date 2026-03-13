@@ -29,6 +29,36 @@
             "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 1979 Chevrolet Camaro. You are authoritative, direct, and grounded in physical verification.",
             "ledger_filename": "MASTER_LEDGER_1979_chevrolet_camaro.md",
             "pdf_subdir": "1979_chevrolet_camaro"
+        },
+        {
+            "id": "1975_cessna_172_skyhawk_aviation",
+            "make": "Cessna",
+            "model": "172 & Skyhawk (AVIATION)",
+            "year": 1975,
+            "collection": "fsm_corpus_1975_cessna_172_skyhawk_aviation",
+            "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 1975 Cessna 172 & Skyhawk (AVIATION). You are authoritative, direct, and grounded in physical verification.",
+            "ledger_filename": "MASTER_LEDGER_1975_cessna_172_skyhawk_aviation.md",
+            "pdf_subdir": "1975_cessna_172_skyhawk_aviation"
+        },
+        {
+            "id": "1975_ford_2000_3000_4000_agriculture_tractor",
+            "make": "Ford",
+            "model": "2000/3000/4000 (AGRICULTURE / TRACTOR)",
+            "year": 1975,
+            "collection": "fsm_corpus_1975_ford_2000_3000_4000_agriculture_tractor",
+            "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 1975 Ford 2000/3000/4000 (AGRICULTURE / TRACTOR). You are authoritative, direct, and grounded in physical verification.",
+            "ledger_filename": "MASTER_LEDGER_1975_ford_2000_3000_4000_agriculture_tractor.md",
+            "pdf_subdir": "1975_ford_2000_3000_4000_agriculture_tractor"
+        },
+        {
+            "id": "2000_mercury_mercruiser_marine",
+            "make": "Mercury",
+            "model": "MerCruiser (MARINE)",
+            "year": 2000,
+            "collection": "fsm_corpus_2000_mercury_mercruiser_marine",
+            "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 2000 Mercury MerCruiser (MARINE). You are authoritative, direct, and grounded in physical verification.",
+            "ledger_filename": "MASTER_LEDGER_2000_mercury_mercruiser_marine.md",
+            "pdf_subdir": "2000_mercury_mercruiser_marine"
         }
     ],
     "default_vehicle_id": "1976_mercedes_450sl"
