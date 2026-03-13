@@ -587,7 +587,7 @@ async def chat(request: Request):
             )
 
         search_tasks = [
-            _search_one(er["dense"], er["sparse"], sq)
+            _search_one(er[0], er[1], sq)  # embed_text returns (dense, sparse) tuple
             for er, sq in zip(embed_results, search_queries)
         ]
         all_search_results = await asyncio.gather(*search_tasks)
