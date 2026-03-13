@@ -154,10 +154,14 @@ def _make_phase_error(instructions: str, reasoning: str) -> dict:
 
 def _strip_llm_fences(raw: str) -> str:
     """Strip markdown fences and <think> blocks from LLM output."""
-    stripped = re.sub(r'<think>.*?</think>', '', raw.strip(), flags=re.DOTALL)
-    stripped = re.sub(r'^```(?:json)?\s*\n?', '', stripped.strip())
-    stripped = re.sub(r'\n?```\s*$', '', stripped)
-    return stripped.strip()
+    # Normalize line endings — LLM may return \r\n, \r, or \n
+    s = raw.replace('\r\n', '\n').replace('\r', '\n').strip()
+    s = re.sub(r'<think>.*?</think>', '', s, flags=re.DOTALL)
+    # Strip opening fence: ```json or ``` at start
+    s = re.sub(r'^```(?:json)?\s*\n?', '', s.strip())
+    # Strip closing fence: ``` (may not be at absolute end if LLM appends text)
+    s = re.sub(r'\n```\s*(?:\n.*)?$', '', s, flags=re.DOTALL)
+    return s.strip()
 
 
 def _extract_json(raw: str) -> dict | None:
@@ -267,8 +271,11 @@ async def _expand_queries(user_query: str) -> tuple[list[str], dict]:
     elapsed = time.monotonic() - t0
     logger.info(f"V12 EXPANSION raw ({elapsed:.1f}s, {len(raw)} chars): {raw[:500]}")
 
+    # Normalize line endings before any parsing
+    raw_clean = raw.replace('\r\n', '\n').replace('\r', '\n')
+
     # Parse the JSON array of queries — multiple extraction strategies
-    stripped = _strip_llm_fences(raw)
+    stripped = _strip_llm_fences(raw_clean)
 
     # Build candidate strings to try parsing
     candidates = [stripped]
