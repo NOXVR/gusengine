@@ -86,7 +86,7 @@ async def run_image_catalog(
     from backend.shared.clients import qdrant_ingest_client
     from backend.ingestion.image_catalog import extract_image_references
     from backend.ingestion.qdrant_setup import index_chunk
-    from backend.inference.embeddings import embed_text
+    from backend.embedding.client import embed_text
 
     if not vehicle_id:
         vehicle_id = get_default_vehicle_id()
