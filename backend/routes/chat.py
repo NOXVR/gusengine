@@ -258,18 +258,20 @@ async def _expand_queries(user_query: str) -> tuple[list[str], dict]:
                 {"role": "system", "content": _EXPANSION_PROMPT},
                 {"role": "user", "content": user_query},
             ],
-            "max_tokens": 512,
+            "max_tokens": 800,
             "temperature": 0.3,
             # NO response_format — we need a bare JSON array, not a json_object
         }
         response = await client.post(f"{VLLM_BASE_URL}/chat/completions", json=payload)
         response.raise_for_status()
-        raw = response.json()["choices"][0]["message"]["content"]
+        resp_data = response.json()
+        raw = resp_data["choices"][0]["message"]["content"]
+        finish_reason = resp_data["choices"][0].get("finish_reason", "unknown")
     except Exception as e:
         logger.warning(f"V12 EXPANSION: LLM call failed ({type(e).__name__}), using original query")
         return [user_query], {"method": "llm_error", "error": str(e), "query_count": 1, "queries": [user_query]}
     elapsed = time.monotonic() - t0
-    logger.info(f"V12 EXPANSION raw ({elapsed:.1f}s, {len(raw)} chars): {raw[:500]}")
+    logger.info(f"V12 EXPANSION raw ({elapsed:.1f}s, {len(raw)} chars, finish={finish_reason}): {raw[:500]}")
 
     # Normalize line endings before any parsing
     raw_clean = raw.replace('\r\n', '\n').replace('\r', '\n')
@@ -335,8 +337,17 @@ async def _expand_queries(user_query: str) -> tuple[list[str], dict]:
         )
         return all_queries, {"method": "regex_fallback", "query_count": len(all_queries), "queries": all_queries, "time": round(elapsed, 1)}
 
-    logger.warning(f"V12 EXPANSION: Failed to parse queries ({elapsed:.1f}s), using original: {raw[:500]}")
-    return [user_query], {"method": "fallback_original", "query_count": 1, "queries": [user_query], "time": round(elapsed, 1), "raw_preview": raw[:200]}
+    logger.warning(f"V12 EXPANSION: Failed to parse queries ({elapsed:.1f}s, finish={finish_reason}), using original: {raw[:500]}")
+    return [user_query], {
+        "method": "fallback_original",
+        "query_count": 1,
+        "queries": [user_query],
+        "time": round(elapsed, 1),
+        "finish_reason": finish_reason,
+        "raw_length": len(raw),
+        "raw_preview": raw[:500],
+        "stripped_preview": stripped[:500],
+    }
 
 
 async def _verify_diagnostic(
