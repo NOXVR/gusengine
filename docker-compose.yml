@@ -63,9 +63,11 @@ services:
       - ALLOWED_PDF_DIR=/app/storage/pdfs
       - GUSENGINE_DB_PATH=/app/storage/db/gusengine.db
       - LEDGER_PATH=/app/config/MASTER_LEDGER.md
+      - SESSIONS_DIR=/app/sessions
     volumes:
       - pdf_data:/app/storage/pdfs
       - gusengine_db:/app/storage/db
+      - sessions_data:/app/sessions
     restart: unless-stopped
     depends_on:
       - qdrant
@@ -75,3 +77,4 @@ volumes:
   qdrant_data:
   pdf_data:
   gusengine_db:
+  sessions_data:

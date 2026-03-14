@@ -48,6 +48,8 @@ from backend.routes import sync
 app.include_router(sync.router)
 from backend.routes import image_ops
 app.include_router(image_ops.router)
+from backend.routes import sessions
+app.include_router(sessions.router)
 
 # Static file serving for PDFs (used by frontend citation modal)
 _PDF_DIR = os.environ.get("ALLOWED_PDF_DIR", os.path.join(os.path.dirname(os.path.dirname(__file__)), "storage", "pdfs"))
