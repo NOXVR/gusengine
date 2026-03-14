@@ -124,7 +124,7 @@ async def run_image_catalog(
         total_refs = 0
         total_indexed = 0
         errors = []
-        client = qdrant_ingest_client()
+        client = qdrant_ingest_client
 
         for pdf_path in pdf_files:
             try:
