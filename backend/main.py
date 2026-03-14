@@ -44,6 +44,8 @@ app.include_router(ledger.router)
 app.include_router(vehicle.router)
 app.include_router(admin.router)
 app.include_router(ingestion_status.router)
+from backend.routes import sync
+app.include_router(sync.router)
 
 # Static file serving for PDFs (used by frontend citation modal)
 _PDF_DIR = os.environ.get("ALLOWED_PDF_DIR", os.path.join(os.path.dirname(os.path.dirname(__file__)), "storage", "pdfs"))

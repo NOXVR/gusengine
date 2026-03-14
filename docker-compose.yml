@@ -61,9 +61,11 @@ services:
       - RESPONSE_BUDGET_TOKENS=8192
       - LEDGER_MAX_TOKENS=2550
       - ALLOWED_PDF_DIR=/app/storage/pdfs
+      - GUSENGINE_DB_PATH=/app/storage/db/gusengine.db
       - LEDGER_PATH=/app/config/MASTER_LEDGER.md
     volumes:
       - pdf_data:/app/storage/pdfs
+      - gusengine_db:/app/storage/db
     restart: unless-stopped
     depends_on:
       - qdrant
@@ -72,3 +74,4 @@ services:
 volumes:
   qdrant_data:
   pdf_data:
+  gusengine_db:
