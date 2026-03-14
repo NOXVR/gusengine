@@ -1,0 +1,1361 @@
+[
+  {
+    "query_id": "acc_eng_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My car blows a big puff of blue smoke out the tailpipe every time I start it up in the morning, but then it clears up after a minute.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Valve Seals (200ci I-6 / 289 V8)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Engine Mechanical",
+        "PCV System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 19,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 37,
+          "context": "CLEANING"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 29,
+          "context": "CLEANING"
+        }
+      ],
+      "diagnostic_reasoning": "Blue smoke at startup that clears quickly is a classic indicator of oil burning. The most common causes are worn valve guide seals, which allow oil to seep into the combustion chamber overnight, or, less commonly, worn piston oil control rings. A malfunctioning Positive Crankcase Ventilation (PCV) system can also contribute to oil burning by allowing excessive crankcase pressure to force oil past seals. The FSM mentions 'Worn valve guides' as a cause for engine issues (Source 6, page 20) and a malfunctioning PCV system as a cause for 'Excessive Fuel Consumption' and 'Rough Idle' (Source 6, page 19; Source 8, page 48). While the FSM does not have a specific procedure for 'blue smoke at startup,' these components are directly related to oil consumption.",
+      "mechanic_instructions": "A puff of blue smoke at startup that clears quickly points to oil burning. We need to determine if the oil is entering the combustion chamber primarily past the valve guide seals or the piston rings, or if the PCV system is a contributing factor. Observe the engine's behavior under different conditions to narrow down the source.",
+      "answer_path_prompts": [
+        "The blue smoke also appears when decelerating from high RPM (e.g., coasting downhill in gear) after the engine is warm.",
+        "After the engine warms up and the startup smoke clears, blue smoke is consistently visible during acceleration or when maintaining speed.",
+        "With the engine idling, I removed the PCV valve from the valve cover. It does not rattle when shaken, or the engine idle does not change when I cover the end of the valve with my finger."
+      ],
+      "confidence_disclaimer": "The FSM does not contain a direct troubleshooting flowchart for 'blue smoke at startup.' This diagnosis is based on general mechanical knowledge of common failure modes for the described symptom, cross-referenced with FSM information regarding related components like valve guides and the PCV system.",
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car burns oil constantly — I have to add a quart every 300 miles and there's always a haze of blue smoke, especially going uphill.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Piston Rings",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine",
+        "Crankcase Ventilation"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 23,
+          "context": "DISTRIBUTORS"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 19,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 19,
+          "context": "CLEANING"
+        }
+      ],
+      "diagnostic_reasoning": "The constant oil burning, indicated by adding a quart every 300 miles and blue smoke, especially going uphill, points to oil entering the combustion chambers. The primary suspects are worn internal engine components (piston rings, valve guides, or bearings) or a malfunctioning Positive Crankcase Ventilation (PCV) system. Source 20 explicitly links 'wet, sludgy deposits' on spark plugs to 'Excessive oil entering combustion chamber through worn rings and pistons, excessive clearance between valve guides and stems, or worn or loose bearings.' A restricted or malfunctioning PCV system can also cause excessive oil consumption by pulling oil vapor into the intake or causing crankcase pressure buildup (Source 31, 44, 50). The 'uphill' symptom suggests increased engine load and vacuum fluctuations exacerbating oil pull past worn components.",
+      "mechanic_instructions": "The constant oil burning and blue smoke, especially under load, indicates oil is entering the combustion chambers. This is typically caused by worn internal engine components or a malfunctioning crankcase ventilation system. We need to confirm the source. Start by inspecting the spark plugs for direct evidence of oil burning, then check the PCV system.",
+      "answer_path_prompts": [
+        "I removed the spark plugs and observed 'wet, sludgy deposits' (Source 20, page 23) on some or all of them.",
+        "I checked the PCV valve and it does not rattle when shaken, or there is no vacuum at the hose connection with the engine running. The PCV hoses or oil filler cap are restricted or sludged (Source 50, page 19).",
+        "The spark plugs look normal, with no 'wet, sludgy deposits' (Source 20, page 23), and the PCV system appears to be functioning correctly (valve rattles, vacuum present, hoses clear)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My engine makes a loud ticking or tapping noise, especially when it's cold. It gets a little quieter once it warms up but never goes away completely.",
+    "query_category": "diagnostic",
+    "technical_issue": "Hydraulic Lifter Noise / Collapsed Lifter",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Mechanical",
+        "Lubrication System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 27,
+          "context": "VALVE LASH-289 HIGH PERFORMANCE V-8"
+        }
+      ],
+      "diagnostic_reasoning": "A loud ticking or tapping noise, especially when cold and lessening when warm, is a classic symptom of valve train issues. The primary suspects are noisy hydraulic valve lifters or incorrect valve lash. Hydraulic lifters rely on oil pressure to maintain zero lash; when cold, thicker oil or a faulty lifter can cause bleed-down and excessive lash, leading to noise. As the engine warms, oil thins, and lifters may pump up better, reducing the noise. The FSM explicitly lists 'NOISY HYDRAULIC VALVE LIFTER' as a trouble symptom, attributing it to 'dirt, gum, varnish, carbon deposits and air bubbles' (Source 14). Incorrect valve lash can also cause a 'rough engine idle' and 'shock contact' (Source 42), which would manifest as a ticking. A secondary, less likely, cause for a ticking noise could be a worn timing chain, which might rattle, but the description points more strongly to valve train.",
+      "mechanic_instructions": "A persistent ticking or tapping noise, particularly when cold, points directly to the valve train. We need to isolate the source of this noise. The most effective method is to use a listening device to pinpoint the exact location. Start the engine and allow it to idle. Using a piece of hose or a mechanic's stethoscope, carefully listen at each valve spring retainer and along the valve covers to determine if the noise is coming from a specific cylinder or a general area. This will help differentiate between a single faulty lifter, widespread lash issues, or another source.",
+      "answer_path_prompts": [
+        "The ticking/tapping noise is clearly loudest at a specific valve cover or directly over one or two particular valve stems.",
+        "The ticking/tapping noise is generally present across the top of the engine, but I cannot isolate it to a single valve or cylinder.",
+        "The noise seems to be coming from the front of the engine, near the timing cover, rather than the valve train.",
+        "The noise sounds more like an exhaust leak, a sharp puffing sound, rather than a metallic tick from inside the engine."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car makes a loud ticking or hissing sound from the engine that gets louder when I first start it and sometimes quiets down once it's warm.",
+    "query_category": "diagnostic",
+    "technical_issue": "Exhaust Manifold Leak / Cracked Manifold",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Exhaust System",
+        "Vacuum System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 7,
+          "context": "INSTALLATION"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 14,
+          "context": "MANIFOLDS"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 29,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 28,
+          "context": "FIG. 2-Bottom View"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 47,
+          "context": "CARBURETOR DIAGNOSIS GUIDE"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of a loud ticking or hissing sound, especially louder when cold and quieting when warm, points to several potential issues. An exhaust leak is a primary suspect, as thermal expansion often seals small leaks as the engine heats up, reducing the noise. A vacuum leak would produce a hissing sound, and could also be more pronounced when cold due to less pliable materials, potentially affecting idle quality. Finally, a noisy hydraulic valve lifter is a classic ticking sound, often louder when cold due to thicker oil or collapsed lifters, and can quiet as oil pressure builds and oil thins. The FSM explicitly details how to diagnose noisy lifters (Source 6, page 20) and mentions intake manifold/carburetor gasket leaks (Source 18, page 47) and exhaust manifold connections (Source 7, page 7) as potential issues.",
+      "mechanic_instructions": "A ticking or hissing sound that is louder when cold and quiets when warm can indicate an exhaust leak, a vacuum leak, or a noisy valve lifter. We need to isolate the source of the sound. Perform the following observations and report what you find:",
+      "answer_path_prompts": [
+        "I found black soot marks or heard a distinct puffing sound near an exhaust manifold gasket or a crack in the exhaust pipe when the engine was cold.",
+        "The engine RPM changed noticeably (either increased or smoothed out) when I sprayed carburetor cleaner or unlit propane around the intake manifold, carburetor base, or a specific vacuum line.",
+        "The ticking sound is clearly isolated to the valve cover area of a specific cylinder, and I can feel a shock on the valve spring retainer when the engine is running at idle."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's always a puddle of oil under the back of the engine near where it meets the transmission. It drips pretty steadily.",
+    "query_category": "diagnostic",
+    "technical_issue": "Oil Leak - Rear Main Seal",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Lubrication System",
+        "Automatic Transmission"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 11,
+          "context": "OIL LEAKAGE CONVERTER AREA"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 12,
+          "context": "OIL LEAKAGE CONVERTER AREA"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 12,
+          "context": "ENGINE ASSEMBLY"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 11,
+          "context": "TRANSMISSION FLUID LEAKAGE CHECKS"
+        }
+      ],
+      "diagnostic_reasoning": "A steady oil drip under the back of the engine near the transmission points to a leak in the converter area. This can originate from either the engine's lubrication system (e.g., rear main seal, oil gallery plugs, rocker arm cover) or the automatic transmission (e.g., front pump seal, converter drain plugs, pan gasket). The FSM explicitly states that original factory-fill automatic transmission fluid is dyed red to aid in distinguishing between engine oil and transmission fluid leaks. Therefore, the initial diagnostic step is to identify the type of fluid by its color.",
+      "mechanic_instructions": "A steady drip of fluid under the back of the engine, where it meets the transmission, indicates a leak in the converter area. This could be engine oil or automatic transmission fluid. To pinpoint the source, first determine the type of fluid. Check the color of the fluid on the transmission dipstick and the color of the fluid in the puddle under the car. Original factory-fill transmission fluid is dyed red.",
+      "answer_path_prompts": [
+        "The fluid is red, consistent with automatic transmission fluid.",
+        "The fluid is brown or black, consistent with engine oil.",
+        "The fluid is discolored, or I cannot clearly distinguish its type by color."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I can see oil weeping down the sides of the engine and it smells like burning oil when I park after a drive.",
+    "query_category": "diagnostic",
+    "technical_issue": "Oil Leak - Valve Cover Gaskets",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Lubrication System",
+        "Fuel System",
+        "Transmission"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 11,
+          "context": "OIL LEAKAGE CONVERTER AREA"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 46,
+          "context": "FUEL PUMP, TANK AND LINES DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 6,
+          "context": "INSTALLATION"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of oil weeping down the sides of the engine and a burning smell after driving strongly indicates an external oil leak, likely dripping onto hot exhaust components. The first step is to differentiate between engine oil and transmission fluid, as leaks can be misdiagnosed (Source 4). If it's engine oil, common sources for weeping down the sides and burning include: rocker arm cover leaks, which can flow over the converter housing or seep down the block; oil gallery plug leaks, which flow down the rear face of the block; crankshaft seal leaks, which work back to the flywheel and into the converter housing (Source 4). Additionally, the fuel pump, located on the side of the engine, can leak oil due to a defective diaphragm or mounting gasket (Source 33). An improperly installed or faulty oil filter can also cause leaks (Source 1).",
+      "mechanic_instructions": "First, we need to determine if the fluid is engine oil or transmission fluid. Remove the transmission dipstick and note the color of the fluid. Original factory fill transmission fluid is dyed red. Then, visually inspect the engine from top to bottom, paying close attention to the highest point where the leak originates, as gravity will cause it to run down. Look for fresh oil around the rocker arm covers, the fuel pump, the oil filter, and the rear of the engine near the bellhousing.",
+      "answer_path_prompts": [
+        "The fluid is red and appears to be leaking from the transmission area (e.g., front pump seal, pan gasket, cooler lines).",
+        "The fluid is brown/black (engine oil) and the highest point of the leak is clearly visible around the rocker arm covers.",
+        "The fluid is brown/black (engine oil) and the highest point of the leak is clearly visible around the fuel pump on the side of the engine.",
+        "The fluid is brown/black (engine oil) and the highest point of the leak is clearly visible around the oil filter housing.",
+        "The fluid is brown/black (engine oil) and the highest point of the leak appears to be from the rear of the engine, near the bellhousing or oil pan rear seal."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_007",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's a persistent oil leak from the very front of the engine, right behind the pulley area.",
+    "query_category": "diagnostic",
+    "technical_issue": "Oil Leak - Timing Chain Cover",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Lubrication System",
+        "Engine Mechanical",
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 11,
+          "context": "OIL LEAKAGE CONVERTER AREA"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 12,
+          "context": "OIL LEAKAGE CONVERTER AREA"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 40,
+          "context": "LUBRICATION SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 49,
+          "context": "FIG. 32-Camshaft and Related Parts"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 35,
+          "context": "FIG. 53-Cartridge-Type Oil Filter"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 36,
+          "context": "INSTALLATION"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 46,
+          "context": "FUEL PUMP, TANK AND LINES DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 7,
+          "context": "CLEANING AND INSPECTION"
+        }
+      ],
+      "diagnostic_reasoning": "A persistent oil leak from the very front of the engine, behind the pulley, points to several common failure points. The primary suspects are the crankshaft front oil seal, the cylinder front cover gasket, and the oil pan front seal, as these components are directly in that area (Source 1, 35, 47, 52, 53, 57). The oil filter, located at the lower left front of the engine, is also a strong candidate for a leak that could appear in this vicinity (Source 42, 51). Finally, the fuel pump, which contains a diaphragm rod seal to prevent engine oil entry, could also be leaking engine oil from its mounting gasket or internal seal (Source 6, 7). The FSM recommends a thorough cleaning and observation to pinpoint the exact source of leakage (Source 1, 29).",
+      "mechanic_instructions": "To accurately diagnose this oil leak, we need to pinpoint the exact source. Start by thoroughly cleaning the entire front of the engine, especially around the crankshaft pulley, timing cover, oil pan front, and the oil filter area. Use a suitable non-flammable solvent and blow dry with compressed air. Once clean, add an oil-soluble aniline or fluorescent dye to the engine oil if available, as this can help distinguish engine oil from other fluids (Source 45). Run the engine at fast idle until it reaches normal operating temperature, then raise the car on a hoist and carefully observe the front of the engine for the first signs of leakage. Pay close attention to the areas directly behind the crankshaft pulley, along the cylinder front cover, the oil pan front seal, the oil filter, and the fuel pump.",
+      "answer_path_prompts": [
+        "I see oil leaking directly from behind the crankshaft pulley, appearing to come from the crankshaft front seal.",
+        "The oil leak is clearly coming from the seam of the cylinder front cover gasket or the oil pan front seal.",
+        "The leak is originating from the oil filter or its adapter fitting.",
+        "The oil leak is coming from the fuel pump area, either its mounting gasket or the pump body itself.",
+        "I have cleaned the area and run the engine, but no leak is immediately evident."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_008",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine overheats and I found a milky-brown sludge under the oil cap. There are also small bubbles in the radiator when it's running.",
+    "query_category": "diagnostic",
+    "technical_issue": "Blown Head Gasket",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "Lubrication System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 10,
+          "context": "TRANSMISSION FLUID LEAKAGE CHECKS"
+        }
+      ],
+      "diagnostic_reasoning": "The milky-brown sludge under the oil cap indicates coolant is mixing with engine oil (Source 11: 'Water formation on the oil level dipstick engine could also be an indication of internal leakage.'). The small bubbles in the radiator when running indicate combustion gases are entering the cooling system (Source 11: 'Internal leakage can be detected by operating the engine at fast idle and looking for the formation of bubbles in the radiator:'). Combined with engine overheating, these symptoms strongly point to a breach in the cylinder head gasket, a cracked cylinder head, or a warped cylinder head/block gasket surface (Source 11: 'Cylinder head gasket defective. Cracked cylinder head or block, or warped cylinder head Or block gasket surface.'). A leaking automatic transmission oil cooler in the radiator is a less likely cause for all three symptoms simultaneously, but it is a possible source of oil in the radiator (Source 11: 'Oil in the radiator may indicate leakage in the block Or leak in the automatic transmission oil cooler:').",
+      "mechanic_instructions": "The milky-brown sludge under the oil cap confirms coolant is mixing with your engine oil, and the bubbles in the radiator indicate combustion gases are entering the cooling system. This combination strongly points to a breach in the cylinder head gasket, a cracked cylinder head, or a cracked engine block. To further pinpoint the issue, observe the coolant in the radiator more closely while the engine is running at fast idle.",
+      "answer_path_prompts": [
+        "The bubbles are continuous and strong, and there's a clear film of engine oil floating on top of the coolant.",
+        "The bubbles are continuous and strong, but the coolant itself appears clean, with no visible oil film.",
+        "The bubbles are intermittent or weak, and the coolant has a reddish-brown, oily film that looks like transmission fluid."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_009",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Oil is being pushed out of every gasket and the engine seems to be building pressure inside — the dipstick even pops out sometimes.",
+    "query_category": "diagnostic",
+    "technical_issue": "Excessive Crankcase Pressure / PCV Valve Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Crankcase Ventilation System",
+        "Engine Lubrication System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 11,
+          "context": "ENGINE DISASSEMBLY"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 13,
+          "context": "ENGINE ASSEMBLY"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 22,
+          "context": "COMPRESSION TEST"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 21,
+          "context": "CAMSHAFT LOBE LIFT"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of oil being pushed out of multiple gaskets and the dipstick popping out are direct indicators of excessive crankcase pressure. This pressure buildup can be caused by a few primary issues: 1) A malfunctioning crankcase ventilation (PCV) system, which is designed to relieve this pressure by drawing blow-by gases into the intake manifold. If the PCV valve or its associated hoses are clogged, pressure will accumulate. 2) Excessive blow-by from worn piston rings or cylinder walls, allowing combustion gases to leak into the crankcase. 3) An incorrect oil level, particularly overfilling, which can lead to oil aeration and contribute to pressure. I will start by diagnosing the PCV system, as it is a common failure point and relatively easy to check. If the PCV system is clear, the next step will be to assess for internal engine wear via a compression test.",
+      "mechanic_instructions": "The engine is building excessive pressure in the crankcase, forcing oil past gaskets and expelling the dipstick. This is a critical issue that needs immediate attention. We need to determine if the crankcase ventilation system is blocked or if there's significant internal engine wear causing excessive blow-by. First, let's check the crankcase ventilation system. Remove the PCV valve from the valve cover and shake it. A functional valve should rattle. Also, check the hose connecting the PCV valve to the intake manifold for obstructions or collapse. While you're there, confirm the engine oil level is correct, as an overfilled crankcase can exacerbate these symptoms.",
+      "answer_path_prompts": [
+        "The PCV valve rattles freely, and the hose is clear and unobstructed. Oil level is correct.",
+        "The PCV valve does not rattle, or the hose is clogged/collapsed. Oil level is correct.",
+        "The engine oil level is significantly overfilled, regardless of PCV system condition."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_010",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine has lost power and doesn't run as smooth as it used to. It also seems harder to start and the idle is rough.",
+    "query_category": "diagnostic",
+    "technical_issue": "Timing Chain Stretch / Worn Timing Set",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Ignition System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 47,
+          "context": "Accelerating Pump Discharge"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "ENGINE CRANKS NORMALLY, BUT WILL NOT START"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "FUEL SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "AUTOMATIC CHOKE"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 23,
+          "context": "POSITIVE CRANKCASE VENTILATION SYSTEM TEST"
+        }
+      ],
+      "diagnostic_reasoning": "The combination of lost power, rough idle, and hard starting points to issues in the fuel, ignition, or engine mechanical systems. A common carburetor issue causing rough idle and hard starting is a leaking power valve or incorrect idle mixture, often indicated by the idle mixture screws needing to be nearly seated (Source 2, 13, 22, 24). Hard starting and rough running can also be caused by a malfunctioning choke (Source 4, 13, 22, 55) or a lack of proper spark from the ignition system (Source 15, 44). A malfunctioning PCV system can also cause a rough idle (Source 13, 24, 36). I need to differentiate between these primary suspects.",
+      "mechanic_instructions": "We need to narrow down whether the issue is primarily fuel-related (carburetor mixture, power valve, choke) or ignition-related. Start by checking the carburetor's idle mixture and choke operation, as these directly impact idle quality and starting. Then, we'll check for spark.",
+      "answer_path_prompts": [
+        "When adjusting the idle mixture screws, the engine only idles smoothly when the screws are nearly, or completely, seated.",
+        "The choke plate is stuck partially closed or open, or its linkage is binding.",
+        "There is no spark, or a weak, inconsistent spark, at one or more spark plugs when cranking the engine.",
+        "I hear a distinct hissing sound around the intake manifold or carburetor, indicating a vacuum leak."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_fuel_011",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car runs rough when idling at stop lights and sometimes stalls if I don't keep my foot on the gas a little.",
+    "query_category": "diagnostic",
+    "technical_issue": "Carburetor — Lean Idle Mixture",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Ignition System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 12,
+          "context": "ENGINE IDLE SPEED CHECK"
+        },
+        {
+          "source": "mustang_fsm_part_04_p151-200.pdf",
+          "page": 46,
+          "context": "OVERDRIVE CONTROL LEVER POSITION CHECK"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "FUEL SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 18,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 23,
+          "context": "POSITIVE CRANKCASE VENTILATION SYSTEM TEST"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "IGNITION SYSTEM"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of a rough idle and stalling at stop lights points to issues affecting the engine's ability to maintain a stable idle speed and proper air/fuel mixture. The primary suspects are: \n1.  **Carburetor/Fuel System:** Engine idle speed set too low (Source 1, Source 4, Source 18), incorrect idle mixture adjustment (Source 4, Source 18), a leaking power valve (Source 5, Source 18), restricted idle passages (Source 5, Source 18, Source 27), incorrect float setting (Source 4, Source 18), or air leaks between the carburetor and manifold (Source 18). A malfunctioning choke (Source 4) can also cause this. \n2.  **Ignition System:** Defective spark plugs, ignition wiring, coil, rotor, condenser, or breaker points (Source 18, Source 47), or excessive play in the distributor shaft/worn cam (Source 47) can lead to a rough idle. \n3.  **Engine Mechanical/Vacuum:** A malfunctioning or restricted Positive Crankcase Ventilation (PCV) system can cause a loping or rough idle (Source 5, Source 43).",
+      "mechanic_instructions": "A rough idle and stalling at stop lights indicates a problem with the engine's ability to maintain a stable idle. We need to systematically check the most common causes. Start by verifying the basic idle settings and looking for obvious air leaks, then move to other critical systems. \n\nFirst, check the engine idle speed against specifications (Group 10). While the engine is idling, listen carefully for any distinct hissing sounds around the carburetor base, intake manifold, or vacuum lines, which would indicate a vacuum leak. Also, visually inspect the choke plate to ensure it is fully open once the engine reaches normal operating temperature. Finally, check the PCV valve for proper operation.",
+      "answer_path_prompts": [
+        "The engine idle speed is below specification (Group 10) and/or I hear a distinct hissing sound around the carburetor base or intake manifold.",
+        "The choke plate is not fully open when the engine is warm, or the fuel level in the carburetor sight glass (if equipped) is visibly incorrect.",
+        "A spark test on one or more cylinders shows a weak or inconsistent spark.",
+        "Replacing the PCV valve with a known good one resolves the rough idle."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_fuel_012",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car is really hard to start when it's warm, runs terrible, and I can smell raw gasoline from the engine. Black smoke comes out the tailpipe.",
+    "query_category": "diagnostic",
+    "technical_issue": "Carburetor — Flooding / Rich Condition",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Carburetor",
+        "Choke System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 47,
+          "context": "CARBURETOR  DIAGNOSIS  GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR  DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "AUTOMATIC  CHOKE"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "FUEL  SUPPLY  AT  THE CARBURETOR"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of hard starting when warm, terrible running, raw gasoline smell, and black smoke from the tailpipe are all classic indicators of an excessively rich fuel mixture. This points to issues within the fuel delivery system, specifically the carburetor or fuel pump.\n\nDifferential Diagnosis:\n1.  **Choke System Malfunction:** If the automatic choke plate remains closed or partially closed when the engine is warm, it will cause an overly rich mixture, leading to hard starting, rough running, fuel smell, and black smoke. The FSM explicitly states: 'If the engine is hot, the plate should be open. If the plate is not open, the engine will load up due to the excessively rich mixture and will not start.' (Source 32, page 16).\n2.  **Carburetor Internal Fuel Level Control Issues:** A high fuel level in the carburetor float bowl, a fuel inlet needle not seating properly, a worn needle/seat, or a leaking power valve can all cause the carburetor to deliver too much fuel, resulting in a rich condition. The FSM lists 'High fuel level or float setting,' 'Fuel inlet needle not seating properly or worn needle and/or seat,' 'Defective power valve gasket,' and 'Ruptured power valve diaphragm' as causes for hard starting and stalling (Source 1, page 47). 'Power valve leaking' is also listed for rough idle (Source 14, page 48).\n3.  **Excessive Fuel Pump Pressure:** If the fuel pump delivers pressure higher than specification, it can force the fuel inlet needle off its seat, leading to an overfilled float bowl and a rich condition. The FSM lists 'Excessive fuel pump pressure' as a cause for hard starting and stalling (Source 1, page 47) and 'Fuel pump pressure too low, or excessive' for rough idle (Source 14, page 48).",
+      "mechanic_instructions": "The symptoms indicate an overly rich fuel mixture. We need to determine the source of this excessive fuel. Begin by checking the most common and easily verifiable culprits.",
+      "answer_path_prompts": [
+        "With the engine warm and off, remove the air cleaner. Observe the choke plate in the top of the carburetor. Is it closed or partially closed?",
+        "With the air cleaner removed and the engine off (but warm), look down the carburetor throat. Is there a visible puddle of fuel, or is fuel dripping from the main nozzle?",
+        "Disconnect the fuel inlet line at the carburetor. Place the end of the line in a suitable container. Crank the engine for 5-10 seconds. Is the fuel flow unusually strong and continuous, indicating excessive pressure, or is it a normal, steady stream?"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_fuel_013",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "When I step on the gas from a stop, the car hesitates for a second like it's going to stall before it finally picks up speed.",
+    "query_category": "diagnostic",
+    "technical_issue": "Carburetor — Hesitation / Stumble on Acceleration",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Carburetor",
+        "Ignition System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 16,
+          "context": "ACCELERATING PUMP SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 30,
+          "context": "ACCELERATING SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "FUEL SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "IGNITION SYSTEM"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'hesitates for a second like it's going to stall before it finally picks up speed' when accelerating from a stop is a classic indication of a lean condition during initial throttle opening. The primary suspect is the carburetor's accelerating pump system, which is specifically designed to provide a momentary increase in fuel to prevent this exact hesitation. The FSM states, 'This lag in fuel response will cause a temporary leanness in the fuel-air mixture that results in a hesitation in engine acceleration. A mechanically operated accelerating pump system (Fig. 6) supplies added fuel to provide a richer fuel-air mixture for this brief period of time.' (Source 33, page 16). Other potential causes include general fuel delivery issues (defective fuel pump, clogged filter) or ignition system problems (weak spark, worn distributor components) that would manifest as a lack of power under load.",
+      "mechanic_instructions": "Your description points directly to a potential issue with the accelerating pump system in the Autolite 2100 carburetor. This system is crucial for providing an immediate squirt of fuel when the throttle opens, preventing a lean condition and hesitation. To check this, remove the air cleaner assembly. With the engine off, look down the carburetor throat and rapidly open the throttle by hand. You should see a strong, steady stream of fuel spray from the discharge nozzle into each main venturi. This is a direct visual check of the accelerating pump's function.",
+      "answer_path_prompts": [
+        "A strong, steady stream of fuel sprays immediately from the discharge nozzle into the carburetor throat when the throttle is opened.",
+        "Fuel dribbles weakly, sprays unevenly, or does not spray at all from the discharge nozzle when the throttle is opened.",
+        "The engine stalls or dies immediately when the throttle is opened quickly, even with a visible fuel spray.",
+        "There is no visible fuel spray, and the throttle linkage feels stiff or binding."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_fuel_014",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "In hot weather, the car stalls after I shut it off for a few minutes and then won't restart until it cools down. It just cranks and cranks.",
+    "query_category": "diagnostic",
+    "technical_issue": "Vapor Lock",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Ignition System",
+        "Carburetor"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "ENGINE CRANKS NORMALLY, BUT WILL NOT START"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 7,
+          "context": "DIAGNOSIS AND TESTING"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 9,
+          "context": "STARTER TROUBLE DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 49,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of stalling after a hot shut-off and then cranking without starting until the engine cools down is a classic indication of either a fuel delivery issue (like vapor lock or an overly rich condition from a stuck choke) or an ignition system component failing when hot (such as the ignition coil). The engine cranking normally (Source 26, Source 55) eliminates the starter and battery as primary suspects. The FSM directs to check fuel supply and spark intensity when the engine cranks but will not start (Source 26). Vapor lock, where fuel in the lines or carburetor bowl vaporizes due to heat soak, is a common cause for this specific hot-start failure in carbureted engines. A malfunctioning automatic choke (stuck rich) or a defective power valve could also contribute to a rich condition causing stalling and hard starting when hot (Source 11, Source 16). Checking for spark and fuel delivery at the carburetor throat will help differentiate between these primary suspects.",
+      "mechanic_instructions": "When the engine is in its hot, no-start condition (cranking but not firing), we need to determine if it's a lack of spark or a lack of proper fuel delivery. This will narrow down whether the problem lies in the ignition system or the fuel system, specifically the carburetor.",
+      "answer_path_prompts": [
+        "When the engine is in the hot, no-start condition, disconnect a spark plug wire, install a terminal adapter, hold it approximately 3/8 inch from the exhaust manifold, and crank the engine. Do you observe a strong, consistent spark?",
+        "When the engine is in the hot, no-start condition, remove the air cleaner. Look down the carburetor throat and manually operate the throttle linkage. Do you see a strong, steady stream of fuel squirting from the accelerator pump nozzles?"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_fuel_015",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car suddenly lost power going down the road and then died completely. It cranks but won't fire up.",
+    "query_category": "diagnostic",
+    "technical_issue": "Mechanical Fuel Pump Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Fuel System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 7,
+          "context": "DIAGNOSIS AND TESTING"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "ENGINE CRANKS NORMALLY, BUT WILL NOT START"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "IF THERE IS NO SPARK OR A WEAK SPARK AT THE SPARK PLUGS"
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 16,
+          "context": "Mechanical failure in camshaft drive."
+        }
+      ],
+      "diagnostic_reasoning": "The sudden loss of power followed by the engine dying completely, yet still cranking, points to a critical failure in either the ignition or fuel system, or a severe mechanical issue like a camshaft drive failure. The FSM outlines checking for spark as a primary diagnostic step when the engine cranks but won't start (Source 15, 47). If spark is present, the focus shifts to fuel delivery. If both are present, then a mechanical issue is more likely (Source 3, 13).",
+      "mechanic_instructions": "The engine cranks but won't fire, indicating a problem with either spark, fuel, or compression. We need to determine if the ignition system is producing spark. Disconnect the high tension lead from the top of the ignition coil. Hold the end of the lead approximately 3/16 inch from the cylinder head. Have someone crank the engine while you observe for spark. This will tell us if the primary ignition circuit and coil are functioning.",
+      "answer_path_prompts": [
+        "A strong, blue-white spark jumps consistently from the coil wire to the cylinder head.",
+        "There is no spark, or the spark is weak and yellow/orange.",
+        "The engine cranks very slowly or makes unusual noises while cranking, indicating a mechanical issue."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_fuel_016",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I just got the car running after it sat for 10 years. It runs terribly — surges, stalls, and won't hold a steady idle.",
+    "query_category": "diagnostic",
+    "technical_issue": "Dirty / Varnished Fuel System (Car Sat in Storage)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Carburetor",
+        "Vacuum System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "ENGINE CRANKS NORMALLY, BUT WILL NOT START"
+        },
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 1,
+          "context": "FINAL IDLE (HOT ENGINE) SPEED AND MIXTURE ADJUSTMENT"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 17,
+          "context": "8-CYLINDER 4-BARREL (4-V) CARBURETOR"
+        },
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 5,
+          "context": "IDLE FUEL MIXTURE AND IDLE SPEED ADJUSTMENTS"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of surging, stalling, and an unsteady idle after a 10-year sit strongly point to issues within the fuel system, particularly the carburetor, or significant vacuum leaks. Old fuel leaves varnish and deposits, restricting idle passages and causing components like the power valve diaphragm or accelerating pump diaphragm to fail (Source 8). Gaskets and vacuum hoses also degrade, leading to unmetered air leaks (Source 8, 16). A basic fuel delivery issue, such as a clogged filter or weak pump, is also plausible (Source 8, 26). We need to isolate whether the problem is primarily a carburetor adjustment/internal issue, an external vacuum leak, or a fundamental fuel supply problem.",
+      "mechanic_instructions": "After a 10-year sit, the most common culprits for surging, stalling, and an unsteady idle are issues with the carburetor's idle circuit, external vacuum leaks, or a restricted fuel supply. We need to perform some initial checks to narrow down the cause. First, let's assess the carburetor's idle mixture screws and check for vacuum leaks. Ensure the engine is at normal operating temperature before making any adjustments or drawing conclusions about idle mixture.",
+      "answer_path_prompts": [
+        "When turning the idle mixture screws (Fig. 21, Source 57) in or out, the engine RPM changes noticeably, and you can find a point of maximum smoothness and RPM.",
+        "Turning the idle mixture screws has little to no effect on engine RPM or smoothness, or the engine dies if you try to lean it out.",
+        "You hear a distinct hissing sound around the intake manifold or carburetor base, or spraying carburetor cleaner/unlit propane around these areas causes a noticeable change in engine RPM."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_fuel_017",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car starts okay when cold but then runs way too rich once it's warmed up — lots of black smoke and terrible gas mileage.",
+    "query_category": "diagnostic",
+    "technical_issue": "Choke Malfunction — Stuck Closed or Won't Open",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Carburetor System",
+        "Cooling System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 40,
+          "context": "AUTOMATIC CHOKE SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "AUTOMATIC CHOKE"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 49,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "COOLING SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of the engine running excessively rich (black smoke, poor gas mileage) *after* warming up, but starting fine when cold, strongly points to a malfunction in the automatic choke system. The choke is designed to provide a rich mixture for cold starts and then gradually open as the engine warms, leaning out the mixture. If the choke plate remains closed or partially closed when the engine is hot, it will continue to supply an overly rich fuel-air mixture. The FSM states, 'If the engine is hot, the plate should be open. If the plate is not open, the engine will load up due to the excessively rich mixture...' (Source 13, page 16). Causes for this include a sticking choke plate/linkage, incorrect thermostatic spring adjustment, or a restricted choke heat passage (Source 36, page 49). An engine failing to reach normal operating temperature due to a cooling system issue (e.g., stuck open thermostat) could also indirectly cause the choke to remain engaged (Source 1, page 17; Source 23, page 20). Other carburetor issues like a leaking power valve or high float level can also cause a rich condition (Source 5, page 48).",
+      "mechanic_instructions": "The primary suspect for an engine running excessively rich after warm-up is the automatic choke failing to open. This would keep the fuel-air mixture too rich, leading to black smoke and poor fuel economy. We need to determine if the choke is indeed stuck, or if the engine isn't warming up properly, which would prevent the choke from disengaging. Perform the following observations after the engine has reached what you believe is normal operating temperature:",
+      "answer_path_prompts": [
+        "The choke plate is closed or partially closed, and the engine temperature gauge reads normal (around 180-200°F).",
+        "The choke plate is closed or partially closed, and the engine temperature gauge reads low (below 160°F).",
+        "The choke plate is fully open, and the engine temperature gauge reads normal (around 180-200°F)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_ign_018",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine misfires and sputters at random, and sometimes it just won't start — it cranks and cranks but won't catch.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn / Pitted Ignition Points",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Fuel System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "ENGINE CRANKS NORMALLY, BUT WILL NOT START"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "FUEL SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 18,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 22,
+          "context": "FUEL SUPPLY AT THE CARBURETOR"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 2,
+          "context": "IGNITION SYSTEM DIAGNOSIS TROUBLE ISOLATION"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 4,
+          "context": "CARBURETOR DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 7,
+          "context": "DIAGNOSIS AND TESTING"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms of 'misfires and sputters at random' and 'cranks but won't start' indicate a fundamental issue with either the ignition or fuel delivery systems, or potentially a severe mechanical problem. The FSM's 'Engine Cranks Normally, But Will Not Start' guide (Source 2, 1) directs to first check the ignition and fuel systems. Intermittent misfires and sputtering can be caused by a failing ignition component (e.g., points, condenser, coil, wires, plugs - Source 27, 47, 12, 34) or inconsistent fuel delivery (e.g., restricted filter, weak pump, carburetor issues - Source 27, 45, 49, 4, 16). A complete failure in either system would result in a crank-no-start condition. Mechanical issues like worn camshaft lobes or tight valves (Source 27, 49) could cause misfires and hard starting, but are less likely to manifest as 'random sputtering' and 'sometimes won't start' without other consistent symptoms. The most efficient initial diagnostic step is to isolate whether the problem lies in spark or fuel, as per FSM guidance (Source 2, 43, 22).",
+      "mechanic_instructions": "The engine misfiring, sputtering, and failing to start points to a breakdown in either the ignition or fuel system. We need to determine if you have spark, fuel, or both. This will narrow down the primary system at fault. Perform the following checks:",
+      "answer_path_prompts": [
+        "When cranking, there is no spark or a weak spark at the coil high tension lead.",
+        "When cranking, there is a strong, consistent spark at the coil high tension lead, but no fuel squirts from the carburetor's accelerator pump nozzles when the throttle is worked by hand.",
+        "When cranking, there is a strong, consistent spark at the coil high tension lead, and fuel squirts from the carburetor's accelerator pump nozzles when the throttle is worked by hand."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_ign_019",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car starts and idles okay, but at higher RPMs it starts misfiring and loses power — it won't rev past about 3,000 RPM.",
+    "query_category": "diagnostic",
+    "technical_issue": "Bad Condenser",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Ignition System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 18,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 17,
+          "context": "DWELL ANGLE"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "IF THERE IS NO SPARK OR A WEAK SPARK AT THE SPARK PLUGS"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 45,
+          "context": "FIG. 2-Typical Fuel Pump Pressure and Capacity Tests"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of misfiring and losing power, specifically with an RPM limit around 3,000 RPM, strongly indicates a breakdown in either the fuel delivery system or the ignition system under increased engine demand. \n\n1.  **Fuel System:** Insufficient fuel delivery (low or erratic fuel pump pressure, restricted lines/filter) or a malfunctioning carburetor power valve can cause a lean condition and misfires at higher RPMs where fuel demand is greater (Source 32, page 18; Source 27, page 27). The FSM outlines procedures for checking fuel pump pressure (Source 3, page 45).\n2.  **Ignition System:** A weak coil, condenser, points, or worn distributor components (shaft/bushings causing erratic timing) can lead to a weak or inconsistent spark at higher RPMs, resulting in misfires and power loss (Source 32, page 18; Source 22, page 16; Source 37, page 17).",
+      "mechanic_instructions": "The engine misfiring and losing power above 3,000 RPM points to either a breakdown in fuel delivery under demand or an ignition system failure at higher speeds. We need to isolate which system is failing. Perform the following observations:",
+      "answer_path_prompts": [
+        "The fuel pump pressure, measured at the carburetor inlet, drops significantly or becomes erratic when attempting to rev the engine past 3,000 RPM.",
+        "The spark at the coil high tension lead is weak, inconsistent, or disappears entirely when attempting to rev the engine past 3,000 RPM, or the timing mark on the crankshaft damper becomes erratic.",
+        "Fuel pressure remains steady and within specification, and the spark is strong and consistent, but the engine still misfires and loses power above 3,000 RPM."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_ign_020",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine has a constant misfire that seems to move around — sometimes one cylinder, sometimes another. Timing seems to wander.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Distributor Shaft Bushing",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Engine Mechanical",
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "IGNITION  SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 5,
+          "context": "SPARK  INTENSITY"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 28,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 48,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "IF  THERE  IS  NO  SPARK OR  A  WEAK  SPARK AT  THE  SPARK  PLUGS"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 2,
+          "context": "IGNITION SYSTEM DIAGNOSIS TROUBLE  ISOLATION"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 18,
+          "context": "DIAGNOSIS  GUIDE  (Continued)"
+        }
+      ],
+      "diagnostic_reasoning": "The 'constant misfire that seems to move around' combined with 'timing seems to wander' points to issues affecting either the overall ignition timing mechanism or a systemic problem in fuel delivery or engine mechanicals. \n\n1.  **Ignition System (Mechanical):** Excessive play in the distributor shaft or a bent shaft can cause inconsistent rotor alignment and erratic timing, leading to misfires that appear to move. (Source 1, Page 17; Source 4, Page 5)\n2.  **Engine Mechanical (Timing Chain):** Excessive timing chain deflection directly causes the camshaft (and thus the distributor) to be out of sync with the crankshaft, resulting in wandering ignition timing. (Source 41, Page 28; Source 54, Page 48)\n3.  **Ignition System (Electrical):** Faulty breaker points, condenser, coil, or secondary wiring (cap, rotor, wires) can cause misfires that may seem to move around or cause erratic timing. (Source 25, Page 17; Source 44, Page 2)\n4.  **Fuel System:** Dirt/water in fuel, restricted filter, or low fuel pump pressure could cause misfires, but typically wouldn't directly cause 'timing to wander.' (Source 34, Page 17; Source 45, Page 18)\n\nI will start by checking the most direct mechanical causes for 'wandering timing' within the ignition and engine mechanical systems, followed by a general ignition system electrical check.",
+      "mechanic_instructions": "The wandering timing and moving misfire suggest a fundamental issue with either the mechanical integrity of the ignition system or the engine's timing drive. We need to physically verify these components.\n\nFirst, check for excessive play in the distributor shaft. Grab the rotor and attempt to move it side-to-side and up-and-down. Excessive play here will cause inconsistent spark timing and misfires.\n\nSecond, we need to check the timing chain deflection. This requires removing the cylinder front cover. If the chain has more than 1/2 inch of deflection, it will cause the camshaft and distributor timing to wander relative to the crankshaft.\n\nThird, we'll perform a quick spark test at the coil to determine if the primary ignition circuit is generating a strong spark, which will help isolate the problem to either the primary or secondary ignition circuit.",
+      "answer_path_prompts": [
+        "I found significant side-to-side or up-and-down play in the distributor shaft.",
+        "I measured the timing chain deflection, and it exceeds 1/2 inch.",
+        "There is no spark, or a very weak spark, from the coil high tension lead when cranking the engine.",
+        "There is a strong, consistent spark from the coil high tension lead, but misfires are still present."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_ign_021",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine pings and knocks when I accelerate or go uphill, and it seems to run hot and lack power.",
+    "query_category": "diagnostic",
+    "technical_issue": "Incorrect Ignition Timing",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Fuel System",
+        "Cooling System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 46,
+          "context": "GENERAL ENGINE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 18,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "FUEL SUPPLY AT THE CARBURETOR"
+        },
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 16,
+          "context": "ACCELERATING PUMP SYSTEM"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of engine pinging/knocking, running hot, and lack of power point to several interconnected issues. Pinging (detonation/spark knock) is often caused by incorrect ignition timing (too advanced) or a lean fuel mixture (Source 4, Source 15, Source 26, Source 53). Both of these conditions can also lead to overheating and reduced power (Source 26, Source 53). Overheating itself can exacerbate pinging (Source 26, Source 53). Lack of power can stem from ignition issues, fuel delivery problems (like a faulty accelerating pump or restricted fuel flow), or even engine mechanical issues (Source 12, Source 26, Source 55). I will start by checking the most common and easily verifiable causes that tie these symptoms together: ignition timing and basic carburetor fuel delivery.",
+      "mechanic_instructions": "Pinging and knocking under load, combined with overheating and power loss, strongly suggests either an ignition timing issue or a lean fuel condition. We need to isolate which system is the primary contributor. Your next step is to perform two quick checks.",
+      "answer_path_prompts": [
+        "The ignition timing, checked with a timing light at idle, is significantly advanced beyond specification, or it wanders erratically.",
+        "With the air cleaner removed, manually working the throttle linkage several times produces a weak, inconsistent, or no stream of fuel from the accelerating pump discharge nozzles.",
+        "The ignition timing is within specification and steady, and the accelerating pump discharges a strong, steady stream of fuel."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_ign_022",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car randomly dies while driving and won't restart for about 10-15 minutes, then fires right up again like nothing happened.",
+    "query_category": "diagnostic",
+    "technical_issue": "Failed Ignition Coil",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "ENGINE CRANKS NORMALLY, BUT WILL NOT START"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "IF THERE IS NO SPARK OR A WEAK SPARK AT THE SPARK PLUGS"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 19,
+          "context": "EXCESSIVE FUEL CONSUMPTION, FUEL SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 18,
+          "context": "ROUGH, RUNS, BUT (Continued) = ENGINE IDLE."
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "FUEL SYSTEM"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of the engine dying randomly while driving and then restarting after a cool-down period (10-15 minutes) is a classic indicator of an intermittent component failure, often heat-related. The primary suspects are within the ignition and fuel systems.\n\n1.  **Ignition System:** Components like the ignition coil, condenser, or breaker points are known to fail when hot and then recover after cooling. This behavior perfectly matches the described symptom of a sudden stall followed by a restart after a brief delay. (Source 38: 'Defective coil, condenser or rotor.'; Source 59: 'Defective coil, rotor, condenser, breaker points, ignition wiring or spark plugs.')\n2.  **Fuel System:** An intermittently failing fuel pump could also cause this. If the pump stops delivering fuel when hot, the engine will stall. After a cool-down period, the pump might temporarily recover. (Source 47: 'Fuel pump defective.') While a restricted fuel filter or lines could cause fuel starvation, they are less likely to result in such a clean, intermittent on/off behavior with a consistent cool-down period.\n\nThe initial diagnostic step, as per the FSM's 'ENGINE CRANKS NORMALLY, BUT WILL NOT START' guide, is to determine whether the problem lies in the ignition or fuel delivery. (Source 4)",
+      "mechanic_instructions": "When the engine dies again, you need to immediately check for spark and fuel delivery to narrow down the cause. This will tell us if the engine is losing spark or fuel when it stalls. Be prepared to perform these checks as soon as the engine dies.",
+      "answer_path_prompts": [
+        "Immediately after the engine dies, I pulled a spark plug wire, held it 3/16 inch from the exhaust manifold, and cranked the engine. There was no spark, or the spark was very weak.",
+        "Immediately after the engine dies, I checked for spark and it was strong. Then I checked for fuel at the carburetor (e.g., by observing the accelerator pump shot or checking the fuel line to the carburetor), and there was no fuel, or very little fuel, reaching the carburetor.",
+        "Immediately after the engine dies, I confirmed there was good spark and good fuel delivery to the carburetor, but the engine still would not start."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_ign_023",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine misfires really badly when it's damp or rainy out — it barely runs in wet weather but is fine on dry days.",
+    "query_category": "diagnostic",
+    "technical_issue": "Cracked / Carbon-Tracked Distributor Cap",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "IGNITION SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "FUEL SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 22,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of severe misfiring specifically in damp or rainy weather strongly indicates an issue with the high-tension components of the ignition system. Moisture provides a conductive path, allowing spark to arc to ground before reaching the spark plugs, leading to misfires. The FSM lists 'High tension leakage across the coil, rotor or distributor cap' (Source 52) as a cause for misfires. Secondary causes could include water in the fuel system, which might be exacerbated by condensation in damp conditions, or carburetor icing, though the latter is more specific to cold, wet conditions. We need to physically verify the presence of arcing or fuel contamination.",
+      "mechanic_instructions": "A misfire that occurs only in damp or rainy conditions is a classic sign of high-tension voltage leakage in the ignition system. The moisture creates a path for the spark to jump to ground instead of firing the spark plug. This can happen at the spark plug wires, distributor cap, or coil. Alternatively, water contamination in the fuel could be a factor. We need to observe the engine under the conditions where the misfire occurs.",
+      "answer_path_prompts": [
+        "With the engine running in damp conditions (or simulated with a spray bottle), you observe visible arcing or hear distinct snapping sounds from the spark plug wires, distributor cap, or coil.",
+        "You find no visible arcing, but when you drain the carburetor fuel bowl, you see a significant amount of water or sediment.",
+        "You observe no arcing, the fuel appears clean, and the misfire persists even after checking these items."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_ign_024",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car has gotten gradually harder to start, the gas mileage is worse, and the engine just doesn't feel as peppy.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Spark Plugs",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Ignition System",
+        "Engine Mechanical",
+        "Exhaust System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 47,
+          "context": "CARBURETOR DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "FUEL SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "ENGINE CRANKS NORMALLY, BUT WILL NOT START"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 18,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 19,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 15,
+          "context": "EXHAUST SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "IF THERE IS NO SPARK OR A WEAK SPARK AT THE SPARK PLUGS"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of gradually harder starting, worse gas mileage, and reduced engine 'peppiness' (poor acceleration) indicate a systemic issue affecting combustion efficiency. This points to primary problems in the fuel or ignition systems, or a significant restriction in the exhaust. \n\n**Fuel System:** Hard starting, poor acceleration, and excessive fuel consumption can be caused by a restricted fuel filter (Source 3, 34, 47, 57, 60), incorrect fuel pump pressure (Source 5, 17, 34, 36, 47, 57, 60), or various carburetor malfunctions such as an incorrect float setting, dirt/water in the fuel system, improper idle adjustments, a ruptured accelerating pump diaphragm, a defective power valve, or an improperly operating choke (Source 5, 17, 34, 57, 60).\n\n**Ignition System:** These symptoms can also stem from a weak or absent spark (Source 25, 59), incorrect ignition timing, fouled or improperly adjusted spark plugs, or issues with distributor components like breaker points, coil, rotor, or excessive shaft play (Source 47, 54, 57, 60).\n\n**Exhaust System:** A restricted exhaust system can directly lead to poor acceleration and excessive fuel consumption (Source 15, 47, 57), and indirectly affect starting difficulty.\n\nTo begin diagnosis, the FSM recommends checking for spark if the engine cranks but will not start, to differentiate between ignition and fuel/mechanical issues (Source 25). This is the most logical first step to narrow the field.",
+      "mechanic_instructions": "We need to isolate the root cause of the hard starting, poor mileage, and lack of power. Start by verifying the ignition system's ability to produce a strong spark. This will quickly tell us if the problem is electrical or if we need to focus on fuel delivery, carburetion, or engine mechanicals. Disconnect a spark plug wire, install a terminal adapter, and hold it approximately 3/16 inch from the exhaust manifold while cranking the engine. Observe the spark.",
+      "answer_path_prompts": [
+        "I checked for spark at a spark plug wire (or coil high tension lead) while cranking, and I see a strong, blue spark.",
+        "I checked for spark at a spark plug wire (or coil high tension lead) while cranking, and I see no spark or a very weak, yellow spark.",
+        "I checked the fuel filter, and it is clearly restricted, or I confirmed the fuel pump is not delivering a steady stream of fuel to the carburetor.",
+        "I observed the choke plate and linkage, and it is stuck closed, stuck open, or not moving freely during cold start attempts.",
+        "I checked for exhaust restriction (e.g., by observing back pressure or listening for abnormal exhaust flow), and it appears significantly restricted."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_ign_025",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car gets terrible gas mileage at cruise speed and the engine seems to run hotter than it should on the highway.",
+    "query_category": "diagnostic",
+    "technical_issue": "Vacuum Advance Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Fuel System",
+        "Cooling System",
+        "Exhaust System",
+        "Transmission"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "AUTOMATIC  CHOKE"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "EXHAUST  SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 19,
+          "context": "DIAGNOSIS  GUIDE  (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS  GUIDE  (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_04_p151-200.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR  DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 15,
+          "context": "STALL SPEED TOO LOW"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of 'terrible gas mileage at cruise speed' and 'engine seems to run hotter than it should on the highway' indicate a condition where the engine is either running inefficiently, under excessive load, or both. This combination points to several potential subsystems. \n\n1.  **Ignition System:** Incorrect ignition timing (retarded) or a malfunctioning distributor advance mechanism will cause incomplete combustion, leading to reduced power, excessive fuel consumption, and increased exhaust gas temperatures, which translates to higher engine operating temperatures (Source 25, 44).\n2.  **Fuel System/Carburetor:** A rich fuel mixture, often caused by a malfunctioning or improperly adjusted automatic choke (stuck partially closed) or a leaking power valve, will lead to excessive fuel consumption. This rich condition can also cause the engine to run hotter due to unburnt fuel and inefficient combustion (Source 44, 60, 31).\n3.  **Cooling System:** Direct issues like a defective thermostat (stuck closed or partially closed), low coolant, or restricted radiator fins will cause overheating. While not a primary cause of poor mileage, an overheating engine will operate less efficiently (Source 25, 4).\n4.  **Exhaust System:** A restricted exhaust system creates excessive back pressure, forcing the engine to work harder, reducing efficiency, increasing fuel consumption, and raising engine temperatures (Source 44, 59).\n5.  **Transmission/Brakes:** Issues like a slipping torque converter stator clutch or dragging brakes can place an excessive load on the engine, causing it to work harder, consume more fuel, and generate more heat (Source 13, 25).\n\nI will prioritize checking the ignition timing and carburetor choke operation first, as these are common causes that directly impact both fuel efficiency and engine temperature. A quick visual check of the cooling system and exhaust restriction will also be included in the initial triage.",
+      "mechanic_instructions": "We need to isolate whether the engine is running inefficiently due to incorrect combustion or if there's a fundamental issue with heat rejection or excessive load. I suspect either incorrect ignition timing or a rich fuel condition from the carburetor. Let's start by checking the ignition timing and the automatic choke operation.",
+      "answer_path_prompts": [
+        "The ignition timing mark is significantly retarded (e.g., after TDC) or wanders erratically at cruise RPM, or the distributor advance mechanism is not functioning correctly.",
+        "With the engine hot and off fast idle, the automatic choke plate is not fully open, or the fast idle cam is still engaged.",
+        "The coolant level is low, or the radiator fins are visibly obstructed with debris, or the upper radiator hose is not hot to the touch after warm-up, indicating a stuck thermostat.",
+        "There is significant back pressure at the tailpipe when revved, or a rattling/hissing sound from the exhaust system, indicating a blockage."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

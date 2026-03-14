@@ -12,6 +12,7 @@ storage/upload_transfer.py
 storage/pdfs/
 storage/backups/
 storage/easyocr_models/
+project/
 
 # === Live Qdrant DB ===
 storage/qdrant/

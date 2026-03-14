@@ -1,0 +1,1091 @@
+[
+  {
+    "query_id": "gear_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The nose strut is completely flat every morning -- there's a puddle of hydraulic fluid on the hangar floor under the nose.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Flat Nose Strut -- Oil Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Landing Gear"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 40,
+          "context": "NOSE STRUT WILL NOT HOLD > AIR PRESSURE. > HYDRAULIC FLUID LEAKAGE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 24,
+          "context": "NOTE > 2-27. > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 23,
+          "context": "NOTE > NOTE > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of a completely flat nose strut with a puddle of hydraulic fluid points directly to a leak in the nose gear shock strut. The Service Manual lists 'HYDRAULIC FLUID LEAKAGE FROM NOSE STRUT' as a troubleshooting item, with 'Defective strut seals' as a probable cause. A defective air filler valve could also contribute to pressure loss, but the fluid puddle strongly indicates a seal failure. Loose attaching clamps are less likely to cause a fluid leak directly.",
+      "mechanic_instructions": "The nose strut going flat with a hydraulic fluid puddle indicates a leak in the nose gear shock strut. We need to pinpoint the source of this leakage. Inspect the nose gear shock strut for visible signs of hydraulic fluid leakage and check the integrity of the air filler valve.",
+      "answer_path_prompts": [
+        "I see hydraulic fluid leaking from around the upper or lower strut seals, or where the two strut sections meet.",
+        "I see hydraulic fluid leaking directly from the air filler valve, or the valve feels loose.",
+        "I don't see any obvious fluid leaks, but the strut attaching clamps are loose."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found corrosion pitting on the main landing gear legs during the annual inspection.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Main Gear Spring Steel Corrosion",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Landing Gear",
+        "Airframe Structure"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 40,
+          "context": "18-41. WING LEADING EDGE. > 18-42. NEGLIGIBLE DAMAGE. Refer to paragraph > 18-13."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 41,
+          "context": "18-57. REPAIRABLE DAMAGE. Fuselage skin re- > 18-58. DAMAGE NECESSITATING REPLACEMENT > 18- 58A. BONDED DOORS."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 30,
+          "context": "5-13. MAIN WHEEL INSPECTION AND REPAIR."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 36,
+          "context": "IF THE AIRCRAFT IS F L O W N  M O R E  T H A N  200 HOURS ANNUALLY. > INSPECTION GUIDE LINES. > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "Corrosion pitting on main landing gear legs is a critical finding. The Service Manual states that 'corrosion of all types must be carefully considered, and approved remedial action taken' (Source 1, 12). For highly stressed members like landing gear bulkheads, only 'minor damage, consisting of small nicks or scratches, may be repaired by dressing out the damaged area,' with any other damage requiring replacement of the assembly (Source 8, 16). While specific repair limits for pitting on the main gear legs themselves are not explicitly detailed, the general principle for critical structural components is to assess the extent of damage. For wheel halves, corroded areas can be sanded out, cleaned, primed, and painted (Source 17). The initial step is to thoroughly inspect the pitting to determine its depth and extent, and whether it constitutes minor damage or a structural integrity issue.",
+      "mechanic_instructions": "Corrosion pitting on the main landing gear legs requires immediate and thorough evaluation. The main gear struts are highly stressed components. You need to determine the extent and depth of the pitting. Carefully clean the affected area to expose the full extent of the corrosion. Then, visually inspect and physically measure the pitting.",
+      "answer_path_prompts": [
+        "The pitting is superficial, affecting only the surface coating, with no measurable depth into the base metal.",
+        "The pitting is localized but has measurable depth, appearing as small, isolated depressions in the metal.",
+        "The pitting is widespread and deep, with significant material loss or evidence of intergranular corrosion.",
+        "There are cracks or other forms of damage associated with the corroded areas."
+      ],
+      "confidence_disclaimer": "The Service Manual provides general guidance on inspecting for corrosion and specific repair procedures for certain landing gear components (e.g., wheel halves, bulkheads). However, it does not explicitly detail specific repair limits or procedures for corrosion pitting on the main landing gear struts themselves beyond general statements about 'minor damage' on highly stressed members. The diagnostic path relies on applying general structural repair principles and the provided FSM context for critical components.",
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The brakes are weak and I have to press very hard to stop -- or one brake drags and the airplane pulls to one side.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Brake System -- Weak or Dragging Brakes",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Hydraulic Brake System",
+        "Landing Gear"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 3,
+          "context": "5 -42. TROUBLE SHOOTING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 24,
+          "context": "Bleed the brake system of entrapped air whenever there is a spongy response to tk brake pedals."
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms of 'weak brakes' and 'one brake drags' point to issues within the hydraulic brake system or the mechanical components of the wheel brakes. Weak braking (brakes fail to operate) can be caused by air in the system, lack of fluid, a leak, or a defective master cylinder. Dragging brakes can result from brake pedal binding, parking brake linkage issues, restrictions in hydraulic lines or compensating ports, worn/warped brake discs, or accumulated dirt restricting wheel brake parts. We need to differentiate between these possibilities.",
+      "mechanic_instructions": "To narrow down the cause, describe the feel of the brake pedal(s) and the specific behavior of the dragging brake, if applicable. This will help determine if the issue is hydraulic (air, fluid, master cylinder) or mechanical (binding, restriction, wear).",
+      "answer_path_prompts": [
+        "The brake pedal feels spongy or goes to the floor easily.",
+        "The brake pedal feels firm, but the braking force is still weak.",
+        "One brake pedal is stiff or doesn't return fully, and that wheel is dragging.",
+        "Both pedals feel normal, but one wheel is dragging."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My tires are worn flat on one side and the mechanic says they need to be replaced.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Tire Wear / Damage",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Landing Gear",
+        "Tires"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 17,
+          "context": "NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 24,
+          "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 37,
+          "context": "NOTE > 5-17. MAIN WHEEL AXLE INSTALLATION. (FLAT > GEAR. )"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 38,
+          "context": "PLACE CARPENTER'S SQUARE > AGAINST STRAIGHTEDGE AND > LET IT TOUCH WHEEL JUST"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 39,
+          "context": "OR EDGE O F  SHIM > DOWN > U P &  FWD"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'tires are worn flat on one side' indicates abnormal tire wear. This can be caused by several factors:\n1.  **Prolonged Static Load:** The service manual explicitly states to 'rotate wheels every 30 days to change supporting points and prevent flat spotting the tires' during storage (Source 1, page 17). If the aircraft has been parked for extended periods without this procedure, flat spots can develop.\n2.  **Incorrect Tire Inflation:** 'Incorrect tire inflation' is listed as a probable cause for 'WHEEL BOUNCE EVIDENT' and contributes to abnormal tire wear (Source 27, page 24). Consistent under-inflation or uneven inflation can lead to localized flat wear.\n3.  **Wheel Imbalance:** 'Wheels out of balance' is also a probable cause for 'WHEEL BOUNCE EVIDENT' and 'uneven tire wear' (Source 27, page 24; Source 9, page 37). An unbalanced wheel can cause a thumping or hopping motion, leading to localized flat spots over time.\n4.  **Main Wheel Alignment:** 'Main wheels out of alignment' can cause 'abnormal tire wear' (Source 31, page 24; Source 49, page 38). While typically resulting in wear across the tread (e.g., inner or outer edge), severe misalignment could contribute to uneven loading and a 'flat on one side' appearance.",
+      "mechanic_instructions": "Before replacing the tires, we need to determine the root cause of the flat wear to prevent recurrence. This type of wear can stem from storage conditions, tire maintenance, or landing gear alignment. We need to check the aircraft's history and current physical state.",
+      "answer_path_prompts": [
+        "The aircraft has been parked for extended periods (over 30 days) without the wheels being rotated or the fuselage blocked up.",
+        "The tire pressure is incorrect, or there is noticeable vibration/shimmy during taxi or takeoff.",
+        "A main wheel alignment check shows toe-in or camber outside of specifications per Figure 5-4."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The annual inspection found corrosion on the wing spar -- the mechanic is concerned about structural integrity.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Wing Spar Corrosion",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Structural"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 39,
+          "context": "18-28. WING SPARS. > 18-29. NEGLIGIBLE DAMAGE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 39,
+          "context": "18-30. REPAIRABLE DAMAGE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 39,
+          "context": "18-31. DAMAGE NECESSITATING REPLACEMENT OF PARTS."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 40,
+          "context": "18-56. NEGLIGIBLE DAMAGE."
+        }
+      ],
+      "diagnostic_reasoning": "The primary concern is the structural integrity of the wing spar due to corrosion. The Service Manual Section 18, 'STRUCTURAL REPAIR,' specifically addresses wing spar damage. It categorizes damage into negligible, repairable, and necessitating replacement. For wing spars, 'very little damage can be considered negligible.' All cracks, stress wrinkles, deep scratches, and sharp dents must be repaired. Smooth dents, light scratches, and abrasions may be negligible. Corrosion, even mild, must be carefully considered and remedial action taken. The next step is to precisely categorize the observed damage.",
+      "mechanic_instructions": "You've found corrosion on the wing spar. We need to determine the extent of this damage to assess structural integrity. Refer to Section 18, 'STRUCTURAL REPAIR,' specifically paragraphs 18-28 through 18-31, for guidance on wing spar damage. Carefully inspect the affected area for any associated damage beyond just surface corrosion. Describe what you observe:",
+      "answer_path_prompts": [
+        "The corrosion is mild, with only smooth dents, light scratches, or abrasions, and no cracks, stress wrinkles, or deep dents are present. (Refer to 18-29, 18-56)",
+        "The spar has cracks, stress wrinkles, deep scratches, or sharp dents, or the corrosion is significant enough to require repair as per Figure 18-7. (Refer to 18-29, 18-30)",
+        "The damage is extensive, beyond what appears practicable for repair, suggesting a complete spar replacement. (Refer to 18-31)"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's bubbling paint and white corrosion powder on the belly skin and around the wing root.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Skin Corrosion -- Fuselage and Wings",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuselage",
+        "Wings",
+        "Electrical System (Battery)"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 17,
+          "context": "2-10. TEMPORARY STORAGE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 40,
+          "context": "18-56. NEGLIGIBLE DAMAGE. Refer to paragraph"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 50,
+          "context": "16-23. DESCRIPTION. The battery is completely"
+        }
+      ],
+      "diagnostic_reasoning": "The bubbling paint and white corrosion powder are classic signs of corrosion on alclad aluminum surfaces. The Service Manual states, 'The first indication of corrosion on unpainted surfaces is in the form of white deposits or spots. On painted surfaces, the paint is discolored or blistered.' (Source 10, page 17). All types of corrosion must be carefully considered and remedial action taken (Source 11, page 40; Source 27, page 40). While general oxidation is the most common cause, localized corrosion on the belly near the firewall could also indicate a battery acid spill, as the battery box is riveted to the forward side of the firewall and has a vent tube (Source 14, page 50; Source 23, page 50). The next step is to determine the extent and nature of the corrosion.",
+      "mechanic_instructions": "The bubbling paint and white powder indicate corrosion on the aluminum skin. This is a known issue for alclad aluminum, which is subject to oxidation. We need to determine the extent and potential source of this corrosion. Carefully inspect the affected areas.",
+      "answer_path_prompts": [
+        "The corrosion is widespread across the belly and wing root, not concentrated in any one area, and appears as general blistering and white powder.",
+        "The corrosion on the belly is heavily concentrated directly beneath or very near the battery box, with signs of liquid staining or residue.",
+        "The corrosion is localized to a specific small area, such as a rivet line or a single dent, and does not appear to be spreading."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The flaps make a grinding noise when I extend or retract them -- they seem to drag.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Flap Track / Roller Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Wing Flap Control System",
+        "Actuator System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 18,
+          "context": "7-4. TROUBLE SHOOTING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 25,
+          "context": "2-43. WING FLAP ACTUATOR."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 17,
+          "context": "7-3. OPERATIONAL CHECK."
+        }
+      ],
+      "diagnostic_reasoning": "The grinding noise and dragging during flap operation point to mechanical binding or excessive friction within the wing flap control system. The troubleshooting guide in Section 7-4 lists 'BINDING IN SYSTEM AS FLAPS ARE RAISED AND LOWERED' with probable causes including 'Flaps binding on tracks,' 'Cables not riding on pulleys,' 'Bind in drive pulleys,' 'Broken or binding pulleys,' and 'Frayed cable.' Additionally, Section 2-43 on the Wing Flap Actuator specifies inspecting and lubricating the jack screw and ball retainer assembly if 'actuator slippage is experienced,' which would manifest as dragging or binding. These are the most probable mechanical causes for the reported symptoms.",
+      "mechanic_instructions": "The grinding noise and dragging during flap operation indicate a mechanical interference or excessive friction within the wing flap control system. We need to physically inspect the components for binding, damage, or lack of lubrication. First, operate the flaps through their full range of travel, observing for uneven or jumpy motion, binding, and lost motion, as described in Section 7-3, paragraph 'a' of the Service Manual. Then, gain access to the flap system components by removing appropriate inspection plates on the lower surface of the wing to expose the flap tracks, rollers, cables, pulleys, and the flap actuator jack screw.",
+      "answer_path_prompts": [
+        "I observed visible damage, wear, or obstruction on the flap tracks or rollers.",
+        "I found cables off their pulleys, frayed, or pulleys that are binding/broken/worn.",
+        "The flap actuator jack screw lubricant is dirty, sticky, gummy, frothy, or there's hard scale present on the jack screw.",
+        "All flap tracks, rollers, cables, pulleys, and the actuator jack screw appear normal and well-lubricated."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The flight controls feel stiff and the mechanic found internal corrosion in the aileron cables.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Control Cable Corrosion / Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Aileron Control System",
+        "Elevator Control System",
+        "Wing Leveler System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 9,
+          "context": "SECTION 6 > AILERON CONTROL SYSTEM > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 10,
+          "context": "TROUBLE > RESISTANCE TO CONTROL > WHEEL MOVEMENT."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 11,
+          "context": "REFER TO FIGURE 6-3 > * BEGINNING WITH 17264786 > AND F17201385."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 42,
+          "context": "I 15-59. WING LEVELER. THRU SERIALS 17261898 > 15-60. DESCRIPTION. The wing leveler control > 15-61. RIGGING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 34,
+          "context": "8-6. REPAIR. Repair may be accomplished as out- > 8-7. > BELLCRANKS."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 35,
+          "context": "SECTION 9 > ELEVATOR TRIM CONTROL SYSTEM > TROUBLE"
+        }
+      ],
+      "diagnostic_reasoning": "The reported 'stiff flight controls' combined with 'internal corrosion in the aileron cables' points directly to issues within the aileron control system. The Service Manual lists 'Resistance to control wheel movement' as a trouble, with probable causes including 'Cables too tight,' 'Pulleys binding or cable off,' and 'Rusty chain.' Internal corrosion would cause increased friction and binding, leading to this resistance. While the FSM doesn't explicitly list 'corroded cables' as a probable cause for stiffness, it does recommend 'Replace worn or broken parts, install cables correctly' for cable-related issues causing lost motion. Other potential causes for stiff controls include binding pulleys or bellcranks, incorrect cable tension, or issues with the wing leveler system if installed. The next step is to confirm the extent of the cable corrosion and rule out other contributing factors within the aileron control system, or other flight control systems.",
+      "mechanic_instructions": "The internal corrosion in the aileron cables is a significant finding. This corrosion will increase friction and binding, directly causing the stiff control feel. Before proceeding with cable replacement, we need to confirm the extent of the corrosion's impact and ensure no other components are contributing to the stiffness. Access the aileron control system components, including the cables, pulleys, and bellcranks, as described in SECTION 6 of the Service Manual. Disconnect the aileron cables from the bellcranks (paragraph 6-13.b) and manually check the movement of the cables and the bellcranks independently.",
+      "answer_path_prompts": [
+        "The corrosion is severe, causing visible fraying or significant resistance when attempting to move the cables by hand, even after disconnecting them from the bellcranks.",
+        "The cables show corrosion, but the primary resistance appears to be from a binding pulley or bellcrank, or the cable tension is excessively high (40 LBS ± 10 LBS is specified for the aileron carry-thru cable).",
+        "The stiffness is not limited to the ailerons; the elevator or rudder controls also exhibit similar stiffness.",
+        "The aircraft is equipped with a wing leveler system (refer to SECTION 15), and the stiffness seems related to its operation or components (e.g., pneumatic servos, hoses)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found cracks in the firewall during the annual -- near the engine mount attachment points.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Firewall Damage / Cracks",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuselage",
+        "Engine Mount"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 41,
+          "context": "18-63. FIREWALL DAMAGE. Firewalls may be re-paired by removing the damaged material and splicing in a new section. ... Damaged or deformed angles and stiffeners may be repaired as shown in figure 18-12, or they may be replaced. A severely damaged firewall must be replaced as a unit."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 41,
+          "context": "18-68. DAMAGE INVOLVING ENGINE MOUNTING LUGS AND ENGINE MOUNT TO FUSELAGE ATTACH-ING FITTINGS. Engine mounting lugs and engine mount-to-fuselage attaching fittings should not be re-paired but must be replaced."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part07_p301-350.pdf",
+          "page": 19,
+          "context": "Figure 18-12. Firewall Angle Repair"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 11,
+          "context": "11-27. REPAIR. Repair of the engine mount shall be performed carefully as outlined in Section 18."
+        }
+      ],
+      "diagnostic_reasoning": "Cracks in the firewall near engine mount attachment points can stem from either firewall structural fatigue or damage, or from issues with the engine mount itself transferring excessive stress. The Service Manual outlines specific repair procedures for firewall damage, ranging from splicing in new sections for skin damage to replacing angles and stiffeners, or even replacing the entire firewall if severely damaged (18-63). Crucially, engine mounting lugs and engine mount-to-fuselage attaching fittings are explicitly stated to require replacement, not repair, if damaged (18-68). Therefore, a thorough inspection is needed to determine the extent of the firewall damage and the condition of the engine mount and its attachment fittings.",
+      "mechanic_instructions": "The cracks in the firewall near the engine mount attachment points require a detailed inspection. You need to determine the extent of the firewall damage and thoroughly inspect the engine mount and its attaching fittings. This will dictate the appropriate repair or replacement procedure.",
+      "answer_path_prompts": [
+        "The cracks are minor, isolated to the firewall skin, and do not involve any angles or stiffeners. The engine mount and its attachment fittings appear sound with no visible damage.",
+        "The cracks involve the firewall angles or stiffeners, but the main firewall skin appears intact. The engine mount and its attachment fittings appear sound.",
+        "The cracks are extensive, indicating severe damage to the firewall unit, or there is visible damage to the engine mounting lugs or engine mount-to-fuselage attaching fittings."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "elec_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The ammeter shows a discharge in flight -- the alternator isn't charging and the battery is draining.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Alternator/Generator Failure -- No Charging",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Alternator System",
+        "Battery Power System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 4,
+          "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont. ) > TROUBLE > AMMETER INDICATES HEAVY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 5,
+          "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont). > TROUBLE > ALTERNATOR SYSTEM"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom, 'ammeter shows a discharge in flight -- the alternator isn't charging and the battery is draining,' directly points to a malfunction in the alternator system. The Service Manual's 'TROUBLE SHOOTING THE ALTERNATOR SYSTEM' (Paragraph 16-39) lists 'ALTERNATOR SYSTEM WILL NOT KEEP BATTERY CHARGED' as a primary trouble. Probable causes include faulty regulator, shorted alternator diodes, or faulty wiring between the alternator and regulator, or the master switch. The troubleshooting procedure begins by verifying the initial charge rate, then moves to inspecting the voltage regulator's field relay operation. This step helps differentiate between a regulator control issue and a fault in the alternator or its primary wiring.",
+      "mechanic_instructions": "The ammeter indicating a discharge means the alternator system is not supplying power, and the battery is carrying the load. We need to isolate the fault. Stop the engine, remove the cowl, and access the voltage regulator. Turn the master switch ON and OFF several times. Observe the field relay within the regulator. This will tell us if the regulator is attempting to activate the alternator field.",
+      "answer_path_prompts": [
+        "The field relay in the voltage regulator does not open and close when the master switch is operated, or no arc is seen.",
+        "The field relay in the voltage regulator opens and closes with the master switch, and a small arc is seen as contacts open."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "elec_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The battery is dead every time I come back to the airplane -- it won't hold a charge.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Battery Failure / Won't Hold Charge",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Battery Power System",
+        "Alternator Power System"
+      ],
+      "source_citations": [
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 47,
+          "context": "16-16. TROUBLE SHOOTING THE BATTERY POWER SYSTEM."
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 3,
+          "context": "16-35. ALTERNATOR POWER SYSTEM."
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 48,
+          "context": "16-17. REMOVAL AND INSTALLATION."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'battery is dead every time I come back to the airplane -- it won't hold a charge' points to a fault within the electrical power supply system. The primary suspects, as per '16-16. TROUBLE SHOOTING THE BATTERY POWER SYSTEM' (Source 38, 46), are a discharged or faulty battery, or issues with the battery contactor or its wiring. A persistent discharge could also be caused by a failure in the alternator system to properly charge the battery (Source 41, 45, 53) or a parasitic drain from a shorted circuit (Source 35). The initial step is to measure the battery voltage under load at the battery contactor to assess the battery's state of charge and the integrity of the main power path, as outlined in the troubleshooting steps for 'BATTERY WILL NOT SUPPLY POWER TO BUS OR IS INCAPABLE OF CRANKING ENGINE' (Source 36, 46).",
+      "mechanic_instructions": "First, we need to determine the current state of the battery and its immediate connections. Measure the voltage at the 'BAT' terminal of the battery contactor. Turn the master switch ON and activate a suitable electrical load, such as the taxi light, to draw current. This will give us a real-world indication of the battery's ability to supply power under load. (Refer to '16-16. TROUBLE SHOOTING THE BATTERY POWER SYSTEM', Step 1, Source 36, 46).",
+      "answer_path_prompts": [
+        "The voltage at the 'BAT' terminal is below 11.5 volts.",
+        "The voltage at the 'BAT' terminal is 11.5 volts or higher, but the engine still won't crank or electrical systems are weak.",
+        "I found significant corrosion on the battery terminals or cables."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "elec_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My landing light burns out frequently -- I replace the bulb and it lasts only a few months.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Landing Light Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Aircraft Lighting System",
+        "Electrical System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 9,
+          "context": "16-51. TROUBLE SHOOTING,"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 23,
+          "context": "16-51. TROUBLE SHOOTING,"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 34,
+          "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont)."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 3,
+          "context": "15 -42. TROUBLE SHOOTING. (C ont."
+        }
+      ],
+      "diagnostic_reasoning": "Frequent landing light burnout indicates a systemic issue beyond a simple lamp failure. The primary suspects are overvoltage from the electrical system, a persistent short circuit, or excessive vibration. The troubleshooting guide for 'LANDING AND TAXI LIGHT(S) OUT' lists 'Lamp burned out,' 'Open circuit in wiring,' 'Short circuit in wiring,' and 'Defective wiring' as probable causes (Source 1, 7, 19). For 'Short circuit in wiring,' it directs to inspect the circuit breaker and test the circuit (Source 23, 32). A defective switch is also a possibility (Source 23, 32). More critically, the 'ALTERNATOR SYSTEM WILL NOT KEEP BATTERY CHARGED' troubleshooting mentions checking bus voltage for normal indication (Source 34, 50), implying that abnormal voltage (overvoltage) could be a cause of electrical component failure, including lamps. Excessive panel vibration is noted as a cause for gauge issues (Source 3, 13, 17), suggesting vibration could also stress light filaments.",
+      "mechanic_instructions": "Frequent landing light burnout points to an underlying electrical or mechanical issue, not just a bad bulb. We need to determine if the light is receiving excessive voltage, experiencing a short circuit, or is subject to undue vibration. Start by checking the system's electrical output and the integrity of the light circuit.",
+      "answer_path_prompts": [
+        "The bus voltage with the engine running is consistently above 14.5 volts, or the ammeter shows a continuous charge after engine warm-up.",
+        "The landing light circuit breaker trips frequently, or there is visible chafing/damage to the landing light wiring.",
+        "The landing light assembly is loose in its mounting, or there is noticeable vibration when the engine is running.",
+        "The voltage at the landing light socket is within normal operating range (12-14.5V), the wiring appears intact, and there is no excessive vibration."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "elec_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The flaps won't move and the flap circuit breaker pops every time I try to extend them.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Flap Motor / Circuit Breaker Trip",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Wing Flap Control System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 18,
+          "context": "7-4. TROUBLE SHOOTING. > PROBABLE CAUSE > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 17,
+          "context": "SECTION 7 > WING FLAP CONTROL SYSTEM > TABLE OF CONTENTS"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'flaps won't move and circuit breaker pops' points directly to an electrical fault in the wing flap control system. The troubleshooting guide (Section 7-4) lists 'Popped circuit breaker' as a probable cause for 'BOTH FLAPS FAIL TO MOVE.' This indicates an overcurrent condition, which could be due to a short circuit, a defective switch, a defective motor drawing excessive current, or a mechanical bind causing the motor to overload. The initial step is to address the circuit breaker itself, then systematically check the electrical path and mechanical components if the breaker continues to pop.",
+      "mechanic_instructions": "The circuit breaker popping indicates an overcurrent condition in the electric wing flap system. First, visually inspect the flap circuit breaker. If it is tripped, reset it. Then, attempt to operate the flaps. Observe what happens immediately after resetting the breaker and attempting flap extension.",
+      "answer_path_prompts": [
+        "The circuit breaker resets and holds, but the flaps still do not move.",
+        "The circuit breaker immediately pops again when I try to extend the flaps.",
+        "The circuit breaker resets and holds, and the flaps move slowly or with a binding noise.",
+        "The circuit breaker resets and holds, and the flaps move normally."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "inst_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My attitude indicator and heading indicator both tumbled and became useless in flight -- the vacuum gauge reads zero.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Vacuum Pump Failure -- Loss of Gyro Instruments",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Vacuum System",
+        "Flight Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 27,
+          "context": "15-25. DESCRIPTION. Suction to operate the gyros is provided by an engine-driven vacuum pump..."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 29,
+          "context": "15-26. TROUBLE SHOOTING--VACUUM SYSTEM > LOW SUCTION GAGE READINGS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 33,
+          "context": "15-28. TROUBLE SHOOTING--VACUUM PUMP > LOW PRESSURE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 33,
+          "context": "15-30. CLEANING. Never apply compressed air to lines or components installed in aircraft."
+        }
+      ],
+      "diagnostic_reasoning": "The simultaneous failure of both the attitude indicator and heading indicator, coupled with a zero reading on the vacuum gauge, strongly indicates a complete loss of suction in the vacuum system. The vacuum system powers these gyroscopic instruments via an engine-driven vacuum pump (Source 9, 15-25). The troubleshooting guide for 'LOW SUCTION GAGE READINGS' (Source 54, 15-26) and 'LOW PRESSURE' in the vacuum pump (Source 58, 15-28) points to several probable causes: vacuum pump failure, leaks or restrictions in the vacuum lines, a clogged central air filter, or a malfunctioning suction relief valve. Given the 'zero' reading, a complete failure of the pump or a major breach in the system is most probable.",
+      "mechanic_instructions": "A zero vacuum gauge reading and tumbled gyros mean the vacuum system has failed. The primary suspects are the vacuum pump, the central air filter, or a major leak in the system lines or relief valve. You need to determine where the suction is being lost. Start by checking the vacuum pump's output directly, then inspect the central air filter, and finally, look for obvious leaks in the lines or a stuck relief valve. Remember, do not apply compressed air to lines or components while installed in the aircraft, as this can damage the gyros (Source 43, 15-30).",
+      "answer_path_prompts": [
+        "The engine-driven vacuum pump is producing no suction when the engine is running.",
+        "The vacuum pump is producing suction, but the central air filter is completely blocked or severely restricted.",
+        "The vacuum pump is producing suction, and the filter is clear, but there is a significant leak in the vacuum lines or the suction relief valve is stuck open."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "inst_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My attitude indicator drifts and doesn't hold level -- it shows a bank when I'm flying straight and level.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Attitude Indicator (AI) Precession / Erratic",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Vacuum System",
+        "Flight Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 30,
+          "context": "15-27. TROUBLE SHOOTING--GYROS."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of an attitude indicator drifting and not holding level points to 'EXCESSIVE DRIFT IN EITHER DIRECTION' as described in the 'TROUBLE SHOOTING--GYROS' section. This can be caused by a malfunction in the aircraft's vacuum system or a defective instrument mechanism. Probable causes listed include a dirty central air filter, low vacuum due to an improperly adjusted relief valve, a faulty suction gauge, vacuum pump failure, or kinked/leaking vacuum lines. The initial step is to assess the vacuum system's performance, as it directly affects gyro operation.",
+      "mechanic_instructions": "An attitude indicator that drifts and shows an incorrect bank when flying straight and level indicates a problem with the gyro's stability. This is often due to insufficient or unstable vacuum pressure, which powers the instrument. First, check the vacuum system's health by observing the suction gauge. This will tell us if the gyro is receiving adequate vacuum.",
+      "answer_path_prompts": [
+        "The suction gauge reads below the normal operating range (e.g., below 4.5-5.5 in. Hg).",
+        "The suction gauge reads within the normal operating range, but fluctuates erratically.",
+        "The suction gauge reads normal and stable, and other vacuum-driven gyros (e.g., directional gyro) are operating correctly.",
+        "The suction gauge reads normal and stable, but other vacuum-driven gyros are also showing signs of sluggishness or drift."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "inst_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My airspeed indicator reads incorrectly or doesn't respond -- the mechanic thinks the pitot tube might be blocked.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Pitot-Static System Error / Blockage",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Pitot Static System",
+        "Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 24,
+          "context": "15- 17. TROUBLE SHOOTING--PITOT STATIC SYSTEM. > LOW OR SLUGGISH AIRSPEED > INCORRECT OR SLUGGISH"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 19,
+          "context": "15-3. INSTRUMENT PANEL. (Refer to figure 15-1.) > 15-4. DESCRIPTION. The instrument panel assem- > 15-5. REMOVAL AND INSTALLATION. The sta-"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 23,
+          "context": "NOTE > 15-14. PITOT SYSTEM INSPECTION AND LEAKAGE > 15-15. BLOWING OUT LINES. Although pitot sys-"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'incorrect or sluggish airspeed indication' or 'hand fails to respond' points to issues within the pitot-static system or the airspeed indicator itself. The FSM (Section 15-17) lists 'Pitot tube obstructed, leak or obstruction in pitot line' as a probable cause for 'LOW OR SLUGGISH AIRSPEED INDICATION (Normal altimeter and vertical speed).' It also lists 'Leaks or obstruction in static line' as a probable cause for 'INCORRECT OR SLUGGISH RESPONSE (all three instruments).' Therefore, the first step is to determine if the issue is isolated to the pitot system or if the static system, which affects the altimeter and vertical speed indicator as well, is compromised. This will narrow down the subsystem causing the malfunction.",
+      "mechanic_instructions": "The airspeed indicator's malfunction could stem from the pitot system, the static system, or the instrument itself. To narrow this down, observe the behavior of the other pressure instruments. The pitot system supplies ram air pressure only to the airspeed indicator. The static system, however, vents the vertical speed indicator, altimeter, and airspeed indicator to atmospheric pressure. Therefore, a static system malfunction will affect all three instruments, while a pitot system issue will primarily affect only the airspeed indicator. Check the altimeter and vertical speed indicator for normal operation.",
+      "answer_path_prompts": [
+        "Only the airspeed indicator is affected; altimeter and vertical speed indicator appear normal.",
+        "All three instruments (airspeed, altimeter, and vertical speed indicator) are affected.",
+        "The airspeed indicator hand is completely unresponsive, but altimeter and VSI are normal."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "exh_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found a crack in the muffler during the annual -- it's also the cabin heat source and could leak carbon monoxide.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Muffler / Heat Exchanger Crack -- CO Hazard",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Exhaust System",
+        "Heating System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 24,
+          "context": "11-73. EXHAUST SYSTEM. (Refer to figure 11-6.)"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 11,
+          "context": "SECTION 14 > UTILITY SYSTEMS > TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 38,
+          "context": "IMPORTANT > SPECIAL INSPEC TION ITEM > EACH 200 HOURS"
+        }
+      ],
+      "diagnostic_reasoning": "A crack in the muffler is a critical finding, especially since the muffler's heat exchange section is integral to the cabin heating system. The Service Manual explicitly states that 'Any time exhaust fumes are detected in the cabin, an immediate inspection must be performed. The exhaust system must be thoroughly inspected, especially the heat exchange section of the muffler. All components that show cracks and general deterioration must be replaced with new parts.' [Source 1, 6]. Furthermore, 'Since any holes or cracks may permit exhaust fumes to enter the cabin, replacement of defective parts is imperative because fumes constitute an extreme danger.' [Source 7, 15]. The primary differential is between a localized muffler crack and more widespread exhaust system or heating system damage. The immediate action is a detailed inspection to confirm the extent of the damage and identify all affected components.",
+      "mechanic_instructions": "A crack in the muffler, which doubles as the cabin heat source, is an immediate safety concern due to potential carbon monoxide leakage. You must perform a thorough inspection of the entire exhaust system, especially the heat exchange section of the muffler, as outlined in paragraph 11-73 (or 11-76, 11A-72, 11A-74). This involves removing the engine cowling, loosening or removing shrouds to ensure ALL surfaces of the exhaust system are visible, and checking for holes, cracks, burned spots, and exhaust gas deposits in surrounding areas. Also, inspect the flexible ducts and shut-off valve of the heating system for damage or leaks. Report your findings.",
+      "answer_path_prompts": [
+        "The muffler has a crack, and other exhaust pipes or components also show cracks or significant deterioration.",
+        "Only the muffler has a crack; the rest of the exhaust system and heating ducts appear intact and free of damage.",
+        "The initial crack was superficial, and a more thorough inspection (including a submerged pressure test if necessary per 11-73.d) reveals no significant defects in the muffler or other exhaust components."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "exh_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The exhaust pipes near the cylinder heads have visible cracks -- exhaust gases are leaking at the joints.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Exhaust Riser / Stack Cracks",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Exhaust System",
+        "Engine"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 24,
+          "context": "11-73. EXHAUST SYSTEM."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 11,
+          "context": "SECTION 14 > UTILITY SYSTEMS > TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 43,
+          "context": "TROUBLE > PROBABLE CAUSE > STARTER MOTOR RUNS, BUT"
+        }
+      ],
+      "diagnostic_reasoning": "Visible cracks and exhaust gas leaks at the cylinder head joints are a direct indication of a defective exhaust system. The Service Manual explicitly states that 'Any time exhaust fumes are detected in the cabin, an immediate inspection must be performed. The exhaust system must be thoroughly inspected... All components that show cracks and general deterioration must be replaced with new parts.' (Source 1, 10). This is a critical safety issue due to the potential for exhaust fumes to enter the cabin (Source 3, 20). The next step is to confirm the extent of the damage and prepare for replacement of the affected exhaust components and their gaskets.",
+      "mechanic_instructions": "The visible cracks and exhaust gas leaks at the exhaust pipes near the cylinder heads are a clear indication of a compromised exhaust system. This is a serious condition that requires immediate attention due to the risk of carbon monoxide entering the cabin. You need to perform a thorough inspection to identify all affected components. Remove the engine cowling per paragraph 11-3 and loosen or remove shrouds to make all surfaces of the exhaust system visible. Check for holes, cracks, burned spots, and exhaust gas deposits, especially near welds. Refer to figure 11-6 for the exhaust system layout. Once the full extent of the damage is assessed, the defective parts must be replaced with new components.",
+      "answer_path_prompts": [
+        "I have identified specific exhaust pipes with cracks and confirmed exhaust gas deposits around the cylinder head joints. The muffler appears intact.",
+        "I found cracks in the muffler heat exchange section in addition to the exhaust pipes near the cylinder heads.",
+        "The cracks are minor, and I only see slight discoloration, not active gas leaks. I suspect the issue might be elsewhere."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "exh_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The entire exhaust system looks rusty and corroded -- the mechanic says it's getting thin.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Exhaust System Corrosion -- General",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Exhaust System",
+        "Heating System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 24,
+          "context": "11-73. EXHAUST SYSTEM."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 11,
+          "context": "SECTION 14 > UTILITY SYSTEMS > TABLE OF CONTENTS"
+        }
+      ],
+      "diagnostic_reasoning": "The reported rust and thinning of the entire exhaust system indicate a critical integrity issue. The Service Manual explicitly states that 'Any time exhaust fumes are detected in the cabin, an immediate inspection must be performed.' It further warns that 'any holes or cracks may permit exhaust fumes to enter the cabin, replacement of defective parts is imperative because fumes constitute an extreme danger.' (Source 14-5, page 11). The exhaust system, particularly the heat exchange section of the muffler, must be thoroughly inspected for holes, cracks, and burned spots, especially near welds, and for exhaust gas deposits in surrounding areas (Source 11-73.c, page 24). This condition is a direct safety hazard.",
+      "mechanic_instructions": "A rusty and thinning exhaust system is an extreme danger due to potential exhaust gas leaks into the cabin. You need to perform a thorough inspection of the entire exhaust system, especially the heat exchange section of the muffler. Remove the engine cowling and loosen or remove shrouds to ensure all surfaces are visible. Check for holes, cracks, burned spots, and exhaust gas deposits around welds. This is a mandatory 100-hour inspection item, and any components showing cracks or deterioration must be replaced. (Refer to paragraph 11-73, page 24, and 14-5, page 11).",
+      "answer_path_prompts": [
+        "Visual inspection reveals clear holes, cracks, or significant exhaust gas deposits on the muffler or exhaust pipes.",
+        "Visual inspection shows general surface rust and thinning, but no obvious holes, cracks, or exhaust gas deposits.",
+        "The exhaust system appears to be in good condition with no significant rust, thinning, or leaks."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The cabin is very drafty and noisy -- wind and rain leak in around the doors.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Door Seal Leaks / Wind Noise",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuselage",
+        "Utility Systems"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 46,
+          "context": "3-22. ADJUSTMENT. Cabin doors should be adjust-ed so skin fairs with fuselage skin. Slots at latch plate permit re-positioning of striker plate. Depth of latch engagement may be changed by adding or removing washers or shims between striker plate and doorpost. 3-23. WEATHERSTRIP. A weatherstrip is cement-ed around all edges of the door. New weatherstrip may be applied after mating surfaces of weatherstrip and door are clean, dry and free from oil or grease."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 14,
+          "context": "14-15. TROUBLE SHOOTING. Most of the opera-tional troubles in the ventilating system are caused by sticking or binding of the inlet scoop door or its control. Check the airscoop filter elements in the wing leading edges for obstructions."
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms of drafts, noise, and rain leaks around the doors point to issues with the cabin door's sealing and fit. The Service Manual explicitly addresses 'Weatherstrip' and 'Adjustment' for cabin doors as primary components for maintaining a proper seal (Source 22, 51). A worn weatherstrip will directly allow ingress, while an improperly adjusted door will prevent the weatherstrip from sealing effectively. Less likely, but still a contributor to general cabin noise and drafts, could be a malfunctioning ventilating system airscoop door (Source 1, 8, 13).",
+      "mechanic_instructions": "The cabin's drafty and noisy condition, with wind and rain leaks around the doors, indicates a compromise in the door's sealing integrity. We need to physically inspect the cabin door's weatherstripping for degradation and verify the door's alignment and latch engagement. A proper seal is critical for both comfort and preventing water damage.",
+      "answer_path_prompts": [
+        "The weatherstripping around the door perimeter is visibly cracked, torn, or compressed flat, but the door itself appears to close flush with the fuselage.",
+        "The weatherstripping appears intact, but the door does not sit flush with the fuselage when closed, or there's excessive play when latched.",
+        "The cabin airscoop door on the right side of the fuselage is visibly stuck open or its control cable is binding."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's a crack in my windshield that's slowly growing -- can it be repaired or does it need replacement?",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Cracked Windshield / Window",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuselage"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 43,
+          "context": "3-6. REPAIRS."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 44,
+          "context": "3-8. CRACKS. (Refer to figure 3-1.)"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 46,
+          "context": "d. A temporary repair can be made by drilling"
+        }
+      ],
+      "diagnostic_reasoning": "The Service Manual states that damaged windshields may be removed and replaced if damage is extensive. Certain repairs can be made without removal, but no repairs are recommended on highly-stressed or compound curves, or where the repair would affect the pilot's field of vision. Any repaired area is both structurally and optically inferior to the original surface. Temporary repairs for cracks involve drilling a stop-hole at the end of the crack and either lacing the edges with soft wire (temporary measure ONLY, replacement required as soon as facilities are available) or applying fabric patches for curved surfaces, or wood reinforcement for flat surfaces. The 'slowly growing' nature of the crack indicates a need to assess its current state and location to determine if even a temporary repair is feasible or if replacement is the only safe option.",
+      "mechanic_instructions": "A growing crack in the windshield is a critical issue. While temporary repairs are possible, they are explicitly stated as 'temporary measure ONLY' and are structurally and optically inferior. Replacement is often the only permanent solution, especially if the crack is in a highly-stressed area, a compound curve, or affects the pilot's field of vision. To determine the appropriate action, describe the crack's characteristics:",
+      "answer_path_prompts": [
+        "The crack is small, on a flat surface, and does not obstruct the pilot's primary field of vision.",
+        "The crack is in a highly-stressed area, a compound curve, or significantly obstructs the pilot's primary field of vision.",
+        "The crack is extensive, with multiple branches or significant length, regardless of location."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My seat slid backward during takeoff rotation -- the seat track locks didn't hold.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Seat Track / Seat Lock Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Seats",
+        "Cabin Structure"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 2,
+          "context": "3-31. SEATS. (Refer to figure 3-6.) > 3-32."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 4,
+          "context": "NOTE > * BEGINNING WITH SERIALS > 17265485 AND F17201385"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 40,
+          "context": "AIRFRA > SPECIAL INSPECTION ITEM > EACH 200 HOURS"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'seat slid backward during takeoff rotation' directly points to a failure in the seat's fore-and-aft locking mechanism. The service manual explicitly states the critical role of seat stops in limiting fore-and-aft travel and preventing disengagement during takeoff and landing (Source 1, page 2). Therefore, missing, improperly installed, or damaged seat stops are the primary suspects. Additionally, the internal adjustment mechanism, involving the seat adjustment pawl and the seat rails/cam slots, could be worn or damaged, preventing proper engagement (Source 11, page 4; Source 15, page 3). Worn seat rollers or damaged seat rails could also contribute to the failure of the locking mechanism to hold (Source 1, page 2).",
+      "mechanic_instructions": "A seat sliding backward during takeoff is a critical safety failure. We need to immediately inspect the pilot's seat fore-and-aft locking mechanism. The most common causes are issues with the seat stops or the internal adjustment pawl and cam system. Visually inspect the seat and its mounting points.",
+      "answer_path_prompts": [
+        "The seat stops (part 13 in Figure 3-6) are missing or visibly damaged on the seat rails.",
+        "The fore/aft adjustment handle (part 15 in Figure 3-6) feels loose, or the seat adjustment pawl (part 7 or 9 in Figure 3-6) does not positively engage the seat rail slots.",
+        "The seat rollers (part 8 or 10 in Figure 3-6) are broken, or the seat rails (part 14 in Figure 3-6) show excessive wear or damage."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My 1969 172 doesn't have shoulder harnesses -- are they required?",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Shoulder Harness Retrofit / Inspection",
+    "response_parsed": {
+      "current_state": "VEHICLE_MISMATCH",
+      "mechanic_instructions": "⚠️ YEAR MISMATCH: Your question mentions the year 1969, but the selected vehicle is a 1975 Cessna 172 & Skyhawk (AVIATION). If you meant to ask about a different year, please check your vehicle selection.",
+      "diagnostic_reasoning": "Pre-LLM firewall detected year 1969 in query. Active vehicle year: 1975.",
+      "detected_vehicle": "Year 1969 (unknown vehicle)",
+      "detected_terms": [
+        "1969"
+      ],
+      "active_vehicle": "1975 Cessna 172 & Skyhawk (AVIATION)",
+      "requires_input": false,
+      "answer_path_prompts": [],
+      "source_citations": [],
+      "intersecting_subsystems": []
+    },
+    "current_state": "VEHICLE_MISMATCH"
+  },
+  {
+    "query_id": "eng_013",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's oil weeping from the back of the engine around the magneto and accessory case area.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Accessory Case Oil Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Engine Oil System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 38,
+          "context": "ENGINE COMPARTMENT Check for evidence of oil and fuel leaks"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 34,
+          "context": "Be sure magneto gasket (right magneto), magneto adapter and gaskets (left magneto) are in place"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 12,
+          "context": "Inspect gasket between accessory housing and crankcase. Repair engine as required."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 9,
+          "context": "After each 50 hours of engine operation, all flexible fluid hoses in the engine compartment should be checked for leaks"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 14,
+          "context": "OIL LEAK AT PUSH ROD HOUSING. Damaged push rod housing oil seal. Replace."
+        }
+      ],
+      "diagnostic_reasoning": "Oil weeping from the back of the engine around the magneto and accessory case area points to several potential sources. The primary suspects are compromised gaskets or seals where the magnetos mount to the accessory case, a leak from the accessory case gasket itself, or a leak from flexible oil hoses or push rod housing seals in that vicinity. The FSM emphasizes checking for oil leaks in the engine compartment (Source 2, 13) and specifically mentions magneto gaskets (Source 34), accessory housing gaskets (Source 33), flexible fluid hoses (Source 6), and push rod housing oil seals (Source 22) as potential leak points.",
+      "mechanic_instructions": "First, clean the entire area thoroughly to remove all oil residue. Then, run the engine to normal operating temperature and observe the exact origin of the oil weeping. Pinpoint the highest point of the leak to trace it to its source.",
+      "answer_path_prompts": [
+        "Oil is weeping directly from around the base of one of the magnetos where it mounts to the engine.",
+        "Oil is weeping from the main gasket seam between the accessory case and the engine crankcase.",
+        "Oil is weeping from a flexible oil hose or fitting connected to the accessory case.",
+        "Oil is weeping from a push rod housing seal on the back of the engine."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_007",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My fuel gauges read full even when the tanks are half empty -- I can't trust them.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Quantity Gauge Inaccuracy",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Electrical System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 36,
+          "context": "15-44. DESCRIPTION. The magnetic type fuel quantity indicators are used in conjunction with a float-operated variable-resistance transmitter in each fuel tank. The full position of float produces a minimum resistance through transmitter, permitting maximum current flow through the fuel quantity indicator and maximum pointer deflection. A s  fuel level is lowered, resistance in transmitter is increased, producing a decreased current flow through fuel quan- tity indicator and a smaller pointer deflection."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 37,
+          "context": "15-45. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 46,
+          "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL QUANTITY INDICATION."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of the fuel gauge reading full when the tank is half empty indicates a constant maximum current flow to the indicator, or a mechanical fault within the indicator itself. The fuel quantity system operates with a float-operated variable-resistance transmitter. A full tank corresponds to minimum resistance and maximum current, causing maximum pointer deflection. As fuel level drops, resistance increases, current decreases, and pointer deflection lessens (paragraph 15-44, Source 1, 38). Therefore, a constant 'full' reading suggests either the transmitter is stuck at minimum resistance, the wiring is shorted, or the indicator itself is defective. The FSM lists 'Defective gage or sensing unit,' 'Loose or broken lead,' and 'Defective indicator or transmitter' as probable causes for incorrect or erratic readings (paragraph 15-45, Source 1, 17; paragraph 12-4, Source 2, 10, 23). This initial test aims to isolate the transmitter from the rest of the circuit.",
+      "mechanic_instructions": "The symptom of your fuel gauges reading full when the tanks are half empty points to either a fault in the fuel quantity transmitter, a short in the wiring, or a defective fuel quantity indicator. The system works by the transmitter's resistance changing with fuel level, which in turn controls the current to the gauge (paragraph 15-44, Source 1, 38). A 'full' reading means maximum current is being supplied to the gauge.",
+      "answer_path_prompts": [
+        "The fuel gauge pointer drops to the 'Empty' position or off scale.",
+        "The fuel gauge pointer remains at the 'Full' position.",
+        "The fuel gauge pointer shows an 'Erratic' reading or fluctuates."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

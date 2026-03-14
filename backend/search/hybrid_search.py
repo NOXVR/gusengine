@@ -109,6 +109,7 @@ def hybrid_search(
                 "page_numbers": point.payload["page_numbers"],
                 "headings": point.payload["headings"],
                 "token_count": point.payload["token_count"],
+                "type": point.payload.get("type", "text"),
                 "score": point.score,
             })
 

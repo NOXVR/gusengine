@@ -1,0 +1,1237 @@
+[
+  {
+    "query_id": "acc_axle_051",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's a howling or whining noise coming from the back of the car that gets louder the faster I go.",
+    "query_category": "diagnostic",
+    "technical_issue": "Differential Whine / Howling from Rear End",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Rear Axle",
+        "Tires",
+        "Engine/Exhaust"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 2,
+          "context": "REAR AXLE TROUBLE SYMPTOMS AND POSSIBLE CAUSES"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'howling or whining noise coming from the back of the car that gets louder the faster I go' points to several potential causes, primarily within the rear axle assembly, but also external factors like tires or the engine/exhaust system. The FSM outlines a diagnostic process for 'EXCESSIVE REAR AXLE NOISE' that begins by eliminating these external sources. Pinion bearings are a strong suspect if the noise is a continuous whine under light load between 20-35 MPH, as described in the FSM. Other differential or wheel bearings are also possibilities. Initial steps must isolate the source before deeper axle inspection.",
+      "mechanic_instructions": "A howling or whining noise from the rear, increasing with speed, is a classic symptom of rear axle trouble, but we must first rule out other common sources. Before any road testing, verify tire pressures are correct and the rear axle lubricant level is normal. Then, perform the following checks to isolate the noise source:",
+      "answer_path_prompts": [
+        "The noise is present when the car is stopped and the engine is run at various speeds (in neutral).",
+        "The noise changes significantly or disappears when driving on different road surfaces, or after cross-switching the tires.",
+        "The noise is *not* present with the engine running in neutral, and it does *not* change with different road surfaces or tire positions. It is a continuous whine, most pronounced under a light load between 20 and 35 MPH."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_axle_052",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's a loud clunk from underneath the car when I first step on the gas from a stop, and sometimes a vibration at speed.",
+    "query_category": "diagnostic",
+    "technical_issue": "Clunking Noise on Acceleration / Worn U-Joints",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Drivetrain",
+        "Rear Axle"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 8,
+          "context": "GEARS"
+        },
+        {
+          "source": "mustang_fsm_part_04_p151-200.pdf",
+          "page": 1,
+          "context": "DISASSEMBLY"
+        },
+        {
+          "source": "mustang_fsm_part_04_p151-200.pdf",
+          "page": 49,
+          "context": "ELECTRICAL SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 39,
+          "context": "EXTENSION HOUSING AND GOVERNOR REPLACEMENT"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 9,
+          "context": "STARTER TROUBLE DIAGNOSIS GUIDE (Continued)"
+        }
+      ],
+      "diagnostic_reasoning": "A loud clunk on initial acceleration and vibration at speed are classic symptoms of excessive play in the drivetrain. This could stem from worn universal joints (U-joints) in the driveshaft, or excessive backlash within the differential gears. Worn U-joints allow rotational slack, causing a clunk when torque is applied, and can lead to imbalance and vibration at speed. Excessive differential backlash, often due to wear on side gear hubs, splines, or thrust washers, also manifests as a clunk on acceleration and can contribute to driveline vibration. The FSM mentions driveshaft removal (Source 3, 47) and differential gear inspection for scoring or excessive wear, and checking backlash (Source 23). We will start by inspecting the U-joints and then the differential for play.",
+      "mechanic_instructions": "A loud clunk from underneath the car when you first step on the gas, and a vibration at speed, points to excessive play in the drivetrain. We need to physically inspect the driveshaft and rear axle components. Start by getting the car safely on a hoist. With the transmission in neutral, attempt to rotate the driveshaft by hand, checking for any rotational play. Also, visually inspect the universal joints at both ends of the driveshaft for any visible looseness or wear.",
+      "answer_path_prompts": [
+        "I found significant rotational play or visible looseness in one or both driveshaft U-joints.",
+        "The U-joints appear tight, but I can feel excessive rotational play when turning the driveshaft by hand, separate from the U-joints themselves.",
+        "There is no noticeable play in the driveshaft, U-joints, or any excessive rotational play in the drivetrain when turning the driveshaft by hand."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_steer_053",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car wanders all over the road — I have to constantly correct the steering just to go straight.",
+    "query_category": "diagnostic",
+    "technical_issue": "Excessive Steering Play / Wandering",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Steering System",
+        "Suspension System",
+        "Wheels and Tires"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 4,
+          "context": "Pump-Fluid Pressure Test."
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 3,
+          "context": "TROUBLE DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 26,
+          "context": "FIG. 24-Sight Glass"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'car wanders all over the road' is directly addressed in the FSM's 'Trouble Diagnosis Guide' under 'Side-to-Side Wander' (Source 44, page 4). Primary suspects include incorrect tire pressure, incorrect front wheel alignment, incorrect steering gear adjustment, and excessive free play in the steering linkage (Source 44, page 4; Source 59, page 3). Hard steering can also lead to overcorrection, giving the sensation of wander (Source 32, page 2). I need to determine if the issue is play in the steering system, a tire/alignment problem, or a steering effort issue.",
+      "mechanic_instructions": "A wandering condition, requiring constant steering correction, indicates an issue with the steering system, front end alignment, or tire condition. We need to isolate the source of this instability. First, check for any excessive play in the steering system, then verify tire condition and pressure, and finally, assess steering effort.",
+      "answer_path_prompts": [
+        "There is noticeable free play in the steering wheel (more than 1-2 inches) before the front wheels begin to turn.",
+        "The tire pressures are incorrect, or the tires show uneven wear or visible damage.",
+        "The steering feels unusually stiff or hard to turn, especially at low speeds or when stationary (if equipped with power steering)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_steer_054",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "When I hit a bump in the road, the steering wheel jerks to one side — it's scary at highway speed.",
+    "query_category": "diagnostic",
+    "technical_issue": "Bump Steer",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Steering System",
+        "Front Suspension",
+        "Wheels and Tires"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 13,
+          "context": "FRONT SUSPENSION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 4,
+          "context": "Pump-Fluid Pressure Test."
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 3,
+          "context": "TROUBLE DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 12,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 1,
+          "context": "PRELIMINARY TESTS"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of the steering wheel jerking to one side when hitting a bump, especially at highway speeds, indicates a sudden, uncontrolled movement in the front end. This is most commonly caused by excessive play in the steering linkage or front suspension components, which allows the wheel to react violently to road input. Less likely, but still possible, are issues with tire condition or power steering assist. The FSM's 'TROUBLE DIAGNOSIS GUIDE' (Source 9, 41) lists 'Jerky Steering' and related symptoms like 'Excessive Free Play' and 'Pull to One Side' with causes such as worn ball studs, loose idler arm connections, or incorrect front wheel bearing adjustment (Source 27, 41). Loose front suspension (Source 31) can also contribute to instability. Preliminary checks for tire pressure and power steering fluid/belt are also prudent (Source 9, 53).",
+      "mechanic_instructions": "The steering wheel jerking to one side when hitting a bump points directly to excessive play in the front suspension or steering linkage. This play allows the wheel to deflect unpredictably under impact. We need to get the front end off the ground and physically check for looseness in these components. Start by checking for play in the wheels themselves, then move to the linkage.",
+      "answer_path_prompts": [
+        "With the front wheels off the ground, I found significant play (more than 1/8 inch) when wiggling a wheel side-to-side or top-to-bottom, indicating worn tie rod ends, ball joints, or wheel bearings.",
+        "All front suspension and steering linkage components appear tight with no perceptible play when wiggling the wheels. Tire pressures are correct, and tires show even wear.",
+        "The power steering pump belt is loose or glazed, or the fluid level is low."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_steer_055",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The steering wheel wobbles up and down and makes a clunking noise when I turn it.",
+    "query_category": "diagnostic",
+    "technical_issue": "Steering Column Bearing Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Steering System",
+        "Steering Column",
+        "Power Steering"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 3,
+          "context": "TROUBLE  DIAGNOSIS  GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 1,
+          "context": "MANUAL STEERING"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 27,
+          "context": "STEERING  COLUMN  UPPER BEARING  REPLACEMENT"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 13,
+          "context": "FRONT  SUSPENSION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 2,
+          "context": "TROUBLE  DIAGNOSIS  GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 23,
+          "context": "CHECK  POWER  STEERING RESERVOIR  FLUID  LEVEL"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of a steering wheel wobbling up and down, combined with a clunking noise when turning, points to mechanical looseness within the steering system. The primary suspects are: \n1.  **Steering Gear/Column Internal Wear or Adjustment:** Excessive free play or lost motion in the steering gear (Source 1, page 3) or wear in the steering column upper bearing (Source 28, page 27) would directly cause vertical wobble and clunking. The FSM explicitly states to check steering gear preload and mesh adjustment for excessive free play. (Source 1, page 3)\n2.  **Steering Linkage Components:** Looseness in the idler arm rod connection or power cylinder piston rod insulators can cause 'chatter' (Source 1, page 3) or 'rattles' (Source 1, page 3), which could manifest as a clunk and contribute to perceived wobble. Issues with the Pitman arm ball stud or idler arm bushings can also cause 'binding or poor recovery' (Source 13, page 2).\n3.  **Power Steering System (Fluid/Belt):** A loose or glazed pump belt can cause 'noise' (Source 1, page 3), and air in the fluid can cause 'chatter' (Source 1, page 3). While these are noise-related, they are less likely to cause a distinct 'up and down wobble' of the steering wheel itself compared to mechanical play in the column or gear.",
+      "mechanic_instructions": "A steering wheel wobble and clunking noise when turning indicates excessive play in the steering system. We need to isolate whether this play is in the steering column, the steering gear, or the linkage components. Perform the following checks to narrow down the cause:",
+      "answer_path_prompts": [
+        "With the engine off, grab the steering wheel at 12 and 6 o'clock. When you try to move it up and down, do you feel significant play or hear the clunking directly from the column or inside the dash?",
+        "With the engine off and the front wheels on the ground, have someone turn the steering wheel slightly left and right (just enough to take up slack, not turn the wheels fully). While they do this, observe the Pitman arm, idler arm, and tie rod ends for excessive play or hear the clunking from these components.",
+        "Check the power steering fluid level in the reservoir (Source 23, page 23) and the pump belt tension (Source 1, page 3). Is the fluid low, or is the belt loose or glazed?"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_056",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The front end makes popping and clunking noises over bumps, and the steering feels imprecise.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Upper and Lower Ball Joints",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Steering System",
+        "Front Suspension",
+        "Wheel Bearings"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_15_p651-691.pdf",
+          "page": 26,
+          "context": "FRONT WHEEL ALIGNMENT CHECKS"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 3,
+          "context": "TROUBLE DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 30,
+          "context": "STEERING LINKAGE REPAIR 5"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 11,
+          "context": "ROAD TEST"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of 'popping and clunking noises over bumps' and 'imprecise steering' strongly indicate wear or looseness in the front suspension or steering linkage components. The FSM explicitly lists checking steering linkage connections and front suspension ball joints for looseness, wear, and damage as a mandatory first step before front end alignment checks (Source 15, page 26). Excessive free play in the steering gear or control valve components can also cause imprecise steering and rattles (Source 36, page 3). Loose wheel bearings can contribute to noise and affect steering feel (Source 39, page 11). Therefore, a physical inspection for play in these areas is the most direct and probable diagnostic path.",
+      "mechanic_instructions": "The popping, clunking, and imprecise steering point to potential wear in your front suspension or steering linkage. We need to get the front end off the ground and physically check for play. This will help us isolate whether the issue is in the ball joints, tie rods, idler arm, or wheel bearings.",
+      "answer_path_prompts": [
+        "When the front wheels are off the ground, I found significant play (more than 1/8 inch) when shaking the wheel top-to-bottom or side-to-side, indicating worn ball joints or tie rod ends.",
+        "When the front wheels are off the ground, I found excessive in-and-out free play in the wheel bearings.",
+        "With the front wheels on the ground, I observed excessive free play or lost motion in the steering wheel before the wheels begin to turn, and I can hear a clunk from the steering gear itself.",
+        "The power steering pump belt is loose or glazed, or the fluid level is low, and I hear a squealing or chattering noise from the pump."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_057",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car pulls to one side under braking and the front end feels loose — like the wheels are moving forward and back.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Strut Rod Bushings",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Brakes",
+        "Front Suspension",
+        "Steering"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 11,
+          "context": "FRONT  END  GENERAL INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 26,
+          "context": "FRONT  WHEEL  ALIGNMENT CHECKS"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 12,
+          "context": "LOWER BALL JOINT INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 40,
+          "context": "FRONT  WHEEL  BEARING ADJUSTMENT"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 12,
+          "context": "BOOSTER  DIAGNOSIS  GUIDE-FALCON,  COMET,  MUSTANG"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'car pulls to one side under braking' can be caused by various brake system issues such as distorted shoes, faulty retracting springs, out-of-round drums, glazed linings, faulty wheel cylinders, restricted brake lines, or improperly adjusted/worn wheel bearings (Source 25, 31, 46, 51, 55). The symptom 'front end feels loose — like the wheels are moving forward and back' strongly points to looseness in the front suspension or wheel bearings (Source 10, 22). The FSM explicitly states to perform a general front-end inspection before checking alignment, which includes checking tire pressure, ball joints, steering linkage, and wheel bearings for looseness, wear, and damage (Source 10, 22). A loose wheel bearing or worn ball joint can directly cause the 'loose' feeling and contribute to a pull under braking. Therefore, the initial step is to systematically check for mechanical play in these components.",
+      "mechanic_instructions": "First, ensure all four tires are at the specified air pressure. Then, raise the front of the car off the floor. Grasp each front wheel at the upper and lower surfaces of the tire and shake it in and out. Observe the lower end of the spindle and the lower arm for any movement, and check for in-and-out free play in the wheel itself. Also, check the steering gear mountings and all steering linkage connections for looseness. This will help isolate whether the issue is in the wheel bearings, ball joints, or steering linkage, which can all contribute to both the loose feeling and the pull under braking.",
+      "answer_path_prompts": [
+        "There is significant in-and-out free play when shaking one or both front wheels, indicating loose wheel bearings. (Refer to FSM Part 3-5, page 40 for adjustment/replacement)",
+        "There is visible movement between the lower end of the spindle and the lower arm, or other looseness in the ball joints or steering linkage. (Refer to FSM Part 3-2, page 12 for ball joint inspection/replacement, and Part 3-3 for steering linkage)",
+        "One or more front wheels are difficult to turn by hand, or a specific brake drum/rotor is noticeably hotter than others after a short drive, indicating a dragging brake. (Refer to FSM Part 2-2, Section 2 for brake shoe adjustment/inspection)",
+        "No significant play in wheel bearings, ball joints, or steering linkage, and no obvious brake drag. Tire pressures are correct."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_058",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The steering has gotten really sloppy and the car wanders — I feel like I have no precise control.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Idler Arm",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Steering System",
+        "Suspension System",
+        "Power Steering System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 2,
+          "context": "TROUBLE DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 3,
+          "context": "TROUBLE DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 33,
+          "context": "PUMP-FLUID PRESSURE TEST 2"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 23,
+          "context": "CHECK STEERING GEAR PRELOAD"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 12,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 1,
+          "context": "Check For Fluid Leaks:"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 31,
+          "context": "STEERING ARM-TO-IDLER ARM ROD REPLACEMENT"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 26,
+          "context": "STEERING WORM AND SECTOR GEAR ADJUSTMENTS"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'sloppy steering' and 'car wanders' indicates excessive free play or lost motion in the steering system. The FSM's 'TROUBLE DIAGNOSIS GUIDE' (Source 27, 37) directly addresses 'EXCESSIVE FREE PLAY' and lists primary suspects: steering gear preload/mesh adjustment, excessive clearance in steering arm ball stud seats, and control valve centering spring adjustment. Worn steering linkage components (Pitman arm, idler arm, tie rod ends) are also common causes of play (Source 60). Additionally, basic checks like tire pressure, power steering fluid level, and belt tension can contribute to a feeling of poor control or wandering (Source 1, 27). The initial triage should focus on isolating the source of this play.",
+      "mechanic_instructions": "Sloppy steering and wandering are classic signs of excessive play in the steering system. We need to systematically check for looseness. Start by inspecting the steering linkage and gear for any noticeable free play. This will help us narrow down whether the issue is in the steering gear itself, the connecting rods, or the power steering control valve. Also, confirm basic fluid levels and belt tension, as these can affect steering feel.",
+      "answer_path_prompts": [
+        "With the engine off, have someone rock the steering wheel back and forth just enough to take up any slack, but not enough to turn the road wheels. You observe significant visible play or movement in the Pitman arm, idler arm, or tie rod ends before the road wheels begin to react.",
+        "With the engine off, have someone rock the steering wheel back and forth just enough to take up any slack. You observe the steering wheel turns a noticeable amount, but the Pitman arm does not move immediately, indicating play internal to the steering gear.",
+        "The power steering pump belt is loose or glazed, the power steering fluid reservoir is low, or the tire pressures are incorrect."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_059",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car bounces excessively over bumps and doesn't settle down — it feels like riding a boat on waves.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Shock Absorbers",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Suspension System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 21,
+          "context": "SHOCK ABSORBERS"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of 'excessive bouncing over bumps' and the car not settling, feeling like 'riding a boat on waves,' is a direct indication of faulty shock absorbers. The shock absorbers are responsible for dampening spring oscillations. If they are worn or damaged, they will not control the spring movement, leading to the described excessive bouncing. The FSM provides a specific test for this condition.",
+      "mechanic_instructions": "Your description points directly to worn or failed shock absorbers. The shocks are designed to dampen the spring's oscillations, preventing the car from continuously bouncing after hitting a bump. If they're not doing their job, the car will feel like a boat on waves. To confirm this, perform a jounce test on the vehicle. Grasp the bumper firmly and jounce the car up and down several times. Release the bumper and observe how the car settles.",
+      "answer_path_prompts": [
+        "The car immediately settles to its normal position after being jounced and released.",
+        "The car continues to bounce excessively (more than one or two oscillations) after being jounced and released."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_060",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The front of the car sits lower than it used to and the ride is harsh — it bottoms out on bumps.",
+    "query_category": "diagnostic",
+    "technical_issue": "Sagging or Broken Front Coil Springs",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Front Suspension"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 21,
+          "context": "SHOCK ABSORBERS"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 11,
+          "context": "FRONT END GENERAL INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 12,
+          "context": "LOWER BALL JOINT INSPECTION"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of the front of the car sitting lower and a harsh ride that bottoms out on bumps strongly indicate issues with the front suspension. The primary suspects are worn or broken coil springs, which would directly cause a lower ride height and reduced travel leading to bottoming out. Additionally, worn or defective shock absorbers would fail to dampen suspension movement, resulting in a harsh ride and allowing the suspension to bottom out easily. The FSM states that if shock absorbers are in good condition, the car will immediately settle after jouncing, implying that poor shocks contribute to improper settling and ride quality (Source 56). Other front suspension components like ball joints or bushings, if severely worn, could contribute to overall looseness or handling issues, but are less likely to be the sole cause of both a static low ride height and harsh bottoming-out ride.",
+      "mechanic_instructions": "The car sitting lower and bottoming out points to a failure in the front suspension's ability to support the vehicle and absorb impacts. We need to determine if the issue is with the springs, which provide the primary support, or the shock absorbers, which control the spring's movement. Start by performing a basic physical check of the front suspension components.",
+      "answer_path_prompts": [
+        "After grasping the front bumper and jouncing the car up and down, it continues to bounce excessively (more than one full rebound) before settling to a normal position.",
+        "Upon visual inspection, one or both front coil springs are visibly broken, cracked, or appear significantly compressed/sagged compared to the other side or what seems normal.",
+        "There is noticeable play or clunking when shaking the front wheels, or obvious damage/looseness in the ball joints, control arm bushings, or strut rods."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_061",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The rear end of the car makes creaking and squeaking noises over bumps and the ride is harsh.",
+    "query_category": "diagnostic",
+    "technical_issue": "Worn Leaf Spring Bushings / Squeaky Rear Suspension",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Rear Suspension",
+        "Chassis"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 24,
+          "context": "Rear Shackle"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 23,
+          "context": "Removal"
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 16,
+          "context": "REMOVAL"
+        }
+      ],
+      "diagnostic_reasoning": "The reported 'creaking and squeaking noises over bumps' and 'harsh ride' from the rear end strongly indicate issues with the rear suspension components. The most common culprits for these symptoms are worn or damaged rubber bushings in the leaf springs and shackles, loose U-bolts securing the springs to the axle, or worn shock absorbers. The FSM explicitly calls for inspection of 'rear shackle, bushings, and studs for wear or damage' (Source 13, page 24) and details the removal of 'spring clip (U-bolt) nuts, spring clips, and spring lower insulator' (Source 29, page 23; Source 58, page 16), implying these are points of potential failure. Worn shocks contribute to a harsh ride and can allow excessive movement leading to noise. A thorough visual and physical inspection of these components is the logical first step.",
+      "mechanic_instructions": "Lift the rear of the car to relieve the suspension load. Visually inspect the rear leaf springs, shackles, U-bolts, and shock absorbers. Pay close attention to the condition of all rubber components, such as the shackle bushings, spring eye bushings, and spring insulators. Check for any signs of cracking, deterioration, or excessive wear in these rubber parts. Also, physically check the tightness of the U-bolt nuts and the shackle bolts. Look for any evidence of metal-on-metal contact or components rubbing where they shouldn't. Finally, inspect the shock absorbers for fluid leaks or physical damage, and test their dampening ability by hand if possible.",
+      "answer_path_prompts": [
+        "I found cracked, dry-rotted, or missing rubber bushings in the leaf spring shackles or spring eyes, and/or the shackle bolts are visibly loose.",
+        "The U-bolts securing the leaf springs to the axle are loose, or the rubber insulators between the springs and axle are visibly compressed or damaged.",
+        "The rear shock absorbers are leaking fluid, show physical damage, or offer very little resistance when compressed/extended by hand.",
+        "All visible rear suspension components (springs, shackles, U-bolts, shocks) appear intact, tight, and show no obvious signs of wear or damage. Tire pressures are also correct."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_062",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I hear a growling or humming noise from the front wheels that gets louder the faster I go.",
+    "query_category": "diagnostic",
+    "technical_issue": "Front Wheel Bearing Wear / Noise",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Front Suspension",
+        "Wheels/Tires",
+        "Brakes"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 11,
+          "context": "FRONT END GENERAL INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 38,
+          "context": "WHEEL INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 41,
+          "context": "FRONT WHEEL BEARING ADJUSTMENT"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 4,
+          "context": "Pump-Fluid Pressure Test."
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 2,
+          "context": "REAR AXLE TROUBLE SYMPTOMS AND POSSIBLE CAUSES"
+        }
+      ],
+      "diagnostic_reasoning": "A growling or humming noise from the front wheels that increases with speed is a classic symptom of worn or improperly adjusted front wheel bearings. The FSM explicitly states to 'Check the front wheel bearings. If any in-and-out free play is noticed, adjust the bearings to specification. Replace worn or damaged bearings' as part of the 'FRONT END GENERAL INSPECTION' (Source 41, page 11). 'Wobble or shimmy caused by a damaged wheel will eventually damage the wheel bearings' (Source 38, page 11). Another common cause for speed-dependent noise is tire condition, such as uneven wear or damage, which can sometimes be mistaken for bearing noise (Source 58, page 4; Source 3, page 2). While less likely given the 'front wheels' description, rear axle noise can sometimes be misdiagnosed as coming from the front, with symptoms like a 'continuous whine' or 'rough and irregular' noise (Source 3, page 2).",
+      "mechanic_instructions": "The most probable cause for a speed-dependent growling or humming from the front is a front wheel bearing issue. You need to physically inspect the front wheel bearings and the tires. Raise the front of the car off the floor. Grasp each front wheel at the upper and lower surfaces of the tire and shake it to check for looseness or play in the ball joints and wheel bearings. Then, spin each front wheel by hand and listen for roughness or grinding, which would indicate a worn bearing. Also, visually inspect the tire tread for any abnormal wear patterns, cupping, or damage.",
+      "answer_path_prompts": [
+        "When shaking the wheel, there is significant in-and-out or side-to-side free play, or the wheel feels rough/grindy when spun by hand.",
+        "The front wheel bearings feel tight with no play, and the wheels spin smoothly, but the front tires show visible signs of uneven wear, cupping, or damage.",
+        "The front wheel bearings feel tight and smooth, and the tires appear normal, but the noise is definitely coming from the front of the vehicle.",
+        "The noise seems to be coming from the rear axle, not the front wheels."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_brake_063",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The brake pedal goes almost to the floor and the car barely stops — I have to pump the pedal to get any braking.",
+    "query_category": "diagnostic",
+    "technical_issue": "Brake Fade / Spongy Pedal",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Brake Hydraulic System",
+        "Brake Mechanical System",
+        "Brake Power Booster (if equipped)"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 10,
+          "context": "AUTOMATIC ADJUSTERS"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 10,
+          "context": "BOOSTER"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 10,
+          "context": "FLUID LEVEL"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 12,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 16,
+          "context": "HYDRAULIC SYSTEM BLEEDING"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 17,
+          "context": "DESCRIPTION AND OPERATION"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'brake pedal goes almost to the floor and the car barely stops' with 'have to pump the pedal to get any braking' strongly indicates excessive pedal travel and a lack of hydraulic pressure. The FSM lists 'Excessive Pedal Travel' and 'No Braking Effect When Pedal is Depressed' as symptoms for 'Leaks or Insufficient Fluid' and 'Air Leak or Insufficient Fluid in System or Caliper' (Source 34, 35). Pumping the pedal to build pressure is a classic sign of air in the system or an internally leaking master cylinder. Additionally, 'Self Adjusters Not Operating' (Source 55) and 'Loose Wheel Bearing Adjustment' (Source 35) can cause excessive pedal travel. Given the 1965 Mustang with C4 automatic, a vacuum booster is optional (Source 33), and an inoperative booster could lead to a 'Hard Pedal' (Source 32), which might be perceived as 'barely stops' due to increased effort required. Therefore, the initial triage must cover hydraulic system integrity, brake adjustment, and booster function.",
+      "mechanic_instructions": "The primary suspects for a brake pedal going to the floor and requiring pumping are issues within the hydraulic system, such as low fluid, leaks, or air. Mechanical issues like inoperative self-adjusters can also cause excessive pedal travel. If your Mustang is equipped with a power booster, a malfunction there could also contribute to poor braking. We need to narrow down the cause.",
+      "answer_path_prompts": [
+        "The master cylinder fluid level is low, or I see visible brake fluid leaks around the master cylinder, lines, hoses, calipers, or wheel cylinders.",
+        "The master cylinder fluid level is full, and there are no visible external leaks. The pedal feels spongy when pressed.",
+        "With the engine off, after exhausting vacuum, I depress and hold the brake pedal. When I start the engine, the pedal does NOT fall away under my foot, indicating the power booster is not assisting.",
+        "With the car raised, the rear wheels spin freely with no drag, even after several reverse stops, indicating the drum brake self-adjusters are not working correctly (Source 1)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_brake_064",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car jerks hard to the left (or right) every time I hit the brakes — it feels dangerous.",
+    "query_category": "diagnostic",
+    "technical_issue": "Brake Pull to One Side",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Braking System",
+        "Suspension System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 17,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 34,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 38,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 42,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 43,
+          "context": "ROAD TEST"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 45,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 46,
+          "context": "ROAD TEST"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 50,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 51,
+          "context": "ROAD TEST"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 54,
+          "context": "ROAD TEST"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 57,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 30,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        }
+      ],
+      "diagnostic_reasoning": "A hard jerk to one side during braking indicates an imbalance in braking force. This can be caused by a component on one side grabbing excessively or failing to engage properly, or by a hydraulic issue causing uneven pressure. Common causes for 'Car Pulls to One Side' or 'Pull' during braking include: distorted or improperly adjusted brake shoes, faulty retracting springs, glazed or worn linings, oil/grease on linings, drum out of round, faulty wheel cylinders, frozen or seized caliper pistons, restricted brake lines, air in the hydraulic system, or improperly adjusted/worn wheel bearings. I need to differentiate between these possibilities by checking for physical signs of uneven braking, hydraulic system integrity, and suspension/bearing play.",
+      "mechanic_instructions": "A hard jerk to one side when braking points to an imbalance in your braking system. We need to determine if one brake is grabbing, not engaging, or if there's a hydraulic issue causing uneven pressure. Start by checking for uneven brake drag or heat, as this is a direct indicator of a problem at a specific wheel. Then, we'll check the master cylinder and wheel bearings.",
+      "answer_path_prompts": [
+        "One wheel is noticeably hotter than the others after a short drive, or it drags when spun by hand with the car raised.",
+        "The master cylinder fluid level is low, or there are visible fluid leaks around a wheel cylinder or caliper.",
+        "There is excessive play in one of the front wheel bearings when checking for looseness."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_brake_065",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I have to keep adding brake fluid and the brakes are getting weaker. I found wet spots on the inside of my rear drums.",
+    "query_category": "diagnostic",
+    "technical_issue": "Wheel Cylinder Leak / Brake Fluid Loss",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Brakes",
+        "Hydraulic System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 38,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 55,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 39,
+          "context": "INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 27,
+          "context": "DRUM BRAKES"
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 13,
+          "context": "REAR AXLE SHAFT, WHEEL BEARING AND OIL SEAL REPLACEMENT"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of 'wet spots on the inside of my rear drums' combined with 'keep adding brake fluid' and 'brakes are getting weaker' strongly indicates a hydraulic fluid leak within the drum brake assembly. The most common source for brake fluid inside the drum is a leaking wheel cylinder. A faulty wheel cylinder can cause symptoms like 'One Brake Drags' or 'Noisy or Grabbing Brakes' (Source 38), and a leak will certainly lead to fluid loss and reduced braking. It is also possible, though less likely given the description of 'brake fluid,' that a rear axle seal is leaking gear oil, which would also contaminate the linings and weaken braking. The initial step is to visually confirm the source and type of fluid.",
+      "mechanic_instructions": "The wet spots inside your rear drums, coupled with fluid loss and weaker brakes, point directly to a leak within the drum brake assembly. The primary suspect is a leaking wheel cylinder. You need to physically inspect the rear brake assemblies to confirm the source of the fluid and its type. Raise the car, remove the wheel and tire assembly, then remove the brake drum. Carefully inspect the wheel cylinder for signs of leakage and note the appearance and smell of the fluid.",
+      "answer_path_prompts": [
+        "I found brake fluid leaking from the wheel cylinder(s) on the inside of the drum(s). The brake shoes are saturated.",
+        "I found gear oil (thick, distinct smell) leaking from behind the axle flange, contaminating the inside of the drum(s).",
+        "I found no fluid leaks inside the drum(s), but the brake shoes are worn thin or glazed."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_brake_066",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The brakes make a horrible screeching or squealing noise every time I stop.",
+    "query_category": "diagnostic",
+    "technical_issue": "Drum Brake Squeal / Noise",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Brake System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 13,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 29,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 30,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 58,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 25,
+          "context": "DRUM BRAKES"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 49,
+          "context": "DRUM BRAKES"
+        }
+      ],
+      "diagnostic_reasoning": "A screeching or squealing noise during braking is a common symptom of issues within the brake system, specifically related to the friction components or braking surfaces. The FSM's 'BOOSTER DIAGNOSIS GUIDE' (which covers general brake symptoms) lists 'Noisy or Grabbing Brakes' as a symptom for several causes, including: Linings Glazed or Worn (Source 13, 29), Oil or Grease In Lining (Source 29), Scored Drum (Source 30), Distorted or Improperly Adjusted Brake Shoe (Source 58), Loose Carrier Plate (Source 29), and Improperly Adjusted or Worn Wheel Bearing (Source 58). The most probable causes for a consistent screech are worn or contaminated linings, or a scored drum. The initial diagnostic step is a physical inspection of these components.",
+      "mechanic_instructions": "The screeching noise during braking indicates a problem with the brake friction materials or the braking surface. We need to visually inspect the brake assemblies. Raise the car, remove one of the front brake drums, and thoroughly inspect the drum and the brake linings. Pay close attention to the lining thickness, any signs of glazing, oil or grease contamination, and the condition of the drum surface for scoring or cracks. Also, check the wheel bearings while the drum is off.",
+      "answer_path_prompts": [
+        "The brake linings are worn to 1/32 inch or less from the rivet heads, or I see obvious oil/grease contamination on the linings.",
+        "The brake drums are heavily scored, cracked, or show significant uneven wear.",
+        "The linings and drums appear to be in good condition, but I found a loose or distorted brake shoe, a faulty retracting spring, or excessive play in the wheel bearings.",
+        "Everything appears normal; the linings have sufficient material, the drums are smooth, and all components are tight."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_brake_067",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The parking brake doesn't hold the car on a hill — it just rolls even with the handle pulled all the way up.",
+    "query_category": "diagnostic",
+    "technical_issue": "Emergency / Parking Brake Not Holding",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Parking Brake System",
+        "Rear Drum Brakes"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 14,
+          "context": "PARKING BRAKE LINKAGE ADJUSTMENT"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 23,
+          "context": "PARKING BRAKES"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 17,
+          "context": "SELF ADJUSTING DRUM BRAKE ASSEMBLIES"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 12,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 16,
+          "context": "DRUM BRAKES"
+        }
+      ],
+      "diagnostic_reasoning": "The parking brake system actuates the rear drum brake shoes. If the parking brake does not hold, the most common cause is improper cable adjustment, leading to insufficient force applied to the rear brake shoes (Source 11). Other possibilities include worn or damaged rear drum brake components (linings, self-adjusters) or physical damage to the parking brake cables or equalizer linkage (Source 1, 33, 56). The initial step is to perform the parking brake linkage adjustment as outlined in the FSM, as this will quickly rule out or confirm maladjustment and provide further diagnostic clues.",
+      "mechanic_instructions": "The parking brake relies on the rear drum brakes. The most common cause for a parking brake not holding is improper cable adjustment. We need to perform the parking brake linkage adjustment first:\n1. Fully release the parking brake by turning the handle counterclockwise and pushing it inward.\n2. Pull the parking brake handle outward to the third notch from its normal released position.\n3. Raise the car.\n4. Locate the adjustment nut in front of the equalizer (refer to Fig. 1 in Source 11, page 14). Turn this adjustment nut forward against the equalizer until a moderate drag is felt when turning the rear wheels in the direction of forward rotation.\n5. Release the parking brake and make sure that the brake shoes return to the fully released position and no drag is felt when turning the rear wheels.",
+      "answer_path_prompts": [
+        "I was able to adjust the nut, and a moderate drag is now felt on the rear wheels when the parking brake is engaged to the third notch. When released, there is no drag.",
+        "I tightened the adjustment nut as far as it would go, but there is still no drag on the rear wheels when the parking brake is engaged to the third notch.",
+        "The adjustment nut was already tight, and there was no drag on the rear wheels when the parking brake was engaged to the third notch.",
+        "I found a visibly broken or disconnected parking brake cable, equalizer, or a component at one of the rear brake shoes."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_068",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Water pours into the car onto my feet every time it rains — the floorboards stay wet for days.",
+    "query_category": "diagnostic",
+    "technical_issue": "Cowl Vent Rust and Water Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body",
+        "Chassis"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 16,
+          "context": "FLOOR PAN PLUGS AND GROMMETS"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 16,
+          "context": "DRAIN HOLES"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 31,
+          "context": "CLEAN BODY DRAIN HOLES"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 16,
+          "context": "BODY MAINTENANCE"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of 'water pours into the car onto my feet every time it rains' indicates a significant breach in the vehicle's water sealing. The FSM explicitly states that missing or improperly installed floor pan plugs and grommets can cause water leaks (Source 6). Additionally, clogged body drain holes (rocker panels, quarter panels, doors) are a known cause for water to back up and enter the cabin (Source 41, 42). Compromised weatherstripping around the windshield or doors is also a common source of rain-related leaks, allowing water to run down to the floorboards (Source 18). We need to differentiate between these primary hypotheses.",
+      "mechanic_instructions": "We need to isolate the source of this water ingress. Start by performing a thorough visual inspection and targeted water tests to pinpoint the leak. Focus on areas where rain water would naturally collect or flow.",
+      "answer_path_prompts": [
+        "I found a missing floor pan plug or a damaged grommet directly under the wet area when inspecting the underside of the car.",
+        "I poured water into the cowl area or door frames, and it backed up and then visibly overflowed into the cabin, or I found drain holes completely blocked.",
+        "I performed a water test around the windshield and/or door frames, and water visibly seeped in from a compromised seal, running down to the floor."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_069",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I can see the road through holes in the floorboards and the carpet is rotted. My feet get wet when I drive through puddles.",
+    "query_category": "diagnostic",
+    "technical_issue": "Floor Pan Rust-Through",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body/Chassis"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 15,
+          "context": "FLOOR PAN PLUGS AND GROMMETS"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 7,
+          "context": "DUST AND WATER LEAKS"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 31,
+          "context": "CLEAN BODY DRAIN HOLES"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of seeing the road through the floorboards and wet feet directly points to a breach in the floor pan's integrity. The most probable causes are missing or improperly installed floor-pan plugs/grommets, or significant rust-through of the floor pan itself. Obstructed body drain holes can exacerbate water accumulation and lead to such damage. Less likely, but still possible, are leaks around scuff plates or other body joints, though these typically don't result in visible holes to the road.",
+      "mechanic_instructions": "The presence of visible holes and wet carpet indicates a direct water leak through the floor pan. You need to physically inspect the floor pan and surrounding areas. Remove the carpet and any sound deadening material to get a clear view. Then, inspect from both inside the car and underneath on a lift. Your primary focus is to identify the exact points of water entry.",
+      "answer_path_prompts": [
+        "I found visible holes or missing plugs directly in the floor pan, allowing a clear view of the ground.",
+        "The floor pan appears intact, but I found significant rust or damage around the scuff plates or body seams.",
+        "The floor pan is intact, but the body drain holes in the rocker panels or doors are completely clogged with debris."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_070",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "A mechanic told me the frame rails under my car are rusted through and the car isn't safe to drive.",
+    "query_category": "diagnostic",
+    "technical_issue": "Frame Rail Rust / Structural Corrosion",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Frame/Chassis"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 18,
+          "context": "DRIVE-ON TYPE HOIST"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 18,
+          "context": "REAR"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 10,
+          "context": "CHECKING UNDERBODY FOR MISALIGNMENT"
+        }
+      ],
+      "diagnostic_reasoning": "The user reports 'frame rails rusted through,' a direct observation of severe structural damage. The provided FSM documents mention underbody inspection for hoist interference (Source 1, 12) and misalignment after major body damage (Source 21), but do not contain specific diagnostic or repair procedures for rusted-through frame rails. Therefore, the diagnostic approach must rely on general mechanical principles for structural integrity assessment.",
+      "mechanic_instructions": "A rusted-through frame rail is a critical structural failure that compromises the vehicle's integrity and safety. The frame rails are the primary load-bearing components of the chassis, supporting the engine, suspension, and body. If they are rusted through, the car is indeed unsafe to drive as it could flex, deform, or even break apart under normal operating stresses, leading to catastrophic failure of suspension mounting points or body separation. You need to physically verify the extent of this damage. Raise the car safely on a lift or jack stands, ensuring proper support points to avoid further damage (refer to Source 1 and 12 for hoist precautions). Visually inspect the entire length of both frame rails, paying close attention to areas where components attach, such as suspension mounting points, body mounts, and crossmembers. Use a small hammer or pick to gently tap suspect areas. Sound and feel will indicate solid metal versus compromised, thin, or perforated sections.",
+      "answer_path_prompts": [
+        "I found large holes, flaking metal, or sections that crumbled when tapped, confirming the frame rails are rusted through in critical areas.",
+        "I found significant rust, but it appears to be surface rust or localized pitting, not completely through the metal in load-bearing sections.",
+        "I found only minor surface rust, and the frame rails appear solid throughout."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_071",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The trunk floor is rusted through and water gets in the trunk. The spare tire well is full of rust and sitting water.",
+    "query_category": "diagnostic",
+    "technical_issue": "Trunk Floor / Spare Tire Well Rust",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body Sealing",
+        "Body Structure"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 16,
+          "context": "FLOOR PAN PLUGS AND GROMMETS"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 7,
+          "context": "6. Scuff plates:"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of a rusted-through trunk floor and standing water in the spare tire well indicates a direct water intrusion issue. The primary suspects are compromised body integrity in the trunk area or failed seals. The FSM explicitly states that missing or improperly installed floor-pan plugs can cause water leaks (Source 3). Additionally, the FSM provides a general method for locating leaks in the 'luggage compartment' by checking 'body joints and weld lines' and using bright lights (Source 50). This initial triage will focus on identifying the direct entry point.",
+      "mechanic_instructions": "The standing water and rust-through in the trunk floor and spare tire well point to a direct breach in the body's water integrity. We need to pinpoint the exact entry point. First, clear out any standing water and debris from the trunk and spare tire well. Then, from inside the trunk, have an assistant shine a bright light from underneath the car, focusing on the spare tire well, the entire trunk floor, and the seams where the floor meets the quarter panels and rear body panel. Also, inspect for any missing or damaged floor-pan plugs. Observe from inside the trunk for any light shining through, indicating a leak path.",
+      "answer_path_prompts": [
+        "I see light shining through specific holes or cracks in the trunk floor or spare tire well, or through missing floor-pan plugs.",
+        "I see light shining through the seams where the trunk lid closes, or around the taillight housings, but not directly through the floor.",
+        "I see light shining through from higher up, such as around the rear window or quarter windows, with water trails leading down into the trunk.",
+        "I do not see any light shining through, but the floor is clearly rusted through in areas."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_072",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The bottom edges of the front fenders are bubbling and rusting through — it looks terrible.",
+    "query_category": "diagnostic",
+    "technical_issue": "Fender Rust — Lower Edges and Wheel Wells",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body & Paint"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 12,
+          "context": "PAINT DEFECTS AND REPAIR PROCEDURES"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 14,
+          "context": "FIG. 1 5Off Color"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of 'bubbling and rusting through' on the front fenders points directly to paint defects, specifically blistering or peeling, as described in the FSM. Blistering is defined as the 'formation of bubbles or pin points on the surface' and is caused by 'rust, moisture, or oil between the coats, metal not properly cleaned, or uneven temperatures.' Peeling is 'large areas of the finish or primer coat separate from the metal' and is 'usually caused by wax, grease, rust, or oil under the paint.' Given the 'rusting through' aspect, the underlying cause is likely corrosion due to moisture and/or improper surface preparation. The next step is to confirm the exact nature of the defect to guide the repair.",
+      "mechanic_instructions": "The bubbling and rusting on the fender edges indicate a paint defect, most likely blistering or peeling, caused by moisture and rust under the paint. We need to confirm the exact nature of the defect. Prick one of the suspected bubbled areas with a sharp tool. What do you observe?",
+      "answer_path_prompts": [
+        "A hole exists under the bubble, confirming blistering, and there is visible rust.",
+        "The paint is flaking off in larger sections, revealing rust underneath.",
+        "It's primarily surface rust with no significant bubbling or paint separation."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_073",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My driver's door has dropped and doesn't line up with the body anymore — I have to lift it to close it.",
+    "query_category": "diagnostic",
+    "technical_issue": "Door Hinge Sag — Door Won't Close Properly",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 42,
+          "context": "DOOR ALIGNMENT"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 50,
+          "context": "INSTALLATION"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 10,
+          "context": "CHECKING BODY FOR MISALIGNMENT"
+        }
+      ],
+      "diagnostic_reasoning": "A dropped door that requires lifting to close is most commonly caused by either loose door hinge attaching bolts or worn hinge pins/bushings. The door hinges are designed to provide sufficient adjustment for most misalignment conditions. If the hinges themselves are worn, they will exhibit vertical play even when the attaching bolts are tight. Less likely, but still possible, is a general body misalignment, which would require more extensive measurement. The FSM explicitly states that striker plate adjustment should not be used to compensate for poor door adjustment, reinforcing that the issue lies with the door's position relative to the body opening.",
+      "mechanic_instructions": "The primary suspects for a dropped driver's door are the door hinges. You need to physically inspect the hinges for looseness or wear. Open the door and observe the hinges. Then, with the door slightly ajar, try to lift the rear edge of the door to check for vertical play. This will help determine if the hinge attaching bolts are loose or if the hinge pins/bushings themselves are worn.",
+      "answer_path_prompts": [
+        "The door hinge attaching bolts are visibly loose or can be easily tightened with a wrench.",
+        "The door hinge attaching bolts are tight, but there is noticeable vertical play (up and down movement) when lifting the rear edge of the door.",
+        "The door hinges appear normal and tight, with no vertical play, but the door still sags and requires lifting to close."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_074",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The rear quarter panels behind the wheels are rusting from the inside out — the paint is bubbling and flaking.",
+    "query_category": "diagnostic",
+    "technical_issue": "Quarter Panel Rust",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body",
+        "Paint",
+        "Maintenance"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 12,
+          "context": "PAINT DEFECTS AND REPAIR PROCEDURES www.ForelPublishing.com"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 14,
+          "context": "FIG. 1 5Off Color"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 16,
+          "context": "DRAIN HOLES"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of \"rusting from the inside out\" with paint bubbling and flaking on the rear quarter panels strongly suggests internal corrosion. The FSM describes \"Blistering\" as the formation of bubbles caused by \"rust, moisture, or oil between the coats, metal not properly cleaned\" (Source 1, page 12). \"Peeling\" is described as large areas of finish separating from the metal, \"usually caused by wax, grease, rust, or oil under the paint\" (Source 21, page 14). A critical factor for \"inside out\" rust in quarter panels is moisture accumulation. The FSM explicitly states that \"Drain holes (Fig. 28), located on the underside of each rocker panel, quarter panel, and door, should be cleared periodically\" (Source 47, page 16). Clogged drain holes would trap water, leading to the described internal corrosion and subsequent paint damage.",
+      "mechanic_instructions": "The paint bubbling and flaking on your rear quarter panels, described as 'from the inside out,' points to internal corrosion. This aligns with FSM descriptions of 'Blistering' and 'Peeling,' both of which can be caused by rust or moisture under the paint. A common culprit for 'inside out' rust in these areas is moisture trapped by clogged drain holes. Your first step is to physically inspect the drain holes on the underside of the affected quarter panels and examine the paint for specific characteristics of blistering or peeling.",
+      "answer_path_prompts": [
+        "The drain holes on the underside of the quarter panels are completely clogged with debris, and I can see rust and moisture inside the panel.",
+        "The drain holes are clear, but there's extensive rust and paint separation visible on the inner side of the quarter panel, indicating internal corrosion from another source.",
+        "The paint is bubbling and flaking on the exterior, but the drain holes are clear, and I see no visible rust or moisture on the inner side of the quarter panel.",
+        "The paint is peeling off in large sections, revealing bare metal, but there's no rust visible on the metal or inside the panel, and the drain holes are clear."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_075",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "A mechanic told me the torque boxes are rusted and the body flexes when I drive over bumps or jack up the car.",
+    "query_category": "diagnostic",
+    "technical_issue": "Torque Box Rust (Convertibles Especially)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body/Frame Structure"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 18,
+          "context": "HOISTING VEHICLE"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 18,
+          "context": "FLOOR JACK"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of body flex when driving over bumps or jacking up the car, coupled with the mechanic's assessment of rusted torque boxes, strongly indicates a compromised unitized body-frame structure. The 1965 Mustang utilizes unitized construction, meaning the body itself is a load-bearing component. Rusted torque boxes, which are critical structural reinforcements, would directly lead to a loss of chassis rigidity and manifest as body flex. The FSM emphasizes the special precautions required for jacking due to this unitized construction (Source 1, page 18; Source 31, page 18), further highlighting the importance of structural integrity. The next step is to visually confirm the extent of this reported damage.",
+      "mechanic_instructions": "The reported body flex and rusted torque boxes indicate a severe compromise to the unitized body-frame structure. Get the car on a lift. You need to visually inspect the torque boxes, which are the reinforced structural members connecting the front and rear subframes, typically found under the floor pan near the rocker panels. Look for visible rust-through, cracks, or deformation in these areas and the adjacent frame rails and floor pan. This is about assessing the extent of structural damage, not just surface rust.",
+      "answer_path_prompts": [
+        "I see significant rust-through, cracks, or visible deformation in the torque boxes and surrounding frame rails/floor pan.",
+        "There is surface rust, but no obvious structural damage (rust-through, cracks, or deformation) to the torque boxes or adjacent frame. The body flex might be from another source.",
+        "I'm having trouble identifying the specific 'torque box' areas you're referring to."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

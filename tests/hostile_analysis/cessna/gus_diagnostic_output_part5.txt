@@ -1,0 +1,41 @@
+[
+  {
+    "query_id": "exh_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The exhaust manifold studs are corroded and one broke off during removal -- now there's a stuck stud in the cylinder head.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Exhaust Stud / Nut Corrosion / Breakage",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Exhaust System",
+        "Engine"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 43,
+          "context": "11-78. > 11-79. > SHOP NOTES:"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 24,
+          "context": "11-71. STARTER MOTOR. > 11-72. REMOVAL AND INSTALLATION. > 11-73. EXHAUST SYSTEM. (Refer to figure 11-6.)"
+        }
+      ],
+      "diagnostic_reasoning": "The Service Manual details exhaust system removal and installation (Paragraph 11A-73, 11-75), which involves disconnecting riser pipes from mufflers and cylinders. It specifies using new copper-asbestos gaskets (Paragraph 11A-73, 11-75). However, the manual does not provide a specific procedure for the removal of a broken or stuck exhaust manifold stud from the cylinder head. This situation requires a standard mechanical extraction technique. The primary concern is to remove the stud without damaging the cylinder head threads, which could necessitate more extensive engine repair.",
+      "mechanic_instructions": "A broken exhaust manifold stud in the cylinder head is a common issue, but the 1975 Cessna 172 & Skyhawk Service Manual does not provide a specific procedure for its removal. This will require careful mechanical extraction. Your goal is to remove the stud without damaging the cylinder head threads. Proceed with caution.\n\nFirst, apply penetrating oil to the stud and allow it to soak. If any portion of the stud protrudes, attempt to use a stud extractor tool or weld a nut onto the stud for leverage. If the stud is broken flush or below the surface, you will need to center punch and drill it out, then use an E-Z Out or similar screw extractor. Ensure you drill straight and use progressively larger drill bits if necessary, being careful not to damage the cylinder head material. If the threads are damaged during extraction, a thread repair insert (Heli-Coil or similar) will be required.\n\nWhat is the current state of the broken stud?",
+      "answer_path_prompts": [
+        "The stud is broken off flush with the cylinder head surface.",
+        "A small portion of the stud (1/8 inch or more) is still protruding from the cylinder head.",
+        "I have attempted to extract it, and the stud is now severely damaged or drilled off-center."
+      ],
+      "confidence_disclaimer": "The provided Service Manual does not contain a specific procedure for removing a broken exhaust manifold stud from the cylinder head. The instructions provided are based on general aviation maintenance practices for stud extraction, which are not explicitly verified by the FSM for this specific component.",
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

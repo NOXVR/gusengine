@@ -1,0 +1,1064 @@
+[
+  {
+    "query_id": "elec_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The ELT battery is expired and the unit failed its annual test.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "ELT Battery Expiration / Test Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Emergency Locator Transmitter (ELT)"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 33,
+          "context": "PROBABLE CAUSE > TROUBLE > *POWER LOW"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 34,
+          "context": "PROBABLE CAUSE > TROUBLE > *POWER LOW"
+        }
+      ],
+      "diagnostic_reasoning": "The ELT battery is expired, and the unit failed its annual test. The Service Manual lists 'Low battery voltage,' 'Faulty transmitter,' and 'Faulty co-axial antenna cable' as probable causes for a 'POWER LOW' condition, which would result in a failed performance check. The troubleshooting procedure for 'POWER LOW' begins by measuring the battery-pack voltage. This step will confirm if the expired battery is indeed the direct cause of the low power output, or if other components need further investigation.",
+      "mechanic_instructions": "The ELT battery is expired, and the unit failed its annual test. The Service Manual's troubleshooting for 'POWER LOW' (which an annual test failure often indicates) begins by verifying the battery's voltage output. Even though the battery is expired, we need to confirm its current state to follow the diagnostic path. \n\nProceed with the following, as per Section 16-95, 'TROUBLE SHOOTING' for 'POWER LOW' (Source 36, page 33; Source 40, page 34):\n1. Set the ELT toggle switch to OFF.\n2. Remove the plastic plug from the remote jack.\n3. Connect a Simpson 260 model voltmeter to the jack.\n4. Measure the battery-pack voltage.",
+      "answer_path_prompts": [
+        "The 6-cell magnesium battery pack voltage is 10.8 volts or less, or the 4-cell lithium battery pack voltage is 11.2 volts or less.",
+        "The battery-pack voltage meets or exceeds 10.8 volts (6-cell magnesium) or 11.2 volts (4-cell lithium)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "inst_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My tachometer reads inconsistently -- it shows different RPMs than what I know the engine is producing.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Tachometer Inaccuracy",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Indicators",
+        "Mechanical Drive System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 34,
+          "context": "15-32. ENGINE INDICATORS. > TROUBLE > PROBABLE CAUSE"
+        }
+      ],
+      "diagnostic_reasoning": "The Service Manual states that 'Most tachometer difficulties will be found in the drive-shaft.' It specifically links a 'noisy or pointer oscillates' symptom to issues with the cable housing (kinks, dents, sharp bends) or the cable itself (worn spots, breaks, kinks). An inconsistent RPM reading falls under this category of pointer oscillation or erratic behavior. The initial diagnostic step is to physically inspect the drive shaft and housing.",
+      "mechanic_instructions": "An inconsistent tachometer reading, where the RPMs shown do not match the engine's known output, strongly suggests a problem with the mechanical tachometer drive shaft or its housing. The flexible shaft drives the tachometer at half crankshaft speed. Any physical obstruction or damage to this system will cause erratic readings. You need to physically inspect the drive shaft and its housing.",
+      "answer_path_prompts": [
+        "The tachometer cable housing has kinks, dents, or sharp bends, or the cable itself has worn spots, breaks, or kinks.",
+        "The tachometer cable and housing appear to be in good condition, free of kinks, bends, or damage, and the cable pulls out smoothly.",
+        "The tachometer is noisy, but the pointer does not oscillate significantly."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My wheel fairings (pants) are cracked and loose -- they rattle and pieces are coming off.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Wheel Fairing Damage / Attachment",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Landing Gear"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 28,
+          "context": "5-10. > MAIN WHEEL SPEED FAIRING REMOVAL > 4ND INSTALLATION."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 29,
+          "context": "5-11. > NOTE > 5-12."
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms of cracked, loose, rattling, and shedding wheel fairings directly point to damage or improper attachment of the main wheel speed fairings. The Service Manual provides procedures for removal and installation of these fairings, and mentions repair kits for earlier models, indicating that fairing damage and attachment issues are known failure modes. The primary suspects are either the fairing material itself failing (cracks) or the mounting hardware (screws, nutplates) becoming loose or damaged.",
+      "mechanic_instructions": "The rattling and pieces coming off indicate a failure of the wheel fairing or its attachment. We need to determine if the fairing material is compromised, or if the mounting hardware has failed. Inspect the main wheel speed fairings and their attachment points. Pay close attention to the screws and nutplates that secure the fairing halves and attach them to the landing gear.",
+      "answer_path_prompts": [
+        "The fairing material itself is cracked, broken, or has missing pieces, but the mounting screws and nutplates appear intact and tight.",
+        "The fairing material is largely intact, but the mounting screws are loose, stripped, or the nutplates are damaged, causing the fairing to rattle.",
+        "Both the fairing material is significantly damaged, and the mounting hardware is loose or compromised."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_014",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The starter engages but won't turn the engine -- I hear a grinding noise and the starter just spins.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Starter Adapter / Ring Gear Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Starting System",
+        "Engine"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 23,
+          "context": "11- 69. TROUBLE SHOOTING > TROUBLE > STARTER MOTOR RUNS, BUT DOES NOT TURN CRANKSHAFT."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 43,
+          "context": "TROUBLE > PROBABLE CAUSE > STARTER MOTOR RUNS, BUT"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'starter engages but won't turn the engine' combined with 'grinding noise and the starter just spins' points directly to a failure in the mechanical power transfer from the starter motor to the engine's crankshaft. The troubleshooting guide (11-69, 11A-67) lists 'Defective Bendix drive,' 'Damaged starter pinion gear or ring gear,' and 'Defective overrunning clutch or drive' as probable causes when the 'STARTER MOTOR RUNS, BUT DOES NOT TURN CRANKSHAFT.' The 'STARTER EXCESSIVELY NOISY' symptom further supports 'Worn starter pinion gear or broken teeth on ring gear.' The Bendix drive (or overrunning clutch) is responsible for engaging the starter pinion gear with the engine's ring gear. If either the Bendix drive fails to fully engage, or if the teeth on either gear are worn or broken, the starter motor will spin, but the engine will not turn, and a grinding noise will be present.",
+      "mechanic_instructions": "The grinding noise and the starter spinning without turning the crankshaft indicate a mechanical failure in the starter engagement mechanism. We need to determine if the issue is with the starter's Bendix drive (overrunning clutch) or the gears themselves. You need to physically inspect the starter pinion gear and the engine's ring gear for damage, and verify the Bendix drive's operation.",
+      "answer_path_prompts": [
+        "I removed the starter and found the starter pinion gear teeth are worn or broken.",
+        "I removed the starter and found the engine's ring gear teeth are worn or broken.",
+        "I removed the starter and the pinion gear and ring gear appear fine, but the Bendix drive (overrunning clutch) does not extend or retract properly, or it slips when manually tested."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The trim wheel is stiff and the trim doesn't respond smoothly -- it's hard to get the airplane properly trimmed.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Elevator Trim Tab Cable Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Elevator Trim Control System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 35,
+          "context": "SECTION 9 > ELEVATOR TRIM CONTROL SYSTEM > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 36,
+          "context": "9-3. TROUBLE SHOOTING (Cont). > TROUBLE > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 41,
+          "context": "9-10. CABLES AND PULLEYS. (Refer to figure > 9-1.) > 9-11. REMOVAL AND INSTALLATION."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'stiff trim wheel' and 'doesn't respond smoothly' indicates excessive resistance within the elevator trim control system. The Service Manual's troubleshooting section for 'TRIM CONTROL WHEEL MOVES WITH EXCESSIVE RESISTANCE' lists several probable causes, including high cable tension, binding pulleys, rusty chains, damaged sprockets, bent sprocket shafts, trim tab hinge binding, and a defective trim tab actuator (Source 1, 15, 41, 50). The 'doesn't respond smoothly' aspect further points to friction or intermittent binding in these mechanical components. The initial diagnostic steps should involve visual inspection of the control system components and isolating the trim tab and actuator to determine the source of resistance.",
+      "mechanic_instructions": "The trim wheel's stiffness and unsmooth response point to friction or binding in the elevator trim control system. We need to isolate the source of this resistance. First, we'll check the control cables, pulleys, chains, and sprockets. Then, we'll check the trim tab hinge and actuator.",
+      "answer_path_prompts": [
+        "I have opened the access plates and visually inspected the trim system cables, pulleys, chains, and sprockets. I observe rust, damage, or cables off pulleys, or clear signs of binding.",
+        "I have opened the access plates and visually inspected the trim system cables, pulleys, chains, and sprockets. All components appear to be in good condition, properly routed, and free of obvious damage or rust.",
+        "I have disconnected the trim tab actuator from the trim tab horn assembly. The trim tab moves freely by hand with no resistance.",
+        "I have disconnected the trim tab actuator from the trim tab horn assembly. The trim tab still exhibits resistance when moved by hand."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_008",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The carb heat knob is very stiff to pull and doesn't seem to give full heat -- or it broke off in my hand.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Carburetor Heat Control Cable Stiff / Broken",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Controls",
+        "Induction Air System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 22,
+          "context": "11-66. CARBURETOR HEAT CONTROL."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "11-63. RIGGING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 39,
+          "context": "11A- 46. AIRBOX."
+        }
+      ],
+      "diagnostic_reasoning": "The carburetor heat control is a push-pull type that operates a valve in the induction airbox. Stiffness or breakage of the knob indicates a mechanical binding or failure within this system. Potential causes include: 1) binding within the control cable or its housing, 2) a sticking or obstructed air valve in the induction airbox, or 3) damage to the control wire or its attachment to the air valve lever. The most efficient first step is to isolate the control cable from the airbox valve to determine which component is causing the resistance.",
+      "mechanic_instructions": "The carburetor heat control is a push-pull type that operates a valve in the induction airbox. Stiffness or breakage indicates a mechanical issue within this system. To isolate the problem, you need to determine if the binding is in the control cable assembly or the airbox valve itself.\n\nFirst, remove the engine cowling as per paragraph 11-3. Then, locate the carburetor heat control connection at the airbox. Disconnect the control wire from the air valve lever on the airbox. This will allow you to test the movement of the control knob and the air valve independently. Observe the movement of both components.",
+      "answer_path_prompts": [
+        "The control knob now moves freely, but the air valve on the airbox is stiff or stuck.",
+        "The control knob is still stiff or broken, even after disconnecting it from the airbox valve.",
+        "Both the control knob and the air valve move freely after disconnection."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "ign_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine runs rough and the mechanic found that the magneto timing has drifted from the specification.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Magneto Timing Drift",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 42,
+          "context": "SPECIAL INSPECTION ITEMS > 8 (LYCOMING \"BLUE STREAKII) > ROLLS/ROYC E CONTINENTAL"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 20,
+          "context": "NOTE > NOTE > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 41,
+          "context": "THESE CONTACT POINTS ARE USABLE > THESE CONTACT POINTS NEED REPLACEMENT > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 18,
+          "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 19,
+          "context": "11-52. MAGNETOS. > (WARNING) > 11-54. REMOVAL AND INSTALLATION."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "11-59. MAGNETO CHECK. > NOTE > 11-60. SPARK PLUGS. Two 18-mm spark plugs are"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 40,
+          "context": "NOTE > (WARNING) > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of 'engine runs rough' combined with the observation that 'magneto timing has drifted from the specification' points directly to the ignition system. The primary suspect is incorrect magneto-to-engine timing. The Service Manual specifies checking magneto-to-engine timing at regular intervals (e.g., every 100 or 200 hours depending on engine type) and provides a tolerance of +0, -2 degrees (Source 5, 9, 10, 26). If the timing is outside this range, it must be re-timed to the engine (Source 9, 26). If re-timing is not possible or the timing drifts immediately, it suggests an internal magneto defect, especially for Lycoming 'Blue Streak' magnetos which are not field overhaulable and have non-replaceable internal components (Source 2, 15, 18, 34). Other potential causes for rough running, such as fouled spark plugs or a defective ignition harness, should also be considered if timing adjustment does not resolve the issue (Source 9, 23, 33, 40, 41).",
+      "mechanic_instructions": "The reported drift in magneto timing is a critical issue for engine operation. Your next step is to perform a magneto-to-engine timing check and adjustment. This procedure involves setting the number one cylinder to its advanced firing position and then using a timing light to ensure the magneto's contact points break at the correct position. The specified tolerance for magneto-to-engine timing is plus zero, minus two degrees. Refer to paragraph 11-57 (or 11A-55 for Continental engines) for detailed instructions on locating the advanced firing position and paragraph 11-58 (or 11A-56) for the timing check and adjustment procedure. (Source 5, 9, 18, 26, 27, 28, 39, 48, 50).",
+      "answer_path_prompts": [
+        "I measured the magneto-to-engine timing, and it was outside the +0, -2 degree tolerance, but I successfully adjusted it back into specification. The engine now runs smoothly.",
+        "I measured the magneto-to-engine timing, and it was outside the +0, -2 degree tolerance. I attempted to adjust it, but it either could not be brought into specification or immediately drifted out again.",
+        "I measured the magneto-to-engine timing, and it was within the +0, -2 degree tolerance. The engine still runs rough."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "inst_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My altimeter doesn't match the field elevation when I set the current altimeter setting -- it's off by over 75 feet.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Altimeter Error -- Setting/Calibration",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Pitot-Static System",
+        "Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 24,
+          "context": "15- 17. TROUBLE SHOOTING--PITOT STATIC SYSTEM. > LOW OR SLUGGISH AIRSPEED > INCORRECT OR SLUGGISH"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 26,
+          "context": "15-20. TROUBLE SHOOTING--ALTIMETER > TROUBLE > INSTRUMENT FAILS TO"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 19,
+          "context": "15-3. INSTRUMENT PANEL. (Refer to figure 15-1.) > 15-4. DESCRIPTION. The instrument panel assem- > 15-5. REMOVAL AND INSTALLATION. The sta-"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of the altimeter being off by over 75 feet when set to field elevation falls under 'INCORRECT INDICATION' for the altimeter (Source 6, 15-20). The probable causes for this include a plugged static line, a defective altimeter mechanism, leaking diaphragm, pointers out of calibration, static pressure irregularities, or a leak in other static instrument installations (Source 6, 15-20). The static system is shared by the altimeter, vertical speed indicator, and airspeed indicator (Source 43, 15-11). Therefore, the primary differential diagnosis is between a fault within the altimeter itself or a problem with the shared static pressure system.",
+      "mechanic_instructions": "Your altimeter is indicating incorrectly. This could be due to a fault within the altimeter instrument itself, or a problem with the shared static pressure system that supplies pressure to the altimeter, vertical speed indicator (VSI), and airspeed indicator. To narrow this down, observe the behavior of the other static instruments.",
+      "answer_path_prompts": [
+        "The vertical speed indicator (VSI) and airspeed indicator also show incorrect or sluggish responses, or fail to operate correctly.",
+        "Only the altimeter shows an incorrect indication; the VSI and airspeed indicator appear to be operating normally."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_007",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found corrosion at the wing strut attach fittings during the annual inspection.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Corrosion at Wing Strut Attachment",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Wings and Empennage",
+        "Structural Repair"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 18,
+          "context": "NOTE > * NOTE > 4-15."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 17,
+          "context": "4-5. REPAIR. > 4-6. INSTALLATION. > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 40,
+          "context": "18-41. WING LEADING EDGE. > 18-42. NEGLIGIBLE DAMAGE. Refer to paragraph > 18-13."
+        }
+      ],
+      "diagnostic_reasoning": "Corrosion on wing strut attach fittings is a critical structural concern. The Service Manual states that wing strut repair is limited to replacement of tie-downs and attaching parts, and a badly dented, cracked, or deformed wing strut should be replaced (Section 4-11, page 17). General structural repair guidelines emphasize that 'corrosion of all types must be carefully considered, and approved remedial action taken' (Section 18-56, page 40). For specific aircraft serial numbers (17261664 THRU 17261808), wing strut attachment straps require inspection and compliance with Cessna Single-engine Service Letter SE73-20 (Note, page 18). The immediate next step is to determine the extent of the corrosion and check the aircraft's serial number against the service letter.",
+      "mechanic_instructions": "Corrosion on wing strut attach fittings demands immediate attention due to its impact on structural integrity. We need to determine the severity of the corrosion and whether a specific service bulletin applies to this aircraft. Carefully inspect the affected area.",
+      "answer_path_prompts": [
+        "The corrosion is superficial, easily removed, and has not caused any pitting, material loss, or visible cracks.",
+        "The corrosion has caused pitting, significant material loss, or there are visible cracks in the fitting.",
+        "The aircraft serial number is between 17261664 and 17261808."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "elec_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I hear a whining noise in my radios that changes pitch with engine RPM -- the mechanic calls it alternator whine.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Avionics Interference / Noise",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Alternator System"
+      ],
+      "source_citations": [
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 3,
+          "context": "16-35. ALTERNATOR POWER SYSTEM. > TROUBLE"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 4,
+          "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont. ) > TROUBLE > AMMETER INDICATES HEAVY"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 8,
+          "context": "16-14"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of 'alternator whine' changing pitch with engine RPM strongly indicates an issue within the alternator power system. This noise is typically caused by AC ripple on the DC bus due to improper rectification, unstable voltage regulation, or inadequate noise suppression. The Service Manual explicitly states that 'poor voltage regulation and/or excessive radio noise may result' from issues with alternator grounding, wiring shields, or the regulator base (Source 53, page 8). Furthermore, troubleshooting for related electrical issues like 'Ammeter indicates heavy discharge' points to a 'Shorted radio noise filter or shorted wire' (Source 1, page 3; Source 13, page 3; Source 17, page 3) or 'Shorted diodes in alternator' (Source 5, page 4; Source 34, page 4), and a 'Regulator faulty or improperly adjusted' (Source 5, page 4; Source 9, page 4; Source 21, page 4; Source 34, page 4; Source 37, page 5; Source 46, page 4). These are the most probable causes for the reported symptom.",
+      "mechanic_instructions": "The whining noise in your radios that changes pitch with engine RPM is a classic sign of electrical interference originating from the alternator system. This can be due to a faulty alternator, an improperly functioning voltage regulator, or issues with the wiring, grounding, or radio noise filter. We need to isolate the source of this electrical noise. Start by checking the components designed to suppress this noise and the primary sources of electrical generation.",
+      "answer_path_prompts": [
+        "I found a direct short in the radio noise filter or its wiring, or the filter shows infinite resistance in both directions during the resistance check (indicating an open circuit).",
+        "I performed the resistance check on the alternator output terminal to the alternator case, and it shows continuity in both directions, or infinite resistance in both directions (indicating shorted or open diodes).",
+        "I observed the field relay in the voltage regulator, and it is inoperative, or after jumpering the 'A+' and 'F' terminals, the ammeter does not show a heavy charge rate."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_015",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's oil dripping from the oil cooler and the oil level keeps dropping.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Oil Cooler Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Oil System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 13,
+          "context": "11-31. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 14,
+          "context": "11- 31. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 21,
+          "context": "2-21. ENGINE OIL."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 16,
+          "context": "11-39. OIL COOLER."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 11,
+          "context": "11-29. ENGINE OIL SYSTEM."
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms, 'oil dripping from the oil cooler' and 'oil level keeps dropping,' directly indicate a leak in the engine oil system, specifically at or around the oil cooler. The service manual lists 'Low oil supply' as a probable cause for low oil pressure, and remedies include checking the dipstick and filling the sump (Source 30, 32, 34, 44). The oil cooler is mounted on the firewall with flexible hoses carrying oil to and from it (Source 16). Leaks can occur from the cooler core, its hoses, or connections. Other potential leak points, such as the crankshaft seal or push rod housing oil seal, are also listed under 'OIL LEAK AT FRONT OF ENGINE' (Source 10, 19, 26), but the user's observation points directly to the cooler. The initial step is to visually inspect the oil cooler and its connections to pinpoint the exact source of the leak.",
+      "mechanic_instructions": "The oil dripping from the oil cooler and the dropping oil level indicate a leak in the engine oil system. You need to visually inspect the oil cooler assembly and its connections to determine the exact source of the leak. Clean the area around the oil cooler and run the engine briefly to observe where the oil begins to seep or drip.",
+      "answer_path_prompts": [
+        "Oil is visibly seeping or dripping directly from the fins or body of the oil cooler itself.",
+        "Oil is dripping from one of the flexible hoses connected to the oil cooler, or from the fittings where the hoses attach to the cooler or engine.",
+        "Oil appears to be dripping onto the oil cooler from a component located above it, indicating the cooler isn't the primary leak source."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_007",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found a crack in the nose gear fork during the 100-hour inspection.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Nose Gear Fork Cracks (AD 71-22-02)",
+    "response_parsed": {
+      "current_state": "PHASE_D_CONCLUSION",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Landing Gear"
+      ],
+      "source_citations": [
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 49,
+          "context": "5-33. NOSE GEAR SHOCK STRUT DISASSEMBLY."
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 41,
+          "context": "18-61. REPAIR AFTER HARD LANDING."
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 24,
+          "context": "5-3. > TROUBLE SHOOTING."
+        }
+      ],
+      "diagnostic_reasoning": "A crack in the nose gear fork is a critical structural defect. The Service Manual states that 'damaged or questionable forgings must be replaced' (Source 5, page 41; Source 11, page 41). While this specific reference is for landing gear bulkheads, the principle applies to any structural forging like the nose gear fork. The troubleshooting section also indicates to 'replace defective parts' for landing gear issues (Source 13, page 24). The nose gear shock strut disassembly procedure details removing the fork (Source 8, page 49). Therefore, the cracked nose gear fork requires replacement.",
+      "mechanic_instructions": "The cracked nose gear fork is a flight safety issue and requires immediate replacement. Do not attempt to repair it. You will need to remove the nose gear shock strut assembly from the aircraft, then disassemble the strut to replace the fork. Refer to paragraph 5-26 for Nose Gear Removal and Installation, and paragraph 5-33 for Nose Gear Shock Strut Disassembly. Specifically, step 'h' of paragraph 5-33 details removing the bolt securing the fork and lower strut.",
+      "answer_path_prompts": [
+        "I have removed and replaced the nose gear fork and reassembled the strut.",
+        "I need clarification on a specific step in the removal or installation process."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_D_CONCLUSION"
+  },
+  {
+    "query_id": "fuel_009",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The fuel selector is leaking internally -- fuel is cross-feeding between tanks or dripping from the valve.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Selector Valve O-Ring Deterioration (Ethanol)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 3,
+          "context": "12-12. FUEL SELECTOR VALVE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 46,
+          "context": "12-4. TROUBLE SHOOTING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 26,
+          "context": "2-44. FUEL SELECTOR VALVE"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of internal fuel selector valve leakage, specifically cross-feeding or dripping, points directly to a defective fuel selector valve. The Service Manual states that 'Valve repair consists of replacement of seals, springs, balls and other detail parts' (Source 1, 5), which are the components responsible for sealing and preventing cross-flow. The troubleshooting guide also lists 'Defective fuel selector valve' as a probable cause for fuel flow issues, with the remedy being 'Repair or replace selector valve' (Source 2, 13, 16). Other fuel system issues like plugged vents or strainers would typically manifest as fuel starvation or tank pressurization, not internal valve leakage or cross-feeding.",
+      "mechanic_instructions": "Your report indicates a defective fuel selector valve. This is a critical component for fuel management and safety. The internal leakage, whether cross-feeding or dripping, suggests worn or damaged internal seals, springs, or balls within the valve body. Before proceeding with any repair, you must physically verify the nature and extent of the leak. This will help determine if a seal replacement kit is sufficient or if the entire valve assembly requires replacement. Access to the valve requires removal of the pedestal cover (Source 4, 8).",
+      "answer_path_prompts": [
+        "Fuel is visibly dripping from the fuel selector valve body or its connections beneath the pedestal.",
+        "Fuel levels in the tanks equalize or change unexpectedly when the selector is in a single tank position (LEFT or RIGHT), indicating cross-feeding.",
+        "The fuel selector handle is stiff, loose, or does not positively detent into positions, but no visible fuel leak is present.",
+        "No visible external leak, and fuel levels remain stable in single tank positions, but there is a strong, persistent fuel odor in the cabin."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_008",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The elevator hinge bolts are worn and there's excessive play in the elevator control surface.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Stabilizer / Elevator Hinge Bolt Wear",
+    "response_parsed": {
+      "current_state": "PHASE_D_CONCLUSION",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Elevator Control System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 30,
+          "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 29,
+          "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 34,
+          "context": "8-6. REPAIR. Repair may be accomplished as out- > 8-7. > BELLCRANKS."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 40,
+          "context": "18-41. WING LEADING EDGE. > 18-42. NEGLIGIBLE DAMAGE. Refer to paragraph > 18-13."
+        }
+      ],
+      "diagnostic_reasoning": "The reported worn elevator hinge bolts and excessive play in the elevator control surface directly indicate 'Defective elevator hinges' as a probable cause for 'BINDING OR JUMPY MOTION FELT IN MOVEMENT OF ELEVATORS' (Source 1, 7, 15). The prescribed remedy is to 'Replace hinges found defective' (Source 1, 7, 15). This is a confirmed component failure.",
+      "mechanic_instructions": "The worn elevator hinge bolts are causing excessive play. You need to replace the defective elevator hinges. To do this, follow the elevator removal procedure in Section 8-5 of the Service Manual. Specifically, you will need to 'Remove bolts (11) from elevator hinges' (Source 11, page 30) and then remove the elevator. After replacement, ensure you rig the system in accordance with paragraph 8-14 (Source 41, page 34) and check for proper static balance, rebalancing as required per Section 18 (Source 12, page 40).",
+      "answer_path_prompts": [],
+      "requires_input": false
+    },
+    "current_state": "PHASE_D_CONCLUSION"
+  },
+  {
+    "query_id": "cab_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My magnetic compass has large deviations -- the heading it shows is way off from what it should be.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Compass Deviation / Compensation",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 38,
+          "context": "15-50. DESCRIPTION."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 40,
+          "context": "AIRFRA > SPECIAL INSPECTION ITEM > EACH 200 HOURS"
+        }
+      ],
+      "diagnostic_reasoning": "Large deviations in the magnetic compass typically indicate a need for compensation. The Service Manual states that 'No maintenance is required on compass except on occasional check on a compass rose for adjustment of compensation' (Source 1, 8, Section 15-50). Furthermore, 'Magnetic compass compensation' is listed as a special inspection item every 200 hours (Source 7). The compass is equipped with compensating magnets adjustable from the front of the case (Source 1, 8). Therefore, the most probable cause is that the compass is out of compensation.",
+      "mechanic_instructions": "The magnetic compass requires compensation. You need to perform an 'occasional check on a compass rose for adjustment of compensation' as per Section 15-50. The compass has compensating magnets adjustable from the front of the case. Conduct a compass swing and adjust the compensating magnets to correct the deviations.",
+      "answer_path_prompts": [
+        "I performed the compensation, and the compass now reads correctly.",
+        "I performed the compensation, but large deviations persist, or I was unable to compensate it accurately."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_010",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The fuel selector is leaking internally -- fuel is cross-feeding between tanks or dripping from the valve.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Selector Valve O-Ring Deterioration (Ethanol)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 46,
+          "context": "12-4. TROUBLE SHOOTING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 3,
+          "context": "12-12. FUEL SELECTOR VALVE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 26,
+          "context": "2-44. FUEL SELECTOR VALVE"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of internal fuel selector leakage, including cross-feeding or dripping from the valve, points directly to a defective fuel selector valve. The troubleshooting guide (Section 12-4) lists 'Defective fuel selector valve' as a probable cause for fuel flow issues. Section 12-13 explicitly states that 'Valve repair consists of replacement of seals, springs, balls and other detail parts,' indicating that internal component failure is a known issue. The 100-hour inspection also calls for checking the valve for cleanliness, wear, and proper operation (Section 2-44). The immediate next step is to remove the valve for a thorough inspection of its internal components.",
+      "mechanic_instructions": "The internal fuel selector leak, whether cross-feeding or dripping, indicates a failure within the valve itself. This is likely due to worn or damaged internal seals, springs, or balls. To confirm this, you need to remove the fuel selector valve for a detailed inspection. Follow the procedure in Section 12-14, 'REMOVAL AND INSTALLATION,' starting on page 3 of the Fuel System section. Pay close attention to precautions in paragraph 12-3 regarding fuel drainage. Once removed, inspect the valve for physical signs of wear or damage.",
+      "answer_path_prompts": [
+        "Upon disassembly, I found visible wear, scoring, or damage to the internal seals, balls, or valve body.",
+        "The valve's internal components appear intact with no obvious damage, but there is evidence of fuel residue or staining indicating a past leak path.",
+        "I found no visible damage or fuel residue on the valve itself, but the fuel lines connected to the valve showed signs of leakage or improper sealing."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_009",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The elevator hinge bolts are worn and there's excessive play in the elevator control surface.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Stabilizer / Elevator Hinge Bolt Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Elevator Control System",
+        "Airframe Structure"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 30,
+          "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 40,
+          "context": "18-41. WING LEADING EDGE. > 18-42. NEGLIGIBLE DAMAGE. Refer to paragraph > 18-13."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 41,
+          "context": "SPECIAL INSPECTION ITEM > EACH 200 HOURS > EACH 100 HOURS"
+        }
+      ],
+      "diagnostic_reasoning": "The user reports worn elevator hinge bolts and excessive play in the elevator control surface. The Service Manual lists 'Defective elevator hinges' as a probable cause for 'BINDING OR JUMPY MOTION FELT IN MOVEMENT OF ELEVATORS' and prescribes 'Replace hinges found defective' (Source 1, page 30; Source 7, page 30; Source 15, page 30). Excessive play is a direct indicator of a defective hinge. Furthermore, the manual specifies that cracks in the front spar at hinge fittings or in the structure supporting the overhanging balance weight are *not* considered negligible damage (Source 2, page 40; Source 12, page 40), highlighting the critical nature of hinge integrity and surrounding structure. Before proceeding with hinge replacement, it is essential to confirm the extent of the hinge damage and inspect for any secondary damage to the surrounding airframe structure. Additionally, other components in the elevator control system, such as bellcranks or cables, could contribute to perceived play or binding, and should be quickly checked.",
+      "mechanic_instructions": "You've identified worn elevator hinge bolts and excessive play. This points directly to defective elevator hinges. Before replacement, we need to confirm the full extent of the damage and rule out other contributing factors. Carefully inspect the elevator hinges and the surrounding structure for any cracks or additional wear. Also, check the bellcranks and cable tension, as these can also cause play or binding in the control system.",
+      "answer_path_prompts": [
+        "The elevator hinges show significant wear, and there are visible cracks in the front spar at the hinge fittings.",
+        "The elevator hinges show wear, but no cracks are visible. However, the bellcrank or its pivot bearing also has noticeable play.",
+        "The elevator hinges show wear, but no cracks are visible. The bellcrank is solid, but the elevator control cables are slack."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My magnetic compass has large deviations -- the heading it shows is way off from what it should be.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Compass Deviation / Compensation",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 38,
+          "context": "15-50. DESCRIPTION."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 40,
+          "context": "AIRFRA > SPECIAL INSPECTION ITEM > EACH 200 HOURS"
+        }
+      ],
+      "diagnostic_reasoning": "The magnetic compass is equipped with compensating magnets adjustable from the front of the case to account for magnetic interference within the aircraft. The Service Manual explicitly states that the only required maintenance, beyond lamp replacement, is an occasional check on a compass rose for adjustment of compensation. Large deviations directly point to an issue with the current compensation settings or the need for a new compensation procedure. This is a 200-hour inspection item.",
+      "mechanic_instructions": "The magnetic compass is designed with internal compensating magnets to correct for magnetic fields within the aircraft that cause deviations. When the compass shows large deviations, the most probable cause is that the compass compensation is incorrect or has not been performed recently. We need to establish the history of the compass compensation.",
+      "answer_path_prompts": [
+        "The compass has not been compensated recently, or the last compensation was performed a long time ago.",
+        "The compass was recently compensated, but the deviations are still significant.",
+        "The deviations are inconsistent, changing with electrical load or aircraft attitude."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "inst_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My altimeter doesn't match field elevation with the current setting -- it's off by over 75 feet.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Altimeter Error -- Calibration",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Pitot-Static System",
+        "Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 26,
+          "context": "15-20. TROUBLE SHOOTING--ALTIMETER"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 23,
+          "context": "15-14. PITOT SYSTEM INSPECTION AND LEAKAGE"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 19,
+          "context": "15-12. MAINTENANCE."
+        }
+      ],
+      "diagnostic_reasoning": "An altimeter indicating off by over 75 feet with the correct setting points to an 'INCORRECT INDICATION' as per Section 15-20, TROUBLE SHOOTING--ALTIMETER. The probable causes include a plugged static line, defective altimeter mechanism (e.g., leaking diaphragm, pointers out of calibration), or leaks in the static system, potentially affecting other instruments. The most logical first step is to verify the integrity of the static system, as it affects the altimeter, vertical speed indicator, and airspeed indicator. The FSM provides a specific 'STATIC PRESSURE SYSTEM INSPECTION AND LEAKAGE TEST' in Section 15-14.",
+      "mechanic_instructions": "An altimeter discrepancy of over 75 feet with the correct setting indicates a fault in the static system or the instrument itself. First, ensure the altimeter setting knob is not simply misaligned. Then, we need to check the static pressure system for leaks or obstructions, as this is a common cause for incorrect altimeter readings and affects all three static instruments. Perform the 'STATIC PRESSURE SYSTEM INSPECTION AND LEAKAGE TEST' as outlined in Section 15-14 of the Service Manual. This involves attaching a suction source to the static pressure opening, slowly applying suction until the altimeter indicates a 1000-foot increase, then cutting off the suction to maintain a closed system for one minute. Observe the altimeter for altitude loss.",
+      "answer_path_prompts": [
+        "The altimeter loses more than 100 feet of altitude in one minute during the leakage test.",
+        "The altimeter loses 100 feet of altitude or less in one minute during the leakage test.",
+        "The altimeter hands were simply misaligned, and resetting them with the knob corrected the 75-foot discrepancy."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_008",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found a crack in the nose gear fork during the 100-hour inspection.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Nose Gear Fork Cracks (AD 71-22-02)",
+    "response_parsed": {
+      "current_state": "PHASE_D_CONCLUSION",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Landing Gear"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 49,
+          "context": "5-33. NOSE GEAR SHOCK STRUT DISASSEMBLY."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 24,
+          "context": "5-3. > TROUBLE SHOOTING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 30,
+          "context": "5-13. MAIN WHEEL INSPECTION AND REPAIR."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 38,
+          "context": "3-7B. CLEANING, INSPECTION AND REPAIR."
+        }
+      ],
+      "diagnostic_reasoning": "A crack in a structural component like the nose gear fork is a critical failure. The Service Manual consistently mandates replacement for cracked or defective structural parts, rather than repair. For landing gear, the manual states to 'replace defective parts' (Source 13). For other critical components like wheel halves, it specifies 'Cracked wheel halves shall be discarded and new parts used' (Source 29). Furthermore, a general directive for actuator assemblies states, 'DO NOT attempt to repair damaged or worn parts... Discard all defective items and install new parts during reassembly' (Source 10). The nose gear fork is an integral part of the nose gear shock strut assembly, and its removal is detailed during strut disassembly (Source 8). Therefore, a cracked nose gear fork must be replaced.",
+      "mechanic_instructions": "A crack in the nose gear fork is a critical defect that necessitates immediate replacement. Do not attempt to repair the fork. You will need to remove the nose gear shock strut assembly to access and replace the fork. Refer to paragraph 5-26 for Nose Gear Removal and Installation, and paragraph 5-33 for Nose Gear Shock Strut Disassembly, which details the removal of the fork from the strut. (Source 8, 17, 23, 33).",
+      "answer_path_prompts": [
+        "I will proceed with the nose gear shock strut removal and disassembly to replace the fork.",
+        "I need to confirm the correct part number for the replacement nose gear fork."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_D_CONCLUSION"
+  },
+  {
+    "query_id": "elec_007",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I hear a whining noise in my radios that changes pitch with engine RPM.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Avionics Interference / Alternator Whine",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Charging System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 3,
+          "context": "TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont. ) > TROUBLE > AMMETER INDICATES HEAVY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 8,
+          "context": "Figure 16-5. Voltage Regulator Installation"
+        }
+      ],
+      "diagnostic_reasoning": "The whining noise in the radios that changes pitch with engine RPM is a classic symptom of electrical interference originating from the charging system. The Service Manual explicitly links 'excessive radio noise' to poor voltage regulation and dirty connections on the alternator, wiring shields, and voltage regulator (Source 12, page 8). It also details troubleshooting for a 'radio noise filter' and associated wiring when a 'shorted radio noise filter or shorted wire' is a probable cause (Source 2, page 3; Source 7, page 3). A faulty alternator or regulator (e.g., shorted diodes) can also generate this noise (Source 21, page 4). The most direct initial check for radio noise is the dedicated radio noise filter and its wiring.",
+      "mechanic_instructions": "The whining noise indicates electrical interference, likely from the alternator system. We need to check the radio noise filter and its wiring first, as this component is specifically designed to suppress such noise. Disconnect the cable connections from the radio noise filter. Then, check the resistance from the filter input terminal to ground. Next, check the resistance from ground to the free ends of the wires that were connected to the radio noise filter.",
+      "answer_path_prompts": [
+        "The resistance reading from the filter input terminal to ground indicates a direct short (not infinite resistance).",
+        "The resistance reading from the filter input terminal to ground is infinite, but the resistance from ground to the free ends of the wires connected to the filter indicates a direct short.",
+        "All resistance readings (filter to ground, and wires to ground) show infinite resistance, indicating no direct shorts in the filter or its immediate wiring."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_016",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's oil dripping from the oil cooler and the level keeps dropping.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Oil Cooler Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Oil System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 13,
+          "context": "11-31. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 38,
+          "context": "ENGINE COMPARTMENT"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 16,
+          "context": "11-39. OIL COOLER."
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of oil dripping from the oil cooler and a dropping oil level points directly to a leak in the engine oil system, specifically at the oil cooler or its connections. The Service Manual lists 'Oilcooler' as an item to check for leaks during inspection (Source 5, page 38). The oil cooler uses flexible hoses to carry oil to and from the engine (Source 13, page 16; Source 16, page 16), which are common points for leaks. While other engine oil leaks are possible (e.g., crankshaft seal, push rod housing, Source 10, page 14), the direct observation of dripping from the cooler makes the cooler assembly the primary suspect.",
+      "mechanic_instructions": "You've got oil dripping from the oil cooler and a dropping oil level. This indicates a leak in the oil cooling system. The first step is to pinpoint the exact source of the leak. Clean the area around the oil cooler thoroughly, then run the engine to operating temperature and visually inspect for the leak. Pay close attention to the cooler core, the flexible hoses, and their fittings.",
+      "answer_path_prompts": [
+        "Oil is visibly seeping from the oil cooler core itself.",
+        "Oil is dripping from the flexible hoses connected to the oil cooler or their fittings.",
+        "The oil cooler and its hoses are dry, but oil is leaking from another area of the engine, such as the front crankshaft seal or push rod housings."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_017",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The starter engages but won't turn the engine -- grinding noise and the starter just spins.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Starter Adapter / Ring Gear Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Starting System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 23,
+          "context": "11- 69. TROUBLE SHOOTING > TROUBLE > STARTER MOTOR RUNS, BUT DOES NOT TURN CRANKSHAFT."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 43,
+          "context": "TROUBLE > PROBABLE CAUSE > STARTER MOTOR RUNS, BUT"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 22,
+          "context": "11-67. STARTING SYSTEM. 11-68. DESCRIPTION."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'starter engages but won't turn the engine -- grinding noise and the starter just spins' indicates a mechanical failure in the engagement between the starter motor and the engine's crankshaft. The Service Manual's 'TROUBLE SHOOTING' section for 'STARTER MOTOR RUNS, BUT DOES NOT TURN CRANKSHAFT' lists 'Defective Bendix drive' and 'Damaged starter pinion gear or ring gear' as probable causes (Source 1, 8, 16, 33, 45). The 'STARTER EXCESSIVELY NOISY' troubleshooting also points to 'Worn starter pinion gear or broken teeth on ring gear' (Source 1, 8, 14, 33). The Bendix drive (or overrunning clutch) is responsible for meshing the starter pinion with the ring gear (Source 11, 20). A failure in either the drive mechanism or the gears themselves would produce the described grinding and spinning.",
+      "mechanic_instructions": "The grinding noise and the starter spinning without turning the crankshaft points to a failure in the mechanical connection between the starter motor and the engine's ring gear. This is typically caused by either a defective Bendix drive (overrunning clutch) or damaged teeth on the starter pinion gear or the engine's ring gear. You need to remove the starter motor to inspect these components. Disconnect the electrical cable at the starter motor, ensuring the terminal bolt does not rotate to prevent internal damage (Source 24, 26, 44). Then remove the nuts and bolt securing the starter to the crankcase (Source 34). Once the starter is removed, inspect the Bendix drive and the starter pinion gear. Also, visually inspect the engine's ring gear for damage.",
+      "answer_path_prompts": [
+        "The starter pinion gear is worn, chipped, or has broken teeth, or the engine's ring gear shows similar damage.",
+        "The Bendix drive (overrunning clutch) is visibly damaged, stuck, or does not extend/retract properly.",
+        "Both the starter pinion gear and the engine's ring gear appear normal, and the Bendix drive functions correctly."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_009",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My wheel fairings are cracked and loose -- rattling and pieces coming off.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Wheel Fairing Damage / Attachment",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Landing Gear",
+        "Fuselage"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 28,
+          "context": "5-10. > MAIN WHEEL SPEED FAIRING REMOVAL > 4ND INSTALLATION."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 45,
+          "context": "5-28. NOSE WHEEL REMOVAL AND INSTALLATION. > NOTE > 5-29. NOSE WHEEL DISASSEMBLY. (Cleveland)."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 39,
+          "context": "SPECIAL INSPECTION ITEM > EACH 200 HOURS > FUEL SYSTEM"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 40,
+          "context": "18-41. WING LEADING EDGE. > 18-42. NEGLIGIBLE DAMAGE. Refer to paragraph > 18-13."
+        }
+      ],
+      "diagnostic_reasoning": "The user reports cracked and loose wheel fairings, with rattling and pieces coming off. This indicates a direct failure of the fairing material or its attachment. The Service Manual lists 'Main gear wheels and fairings' and 'Nose gear wheel, torque links, steering rods, boots and fairing' as items for 200-hour inspection, indicating they are subject to wear and damage (Source 2, 8). Procedures for fairing removal and installation are provided in paragraphs 5-10 and 5-27/5-28 (Source 7, 24, 26, 28, 30, 47, 48, 50). The manual also refers to Cessna Service Kit SK182-12 for repair of wheel speed fairings on specific models (Source 7, 24), implying repairability for some damage. However, 'pieces coming off' suggests damage beyond minor repair. Incorrect scraper-to-tire clearance (0.38 inch nominal) is a critical adjustment that, if incorrect, could lead to fairing stress and damage (Source 7, 14, 22, 24, 28, 36). Finally, underlying landing gear structural issues, such as wrinkles in the main landing gear bulkhead areas, could contribute to fairing stress (Source 10). The initial step is to visually assess the fairing's condition and its mounting.",
+      "mechanic_instructions": "The wheel fairings are cracked and loose, indicating a potential failure of the fairing material or its mounting. We need to determine the extent of the damage to the fairing itself and check for any contributing factors like improper installation or underlying structural issues. Visually inspect the affected wheel fairing(s) and their attachment points.",
+      "answer_path_prompts": [
+        "The fairing material is cracked, broken, or missing pieces, and/or the mounting screws/nutplates are stripped or damaged, allowing significant movement.",
+        "The fairing appears structurally sound, but the scraper is visibly rubbing the tire, or there's a significant gap (more than 0.38 inch) between the scraper and the tire.",
+        "The fairing is damaged, but I also observe cracks, deformation, or excessive movement in the main landing gear spring-strut or its attaching bulkhead."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_010",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Corrosion found at wing strut attach fittings during the annual.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Corrosion at Wing Strut Attachment",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Wings and Empennage",
+        "Airframe Structure"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 18,
+          "context": "figure 4-4. )"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 17,
+          "context": "4-5. REPAIR. > 4-6. INSTALLATION. > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 18,
+          "context": "NOTE > NOTE > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "Corrosion at the wing strut attach fittings is a critical structural concern. The Service Manual identifies the wing strut, wing attachment fitting, and fuselage attachment fitting as key components in this area (Figure 4-2). For specific aircraft serials (17261664 THRU 17261808), wing strut attachment straps require inspection per Service Letter SE73-20. General airframe corrosion inspection is also a monthly requirement. The extent and location of the corrosion will determine if repair or replacement is necessary, as wing strut repair is limited to attaching parts, and a badly dented, cracked, or deformed strut should be replaced. Wing and fuselage attachment fittings are integral to the wing structure.",
+      "mechanic_instructions": "Corrosion at the wing strut attach fittings demands immediate attention due to its structural implications. We need to determine the exact location and severity of the corrosion. First, identify if the corrosion is on the wing strut itself, the wing attachment fitting, the fuselage attachment fitting, or the attachment straps. Pay close attention to aircraft serials 17261664 THRU 17261808, as these have a specific inspection requirement for wing strut attachment straps per Cessna Single-engine Service Letter SE73-20. Remove the strut fairings as outlined in paragraph 4-10.a to gain full access.",
+      "answer_path_prompts": [
+        "Corrosion is primarily on the wing strut attachment straps, particularly on an aircraft within serials 17261664 THRU 17261808.",
+        "Corrosion is primarily on the wing attachment fitting (part 3 in Figure 4-2) or the fuselage attachment fitting (part 8 in Figure 4-2).",
+        "Corrosion is primarily on the wing strut tube itself (part 1 in Figure 4-2), causing deformation or cracking.",
+        "Corrosion is minor, superficial, and localized to the fairings or non-structural hardware."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

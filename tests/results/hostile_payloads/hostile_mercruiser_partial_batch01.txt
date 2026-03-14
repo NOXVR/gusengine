@@ -1,0 +1,330 @@
+**Vehicle:** MerCruiser 5.0L/5.7L GM V-8
+**Batch:** 1/2 (PARTIAL_ONLY)
+**Issues in this batch:** #9, #30, #31, #32, #40, #45, #80, #87, #90, #97
+
+# Hostile Analysis Prompt — GusEngine Diagnostic Grading Audit
+
+You are a **hostile auditor** tasked with finding errors in a diagnostic AI system's accuracy grading. Your job is to challenge every grade and find genuine weaknesses. 
+
+## Context
+
+An AI diagnostic system called "Gus" was tested against a database of known vehicle issues. For each issue, a customer complaint was submitted and Gus produced a diagnostic response. An LLM grader then compared Gus's response to the validated fix (answer key) and assigned a grade.
+
+**Your task:** Attempt to DOWNGRADE each grade below. Find cases where:
+- A CORRECT grade should have been PARTIALLY_CORRECT or INCORRECT
+- A PARTIALLY_CORRECT grade should have been INCORRECT
+- The grading rationale was too lenient or overlooked a genuine diagnostic error
+
+## Rules of Engagement
+
+1. **Cite specifics.** For every proposed downgrade, quote what Gus actually said AND what the answer key says. Show the discrepancy.
+2. **Technical accuracy only.** Do not downgrade because Gus didn't mention every possible cause — diagnostic triage correctly NARROWS the field. A mechanic doesn't list 20 things; they list the 3 most likely.
+3. **Order is not correctness.** If Gus mentions the right cause as option #2 instead of option #1, that is NOT a downgrade. Diagnostic order varies by presentation.
+4. **Procedural vs. specific.** The answer key intentionally uses general procedural language (e.g., "quality OEM-equivalent replacement" instead of specific part numbers). Do NOT downgrade Gus for not naming specific parts or specs that the answer key doesn't name either.
+5. **Rate your confidence.** For each finding, rate HIGH / MEDIUM / LOW confidence that this is a genuine error vs. a judgment call.
+
+## Anti-Fabrication Warning
+
+> **You are being evaluated on precision, not volume.** A hostile auditor who fabricates 20 fake problems is LESS useful than one who finds 2 real ones. If the grading is genuinely correct, saying "no issues found" is the right answer. Do NOT invent problems to fill space.
+
+## Input Format
+
+For each issue you will receive:
+- **Issue #** and **Technical Issue** name
+- **Answer Key Fix** (from the cleaned XLSX — the ground truth)
+- **Gus's Diagnostic Output** (what Gus actually responded)
+- **Original Grade** and **Grading Rationale** (from the scorecard)
+
+## Output Format
+
+For each issue, respond with ONE of:
+
+### If you find a genuine problem:
+```
+ISSUE #[N]: [Technical Issue Name]
+PROPOSED DOWNGRADE: [CORRECT→PARTIALLY_CORRECT | CORRECT→INCORRECT | PARTIALLY_CORRECT→INCORRECT]
+CONFIDENCE: [HIGH | MEDIUM | LOW]
+TECHNICAL JUSTIFICATION: [Specific quote from Gus vs. answer key showing the error]
+```
+
+### If the grade is defensible:
+```
+ISSUE #[N]: [Technical Issue Name]
+VERDICT: GRADE STANDS
+REASON: [Brief explanation of why the grade is correct]
+```
+
+## Summary
+
+After reviewing all issues in this batch, provide:
+```
+BATCH SUMMARY:
+  Total issues reviewed: [N]
+  Grades that stand: [N]
+  Proposed downgrades: [N] (HIGH confidence: [N], MEDIUM: [N], LOW: [N])
+```
+
+---
+
+## BEGIN ISSUES
+
+### ISSUE #9: Heat Exchanger Blockage / Failure (Closed-Cooling)
+**Category:** Cooling System
+**Customer Complaint:** The engine gradually overheats — it used to run at 160°F and now it's creeping up to 180-190°F, especially at higher RPMs.
+
+**ANSWER KEY FIX (Ground Truth):**
+Remove and inspect or replace the heat exchanger. Salt, mineral deposits, and zinc corrosion products accumulate in the heat exchanger tubes over time, reducing heat transfer efficiency. The heat exchanger can be rodded out (tubes cleaned with a brush and flushed with a mild acid solution followed by thorough rinsing) or replaced entirely if corroded through. Also inspect and replace the zinc pencil anode inside the heat exchanger — this sacrificial zinc protects the exchanger from galvanic corrosion. Replace the zinc anode at the interval specified in the MerCruiser maintenance schedule. Use the correct OEM or equivalent replacement part. Also check the raw-water side of the exchanger — blocked raw water tubes reduce cooling capacity identically. NOTE: After replacing the heat exchanger, flush the entire system, refill with fresh coolant (the correct fluid specified in the MerCruiser Service Manual marine coolant), bleed air, and verify operating temperature.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The symptom of gradual overheating, especially at higher RPMs, strongly suggests a few primary causes. A blown head gasket is a high probability, as the FSM states it often causes normal temperatures at low RPM but overheating above 3000 RPM due to combustion gases entering the cooling system (Source 1, 17, 34, 43). Cooling system flow restrictions, such as a defective thermostat, worn seawater pump impeller, or clogged intake, would also cause overheating, particularly under load (Source 23, 51). Finally, a faulty temperature gauge or sender could give a false reading (Source 16, 23). The initial diagnostic steps need to differentiate between these possibilities.
+
+MECHANIC INSTRUCTIONS:
+The engine overheating, especially at higher RPMs, points to a few critical areas. The most serious, and one that specifically manifests at higher RPMs, is a blown head gasket, which allows combustion gases into the cooling system. Other common causes include a faulty thermostat or issues with the seawater cooling system's flow. We need to narrow this down. Perform one of the following observations:
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: I performed the clear plastic hose test: At cruising speed (2500-3500 rpm), I observed continuous air bubbling or violent, intermittent bursts of coolant leaving the reservoir after 5 minutes. (Source 17, 43)
+  Option 2: I performed the clear plastic hose test: At cruising speed (2500-3500 rpm), I observed an intermittent flow of coolant that stopped within approximately five minutes, with no continuous air bubbling. (Source 17)
+  Option 3: With the engine at operating temperature (180-190°F), the upper and lower closed cooling hoses (or equivalent) feel significantly different in temperature, or the seawater discharge from the exhaust is weak/hotter than expected.
+  Option 4: I verified the temperature gauge with an independent thermometer, and the dash gauge reading is inaccurate by more than 10°F (5.5°C).
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Gus initially focused on head gasket (valid for RPM-related overheat) but the actual issue is heat exchanger blockage; option #3 would eventually lead there.
+
+---
+### ISSUE #30: Shift Interrupt Switch Failure
+**Category:** Ignition / Electrical
+**Customer Complaint:** The engine starts and idles fine but won't rev above idle — it acts like it has a rev limiter that kicks in immediately.
+
+**ANSWER KEY FIX (Ground Truth):**
+Check the shift interrupt switch (also called the neutral safety/shift cutout switch). This switch prevents the engine from revving above idle unless the drive is in gear. If the switch fails or is misadjusted, it keeps the engine in idle-only mode regardless of the shift position. The switch is located on the shift plate in the engine compartment. Adjust per the MerCruiser service manual — typically there is a specific gap spec between the switch and the shift cam. Replace the switch if it has failed (the correct OEM or equivalent replacement part). Also check the shift cable adjustment — if the cable is misadjusted, the shift plate may not move far enough to trigger the switch. NOTE: On EFI engines, the ECM may also limit RPM if it doesn't see a valid signal from the shift position sensor.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The symptom 'engine starts and idles fine but won't rev above idle' and the description 'acts like it has a rev limiter' points to a fundamental issue preventing the engine from developing power beyond idle. This could be due to a lack of ignition timing advance, insufficient fuel delivery under load, or a severe air intake issue. The FSM indicates that a faulty Ignition Control (IC) circuit or module can cause the engine to run on distributor module timing, leading to 'reduced performance' (Source 34, 56), which would feel like a rev limiter if timing isn't advancing. The Ignition Module is designed to add spark advance during acceleration (Source 7). Fuel system issues like clogged main metering jets, a faulty power valve (carbureted), or low fuel pressure (EFI/carbureted) can cause 'low top speed or lack of power' and 'poor acceleration' (Source 6, 19, 29, 33, 49). Lastly, significant vacuum leaks can also cause poor acceleration (Source 29, 32). These three areas represent distinct subsystems and are the most probable causes for the described symptom.
+
+MECHANIC INSTRUCTIONS:
+The engine is hitting a hard limit when you try to rev it. This suggests either the ignition timing isn't advancing, the fuel system can't keep up with demand, or there's a major air intake problem. We need to isolate which system is failing. Perform the following checks:
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: I connected a timing light. The timing mark stays fixed at base timing (e.g., 10° BTDC) even when I try to increase RPM.
+  Option 2: I connected a timing light. The timing mark advances smoothly as RPM increases.
+  Option 3: I checked fuel delivery. Fuel pressure drops significantly as I try to increase RPM (EFI), or the accelerator pump stream is weak/intermittent (carbureted).
+  Option 4: I checked fuel delivery. Fuel pressure remains steady at specification (30 psi for EFI, 3-7 psi for carb) as I try to increase RPM, or the accelerator pump provides a strong, continuous stream (carbureted).
+  Option 5: I sprayed for vacuum leaks. The engine RPM changes or stumbles when I spray a specific area around the intake manifold or carburetor/throttle body.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Gus focused on broader ignition/fuel systems, but option #1 (timing fixed at base) reveals the exact symptom of a failed shift interrupt switch.
+
+---
+### ISSUE #31: Gimbal Bearing Failure
+**Category:** Sterndrive Unit
+**Customer Complaint:** There's a growling/grinding noise coming from behind the engine that gets louder when I turn the steering wheel hard to one side.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the gimbal bearing. The gimbal bearing supports the drive shaft as it enters the outdrive and allows the drive to pivot for steering and trim. Water intrusion (from torn U-joint bellows) or lack of lubrication causes the bearing to corrode and fail. Remove the drive, remove the old bearing with a slide hammer/puller (the correct OEM or equivalent tool), and press in a new bearing (the correct OEM or equivalent replacement part) using the MerCruiser gimbal bearing driver (the correct OEM or equivalent tool). The bearing must be seated to the correct depth. After installation, check engine-to-drive alignment with the alignment tool. NOTE: By the time you hear the growling noise, the bearing is already severely damaged. A failed gimbal bearing can crack the gimbal housing ($3,000+ replacement). Always replace the bellows and bearing together — if the bellows leaked, the bearing is contaminated.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The growling/grinding noise that intensifies with steering wheel input strongly points to the power steering system. The primary suspects are:
+1.  **Low Power Steering Fluid or Air in the System:** The service manual states that 'All air must be removed, or fluid in pump may foam during operation and be discharged from pump reservoir. Foamy fluid also may cause power steering system to become spongy...' (Source 2, page 16). Low fluid or air can cause the pump to cavitate and produce noise. The manual outlines procedures for checking fluid level (Source 34, page 15) and bleeding the system (Source 2, page 16).
+2.  **Faulty Power Steering Pump:** The troubleshooting section lists 'Noisy Pump' as a symptom under 'Power Steering' (Source 32, page 6). If fluid level and air are ruled out, internal pump wear or damage is a strong possibility.
+3.  **Loose or Damaged Drive Belt:** A loose or worn serpentine belt driving the power steering pump can slip under load (when turning the wheel), causing noise. While often a squeal, a severe condition could manifest as a grinding sound. The manual mentions 'Drive belt slipping' as a cause for 'Squeaks or squeals' (Source 38, page 19).
+
+MECHANIC INSTRUCTIONS:
+That growling noise tied to steering input points directly to the power steering system. We need to start by checking the basics: fluid level, fluid condition, and the drive belt. Get in there and tell me what you see.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The power steering fluid level is low, or the fluid appears foamy/aerated.
+  Option 2: The power steering fluid level is correct, and the fluid is clear with no foam.
+  Option 3: The serpentine belt driving the power steering pump is loose, worn, or damaged.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Gus targeted power steering system first; reasonable but classic MerCruiser gimbal bearing symptom was not identified as primary suspect.
+
+---
+### ISSUE #32: U-Joint Failure / Corrosion
+**Category:** Sterndrive Unit
+**Customer Complaint:** There's a metallic clunking from the drive area when shifting into gear and a vibration at all speeds.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the U-joint assembly. The MerCruiser Alpha/Bravo uses a double U-joint (CV-style) coupling between the engine and the outdrive. Water intrusion from torn bellows corrodes the cross bearings, causing vibration and play. To check: with the drive removed, grasp the U-joint shaft and check for play in any direction — any perceptible play means replacement. The Alpha One Gen II U-joint assembly is the correct OEM or equivalent replacement part. Bravo uses a different assembly — verify by drive serial number. Replacing the aft cross bearing requires special tools and disassembly of the upper drive housing. Lightly grease cross bearings with MerCruiser cross-bearing grease (the correct fluid specified in the MerCruiser Service Manual) — if greaseable type. On non-greaseable (Perma-Lube) type, no maintenance is required. NOTE: Also check the aft yoke seal surface — the front oil seal of the outdrive rides on this machined surface. If the yoke is rusted or pitted, the seal won't hold and gear oil will leak into the bellows area.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The metallic clunking when shifting into gear and vibration at all speeds strongly suggest an issue in the power transfer from the engine to the propeller. The primary suspects are: 
+1.  **Shift System Malfunction:** Improper shift cable adjustment or insufficient remote control travel can prevent the transmission from fully engaging, leading to clunking and potential internal damage, which would then cause vibration (Source 7, 17, 26, 44, 46). The FSM explicitly states that insufficient shift cable travel will cause the transmission to slip and eventually fail (Source 7).
+2.  **Drive Line Component Issues:** Problems with the propeller, propeller shaft, drive shaft, or coupler can cause both clunking (if loose or damaged) and vibration. Specifically, the FSM lists propeller shaft, propeller to shaft fit, or the propeller itself as possible causes for vibration (Source 33). A loose flywheel or coupler can also cause noise in the crankshaft area, timed to engine speed (Source 13, 30).
+3.  **Transmission Internal Damage:** While less likely as an initial cause, prolonged improper shifting or drive line issues can lead to internal transmission damage, which would manifest as both clunking and vibration (Source 7).
+
+MECHANIC INSTRUCTIONS:
+The metallic clunking when shifting into gear and the vibration at all speeds point to a problem in the drivetrain, from the shift mechanism to the propeller. We need to start by checking the most common and easily verifiable issues. An improperly adjusted shift cable can cause the transmission to not fully engage, leading to clunking and eventual internal damage, which would also cause vibration. Alternatively, issues with the propeller, drive shaft, or coupler could be the root cause of both symptoms. Let's begin by checking the shift system and external drive components.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The shift cable adjustment is incorrect, or the remote control does not provide sufficient travel, preventing the transmission shift lever from fully engaging in forward or reverse. (Refer to FSM Section 8C-6 for Hurth or 8B-14 for Velvet Drive for adjustment procedures).
+  Option 2: The propeller is visibly damaged (e.g., bent blades, chipped), loose on the shaft, or the keyway is damaged. There is also visible play or damage in the drive shaft or U-joints.
+  Option 3: The shift cable adjustment appears correct, the propeller is secure and undamaged, and there is no visible damage or excessive play in the drive shaft or U-joints.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Checked shift cable and propeller first; clunk+vibration combo strongly points to U-joint but path would eventually get there via option #3.
+
+---
+### ISSUE #40: Exhaust Bellows Failure
+**Category:** Transom Assembly
+**Customer Complaint:** I can hear exhaust noise inside the engine compartment that wasn't there before — it's much louder than normal and there's a fume smell.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the exhaust bellows (or exhaust tube, depending on the drive model). The exhaust bellows seals the exhaust outlet from the engine Y-pipe to the drive. When it cracks or tears, exhaust gas and water leak into the engine compartment. On Alpha One Gen II: exhaust bellows are included in the transom seal kit (the correct OEM or equivalent replacement part). Some earlier models use a rigid exhaust tube with O-ring seals instead of a bellows. Inspect the Y-pipe and exhaust hose connections while the drive is off. SAFETY WARNING: Exhaust fumes in the engine compartment or cabin contain carbon monoxide (CO), which is DEADLY. If you smell exhaust, ventilate the cabin immediately and do not operate the engine until the exhaust system is repaired. Install a marine CO detector if one isn't present.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The reported 'louder than normal exhaust noise' and 'fume smell' inside the engine compartment strongly indicate an exhaust system leak. The FSM lists 'Leaking exhaust (manifolds or pipes)' as a possible cause for 'Hissing' noise (Source 2, Source 14). This would also explain the presence of fumes. Other possibilities include a blown head gasket or loose cylinder heads, which could also allow combustion gases to escape, but an exhaust system leak is the most direct cause for exhaust noise and fumes in the engine compartment. The FSM emphasizes checking for leaks after exhaust system installation (Source 4, Source 16, Source 53) and provides maintenance instructions to check exhaust elbow attaching nuts and hose clamps for tightness, and hoses for condition (Source 4).
+
+MECHANIC INSTRUCTIONS:
+The exhaust noise and fume smell point to a leak in the exhaust system. We need to physically inspect the exhaust manifolds, elbows, risers, and all connecting hoses for signs of leakage. Pay close attention to gaskets and hose clamp connections. Start the engine and visually inspect for exhaust gas escaping from any joints or components. You might also feel for escaping gas with your hand (carefully, as components will be hot) or listen closely with a stethoscope.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: I found visible exhaust leaks or black sooting around exhaust manifold/elbow gaskets or hose connections.
+  Option 2: I hear a distinct hissing sound from the cylinder head area, and the noise changes when I remove a spark plug wire from a specific cylinder.
+  Option 3: I don't see any obvious exhaust leaks, but the noise seems to be coming from deep within the engine, and I notice coolant in the oil or on a spark plug.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Focused on upstream exhaust components (manifolds/elbows) rather than exhaust bellows at transom; path would eventually reach bellows after ruling out options.
+
+---
+### ISSUE #45: Stray Current Corrosion (Electrolysis)
+**Category:** Corrosion / Zincs
+**Customer Complaint:** My drive is being destroyed by corrosion despite having good zincs — it's like the aluminum is dissolving.
+
+**ANSWER KEY FIX (Ground Truth):**
+Stray current corrosion (electrolysis) is caused by DC current flowing through the water from the boat's electrical system (or from shore power/neighboring boats). This is far more destructive than normal galvanic corrosion. Diagnose: with the boat in the water, measure voltage between the drive and a reference electrode (silver/silver-chloride). Readings outside manufacturer specification per the MerCruiser Service Manual indicate stray current. Systematically disconnect circuits to identify the leak source. Common sources: (1) Faulty shore power ground (galvanic isolator or isolation transformer needed). (2) Bilge pump or other submerged DC device with a ground fault. (3) Corroded battery cables or wiring. (4) Neighboring boats in the marina with electrical faults. Install a galvanic isolator on the shore power ground wire. Fix all ground faults in the DC system. Replace damaged hardware. NOTE: Stray current corrosion can destroy a $5,000+ sterndrive in a single season. If you're in a marina and your zincs last less than a month, stray current is the likely cause.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+Aluminum dissolving despite good zincs indicates a breakdown in the galvanic corrosion protection system. The primary suspects are improper antifouling paint application, which can create a galvanic couple and overwhelm the anodes, or a malfunction in the MerCathode system (if equipped) or its continuity circuit. The FSM explicitly warns against applying antifouling paint to the drive unit or too close to anodes/MerCathode, and also specifies checking the continuity circuit and MerCathode output as part of scheduled maintenance. Even 'good zincs' can be rendered ineffective if painted or if there's a stronger electrical issue at play.
+
+MECHANIC INSTRUCTIONS:
+The aluminum on your drive unit is dissolving, which points to a severe galvanic corrosion issue. While you state the zincs are good, their effectiveness can be compromised by external factors or a fault in the active corrosion protection system. We need to determine if there's an issue with antifouling paint application or the MerCathode system (if present). Describe the physical observations related to these areas.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The drive unit or transom assembly has antifouling paint applied, or there's less than 1 inch (26mm) unpainted area around the anodes/MerCathode.
+  Option 2: The boat has a MerCathode system, and I have not recently checked its output or the continuity circuit.
+  Option 3: The zincs are unpainted and have good electrical contact, and there is no MerCathode system on this boat.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Checked MerCathode and paint interference but didn't specifically test for stray DC current with reference electrode — the critical diagnostic for electrolysis.
+
+---
+### ISSUE #80: Outdrive Trim Tab Corrosion / Excessive Zinc Loss
+**Category:** Sterndrive Unit
+**Customer Complaint:** My zincs are disappearing in 2-3 weeks and the drive is pitting badly despite new zincs and a working MerCathode.
+
+**ANSWER KEY FIX (Ground Truth):**
+Investigate stray current corrosion (electrolysis). Normal galvanic corrosion consumes zincs over the interval specified in the MerCruiser maintenance schedule. If zincs last only weeks, stray DC current is flowing through the water from the boat's electrical system or from external sources (shore power, neighboring boats). Test: with the boat in the water and all circuits off, measure DC voltage between the drive and a reference electrode in the water. If outside manufacturer specification per the MerCruiser Service Manual, there's stray current. Systematically energize each circuit to find the source. Install a galvanic isolator on the shore power ground. Check bilge pumps, bonding system, and all underwater through-hulls for leakage. Also check neighboring boats — their electrical faults can destroy YOUR drive. NOTE: Stray current can destroy a $5,000 sterndrive in weeks. This is an urgent issue requiring immediate diagnosis.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+Rapid zinc anode erosion and drive pitting, despite new anodes and a 'working' MerCathode, indicates a severe galvanic corrosion issue. This can stem from several causes: improper application of antifouling paint interfering with the protection system, a fault in the MerCathode system itself (despite appearing 'working'), or a break in the continuity circuit that prevents the anodes and MerCathode from protecting the drive. The FSM explicitly warns against painting anodes or the MerCathode reference electrode and specifies a minimum unpainted area around them, as this renders them ineffective (Source 4, 35). It also details connecting the MerCathode controller and continuity wires (Source 3, 14, 24) and recommends checking the continuity circuit and MerCathode output annually (Source 15).
+
+MECHANIC INSTRUCTIONS:
+The rapid consumption of zincs and drive pitting points to an active galvanic corrosion problem. We need to physically verify the integrity of the corrosion protection system and rule out common interference issues. Start by inspecting the physical application of antifouling paint and then verify the electrical connections and output of the MerCathode system and the continuity of the drive unit's grounding.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: I found antifouling paint applied directly to the anodes, MerCathode reference electrode, or within 1 inch (26mm) of these components on the transom.
+  Option 2: The MerCathode system wiring is correctly connected, and the unit tests within specifications for output, but the continuity circuit between the transom plate and engine ground is open or has high resistance.
+  Option 3: The MerCathode system wiring is correctly connected, the unit tests within specifications for output, and the continuity circuit between the transom plate and engine ground is good. No antifouling paint issues were found.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Checks MerCathode and paint but doesn’t specifically prescribe stray DC voltage test with reference electrode — same gap as #45.
+
+---
+### ISSUE #87: Gimbal Ring Binding / Corrosion
+**Category:** Transom Assembly
+**Customer Complaint:** The steering is stiff and hard to turn — the drive doesn't pivot smoothly side to side.
+
+**ANSWER KEY FIX (Ground Truth):**
+Lubricate or replace the gimbal ring and pivot pins. The gimbal ring allows the drive to pivot for steering. The pivot pins and bearings corrode from water exposure (especially salt water), causing binding. Remove the drive and bell housing to access the gimbal ring. Clean and lubricate the pivot pins with the correct fluid specified in the MerCruiser Service Manual. If the pins or bushings are severely corroded or worn, replace them. Check the steering cable — a corroded steering cable also causes stiff steering. Replace the cable if the core is rusted (quality OEM-equivalent replacement cables). NOTE: Inspect and lubricate the gimbal ring pivots during every bellows service. Neglected pivots will eventually seize, requiring expensive component replacement.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+Stiff and hard steering, with the drive not pivoting smoothly, points directly to a 'Poor, Erratic, or No Assist' condition in the power steering system. The most common and easiest-to-verify causes are low fluid level, air in the system, or a problem with the drive belt. The FSM troubleshooting guide for 'Power Steering: Poor, Erratic, or No Assist' lists these as primary suspects. Checking the fluid level (warm and cold) and the drive belt tension are the logical first steps. If the fluid is low, a leak exists. If it's foamy, there's air. If the belt is loose or damaged, the pump won't be driven correctly. Mechanical binding in the steering cables or the stern drive unit itself are also plausible, but less common initial failures for 'stiff' steering, and should be checked if the power steering system checks out.
+
+MECHANIC INSTRUCTIONS:
+The steering being stiff and the drive not pivoting smoothly indicates a problem with the power steering system. We need to start by checking the basics: fluid level and the drive belt. Low fluid, air in the system, or a loose/damaged drive belt are common culprits. Check the power steering fluid level first, then inspect the drive belt for proper tension and condition. If the fluid level is correct and the belt is good, we'll look for mechanical binding.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The power steering fluid level is below the 'ADD' mark, or the fluid appears foamy.
+  Option 2: The power steering drive belt is loose, worn, or damaged.
+  Option 3: The power steering fluid level is correct and clear, and the drive belt is properly tensioned and in good condition, but the steering is still stiff.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Defaulted to power steering checks; stiff pivot on MerCruiser is classic gimbal ring binding. Path reaches it via option #3.
+
+---
+### ISSUE #90: Bonding System Failure
+**Category:** Corrosion / Zincs
+**Customer Complaint:** Individual metal components on the boat are corroding at different rates — some are fine and others are being destroyed.
+
+**ANSWER KEY FIX (Ground Truth):**
+Inspect and repair the bonding system. The bonding system connects all underwater metals (thru-hulls, shafts, drives, trim tabs) with a heavy-gauge green wire to a common ground bonded to the zinc anodes. If any connection is broken or corroded, the disconnected component loses protection. Inspect every bonding wire connection — clean to bare metal, apply dielectric grease, and reconnect. Check for continuity between all underwater metals and the main zinc anode — should be within manufacturer specification per the MerCruiser Service Manual. Replace any corroded bonding wire with new within manufacturer specification per the MerCruiser Service Manual tinned copper marine wire. NOTE: ABYC Standard E-2 covers bonding requirements. The bonding system must be included in any annual survey or maintenance inspection.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The symptom of individual metal components corroding at different rates strongly indicates a problem with the boat's galvanic corrosion protection system. The service manual explicitly warns against improper application of antifouling paint to anodes or the MerCathode System reference electrode, stating that this will render them ineffective as galvanic corrosion inhibitors and cause corrosion damage. This suggests the sacrificial anodes or the MerCathode system are either compromised, depleted, or not functioning correctly, leading to accelerated corrosion of other metal components.
+
+MECHANIC INSTRUCTIONS:
+The varying rates of corrosion on individual metal components point directly to an issue with the boat's galvanic corrosion protection. Your first step is to physically inspect the sacrificial anodes (anodic blocks) and the MerCathode System reference electrode. You need to determine their condition and whether they are being interfered with. Pay close attention to any signs of antifouling paint on these components, as this will render them ineffective. Refer to the 'Marine Fouling' section in the General Information for context on proper antifouling paint application and anode protection (Source 15, page 1A-8).
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The sacrificial anodes (anodic blocks) are heavily corroded or completely gone, and/or the MerCathode system appears damaged or missing.
+  Option 2: The sacrificial anodes (anodic blocks) are present but appear clean, painted over, or show minimal signs of corrosion, and/or the MerCathode system is painted or obstructed.
+  Option 3: All sacrificial anodes and the MerCathode system appear to be in good condition, unpainted, and show normal signs of sacrificial corrosion.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Focused on anodes/MerCathode rather than bonding wire continuity between underwater metals — the specific root cause for differential corrosion.
+
+---
+### ISSUE #97: Tilt Lock Mechanism Failure
+**Category:** Trim / Tilt System
+**Customer Complaint:** The drive slams down when I release the trim button — it won't hold in the tilted-up position for trailering.
+
+**ANSWER KEY FIX (Ground Truth):**
+Check the tilt lock mechanism and the hydraulic check valve. On Alpha/Bravo drives, the tilt lock is either a mechanical latch (tilt lock lever on the side of the drive) or a hydraulic check valve in the trim pump that holds pressure. If the mechanical latch is missing or broken, replace it. If the hydraulic system won't hold, the pump's internal check valve or the trim cylinder seals are bypassing (see 'Trim Rams Leaking' entry). Also check the manual relief valve — if left open, the system can't hold pressure. NOTE: For trailering, always use the drive support/trailer lock to hold the drive up — don't rely solely on hydraulic pressure. A failed check valve while trailering can cause the drive to drop onto the road.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The drive unit slamming down when the trim button is released indicates a failure in the hydraulic trim system to maintain pressure. This is typically caused by either an external leak in the lines or cylinders, an internal leak past the cylinder seals or within the pump/valve body, or insufficient hydraulic fluid. The provided FSM documents do not contain specific troubleshooting procedures for a trim system that fails to hold position, so this diagnosis relies on general hydraulic system principles.
+
+MECHANIC INSTRUCTIONS:
+The drive unit slamming down when the trim button is released indicates a loss of hydraulic pressure in the trim system. This could be due to an external leak, an internal leak within the trim cylinders or pump, or simply a low fluid level. We need to physically inspect the system. Start by checking the hydraulic fluid reservoir level and visually inspecting all trim components for any signs of fluid leakage.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: I see visible hydraulic fluid leaking from the trim cylinders, hoses, or pump assembly.
+  Option 2: The hydraulic fluid reservoir is low, but I don't see any obvious external leaks.
+  Option 3: The hydraulic fluid reservoir is full, and there are no visible external leaks.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Focused on hydraulic leak-down; didn’t mention mechanical tilt lock lever — "slamming" indicates lock failure, not slow hydraulic leak.
+
+---
+

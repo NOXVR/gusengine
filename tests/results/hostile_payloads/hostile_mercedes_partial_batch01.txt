@@ -1,0 +1,265 @@
+**Vehicle:** 1976 Mercedes-Benz 450SL
+**Batch:** 1/1 (PARTIAL_ONLY)
+**Issues in this batch:** #15, #16, #24, #63, #70, #86, #88
+
+# Hostile Analysis Prompt — GusEngine Diagnostic Grading Audit
+
+You are a **hostile auditor** tasked with finding errors in a diagnostic AI system's accuracy grading. Your job is to challenge every grade and find genuine weaknesses. 
+
+## Context
+
+An AI diagnostic system called "Gus" was tested against a database of known vehicle issues. For each issue, a customer complaint was submitted and Gus produced a diagnostic response. An LLM grader then compared Gus's response to the validated fix (answer key) and assigned a grade.
+
+**Your task:** Attempt to DOWNGRADE each grade below. Find cases where:
+- A CORRECT grade should have been PARTIALLY_CORRECT or INCORRECT
+- A PARTIALLY_CORRECT grade should have been INCORRECT
+- The grading rationale was too lenient or overlooked a genuine diagnostic error
+
+## Rules of Engagement
+
+1. **Cite specifics.** For every proposed downgrade, quote what Gus actually said AND what the answer key says. Show the discrepancy.
+2. **Technical accuracy only.** Do not downgrade because Gus didn't mention every possible cause — diagnostic triage correctly NARROWS the field. A mechanic doesn't list 20 things; they list the 3 most likely.
+3. **Order is not correctness.** If Gus mentions the right cause as option #2 instead of option #1, that is NOT a downgrade. Diagnostic order varies by presentation.
+4. **Procedural vs. specific.** The answer key intentionally uses general procedural language (e.g., "quality OEM-equivalent replacement" instead of specific part numbers). Do NOT downgrade Gus for not naming specific parts or specs that the answer key doesn't name either.
+5. **Rate your confidence.** For each finding, rate HIGH / MEDIUM / LOW confidence that this is a genuine error vs. a judgment call.
+
+## Anti-Fabrication Warning
+
+> **You are being evaluated on precision, not volume.** A hostile auditor who fabricates 20 fake problems is LESS useful than one who finds 2 real ones. If the grading is genuinely correct, saying "no issues found" is the right answer. Do NOT invent problems to fill space.
+
+## Input Format
+
+For each issue you will receive:
+- **Issue #** and **Technical Issue** name
+- **Answer Key Fix** (from the cleaned XLSX — the ground truth)
+- **Gus's Diagnostic Output** (what Gus actually responded)
+- **Original Grade** and **Grading Rationale** (from the scorecard)
+
+## Output Format
+
+For each issue, respond with ONE of:
+
+### If you find a genuine problem:
+```
+ISSUE #[N]: [Technical Issue Name]
+PROPOSED DOWNGRADE: [CORRECT→PARTIALLY_CORRECT | CORRECT→INCORRECT | PARTIALLY_CORRECT→INCORRECT]
+CONFIDENCE: [HIGH | MEDIUM | LOW]
+TECHNICAL JUSTIFICATION: [Specific quote from Gus vs. answer key showing the error]
+```
+
+### If the grade is defensible:
+```
+ISSUE #[N]: [Technical Issue Name]
+VERDICT: GRADE STANDS
+REASON: [Brief explanation of why the grade is correct]
+```
+
+## Summary
+
+After reviewing all issues in this batch, provide:
+```
+BATCH SUMMARY:
+  Total issues reviewed: [N]
+  Grades that stand: [N]
+  Proposed downgrades: [N] (HIGH confidence: [N], MEDIUM: [N], LOW: [N])
+```
+
+---
+
+## BEGIN ISSUES
+
+### ISSUE #15: Fuel Pump Relay Failure
+**Category:** Fuel System (Bosch CIS)
+**Customer Complaint:** The car cranks but won't start — there's no fuel getting to the engine. I can't hear the fuel pump running.
+
+**ANSWER KEY FIX (Ground Truth):**
+Check/replace the fuel pump relay. Located above the fuse box (under the hood on the passenger side of the firewall on the 1976), the relay energizes the electric fuel pump. Test by swapping with an identical relay from the same relay panel. Also check the fuel pump safety switch (on the air sensor plate) — if the sensor plate is stuck or the connector is corroded, the safety circuit keeps the pump off. To bypass for testing: unplug the blue safety switch connector — the pump should run with ignition on. If the pump now runs, the safety switch needs cleaning or replacement. NOTE: The 1976 450SL uses a OEM-equivalent electric fuel pump in the rear of the car. If the relay and safety switch are good but the pump doesn't run, the pump itself has failed (the correct OEM or equivalent replacement part).
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The symptom 'cranks but won't start' with 'no fuel getting to the engine' and 'can't hear the fuel pump running' strongly indicates a fault in the fuel pump's electrical supply or the pump itself. The Master Technician Ledger, which supersedes FSM, identifies a hairline crack in the 0.4 ohm ballast resistor on the fender as a 90% probability for 'Hot start vapor lock — engine cranks but won't fire.' While the user did not specify 'hot start vapor lock,' the core symptom of cranking without firing due to lack of fuel is consistent. The recommended verification test for this involves hot-wiring terminal 15 on the ignition coil, which bypasses the resistor, making it the most efficient first diagnostic step. Other potential causes include a faulty fuel pump control relay (which supplies power to the pump, auxiliary-air device, and warm-up regulator, activated by the ignition/starting switch and ignition coil pulses), or a mechanically failed fuel pump.
+
+MECHANIC INSTRUCTIONS:
+The primary suspect for a 'cranks but no start' with no audible fuel pump, especially on a 450SL, is often an electrical issue in the fuel pump's power supply circuit. The Master Technician Ledger indicates a high probability of a hairline crack in the 0.4 ohm ballast resistor on the fender. We need to bypass this resistor to verify its function.
+
+Perform the Master Tech Override test: Hot-wire terminal 15 on the ignition coil directly to battery positive. Then attempt to start the engine.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The engine starts immediately with terminal 15 hot-wired.
+  Option 2: The engine still cranks but does not start with terminal 15 hot-wired, and the fuel pump is still not audible.
+  Option 3: The engine still cranks but does not start with terminal 15 hot-wired, but I can now hear the fuel pump running.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Initial focus on ballast resistor when customer explicitly stated no fuel pump sound; should have gone directly to fuel pump relay circuit. Path does eventually address pump power.
+
+---
+### ISSUE #16: Fuel Accumulator Failure
+**Category:** Fuel System (Bosch CIS)
+**Customer Complaint:** After the car sits for just a short time, it takes a lot of cranking to start — like the fuel system loses pressure when I turn it off.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the fuel accumulator. The accumulator maintains residual fuel pressure in the CIS system after engine shutdown, preventing vapor formation and ensuring quick restarts. A failed accumulator lets pressure bleed down. Located near the fuel pump under the car, replace with a quality OEM-equivalent replacement unit. Also check the fuel pump check valve — if it allows fuel to drain back to the tank, the accumulator alone won't fix the problem. NOTE: A bad accumulator also contributes to hot-start problems because the fuel vaporizes more easily without maintained pressure.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The symptom of extended cranking for a hot start, despite the user's suspicion of fuel pressure loss, aligns directly with a known fault signature in the Master Technician Ledger: 'Hot start vapor lock — engine cranks but won't fire.' The Ledger states a 90% probability for this symptom points to a hairline crack in the 0.4 ohm ballast resistor on the fender. This resistor provides reduced voltage to the ignition coil during normal operation, but full battery voltage during cranking. A faulty resistor would result in a weak spark during cranking, leading to hard starting when hot. 
+
+However, the user's observation of 'like the fuel system loses pressure' is also a common K-Jetronic issue. A loss of residual fuel pressure after shutdown can be caused by several components, including a leaking fuel accumulator (Source 29, page 17), a leaking primary-pressure regulator (Source 1, page 18), a leaking fuel pump check valve (Source 2, page 2), or leaking injection valves (Source 2, page 2). The fuel accumulator's primary function is to maintain this pressure for hot restarts (Source 29, page 17). Therefore, a fuel pressure test is a valid secondary diagnostic path.
+
+MECHANIC INSTRUCTIONS:
+You're describing a classic hot-start hard-crank scenario. While your gut points to fuel pressure, the most common culprit for this specific symptom on a 1976 450SL, according to our Master Technician Ledger, is an electrical issue with the ignition system's ballast resistor. This resistor reduces voltage to the coil during run, but should be bypassed for full voltage during start. If it's cracked, you get a weak spark when cranking hot.
+
+We need to differentiate between a weak spark and actual fuel pressure loss. Perform one of the following observations:
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: Hot-wire terminal 15 on the ignition coil directly to battery positive. The engine starts instantly.
+  Option 2: Connect a fuel pressure gauge to the ring line (07.4.1-414, Fig. 1). After running the engine to operating temperature and then shutting it off, the fuel pressure drops uniformly to 0 ati within 5 minutes (07.4.1-414, page 2).
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Checked ballast resistor first despite customer describing classic fuel pressure bleed-down symptoms; option 2 includes the correct pressure gauge test for accumulator diagnosis.
+
+---
+### ISSUE #24: Spark Plugs — Incorrect Type or Worn
+**Category:** Ignition System
+**Customer Complaint:** The engine runs rough, misfires occasionally, and fuel economy has gotten worse.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the spark plugs with the correct OEM or equivalent replacement part for the 1976 M117. Gap to manufacturer specification per the Mercedes-Benz Workshop Manual. The M117 is sensitive to plug type — do not use platinum or iridium plugs in the CIS system; they change the flame kernel in ways that can affect CIS mixture calibration. Standard copper-core plugs are correct. Inspect the old plugs for diagnostic clues: tan = correct mixture; black/sooty = rich (check CIS); white/blistered = lean; oily = valve seals or rings. NOTE: Replace at the interval specified in the Mercedes-Benz maintenance schedule.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The reported symptoms of rough running, occasional misfires, and poor fuel economy point to issues with fuel delivery or air/fuel mixture control. The most probable causes, based on the FSM, are:
+1.  Leaking Injection Nozzles: Directly causes misfires and rough running, and contributes to poor fuel economy. (Source 41: kjet-cis-diagnosis.pdf, page 27)
+2.  Incorrect Primary System Pressure: Affects overall fuel delivery, leading to rough idle and poor economy. (Source 43: kjet-cis-diagnosis.pdf, page 19)
+3.  Fuel Distributor Malfunction: Can cause rough idle and poor fuel economy due to uneven fuel distribution. (Source 2: kjet-cis-diagnosis.pdf, page 49)
+4.  Auxiliary Air Valve Malfunction: Can cause rough running, especially at idle, by affecting supplementary air. (Source 32: kjet-cis-diagnosis.pdf, page 33)
+
+We need to differentiate between these by checking the most direct and common failure points first.
+
+MECHANIC INSTRUCTIONS:
+The engine's rough running, misfires, and poor fuel economy indicate a problem with either fuel delivery or air/fuel mixture. We need to isolate the root cause. Start by checking the integrity of the fuel injection nozzles and the overall fuel system pressure, as these are common culprits for misfires and rough running in a K-Jetronic system. Also, consider the auxiliary air valve's function.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: Perform an installed injection nozzle leak test (FSM 07.4.1-411, page 27). After pressing the sensor plate down slowly, does the fuel pressure gauge drop momentarily and then hold steady, or does it continue to drop?
+  Option 2: Measure the primary system pressure (FSM 07.4.1-411, page 19). What is the reading on the gauge?
+  Option 3: With the engine fully warm (140-176°F / 60-80°C), pinch the air hose from the auxiliary air valve shut (FSM 07.4.1-411, page 33). Does the idle speed change noticeably?
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Focused on fuel injection diagnostics rather than the simpler spark plug inspection; path is reasonable but initial focus on less likely cause when plug inspection would be faster.
+
+---
+### ISSUE #63: Broken Seat Back Recline Mechanism
+**Category:** Interior
+**Customer Complaint:** The driver's seat back is loose and wobbles back and forth — it doesn't lock in any position anymore.
+
+**ANSWER KEY FIX (Ground Truth):**
+Rebuild or replace the seat back recline mechanism. The R107 uses a gear-type recliner that wears over time. Rebuild kits are available that include new gears and bearings. Remove the seat, disassemble the recliner housing, replace the worn gears, reassemble with proper lubrication. If the housing is cracked or severely worn, replace the entire mechanism. NOTE: This is a common problem on high-mileage R107s. The driver's seat is always the worst because of the weight transfer during acceleration and braking.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The driver's seat back interlock system on the 450SL is vacuum-operated. It relies on vacuum from the intake manifold, which actuates operating elements under the seat. These elements, via a linkage, engage interlocking hooks to hold the backrest in position. The system only functions when the engine is running and both driver's doors are closed (and no rear switches are actuated). If the backrest is not locking, the issue could be a loss of vacuum supply, a leak in the vacuum lines, a faulty vacuum operating element, or a mechanical failure in the linkage or hooks. We need to determine if the system is receiving and holding vacuum, and if the mechanical components are intact.
+
+MECHANIC INSTRUCTIONS:
+The backrest interlock system is vacuum-actuated. When the engine is running and both doors are closed, vacuum should be established to engage the locking hooks under the seat. If the backrest is loose, we need to check the integrity of this vacuum system and the mechanical linkage. Observe the seat back's behavior under specific conditions.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The backrest *never* locks, regardless of engine status or door position, and I hear no vacuum leaks.
+  Option 2: The backrest *never* locks, but I hear a distinct hissing sound from under the seat or near the intake manifold when the engine is running.
+  Option 3: The backrest *sometimes* locks, but it's inconsistent, or only locks under specific conditions (e.g., only with one door closed, or after wiggling the seat).
+  Option 4: The backrest locks, but it feels weak, or releases easily with minimal force.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Focused on vacuum-actuated backrest interlock system (valid R107 component) but the primary issue is worn recliner gear mechanism — a different subsystem.
+
+---
+### ISSUE #70: EGR Valve Failure / Carbon Buildup
+**Category:** Exhaust / Emissions
+**Customer Complaint:** The engine runs rough at idle and there's a hesitation during acceleration — also occasionally stalls.
+
+**ANSWER KEY FIX (Ground Truth):**
+Clean or replace the EGR (Exhaust Gas Recirculation) valve. On the 1976 450SL, the EGR valve is mounted on the left (driver's side) exhaust manifold. Carbon buildup from exhaust gases causes the valve to stick open (rough idle/stalling) or stick closed (increased NOx emissions). Remove the valve, clean thoroughly with carburetor cleaner and a wire brush, and test for proper vacuum-actuated operation. Replace if the diaphragm is damaged or the valve is excessively worn. Also check the EGR vacuum switching valve and its vacuum supply. NOTE: A stuck-open EGR valve at idle introduces exhaust gas into the intake, diluting the fresh charge and causing a rough/unstable idle. This is a common and often overlooked cause of drivability problems.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The reported symptoms of rough idle, hesitation during acceleration, and occasional stalling point to several potential issues within the K-Jetronic CIS fuel injection system, the ignition system, or the air intake system. The FSM explicitly links 'rough idle, hard starting (cold), & stumble on acceleration' to primary system pressure issues (Source 36). 'Stumble on acceleration with a warm or cold engine' is linked to the enrichment compensator (Source 41). 'Rough or engine miss on acceleration. idling' is linked to injection nozzles (Source 45). The Master Technician Ledger also highlights a high probability of a hairline crack in the 0.4 ohm ballast resistor causing hot start issues (cranks but won't fire), which can manifest as weak spark leading to rough running and stalling, especially when hot. Vacuum leaks are a common cause of rough idle and stalling by introducing unmetered air.
+
+MECHANIC INSTRUCTIONS:
+We need to narrow down whether this is a fuel delivery, ignition, or air/vacuum issue. The most direct and high-probability checks are for fuel system pressures and the ignition ballast resistor. Perform the following initial observations and tests:
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The engine starts instantly when terminal 15 on the ignition coil is hot-wired directly to battery positive.
+  Option 2: The primary system pressure, measured per FSM 07.4.1-414 (Source 12), is outside the specified range of 2.0 +/- 0.1 atu (28.4-31.3 psi).
+  Option 3: A distinct hissing sound is heard around the intake manifold or vacuum lines, indicating a vacuum leak.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Focused on fuel injection and ignition diagnostics; didn't identify EGR valve as initial suspect despite classic EGR-stuck-open symptom pattern.
+
+---
+### ISSUE #86: Auxiliary Water Pump Failure (Climate Control Circuit)
+**Category:** Electrical System
+**Customer Complaint:** The climate control system stopped working and I traced it to a failed water pump under the hood.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the auxiliary water pump. The R107 has a small electric pump that circulates coolant through the heater core independently of engine RPM. When this pump seizes, it draws excessive current through the climate control panel's circuit board, burning it out. Replace the pump (firewall, passenger side) and inspect the climate panel for burned traces. Replace if damaged. NOTE: Known design flaw — add an inline fuse to the pump circuit to protect the expensive climate panel from future pump failures.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The engine's water pump (20.1-220) is part of the engine cooling system, circulating coolant. The heating system (83.1-020) relies on hot engine coolant to provide heat to the cabin. Therefore, a failed engine water pump would directly prevent the heating function of the climate control system. The air conditioning system (83_Ventilation__Heating__Air_Conditioning_volume_1.pdf) relies on the engine running to drive the refrigerant compressor. If an engine water pump failure leads to engine overheating and shutdown, it would indirectly prevent the A/C from operating. However, the engine water pump is not a direct component of the climate control's electrical or vacuum control circuits. The FSM documents on climate control describe components like control valves, heater valves, micro switches, and blowers. I need to understand the specific symptom of the climate control failure and the physical evidence that led to the water pump diagnosis to confirm the causal link.
+
+MECHANIC INSTRUCTIONS:
+You state the climate control system stopped working and you traced it to a failed water pump. The engine's water pump is critical for circulating coolant, which directly impacts the heating system's ability to provide heat and indirectly affects the A/C if the engine overheats. However, the water pump is not typically a direct component of the climate control's electrical or vacuum control circuits. To confirm your diagnosis, describe the specific symptom you observed with the climate control system and the physical evidence that led you to conclude the engine's water pump failed.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The climate control system provides no heat, and the engine water pump is leaking coolant or making grinding noises.
+  Option 2: The climate control system provides no A/C, and the engine is overheating or not running due to water pump failure.
+  Option 3: The climate control system's blower or controls are inoperative, and the water pump was diagnosed due to unrelated engine symptoms.
+  Option 4: The climate control system has other symptoms (e.g., specific vents not working, fan speed issues), and the water pump was diagnosed.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Misidentified auxiliary water pump as engine water pump; diagnostic options would eventually redirect to correct subsystem but initial focus was wrong.
+
+---
+### ISSUE #88: Steering Damper Wear — Shimmy at Speed
+**Category:** Suspension / Steering
+**Customer Complaint:** The steering wheel shakes violently at certain speeds, especially after hitting a bump.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the steering damper (the correct OEM or equivalent replacement part). The steering damper is a hydraulic shock absorber between the steering linkage and frame. When worn, the steering is prone to shimmy triggered by road imperfections. Also check and tighten the steering box mounting bolts and replace any worn steering linkage components. NOTE: A new steering damper dramatically improves R107 steering feel. It's an inexpensive, easy-to-replace part that is often overlooked.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The violent shaking of the steering wheel at certain speeds, especially after hitting a bump, points to several potential issues within the steering, wheel, or front suspension systems. 
+
+1.  **Wheel Imbalance/Damage:** Excessive unbalance of the wheels is the most frequent reason for vibrations at higher speeds and unsteadiness of the steering wheel (Source 40.1-130, page 2; Source 40_Wheels_and_Wheel_Alignment_volume_1, page 23). A bump could exacerbate an existing imbalance or highlight a tire defect. 
+2.  **Steering System Play:** Excessive free play in the steering wheel, steering linkage, intermediate steering lever, or steering gear can cause vibrations. The FSM explicitly states to check steering wheel free play and then the linkage if play is excessive (Source 46.0-110, page 1; Source 46_Steering_volume_1, page 3). Loose components would be more noticeable after a bump. 
+3.  **Front Suspension Ball Joints:** Worn supporting or guide joints in the steering knuckle bearing can exhibit too much free play, jerky movement, or grinding noises, leading to instability and shaking, particularly when stressed by road impacts (Source 33.1-425, page 1; Source 33_Front_Axle_volume_1, page 37). 
+4.  **Shock Absorbers:** Severely worn shock absorbers with significant oil loss can lead to knocking and reduced dampening, contributing to instability and amplified vibrations after bumps (Source 32.1-120, page 4; Source 32_Suspension_volume_1, page 19). While the FSM describes 'rumbling noise' and 'knocking,' a lack of proper dampening can certainly manifest as violent shaking.
+
+MECHANIC INSTRUCTIONS:
+A violent steering wheel shake, particularly after a bump, indicates a critical issue in the front end. We need to systematically isolate the source of the play or imbalance. Start with the most common and easily verifiable causes. First, check for excessive play in the steering system itself, then move to the wheels and suspension components.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The steering wheel has more than 25mm (1 inch) of free play at the rim, or I can see visible looseness in the steering linkage (tie rods, intermediate steering lever) when someone wiggles the wheel.
+  Option 2: The wheels show significant imbalance on a balancing machine, or I observe excessive radial/lateral runout or obvious damage (bulges, separated tread) on a tire.
+  Option 3: I found excessive play, jerky movement, or grinding noise in the supporting or guide ball joints of the steering knuckle bearing when prying on them.
+  Option 4: The front shock absorbers are leaking oil, or I can easily compress the suspension by hand and it bounces excessively.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Valid front-end diagnostic checking play, balance, and ball joints, but didn't identify steering damper as initial suspect for bump-triggered shimmy.
+
+---
+

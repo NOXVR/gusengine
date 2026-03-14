@@ -1,0 +1,181 @@
+**Vehicle:** 1965 Ford Mustang
+**Batch:** 1/1 (PARTIAL_ONLY)
+**Issues in this batch:** #10, #36, #43, #44
+
+# Hostile Analysis Prompt — GusEngine Diagnostic Grading Audit
+
+You are a **hostile auditor** tasked with finding errors in a diagnostic AI system's accuracy grading. Your job is to challenge every grade and find genuine weaknesses. 
+
+## Context
+
+An AI diagnostic system called "Gus" was tested against a database of known vehicle issues. For each issue, a customer complaint was submitted and Gus produced a diagnostic response. An LLM grader then compared Gus's response to the validated fix (answer key) and assigned a grade.
+
+**Your task:** Attempt to DOWNGRADE each grade below. Find cases where:
+- A CORRECT grade should have been PARTIALLY_CORRECT or INCORRECT
+- A PARTIALLY_CORRECT grade should have been INCORRECT
+- The grading rationale was too lenient or overlooked a genuine diagnostic error
+
+## Rules of Engagement
+
+1. **Cite specifics.** For every proposed downgrade, quote what Gus actually said AND what the answer key says. Show the discrepancy.
+2. **Technical accuracy only.** Do not downgrade because Gus didn't mention every possible cause — diagnostic triage correctly NARROWS the field. A mechanic doesn't list 20 things; they list the 3 most likely.
+3. **Order is not correctness.** If Gus mentions the right cause as option #2 instead of option #1, that is NOT a downgrade. Diagnostic order varies by presentation.
+4. **Procedural vs. specific.** The answer key intentionally uses general procedural language (e.g., "quality OEM-equivalent replacement" instead of specific part numbers). Do NOT downgrade Gus for not naming specific parts or specs that the answer key doesn't name either.
+5. **Rate your confidence.** For each finding, rate HIGH / MEDIUM / LOW confidence that this is a genuine error vs. a judgment call.
+
+## Anti-Fabrication Warning
+
+> **You are being evaluated on precision, not volume.** A hostile auditor who fabricates 20 fake problems is LESS useful than one who finds 2 real ones. If the grading is genuinely correct, saying "no issues found" is the right answer. Do NOT invent problems to fill space.
+
+## Input Format
+
+For each issue you will receive:
+- **Issue #** and **Technical Issue** name
+- **Answer Key Fix** (from the cleaned XLSX — the ground truth)
+- **Gus's Diagnostic Output** (what Gus actually responded)
+- **Original Grade** and **Grading Rationale** (from the scorecard)
+
+## Output Format
+
+For each issue, respond with ONE of:
+
+### If you find a genuine problem:
+```
+ISSUE #[N]: [Technical Issue Name]
+PROPOSED DOWNGRADE: [CORRECT→PARTIALLY_CORRECT | CORRECT→INCORRECT | PARTIALLY_CORRECT→INCORRECT]
+CONFIDENCE: [HIGH | MEDIUM | LOW]
+TECHNICAL JUSTIFICATION: [Specific quote from Gus vs. answer key showing the error]
+```
+
+### If the grade is defensible:
+```
+ISSUE #[N]: [Technical Issue Name]
+VERDICT: GRADE STANDS
+REASON: [Brief explanation of why the grade is correct]
+```
+
+## Summary
+
+After reviewing all issues in this batch, provide:
+```
+BATCH SUMMARY:
+  Total issues reviewed: [N]
+  Grades that stand: [N]
+  Proposed downgrades: [N] (HIGH confidence: [N], MEDIUM: [N], LOW: [N])
+```
+
+---
+
+## BEGIN ISSUES
+
+### ISSUE #10: Timing Chain Stretch / Worn Timing Set
+**Category:** Engine
+**Customer Complaint:** The engine has lost power and doesn't run as smooth as it used to. It also seems harder to start and the idle is rough.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the timing chain and gear set. Remove the radiator, water pump, harmonic balancer, and timing cover. Check the timing chain deflection — excessive free play per the Ford Shop Manual indicates excessive wear. Install a new double-roller timing set (a quality double-roller timing set) for durability. Align the timing marks on the cam and crank gears per the factory diagram (dots aligned). Verify ignition timing after installation (per the Ford Shop Manual for your engine). NOTE: A stretched timing chain retards cam timing, causing loss of power and efficiency. Nylon-tooth cam gears (used on some stock 289s) are notorious for teeth shearing off — always replace with a steel gear set.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The combination of lost power, rough idle, and hard starting points to issues in the fuel, ignition, or engine mechanical systems. A common carburetor issue causing rough idle and hard starting is a leaking power valve or incorrect idle mixture, often indicated by the idle mixture screws needing to be nearly seated (Source 2, 13, 22, 24). Hard starting and rough running can also be caused by a malfunctioning choke (Source 4, 13, 22, 55) or a lack of proper spark from the ignition system (Source 15, 44). A malfunctioning PCV system can also cause a rough idle (Source 13, 24, 36). I need to differentiate between these primary suspects.
+
+MECHANIC INSTRUCTIONS:
+We need to narrow down whether the issue is primarily fuel-related (carburetor mixture, power valve, choke) or ignition-related. Start by checking the carburetor's idle mixture and choke operation, as these directly impact idle quality and starting. Then, we'll check for spark.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: When adjusting the idle mixture screws, the engine only idles smoothly when the screws are nearly, or completely, seated.
+  Option 2: The choke plate is stuck partially closed or open, or its linkage is binding.
+  Option 3: There is no spark, or a weak, inconsistent spark, at one or more spark plugs when cranking the engine.
+  Option 4: I hear a distinct hissing sound around the intake manifold or carburetor, indicating a vacuum leak.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Focused on fuel/ignition (carb mixture, choke, spark) rather than timing chain — reasonable initial checks but not the most likely cause given the symptom pattern.
+
+---
+### ISSUE #36: Corroded / Damaged Wiring Harness
+**Category:** Electrical System
+**Customer Complaint:** Various electrical components work intermittently — sometimes the lights work, sometimes they don't, with no pattern.
+
+**ANSWER KEY FIX (Ground Truth):**
+Inspect the wiring harness for cracked insulation, melted wires, corroded connections, and amateur splices. On a 60-year-old car, the factory cloth-wrapped wiring is often brittle and cracked. Options: (1) Repair individual damaged sections with proper solder and heat-shrink connections. (2) Install a complete replacement wiring harness — aftermarket reproduction parts are available from major Mustang restoration suppliers that make direct-fit harnesses for the 1965 Mustang. A complete harness replacement is recommended if more than 3-4 circuits have issues. NOTE: If the car has been modified by previous owners, expect non-standard wiring. A complete harness replacement eliminates decades of band-aid repairs.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+Intermittent operation of various electrical components, including lights, points to a general power supply or grounding issue. The most common causes for such widespread, intermittent problems are loose or corroded battery connections, a failing charging system (alternator/regulator), or a fault in a primary electrical switch or circuit breaker that supplies multiple circuits. The FSM indicates that 'Loose or corroded electrical connections' and 'Loose battery cable' can cause lights to not light or burn out repeatedly (Source 44). Alternator system trouble, including a poor battery or regulator issues, can cause headlights to dim at idle (Source 9). A defective headlight switch or its associated circuit breaker could also cause intermittent lighting issues (Source 44, 45, 46). A loose connection in the primary circuit can also cause issues (Source 3).
+
+MECHANIC INSTRUCTIONS:
+Intermittent electrical issues affecting various components often stem from a fundamental problem with the main power supply or ground. We need to determine if the issue is a poor connection at the battery, a fault in the charging system, or a specific switch/circuit breaker affecting multiple circuits.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The battery terminals or main ground strap are loose, corroded, or damaged.
+  Option 2: The charge indicator light behaves normally (ON with ignition OFF, OFF with engine running), but headlights dim noticeably at idle compared to higher RPMs.
+  Option 3: When the headlights are not working, the parking lights, tail lights, and horn still operate normally.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Reasonable first step checking power supply/charging, but doesn't initially target harness inspection — would get there by elimination.
+
+---
+### ISSUE #43: 3-Speed — Stuck in Gear / Won't Shift
+**Category:** Transmission (Manual)
+**Customer Complaint:** The transmission gets stuck in first gear and won't let me shift to second — I have to reach underneath and move the linkage by hand.
+
+**ANSWER KEY FIX (Ground Truth):**
+Inspect and replace the shift linkage bushings — the external linkage rods on the Borg-Warner T-10 / Ford 3-speed use rubber or nylon bushings at each pivot point that wear out and allow the rods to bind or miss their detent. Replace all linkage bushings and lubricate the pivots with white lithium grease. Adjust the linkage per the Ford shop manual. NOTE: If the problem is internal (synchros grinding or popping out of gear under load), the transmission needs to be removed and rebuilt — replace the synchro assemblies, shift forks, and any worn gears. Change the transmission fluid to Ford-spec GL-1 gear oil (modern GL-5 can damage brass synchros in these transmissions — use GL-1 or MT-90 equivalent).
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The symptom 'transmission gets stuck in first gear and won't let me shift to second — I have to reach underneath and move the linkage by hand' strongly suggests an issue with the external manual linkage. The fact that you can manually shift it by hand at the transmission's lever indicates the internal transmission components are likely capable of shifting, but the control input from the shifter is not reaching them correctly. Improperly adjusted manual linkage can prevent the manual valve from being correctly positioned, leading to incorrect fluid pressure direction and shift issues (Source 11). If the linkage is confirmed good, then internal hydraulic components like the 1-2 shift valve train or governor pressure system would be the next suspects (Source 15, Source 18, Source 35).
+
+MECHANIC INSTRUCTIONS:
+First, we need to verify the manual linkage adjustment and check for any binding. This is a common cause for incorrect shifting in C4 automatics. 
+
+1.  **Raise the vehicle.**
+2.  **Locate the manual lever on the transmission:** This is where the shift rod from the column connects.
+3.  **With the engine OFF, manually move the transmission's manual lever through all its detents (P, R, N, D2, D1, L).** Observe if it moves freely and if you can feel distinct detents for each gear.
+4.  **Attempt to shift the transmission into D1 (Drive 1) by hand at the transmission lever, then try to move it to D2 (Drive 2) and L (Low).** Does it move smoothly into these positions?
+5.  **Perform the manual linkage adjustment:** With the engine stopped, loosen the clamp at the shift lever (point 'A' in Fig. 16, Source 39) so the shift rod is free. Position the transmission selector lever into the D1 (large dot) position, ensuring it's against the D1 stop on the selector plate. Then, shift the manual lever at the transmission into the D1 detent position (second from the rear). Tighten the clamp on the shift rod at point 'A'.
+6.  **After adjustment, lower the vehicle and start the engine.** Check the pointer alignment and transmission operation for all selector lever detent positions, specifically testing the 1-2 shift in D1.
+
+What did you observe during these steps?
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: After adjusting the manual linkage, the transmission now shifts smoothly from first to second gear and through all other ranges. The manual lever at the transmission also moved freely through all detents.
+  Option 2: The manual linkage was already correctly adjusted, or I adjusted it as per the procedure, and the manual lever at the transmission moves freely through all detents. However, the transmission still gets stuck in first gear and won't shift to second automatically.
+  Option 3: The manual linkage rod is bent, or the lever at the transmission is stiff/damaged, preventing proper movement even after attempting adjustment. I could not move the transmission's manual lever freely through all detents by hand.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Correctly identified linkage as the issue, but referenced C4 automatic procedures instead of manual 3-speed linkage.
+
+---
+### ISSUE #44: Clutch Slipping
+**Category:** Transmission (Manual)
+**Customer Complaint:** The engine revs up but the car doesn't accelerate — especially in higher gears or when I'm going uphill.
+
+**ANSWER KEY FIX (Ground Truth):**
+Replace the clutch disc, pressure plate, and throw-out bearing as a set. The 1965 289 uses a correct size clutch depending on the application. Resurface or replace the flywheel (check for heat spots, cracks, and proper surface finish). Inspect the pilot bearing/bushing in the crankshaft — replace it (press out old, press in new bronze bushing or sealed bearing). Adjust the clutch free play to the correct free play per the Ford Shop Manual at the pedal. NOTE: A slipping clutch can also be caused by oil contamination from a leaking rear main seal or transmission input shaft seal — identify and fix the leak before installing the new clutch, or it will slip again.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+The symptom 'engine revs up but the car doesn't accelerate — especially in higher gears or when I'm going uphill' is a classic indication of transmission slippage. When the engine revs freely but power is not effectively transferred to the wheels, it points to a problem within the automatic transmission's ability to hold a gear. This could be due to improper band adjustment, issues with the converter one-way clutch, or general clutch/band slippage, as indicated in the FSM's diagnosis guide for 'POOR ACCELERATION' (Source 29). The 'Stall Test' (Source 25) is the direct procedure to confirm clutch or band slippage by observing engine RPM under full throttle with the brakes applied.
+
+MECHANIC INSTRUCTIONS:
+The primary suspect here is transmission slippage. When the engine revs but the car doesn't accelerate, it means the power generated by the engine isn't being fully transmitted to the drive wheels. This is often caused by worn clutches, bands, or a faulty torque converter within the C4 automatic transmission. To confirm this, we need to perform a Stall Test. This test will directly indicate if there is clutch or band slippage. Before we proceed with the Stall Test, I need you to describe the exact behavior you observe when you try to accelerate.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The engine RPM increases significantly, but the vehicle speed does not increase proportionally, or the car struggles to move, especially under load (e.g., uphill).
+  Option 2: The engine struggles to gain RPM, bogs down, or misfires when you press the accelerator, indicating a lack of engine power.
+  Option 3: The transmission shifts erratically, delays shifts, or refuses to engage certain gears, but when a gear *does* engage, the power transfer feels normal.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Correctly identified slippage but prescribed C4 automatic stall test instead of manual clutch diagnostic — right symptom, wrong transmission type.
+
+---
+

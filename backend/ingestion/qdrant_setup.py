@@ -56,6 +56,8 @@ def index_chunk(client: QdrantClient, chunk: dict, chunk_id: str,
                 "page_numbers": chunk["page_numbers"],
                 "headings": chunk["headings"],
                 "token_count": chunk["token_count"],
+                "type": chunk.get("type", "text"),
+                "image_count": chunk.get("image_count", 0),
             }
         )]
     )

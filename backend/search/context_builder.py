@@ -98,8 +98,9 @@ def build_context(
         # Use pre-computed token count from ingestion
         chunk_tokens = chunk["token_count"]
 
-        # Format chunk with provenance header
-        header = f"[Source {i+1}: {chunk['source']}"
+        # Tag image_reference chunks so the LLM knows to reference, not interpret
+        chunk_type_tag = "DIAGRAM REFERENCE" if chunk.get("type") == "image_reference" else f"Source {i+1}"
+        header = f"[{chunk_type_tag}: {chunk['source']}"
         if chunk["page_numbers"]:
             pages = ", ".join(str(p) for p in chunk["page_numbers"])
             header += f" | Pages {pages}"

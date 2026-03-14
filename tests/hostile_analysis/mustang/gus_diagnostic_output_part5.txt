@@ -1,0 +1,1020 @@
+[
+  {
+    "query_id": "acc_elec_101",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My windshield wipers have stopped working — they either don't move at all or move really slowly.",
+    "query_category": "diagnostic",
+    "technical_issue": "Windshield Wiper Motor Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Mechanical System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 19,
+          "context": "SINGLE SPEED ELECTRIC WIPER MOTOR TESTS"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 19,
+          "context": "FIG. 2-Windshield Wiper Connector Plug Test Points"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 34,
+          "context": "CIRCUIT PROTECTION"
+        }
+      ],
+      "diagnostic_reasoning": "The FSM outlines a clear diagnostic path for inoperative or sluggish windshield wipers. The first step is to check the mechanical linkage for obstructions and ease of operation. If the linkage is free, the next step is to check for voltage at the wiper motor connector. Lack of voltage points to a defective circuit breaker, switch, or wiring. If voltage is present and linkage is free, the motor itself is suspect.",
+      "mechanic_instructions": "First, we need to determine if the issue is mechanical binding or an electrical fault. Begin by examining the wiper linkage under the instrument panel for any obstructions. Then, disconnect the linkage at the wiper motor and manually check the ease of operation of the wiper arms and blades. This will isolate whether the motor is struggling against a mechanical load or if it's an electrical supply problem.",
+      "answer_path_prompts": [
+        "The linkage is obstructed or binds significantly when moved by hand, even with the motor disconnected.",
+        "The linkage moves freely by hand with the motor disconnected, but the motor shaft does not turn or turns very slowly when the switch is activated.",
+        "The linkage moves freely by hand with the motor disconnected, and the motor shaft turns normally when the switch is activated."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_int_102",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The interior door handle broke off and I can't open the door from the inside.",
+    "query_category": "diagnostic",
+    "technical_issue": "Broken / Missing Interior Door Handle or Window Crank",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Door Hardware"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_13_p601-650.pdf",
+          "page": 27,
+          "context": "REMOVAL AND INSTALLATION COMET, FALCON, FAIRLANE"
+        },
+        {
+          "source": "mustang_fsm_part_13_p601-650.pdf",
+          "page": 1,
+          "context": "DOOR HANDLE AND/OR PUSH BUTTON"
+        },
+        {
+          "source": "mustang_fsm_part_13_p601-650.pdf",
+          "page": 1,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_13_p601-650.pdf",
+          "page": 40,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_13_p601-650.pdf",
+          "page": 48,
+          "context": "REMOVAL"
+        }
+      ],
+      "diagnostic_reasoning": "The interior door handle breaking off indicates a failure in the handle assembly or its direct linkage to the door lock mechanism. To diagnose this, the door trim panel must be removed to gain access to the internal components. Once the trim panel is off, the specific point of failure (handle, linkage, or lock mechanism) can be visually identified. The FSM provides procedures for trim panel removal and subsequent handle/lock component access.",
+      "mechanic_instructions": "The interior door handle breaking off means we need to get inside the door to assess the damage. Your first step is to remove the door trim panel to expose the handle and lock mechanism. Refer to 'Typical Door Trim' removal in Source 35, page 27. Once the trim panel is off and the water shield is positioned away, visually inspect the interior door handle, its retaining hardware, and the actuating link connecting it to the door lock assembly. What do you observe?",
+      "answer_path_prompts": [
+        "After removing the trim panel, the handle itself is physically broken (e.g., snapped plastic, stripped metal) but the actuating rod/linkage is still attached to the lock mechanism.",
+        "After removing the trim panel, the handle appears intact, but the actuating rod/linkage has become disconnected from either the handle or the lock mechanism.",
+        "After removing the trim panel, the handle and its linkage appear intact, but the door lock mechanism itself is seized and will not move when the linkage is operated manually."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_103",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "A mechanic said my shock towers are rusted and could collapse — the upper suspension mounts are compromised.",
+    "query_category": "diagnostic",
+    "technical_issue": "Shock Tower Rust / Structural Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Front Suspension",
+        "Body Structure"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 13,
+          "context": "FRONT SUSPENSION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 17,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 21,
+          "context": "FIG. 17-Front Shock Absorber Removal or Installation-Mustang -Typical of Comet and Falcon"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 18,
+          "context": "INSTALLATION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 17,
+          "context": "INSTALLATION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 21,
+          "context": "Installation"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 22,
+          "context": "Installation"
+        }
+      ],
+      "diagnostic_reasoning": "The mechanic's report of rusted shock towers and compromised upper suspension mounts indicates a critical structural integrity issue. The FSM describes the front suspension components: the upper arm attaches to the underbody (Source 2, page 13; Source 32, page 18), the coil spring seats between the upper arm and the top of the spring housing (shock tower) (Source 2, page 13), and the shock absorber upper mounting bracket attaches to the body/shock tower (Source 45, page 17; Source 55, page 21). While the FSM details the removal and installation of these components, it does not provide specific diagnostic procedures or repair guidelines for rust-induced structural failure of the unibody shock towers or associated mounting points. This is a severe safety concern that requires thorough visual inspection to determine the extent of the damage.",
+      "mechanic_instructions": "A compromised shock tower is a serious structural issue affecting the entire front suspension and vehicle safety. You need to perform a detailed visual inspection of the shock towers and surrounding areas. Raise the front of the car and support it securely on jack stands, ensuring clear access to the entire shock tower, inner fender, and frame rail area. Pay close attention to the areas where the upper control arm mounts to the underbody and where the shock absorber upper bracket attaches to the body. Look for: \n\n1.  **Rust Perforation:** Are there actual holes or areas where the metal has completely rusted through?\n2.  **Metal Deformation:** Are there any bulges, cracks, or signs of stress in the metal around the spring seat or mounting points?\n3.  **Mounting Point Integrity:** Are the bolts for the upper control arm shaft or shock absorber bracket pulling through the metal, or is the metal around them cracked or weakened?\n4.  **Extent of Rust:** Does the rust appear localized to the shock tower, or does it extend into the frame rails, inner fender, or cowl area?\n\nDescribe precisely what you observe.",
+      "answer_path_prompts": [
+        "The rust is localized to the shock tower itself, primarily around the spring seat and shock mount, but the surrounding frame rails and inner fender appear solid with no significant rust or deformation.",
+        "The rust extends beyond the shock tower into the adjacent frame rails, inner fender, or cowl area, showing signs of widespread structural compromise.",
+        "The upper control arm mounting points on the underbody are heavily rusted, cracked, or show signs of the bolts pulling through the metal.",
+        "There are visible cracks or significant deformation in the metal around the shock tower, indicating immediate structural failure or imminent collapse.",
+        "Upon closer inspection, the rust appears superficial, and there are no signs of structural compromise, cracks, or deformation in the shock towers or mounting points."
+      ],
+      "confidence_disclaimer": "The retrieved FSM documents describe the components of the front suspension and their attachment points, but do not contain specific diagnostic or repair procedures for rust-induced structural failure of the shock towers or unibody mounting points. This guidance is based on general mechanical knowledge of structural integrity and the FSM's description of component locations.",
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_104",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My oil pressure gauge reads zero or very low even though the engine sounds fine and isn't knocking.",
+    "query_category": "diagnostic",
+    "technical_issue": "Oil Pressure Sender / Gauge Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Lubrication System",
+        "Electrical System",
+        "Instrumentation"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 18,
+          "context": "OIL PRESSURE INDICATOR GAUGE TEST-COMET"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 19,
+          "context": "TEMPERATURE GAUGE TEST"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 27,
+          "context": "OIL PRESSURE INDICATOR GAUGE-COMET"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 17,
+          "context": "INSTRUMENT TROUBLE DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 26,
+          "context": "GAUGES"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of a zero or very low oil pressure gauge reading, coupled with a normal-sounding engine, strongly suggests an issue with the oil pressure *indication* rather than actual low oil pressure. A true lack of oil pressure would rapidly lead to severe engine damage and noise. The primary suspects are the oil pressure sending unit, its wiring, the gauge itself, or the constant voltage regulator. While the 1965 Mustang typically uses an oil pressure indicator light (Source 59), the FSM provides diagnostic procedures for an oil pressure gauge (under 'Comet' sections, Source 1, 10, 25, 34) which are applicable. The initial diagnostic step is to test the sender unit and its circuit by grounding the sender wire, as described in the FSM (Source 1). This will quickly differentiate between a faulty sender and a problem with the gauge, wiring, or constant voltage regulator. If the gauge responds, the sender is defective. If it does not, the problem lies elsewhere in the circuit or the gauge itself. Verifying actual oil pressure with a mechanical gauge is the ultimate confirmation, especially if electrical tests are inconclusive.",
+      "mechanic_instructions": "Your 1965 Mustang should technically have an oil pressure indicator light, not a gauge, according to the FSM. However, if you have a gauge, we will proceed with the appropriate diagnostic steps. The first step is to determine if the issue is with the oil pressure sending unit or the gauge/wiring circuit. The engine sounding fine indicates the problem is likely electrical, not a catastrophic loss of oil pressure. We need to test the sending unit and the circuit.",
+      "answer_path_prompts": [
+        "Locate the oil pressure sending unit (above the oil filter on the V-8, Fig. 3, Source 10). Disconnect the wire from the sending unit. Turn the ignition switch ON (do not start the engine). Momentarily short the sender wire to a good engine ground. Observe the oil pressure gauge. Does the gauge needle move to the 'normal' or 'high' range?",
+        "Before any electrical tests, I want to verify the actual oil pressure. Remove the oil pressure sending unit and install a temporary, known-good mechanical oil pressure gauge in its place. Start the engine and let it reach normal operating temperature. What is the reading on the mechanical gauge at idle?"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_m_105",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I have to force the car into first gear and it grinds when I try to shift — the clutch doesn't seem to release all the way.",
+    "query_category": "diagnostic",
+    "technical_issue": "Clutch Won't Fully Disengage / Hard to Get into Gear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Clutch System",
+        "Transmission Linkage",
+        "Engine Management"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 46,
+          "context": "HARD SHIFTING"
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 57,
+          "context": "CLUTCH PEDAL ADJUSTMENT"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 15,
+          "context": "ENGINE IDLE SPEED CHECK"
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 29,
+          "context": "GEARS SPINNING WHEN SHIFTING INTO GEAR FROM NEUTRAL"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of having to force the car into first gear and grinding during shifts, coupled with the observation that the clutch 'doesn't seem to release all the way,' strongly indicates a clutch disengagement issue. The primary suspects are: 1) Improper clutch pedal adjustment, which is a frequent cause of clutch failure and can prevent full disengagement (Source 57). 2) Issues with the shift linkage itself, such as being out of adjustment, bent, or loose, which can directly cause hard shifting (Source 10). 3) An excessively high engine idle speed, which can cause rough transmission engagement and make shifting difficult (Source 15, Source 29). We need to rule out these simpler, external adjustments before considering internal transmission or clutch component failures.",
+      "mechanic_instructions": "The grinding and difficulty engaging first gear, especially with your observation of incomplete clutch release, points to a problem with the clutch disengagement. We need to start by checking the most common and easily verifiable causes. First, verify the clutch pedal free play, as incorrect adjustment is a frequent cause of poor clutch release. Second, inspect the shift linkage for any physical damage or misalignment. Third, confirm the engine idle speed is within specifications, as a high idle can exacerbate shifting issues.",
+      "answer_path_prompts": [
+        "The clutch pedal has excessive free play (more than 1/2 inch) or no free play at all.",
+        "The shift linkage rods appear bent, loose, or the alignment pin cannot be inserted into the control bracket and linkage holes.",
+        "The engine idle speed is noticeably high (above 700 RPM in neutral).",
+        "The clutch pedal free play is within specification, the shift linkage appears normal, and the engine idle speed is correct."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_106",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's rust falling down behind the dashboard and I can see corrosion on the firewall from inside the car.",
+    "query_category": "diagnostic",
+    "technical_issue": "Cowl-to-Firewall Rust (Behind Dash)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body",
+        "Cooling System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 7,
+          "context": "DUST AND WATER LEAKS"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 16,
+          "context": "BODY MAINTENANCE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 41,
+          "context": "HEATER CORE"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of rust falling behind the dashboard and visible corrosion on the firewall from inside the car points to two primary subsystems: body water leaks or a leaking heater core. \n\n1.  **Body Water Leaks:** Water can enter the passenger compartment through compromised body seams, windshield seals, or cowl areas. The FSM explicitly states to 'Check all openings for water leaks, and seal where necessary' (Source 56, page 16) and discusses 'DUST AND WATER LEAKS' in the cowl panel area (Source 58, page 7). Water ingress would lead to rust formation on internal metal structures, which could then flake off and be visible.\n2.  **Heater Core Leak:** A leaking heater core, located behind the dashboard, would drip coolant into the passenger compartment. Coolant, especially when mixed with dust and grime, can cause significant corrosion on metal surfaces like the firewall and dashboard support structures. The FSM provides procedures for heater core removal and installation (Source 4, page 41), indicating it's a serviceable component in that location.",
+      "mechanic_instructions": "The rust and corrosion behind the dashboard and on the firewall indicate water ingress. We need to determine the source. This could be external water leaking into the cabin or an internal leak from the cooling system.\n\nFirst, visually inspect the area behind the dashboard and on the firewall. We need to differentiate between general water intrusion and a coolant leak.\n\nObserve the nature of the rust and any associated moisture or fluid. Check for specific odors.",
+      "answer_path_prompts": [
+        "The rust appears dry, and I see water stains or active drips, especially after rain or washing, coming from the upper cowl area, windshield, or A-pillars. There is no sweet smell.",
+        "The corrosion or any dripping fluid has a distinct sweet smell, and the fluid feels oily/slippery to the touch. The coolant level in the radiator or overflow bottle is low."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_exh_107",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "A bolt broke off in the cylinder head when my mechanic tried to remove the exhaust manifold.",
+    "query_category": "diagnostic",
+    "technical_issue": "Exhaust Manifold Bolt Seizure / Breakage",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Engine",
+        "Exhaust System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 45,
+          "context": "INSTALLATION"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 24,
+          "context": "INSTALLATION"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 12,
+          "context": "REMOVAL"
+        }
+      ],
+      "diagnostic_reasoning": "A bolt broke off in the cylinder head during exhaust manifold removal. The FSM details exhaust manifold removal and installation (Source 12, 13, 17, 29, 38) and cylinder head procedures (Source 2, 17, 19, 20, 26, 28, 32, 33, 42, 44, 45, 50, 53, 55, 58), including torquing bolts (Source 2, 8, 9, 34, 52). However, it does not provide a specific procedure for extracting a broken bolt. This situation requires a repair procedure based on general mechanical practice. The approach depends on how much of the bolt is exposed.",
+      "mechanic_instructions": "A broken exhaust manifold bolt in the cylinder head requires careful removal. Your next step is to assess the bolt's condition and attempt extraction. Describe what you observe regarding the broken bolt.",
+      "answer_path_prompts": [
+        "The broken bolt is protruding from the cylinder head, allowing access with vice grips or a similar tool.",
+        "The broken bolt is flush with the cylinder head surface.",
+        "The broken bolt is recessed below the cylinder head surface."
+      ],
+      "confidence_disclaimer": "The retrieved FSM documents describe exhaust manifold removal and cylinder head work, including bolt installation and torque specifications. However, they do not contain a specific procedure for extracting a broken bolt from the cylinder head. The advice provided is based on general mechanical knowledge and common repair practices for this type of issue.",
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_108",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My front tires are wearing unevenly and the car pulls to one side even on a flat road.",
+    "query_category": "diagnostic",
+    "technical_issue": "Front End Alignment Out of Spec — Tire Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Steering",
+        "Suspension",
+        "Brakes",
+        "Wheels & Tires"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 11,
+          "context": "FRONT END GENERAL INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 26,
+          "context": "FRONT WHEEL ALIGNMENT CHECKS"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 12,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 4,
+          "context": "Pump-Fluid Pressure Test."
+        }
+      ],
+      "diagnostic_reasoning": "Uneven front tire wear and the car pulling to one side are classic symptoms of front end alignment issues, worn suspension components, or a dragging brake. The FSM mandates a thorough front end general inspection before attempting any alignment adjustments (Source 2, 12). This inspection covers tire pressure, ball joints, steering linkage, wheel bearings, wheel balance, and shock absorbers. Additionally, the FSM's brake diagnosis guide lists 'Car Pulls to One Side' as a symptom for various brake component failures, such as a faulty wheel cylinder, distorted brake shoe, or oil/grease in the lining (Source 3, 14, 21, 42). Therefore, the initial diagnostic steps must cover these primary suspects.",
+      "mechanic_instructions": "Before we dive into specific alignment adjustments, we need to perform a foundational inspection of the front end. Many issues that cause uneven tire wear and pulling can be traced back to basic component wear or improper setup. We'll start by checking the most common and easily verifiable culprits.",
+      "answer_path_prompts": [
+        "All four tires are at specified pressure, but I found significant play when shaking a front wheel (grasping upper and lower surfaces of the tire).",
+        "All four tires are at specified pressure, and there's no noticeable play in the front wheels, but one of the front brakes feels hot after a short drive, or the car pulls more severely when braking.",
+        "All four tires are at specified pressure, and the front end feels solid with no brake issues, but the steering linkage or gear mountings appear loose."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_109",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The radio doesn't work — it's completely dead or I only get static with no clear stations.",
+    "query_category": "diagnostic",
+    "technical_issue": "Radio Not Working / Antenna Issues",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Radio System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 2,
+          "context": "RADIO DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 3,
+          "context": "RADIO DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 3,
+          "context": "TESTING"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of a completely dead radio or static with no clear stations points to several potential issues within the radio system. The 'RADIO DIAGNOSIS GUIDE' (Source 1) lists a burned-out fuse, defective antenna, shorted speaker lead or defective speaker, and lack of 12V at the A lead as primary causes for no reception. For static, 'NOISY OR ERRATIC RECEPTION' (Source 12) points to a defective antenna, loose lead-in cable, or poor receiver ground. The initial diagnostic path should verify the basic power supply and the integrity of the antenna and speaker circuits, as these are the most common and easiest to check components.",
+      "mechanic_instructions": "First, we need to determine if the radio is receiving power. Check the radio fuse for continuity. If the fuse is good, verify that 12 volts are available at the radio's A lead. If power is present, the next step is to isolate whether the issue is with the antenna or the speaker. The FSM suggests substituting known good components for testing. What do you observe?",
+      "answer_path_prompts": [
+        "The radio fuse is blown, or there is no 12V at the radio's A lead.",
+        "The radio powers on, but I only get static, even after checking the antenna lead connection at the radio.",
+        "The radio powers on and tunes stations, but there is no sound, or the sound is distorted/garbled."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_cool_110",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's coolant leaking from the hoses going through the firewall to the heater.",
+    "query_category": "diagnostic",
+    "technical_issue": "Leaking Heater Hose / Heater Valve",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "Heater System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_13_p601-650.pdf",
+          "page": 23,
+          "context": "RADIATOR HOSE REPLACEMENT"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 40,
+          "context": "HEATER HOSE REPLACEMENT"
+        }
+      ],
+      "diagnostic_reasoning": "Coolant leaking from heater hoses at the firewall points to a breach in the cooling system. The most common causes are loose or damaged hose connections, or the hoses themselves are cracked or rotted. Less commonly, the heater core tubes could be compromised, or the entire system could be over-pressurizing due to another fault, exacerbating a weak point. The initial step is to visually inspect the immediate area of the leak to determine the exact source.",
+      "mechanic_instructions": "Inspect the heater hoses and their connections at the firewall. Look for visible cracks, tears, or signs of coolant weeping from under the hose clamps. Trace the leak to its precise origin.",
+      "answer_path_prompts": [
+        "I see coolant actively dripping or weeping from a hose clamp or a visible crack in one of the heater hoses.",
+        "The hoses and clamps appear intact, but coolant is visibly running down the firewall from behind the heater box, suggesting a leak from the heater core itself.",
+        "The hoses are intact, but the cooling system seems to be under excessive pressure (hoses are very hard when hot), and the leak is a slow weep from a connection."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_111",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine suddenly started running rough and then died — it cranks but won't start and timing seems completely off.",
+    "query_category": "diagnostic",
+    "technical_issue": "Distributor Gear Wear (Nylon Gear Failure)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Fuel System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 7,
+          "context": "DIAGNOSIS AND TESTING"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "ENGINE CRANKS NORMALLY, BUT WILL NOT START"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 16,
+          "context": "IF THERE IS NO SPARK OR A WEAK SPARK AT THE SPARK PLUGS"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 2,
+          "context": "IGNITION SYSTEM DIAGNOSIS TROUBLE ISOLATION"
+        },
+        {
+          "source": "mustang_fsm_part_07_p301-350.pdf",
+          "page": 28,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 41,
+          "context": "ENGINE"
+        }
+      ],
+      "diagnostic_reasoning": "The engine's sudden rough running, dying, and subsequent no-start condition, coupled with your observation that 'timing seems completely off,' indicates a critical failure. Following the FSM's 'ENGINE CRANKS NORMALLY, BUT WILL NOT START' guide (Source 18), the initial step is to determine if the fault lies in the ignition or fuel system. \n\n1.  **Ignition System Failure:** A lack of spark or a weak, erratic spark would prevent the engine from starting. This could be due to a defective coil, condenser, breaker points, wiring, or a problem with the distributor itself, including excessive shaft play or a worn cam (Source 28, 29, 48, 57, 60). If the distributor's mechanical drive (e.g., from the timing chain) is compromised, the ignition timing would indeed be 'completely off.'\n2.  **Fuel System Failure:** Insufficient fuel supply or an incorrect fuel mixture can also cause rough running, stalling, and a no-start condition (Source 13, 28, 52, 56). This includes issues like a defective fuel pump, restricted fuel filter, or major carburetor malfunctions.\n3.  **Engine Mechanical Failure (Timing Chain):** While not the immediate FSM first step for a no-start, your specific mention of 'timing completely off' strongly suggests a mechanical timing issue, such as a stretched, jumped, or broken timing chain (Source 2, 11, 41, 55). Such a failure would directly cause the ignition timing to be incorrect and prevent the engine from running. If the spark check is good but the engine still won't start, or if the spark is erratic, a timing chain inspection would be warranted.\n\nThe most efficient first step is to check for spark at the coil high tension lead, as this quickly isolates the problem to either the ignition or fuel system, or points to a deeper mechanical issue if spark is present but erratic.",
+      "mechanic_instructions": "The engine cranks but won't start, and you've noted the timing seems completely off. We need to perform the initial diagnostic step for a no-start condition: checking for spark at the coil high tension lead. This will help us quickly determine if the ignition system is functioning at a basic level, or if we need to investigate further into the ignition circuit, fuel system, or mechanical timing. \n\nTo do this, disconnect the coil high tension lead from the top of the distributor. Hold the end of the lead approximately 3/16 inch from the cylinder head or any other good ground. With the ignition on, crank the engine and observe the spark. (Source 57, Source 29)",
+      "answer_path_prompts": [
+        "A strong, blue-white spark jumps consistently from the coil high tension lead to ground.",
+        "No spark, or a weak, yellow-orange spark, or an inconsistent spark occurs from the coil high tension lead to ground.",
+        "I observed the distributor rotor, and it does not turn when the engine is cranking."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_a_112",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "When I floor the gas pedal on the highway to pass someone, the transmission doesn't downshift — it just stays in the same gear and accelerates slowly.",
+    "query_category": "diagnostic",
+    "technical_issue": "Kickdown (Passing Gear) Not Working",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Transmission",
+        "Throttle Linkage"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 10,
+          "context": "DIAGNOSIS AND TESTING"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 33,
+          "context": "MUSTANG LINKAGEALL ENGINES"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 12,
+          "context": "CONTROL PRESSURE AND VACUUM DIAPHRAGM UNIT CHECK"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 17,
+          "context": "C4 AUTOMATIC DUAL RANGE DIAGNOSIS GUIDE"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'transmission doesn't downshift when flooring the gas pedal' directly indicates a 'No Forced Downshifts' condition. The primary suspects, as per the FSM's preliminary checks, are the accelerator pedal height, downshift linkage adjustment, and throttle linkage operation (Source 60, page 10). If the downshift linkage is not correctly adjusted, the transmission will not receive the signal to perform a forced downshift (kickdown). A secondary, but less common, cause could be a vacuum leak affecting the transmission's vacuum diaphragm unit, which influences shift points (Source 51, page 12). Internal transmission issues are less likely to be the initial cause for this specific symptom but could be a factor if external checks prove inconclusive (Source 57, page 17).",
+      "mechanic_instructions": "The most common cause for a lack of forced downshift is incorrect downshift linkage adjustment or insufficient accelerator pedal travel. You need to physically verify that the accelerator pedal is reaching its full-throttle stop and that the downshift linkage is engaging the kickdown detent at the carburetor. This is a critical preliminary check before delving into internal transmission components. Follow the procedure for V-8 engines in the FSM (Source 34, page 33).",
+      "answer_path_prompts": [
+        "When the accelerator pedal is fully depressed, the downshift lever on the transmission does not move to its kickdown position, or the carburetor throttle lever does not reach its wide-open stop.",
+        "The accelerator pedal reaches full travel and the downshift lever moves to its kickdown position, but there is a noticeable vacuum leak at the transmission vacuum diaphragm unit or its connecting hoses.",
+        "The accelerator pedal reaches full travel, the downshift linkage engages the kickdown position, and there are no apparent vacuum leaks. The transmission still does not downshift."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_susp_113",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The rear of the car sits noticeably lower than the front — it looks like the back end is squatting.",
+    "query_category": "diagnostic",
+    "technical_issue": "Rear Leaf Spring Sag / Broken Leaves",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Rear Suspension"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 13,
+          "context": "REAR  SUSPENSION"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 23,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_02_p51-100.pdf",
+          "page": 24,
+          "context": "Rear  Shackle"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of the car's rear sitting noticeably lower than the front points directly to a failure in the rear suspension's load-bearing components. The 1965 Mustang uses leaf springs for the rear suspension (Source 45). Over time, these springs can fatigue, flatten, or break, leading to a loss of ride height. Additionally, the shackles and hangers that secure the leaf springs to the chassis can wear or become damaged, also causing the rear to sag (Source 45, 15). While shock absorbers control damping, they are not primary load-bearing components; however, a completely failed shock could allow excessive compression. The most probable cause is fatigued or damaged leaf springs, followed by worn or damaged shackles/hangers.",
+      "mechanic_instructions": "The rear of the car squatting indicates a problem with the rear suspension's ability to support the vehicle's weight. You need to physically inspect the leaf springs and their mounting hardware. Raise the car on a hoist, supporting the frame, and visually examine the rear leaf springs for any signs of flattening, cracks, or breaks. Also, inspect the spring shackles and hangers for excessive wear, bending, or damage where they connect the springs to the underbody.",
+      "answer_path_prompts": [
+        "The leaf springs are visibly flattened, cracked, or broken.",
+        "The leaf springs appear normal, but the shackles or hangers are bent, worn, or damaged.",
+        "All rear suspension components (springs, shackles, hangers, shocks) appear normal with no obvious damage or wear."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_114",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My taillights and parking lights are dim on one side or flicker on and off.",
+    "query_category": "diagnostic",
+    "technical_issue": "Parking Light / Taillight Socket Corrosion",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Lighting System",
+        "Electrical System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 16,
+          "context": "DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 22,
+          "context": "TAIL, STOP, AND BACK-UP LIGHT BULBS"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 34,
+          "context": "BULB CHART"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 42,
+          "context": "ALTERNATOR SYSTEM TROUBLE"
+        }
+      ],
+      "diagnostic_reasoning": "Dim or flickering lights on one side typically indicate a localized electrical issue. The most common causes are a faulty bulb, a corroded or loose connection at the bulb socket, or a poor ground connection for that specific light assembly. Less likely, but still possible, is a broader electrical system issue like a failing alternator or voltage regulator, though this would usually affect all lights, not just one side. The FSM explicitly lists 'Burned out bulb,' 'Loose or broken wires to the bulb,' and 'Poor ground' as causes for individual lights not lighting, which directly applies to dimming/flickering. It also mentions alternator issues for dimming headlights, which is a general system concern.",
+      "mechanic_instructions": "A dim or flickering taillight and parking light on one side points to a localized electrical problem. We need to isolate whether the issue is with the bulb itself, the socket, or the wiring/ground for that specific light assembly. Begin by physically inspecting the affected light.",
+      "answer_path_prompts": [
+        "The bulb filament is visibly broken or discolored, or the socket shows heavy corrosion or damage.",
+        "The bulb and socket appear fine, but wiggling the wires leading to the light causes the flickering to change or stop.",
+        "All other lights (headlights, dash lights, other side's taillights) also appear dim or flicker, especially at idle."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_body_115",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The panel below the bumper at the back of the car is rusted and falling apart.",
+    "query_category": "diagnostic",
+    "technical_issue": "Rear Valance Panel Rust",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Body"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 22,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 23,
+          "context": "bumper."
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 26,
+          "context": "FIG. 16-Mustang Rear Bumper Installation"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom describes a rusted and failing panel below the rear bumper. This is commonly the rear valance panel, which is highly susceptible to corrosion due to its exposed location. While the FSM does not provide a specific procedure for 'rear valance panel replacement,' it does detail the removal and installation of the rear bumper (Source 55, 30, 49). Accessing and repairing or replacing the valance panel would necessitate the removal of the rear bumper. General body repair techniques would then be applied to address the panel itself.",
+      "mechanic_instructions": "The panel you're describing is likely the rear valance panel. This area is prone to rust due to its exposure to road debris and moisture. To properly assess and repair or replace this panel, the rear bumper must first be removed. This will give you clear access to the valance panel for further inspection and repair.\n\n1. Remove the screws retaining the license plate lamp assembly to the rear bumper.\n2. Remove the rear license plate.\n3. Remove the four bumper arm-to-frame retaining bolts (refer to Figs. 14 and 15 in Source 55, page 22, and Fig. 16 in Source 49, page 26 for visual reference of the Mustang rear bumper installation).\n4. Remove the bumper assembly.",
+      "answer_path_prompts": [
+        "The rust is on the sheet metal panel directly below the bumper, extending down to where the exhaust pipes exit.",
+        "The rust is primarily on the bumper itself, or the brackets holding it.",
+        "The rust is on the body structure *behind* the bumper, not the panel directly below it."
+      ],
+      "confidence_disclaimer": "The FSM provides procedures for rear bumper removal, which is a necessary step. However, it does not contain a specific procedure for the replacement or repair of the rear valance panel itself. The recommended repair approach for the valance panel is based on general automotive body repair knowledge.",
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_int_116",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The carpet is rotted, full of holes, and the car smells musty and moldy inside.",
+    "query_category": "diagnostic",
+    "technical_issue": "Carpet Deterioration / Moldy Smell",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Body",
+        "Interior"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 7,
+          "context": "6. Scuff plates:"
+        },
+        {
+          "source": "mustang_fsm_part_13_p601-650.pdf",
+          "page": 7,
+          "context": "REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_13_p601-650.pdf",
+          "page": 8,
+          "context": "REMOVAL"
+        }
+      ],
+      "diagnostic_reasoning": "The rotted carpet, holes, and musty/moldy smell indicate significant water intrusion into the passenger compartment. The FSM explicitly states that 'the location of most leaks will be readily evident' by checking 'door openings, cowl panel, lower part of the quarter panel, and in the luggage compartment' (Source 6). It also details procedures for removing quarter windows and their weatherstripping, implying these are common areas for leaks (Sources 11, 25). The primary suspects are compromised body seals, rusted floor pans, or leaks around windows or the cowl.",
+      "mechanic_instructions": "The carpet rot and mold indicate water ingress. To accurately locate the source, you must first remove the existing carpet and any sound deadening to expose the bare floor pan. Once the floor is visible, perform a water test. Have a helper spray water over specific areas of the car while you observe the interior for water entry. This will help pinpoint the exact leak path. Start by focusing on the most common areas for water intrusion.",
+      "answer_path_prompts": [
+        "Water is entering from the windshield cowl area or around the front door seals, running down the firewall or kick panels onto the front floorboards.",
+        "Water is entering from the rear quarter windows, rear window, or trunk area, accumulating on the rear floorboards or migrating forward.",
+        "Water is entering directly through rusted-out sections of the floor pan or compromised body seams, not from above."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_117",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Coolant is leaking from the side of the engine block from what looks like a round corroded plug.",
+    "query_category": "diagnostic",
+    "technical_issue": "Freeze Plug Rust-Through (Block)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "Engine Block"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 22,
+          "context": "COMPRESSION TEST"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 36,
+          "context": "INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of coolant leaking from a 'round corroded plug' on the side of the engine block strongly indicates a leaking cylinder block core plug (also known as an expansion plug). The FSM lists 'Cylinder block core plugs leaking' as a cause for coolant loss (Source 1, Source 39). Corrosion is a common failure mode for these plugs. Other possibilities include a crack in the cylinder block itself (Source 1, Source 22, Source 39) or a severe external cylinder head gasket leak (Source 1, Source 39), but the specific description points directly to the plug.",
+      "mechanic_instructions": "The most likely cause of coolant leaking from a round corroded plug on the side of the engine block is a failed cylinder block core plug. These plugs seal passages in the block and can corrode over time, leading to leaks. You need to visually confirm the source of the leak.\n\nInspect the area around the corroded plug. Is the coolant actively seeping or dripping directly from the plug itself, or from a crack in the block material adjacent to the plug? Also, check for any signs of leakage from the cylinder head gasket directly above the plug.",
+      "answer_path_prompts": [
+        "The coolant is clearly leaking directly from the corroded round plug itself.",
+        "The coolant appears to be leaking from a crack in the engine block material near the plug, not the plug itself.",
+        "The coolant is leaking from the cylinder head gasket area, running down to the vicinity of the plug."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_brake_118",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The brake pedal slowly sinks to the floor when I hold steady pressure at a stop light, but pumping brings it back.",
+    "query_category": "diagnostic",
+    "technical_issue": "Master Cylinder Internal Bypass",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Brake Hydraulic System",
+        "Master Cylinder"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 12,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 10,
+          "context": "HYDRAULIC SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 39,
+          "context": "FLUID LEVEL"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'pedal gradually goes to floor' is explicitly listed as a potential cause for a 'Faulty Master Cylinder,' 'Leaks or Insufficient Fluid,' and 'Air in Hydraulic System' (Source 60, page 12; Source 59, page 12). The fact that pumping the pedal brings it back strongly suggests an internal bypass within the master cylinder, where steady pressure cannot be maintained but can be built up with repeated strokes. However, external leaks or air in the system could also present with a sinking pedal. Therefore, the initial diagnostic step is to visually inspect the hydraulic system for fluid level and external leaks to narrow down the potential causes.",
+      "mechanic_instructions": "A brake pedal that slowly sinks under steady pressure, but returns with pumping, points to a hydraulic system issue. We need to determine if the problem is an internal master cylinder bypass, an external leak, or air in the system. Start by checking the master cylinder fluid level and performing a thorough visual inspection for any external brake fluid leaks.",
+      "answer_path_prompts": [
+        "The master cylinder fluid level is full, and I see no visible external brake fluid leaks anywhere (master cylinder, lines, calipers, wheel cylinders).",
+        "The master cylinder fluid level is low, but I do not see any visible external brake fluid leaks.",
+        "The master cylinder fluid level is low, and I see visible brake fluid leaking from a specific component (e.g., wheel cylinder, caliper, brake line fitting).",
+        "The pedal feels very spongy, and I've recently performed brake service or opened the hydraulic system."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_int_119",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My speedometer doesn't work or bounces wildly, and there's a whining noise coming from behind the dashboard.",
+    "query_category": "diagnostic",
+    "technical_issue": "Broken Speedometer / Speedometer Cable Noise",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Speedometer System",
+        "Transmission"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 27,
+          "context": "SPEEDOMETER"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 30,
+          "context": "SPEEDOMETER CABLE"
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 48,
+          "context": "LUBRICATION"
+        }
+      ],
+      "diagnostic_reasoning": "The speedometer is a mechanical system, driven by a flexible cable from the transmission's output shaft (Source 1). A non-functional or wildly bouncing speedometer, combined with a whining noise from behind the dashboard, strongly points to an issue with this flexible cable. The cable can become dry, kinked, or broken, leading to friction (whining noise) and erratic or no speedometer operation (Source 41). A damaged speedometer drive gear in the transmission (Source 51) or a faulty speedometer head (Source 23) are also possible, but the noise behind the dash makes the cable the primary suspect.",
+      "mechanic_instructions": "The combined symptoms of a non-functional/bouncing speedometer and a whining noise from behind the dashboard indicate a problem with the speedometer cable. This cable runs from the transmission to the speedometer head. A dry, kinked, or broken cable will cause both the erratic readings and the noise. Your first step is to physically inspect the cable. Disconnect the speedometer cable at the speedometer head behind the dashboard. Pull the inner cable out of the housing. Inspect the cable for dryness, kinks, or breakage. Then, with the inner cable removed, drive the car slowly to see if the whining noise persists.",
+      "answer_path_prompts": [
+        "I disconnected the speedometer cable at the speedometer head. The inner cable is dry, kinked, or broken, and the whining noise stopped when I drove the car without the inner cable.",
+        "I disconnected the speedometer cable at the speedometer head. The inner cable looks good, but the whining noise is still present when I drive the car without the inner cable.",
+        "I disconnected the speedometer cable at the speedometer head. The inner cable looks good, and the whining noise stopped when I drove the car without the inner cable. When I manually spin the inner cable, the speedometer needle does not move or moves erratically.",
+        "I disconnected the speedometer cable at the speedometer head. The inner cable looks good, and the whining noise stopped when I drove the car without the inner cable. When I manually spin the inner cable, the speedometer needle moves smoothly."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_fuel_120",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I can smell gasoline near the back of the car and I noticed the fuel filler neck where you put the nozzle is corroded.",
+    "query_category": "diagnostic",
+    "technical_issue": "Fuel Filler Neck Rust / Fuel Smell",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 11,
+          "context": "Removal"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 12,
+          "context": "Removal"
+        },
+        {
+          "source": "mustang_fsm_part_12_p551-600.pdf",
+          "page": 7,
+          "context": "DUST AND WATER LEAKS"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 44,
+          "context": "FUEL TANK, LINES AND FILTER"
+        }
+      ],
+      "diagnostic_reasoning": "The reported gasoline smell near the back of the car, coupled with a corroded fuel filler neck, points directly to a leak in the fuel tank assembly or its immediate connections. The FSM details the fuel tank, filler pipe, fuel gauge sending unit, and associated hoses and gaskets as potential leak points. Corrosion on the filler neck itself (Source 12, Source 44, Source 53) or compromised seals/hoses around it (Source 1, Source 12, Source 53) are highly probable causes. Other common leak points on the tank include the fuel gauge sending unit (Source 1, Source 12, Source 23, Source 49, Source 56), the fuel tank vent hose (Source 1, Source 12), and the drain plug (Source 1, Source 12). A restricted fuel tank vent can also lead to issues, though typically not a direct smell without other symptoms (Source 13, Source 33).",
+      "mechanic_instructions": "The gasoline smell near the back of the car, especially with a corroded filler neck, indicates a fuel leak in that area. We need to visually inspect the fuel tank and its connections to locate the source. Start by examining the most obvious points of failure.",
+      "answer_path_prompts": [
+        "I found visible fuel leakage or a strong vapor smell directly at the corroded filler neck, its connecting hose, or the hose clamps.",
+        "I found visible fuel leakage or a strong vapor smell at the fuel gauge sending unit, its gasket, or the fuel line connection to it.",
+        "I found visible fuel leakage or a strong vapor smell at the fuel tank vent hose or the drain plug.",
+        "I did not find any visible leaks or strong smells at the filler neck, sending unit, vent hose, or drain plug. The smell seems to be coming from elsewhere under the car."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_eng_121",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine idles high and rough, and I can hear a hissing sound from the engine bay that I can't pinpoint.",
+    "query_category": "diagnostic",
+    "technical_issue": "Vacuum Leak — Multiple Sources",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Engine Mechanical",
+        "Ignition System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 48,
+          "context": "CARBURETOR  DIAGNOSIS GUIDE-Continued"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 22,
+          "context": "MANIFOLD VACUUM TEST"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "FUEL  SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 23,
+          "context": "POSITIVE  CRANKCASE VENTILATION  SYSTEM  TEST"
+        },
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 38,
+          "context": "Accelerating  Pump  Discharge"
+        },
+        {
+          "source": "mustang_fsm_part_09_p401-450.pdf",
+          "page": 5,
+          "context": "IDLE  FUEL  MIXTURE  AND IDLE  SPEED  ADJUSTMENTS"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 15,
+          "context": "8-CYLINDER  DUAL (2-V)  CARBURETOR"
+        }
+      ],
+      "diagnostic_reasoning": "The reported high and rough idle, combined with a distinct hissing sound, strongly suggests a vacuum leak. Unmetered air entering the intake system will lean the mixture, causing the engine to run rough and often at a higher-than-normal idle. The FSM lists 'Intake manifold, carburetor, spacer or cylinder head gasket leak' as a cause for abnormal manifold vacuum readings, which correlates with a rough idle. Other possibilities for rough idle include incorrect carburetor idle mixture/speed adjustments or a malfunctioning PCV system, both of which can also contribute to vacuum issues or poor idle quality. A leaking power valve in the carburetor can also cause a rough idle, often requiring the idle mixture screws to be nearly seated to compensate.",
+      "mechanic_instructions": "The hissing sound is a critical clue pointing to a vacuum leak. We need to confirm the presence and location of this leak. Additionally, we must rule out common carburetor adjustment issues and PCV system malfunctions, as these can also cause similar symptoms. Perform the following checks to narrow down the cause.",
+      "answer_path_prompts": [
+        "I sprayed carburetor cleaner or propane around the intake manifold, carburetor base, and vacuum lines, and the engine RPM changed or smoothed out significantly.",
+        "With the engine warm and idling, I turned the idle mixture screws inward. They needed to be nearly fully seated (less than 1 turn out) to achieve a relatively smooth idle, or the engine died before I could get them seated.",
+        "I removed the PCV valve from its grommet with the engine running, and the idle smoothed out or changed significantly. (If engine off, the valve rattles freely when shaken.)",
+        "None of the above observations match; the hissing persists, and the idle remains high and rough without significant change during these tests."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

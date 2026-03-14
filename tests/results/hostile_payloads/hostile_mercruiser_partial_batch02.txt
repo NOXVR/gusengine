@@ -1,0 +1,96 @@
+**Vehicle:** MerCruiser 5.0L/5.7L GM V-8
+**Batch:** 2/2 (PARTIAL_ONLY)
+**Issues in this batch:** #98
+
+# Hostile Analysis Prompt — GusEngine Diagnostic Grading Audit
+
+You are a **hostile auditor** tasked with finding errors in a diagnostic AI system's accuracy grading. Your job is to challenge every grade and find genuine weaknesses. 
+
+## Context
+
+An AI diagnostic system called "Gus" was tested against a database of known vehicle issues. For each issue, a customer complaint was submitted and Gus produced a diagnostic response. An LLM grader then compared Gus's response to the validated fix (answer key) and assigned a grade.
+
+**Your task:** Attempt to DOWNGRADE each grade below. Find cases where:
+- A CORRECT grade should have been PARTIALLY_CORRECT or INCORRECT
+- A PARTIALLY_CORRECT grade should have been INCORRECT
+- The grading rationale was too lenient or overlooked a genuine diagnostic error
+
+## Rules of Engagement
+
+1. **Cite specifics.** For every proposed downgrade, quote what Gus actually said AND what the answer key says. Show the discrepancy.
+2. **Technical accuracy only.** Do not downgrade because Gus didn't mention every possible cause — diagnostic triage correctly NARROWS the field. A mechanic doesn't list 20 things; they list the 3 most likely.
+3. **Order is not correctness.** If Gus mentions the right cause as option #2 instead of option #1, that is NOT a downgrade. Diagnostic order varies by presentation.
+4. **Procedural vs. specific.** The answer key intentionally uses general procedural language (e.g., "quality OEM-equivalent replacement" instead of specific part numbers). Do NOT downgrade Gus for not naming specific parts or specs that the answer key doesn't name either.
+5. **Rate your confidence.** For each finding, rate HIGH / MEDIUM / LOW confidence that this is a genuine error vs. a judgment call.
+
+## Anti-Fabrication Warning
+
+> **You are being evaluated on precision, not volume.** A hostile auditor who fabricates 20 fake problems is LESS useful than one who finds 2 real ones. If the grading is genuinely correct, saying "no issues found" is the right answer. Do NOT invent problems to fill space.
+
+## Input Format
+
+For each issue you will receive:
+- **Issue #** and **Technical Issue** name
+- **Answer Key Fix** (from the cleaned XLSX — the ground truth)
+- **Gus's Diagnostic Output** (what Gus actually responded)
+- **Original Grade** and **Grading Rationale** (from the scorecard)
+
+## Output Format
+
+For each issue, respond with ONE of:
+
+### If you find a genuine problem:
+```
+ISSUE #[N]: [Technical Issue Name]
+PROPOSED DOWNGRADE: [CORRECT→PARTIALLY_CORRECT | CORRECT→INCORRECT | PARTIALLY_CORRECT→INCORRECT]
+CONFIDENCE: [HIGH | MEDIUM | LOW]
+TECHNICAL JUSTIFICATION: [Specific quote from Gus vs. answer key showing the error]
+```
+
+### If the grade is defensible:
+```
+ISSUE #[N]: [Technical Issue Name]
+VERDICT: GRADE STANDS
+REASON: [Brief explanation of why the grade is correct]
+```
+
+## Summary
+
+After reviewing all issues in this batch, provide:
+```
+BATCH SUMMARY:
+  Total issues reviewed: [N]
+  Grades that stand: [N]
+  Proposed downgrades: [N] (HIGH confidence: [N], MEDIUM: [N], LOW: [N])
+```
+
+---
+
+## BEGIN ISSUES
+
+### ISSUE #98: Shore Power Galvanic Corrosion
+**Category:** Corrosion / Zincs
+**Customer Complaint:** My drive corrodes severely only when I'm plugged into shore power at the marina — on the hook or a mooring it's fine.
+
+**ANSWER KEY FIX (Ground Truth):**
+Install a galvanic isolator or isolation transformer on the shore power ground conductor. Shore power connects your boat's grounding system to every other boat on the dock — if any boat has a ground fault, it sends stray current through the water that attacks YOUR drive's metal. A galvanic isolator (quality OEM-equivalent replacement) blocks low-voltage DC current on the AC ground wire while maintaining the safety ground for fault protection. An isolation transformer (quality OEM-equivalent replacement) provides complete electrical isolation from the dock power. NOTE: ABYC Standard E-11 recommends galvanic isolators for all shore-powered boats. This is the single most important shore-power investment for drive longevity.
+
+**GUS'S DIAGNOSTIC OUTPUT:**
+[Phase: PHASE_A_TRIAGE]
+
+DIAGNOSTIC REASONING:
+Severe drive corrosion only when plugged into shore power points directly to an electrical issue related to the shore power connection, leading to accelerated galvanic or stray current corrosion. When connected to shore power, the boat's underwater metals can become part of a larger electrical circuit with other boats or the marina's grounding system. If there are dissimilar metals or stray electrical potentials, the drive unit can become anodic and corrode rapidly. Sacrificial anodes are designed to protect against this, but if the galvanic potential is too high, they will be consumed quickly (Source 1, 30). If the boat has a MerCathode system, it actively provides cathodic protection; a malfunction could leave the drive unprotected (Source 37). Faulty wiring, loose connections, or improper bonding within the boat's electrical system, particularly when connected to shore power, can also create stray current paths (Source 3, 15, 25, 32, 37, 48). The initial steps must verify the condition of the primary corrosion protection and the integrity of the electrical system.
+
+MECHANIC INSTRUCTIONS:
+The fact that corrosion only occurs when plugged into shore power indicates an external electrical influence. We need to isolate whether this is due to a failure in your boat's corrosion protection, an internal electrical fault, or an issue with the shore power connection itself. Start by physically inspecting the primary corrosion protection components and the electrical system.
+
+DIAGNOSTIC OPTIONS PRESENTED:
+  Option 1: The drive unit's sacrificial anodes are severely pitted, crumbling, or more than 50% eroded after a short period on shore power.
+  Option 2: My boat has a MerCathode system, and I have tested its output; it is not functioning within specifications.
+  Option 3: I have checked the boat's main electrical system for loose, damaged, or corroded fasteners, especially around the shore power inlet and bonding system components, and found issues.
+
+**ORIGINAL GRADE:** PARTIALLY_CORRECT
+**GRADING RATIONALE:** Identified shore power cause but didn’t prescribe galvanic isolator — the standard fix for this well-known marina problem.
+
+---
+

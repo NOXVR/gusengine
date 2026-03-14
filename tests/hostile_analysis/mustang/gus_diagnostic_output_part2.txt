@@ -1,0 +1,1206 @@
+[
+  {
+    "query_id": "acc_cool_026",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine overheats very quickly after starting — the temperature gauge shoots up to hot within just a few minutes of driving.",
+    "query_category": "diagnostic",
+    "technical_issue": "Thermostat Stuck Closed",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "Instrumentation"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 18,
+          "context": "TEMPERATURE GAUGE TEST"
+        }
+      ],
+      "diagnostic_reasoning": "A rapid rise in temperature gauge reading to hot, especially within minutes of starting, points to either a severe cooling system malfunction or a faulty temperature gauge/sending unit providing a false reading. The most common cooling system failures for such rapid onset are a thermostat stuck in the closed position, critically low coolant, or an inoperative water pump, preventing coolant circulation. Alternatively, the engine may not be overheating at all, and the gauge is simply misreporting due to a defective sending unit, gauge, or associated wiring, or a faulty constant voltage regulator.",
+      "mechanic_instructions": "The engine overheating quickly can be either a true cooling system failure or a false reading from the gauge system. We need to determine if the engine is actually overheating. Operate the engine for a few minutes until the gauge reads hot, then shut it down immediately and perform the following physical checks. Be cautious of hot coolant and steam.",
+      "answer_path_prompts": [
+        "The upper radiator hose is extremely hot and hard, the lower radiator hose is cool, and the coolant in the radiator is boiling or steaming.",
+        "Both the upper and lower radiator hoses are only warm to the touch, and the coolant in the radiator is not boiling or steaming, despite the gauge reading hot.",
+        "The coolant level in the radiator is significantly low, and the engine is audibly boiling or steaming."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_cool_027",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car runs fine around town but overheats in traffic or on hot days. The temperature just creeps up slowly.",
+    "query_category": "diagnostic",
+    "technical_issue": "Radiator Clogged / Insufficient Cooling",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "Engine"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 26,
+          "context": "FAN DRIVE CLUTCH TEST"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 56,
+          "context": "DIAGNOSIS GUIDE"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'overheats in traffic or on hot days' with the temperature 'creeping up slowly' strongly suggests a cooling system inefficiency that is exacerbated by low vehicle speed (traffic) or high ambient temperatures. The most probable cause for this specific pattern is a faulty fan drive clutch, which fails to pull sufficient air through the radiator when ram air is inadequate. Other plausible causes include insufficient coolant, restricted radiator fins or internal passages, or a thermostat stuck partially closed. Incorrect ignition timing is a general cause of overheating but less specific to the 'in traffic' condition. The FSM lists 'Faulty fan drive clutch,' 'Radiator fins obstructed,' 'Insufficient coolant,' and 'Thermostat defective' as causes for engine overheating. The fan drive clutch test is a direct, initial check for the most likely culprit given the specific conditions.",
+      "mechanic_instructions": "The engine overheating specifically in traffic or on hot days, with a slow temperature increase, points to a cooling system component that struggles under low airflow or high heat load. The most common culprit for this behavior is the fan drive clutch, which is responsible for moving air across the radiator when the vehicle speed is low. We need to verify its operation first. Also, a basic check of coolant level and radiator airflow is critical.",
+      "answer_path_prompts": [
+        "After running the engine to normal operating temperature and shutting it off, the fan requires very little effort to turn by hand, indicating the clutch is not engaging properly.",
+        "The coolant level is low, or there is visible external leakage from the radiator, hoses, water pump, or core plugs.",
+        "The radiator fins are visibly clogged with debris, or the radiator itself feels significantly cooler in one area than another after the engine has warmed up, indicating an internal blockage.",
+        "The fan requires considerable effort to turn by hand after the engine reaches normal operating temperature, and the coolant level is correct with no visible external leaks or radiator obstructions."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_cool_028",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I heard a screeching noise from the engine and then noticed coolant pouring out from behind the water pump pulley.",
+    "query_category": "diagnostic",
+    "technical_issue": "Water Pump Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "Engine Accessories"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 25,
+          "context": "DESCRIPTION AND OPERATION"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 22,
+          "context": "FAN DRIVE BELTS"
+        }
+      ],
+      "diagnostic_reasoning": "The screeching noise followed by coolant pouring from behind the water pump pulley strongly indicates a failure of the water pump's internal bearing and/or seal. The FSM states that a 'bleed hole in the water pump housing allows water that may leak past the seal to be thrown out by the slinger' (Source 12). This is a direct indicator of a failed water pump seal. The screeching noise is consistent with a failing bearing within the pump or a loose/damaged drive belt (Source 57). Given the coolant leak, the water pump itself is the primary suspect for both symptoms.",
+      "mechanic_instructions": "The screeching noise and subsequent coolant leak from behind the water pump pulley point to a failed water pump. The internal bearing is likely seized or failing, causing the screech, and the internal seal has failed, allowing coolant to escape through the pump's bleed hole. We need to confirm the source of the leak and the condition of the pump. Visually inspect the water pump and its drive belt.",
+      "answer_path_prompts": [
+        "The water pump pulley has excessive wobble or play when I try to move it by hand, and coolant is actively dripping from the weep hole or behind the pulley.",
+        "The water pump pulley feels solid with no play, but the drive belt is visibly frayed, loose, or glazed, and coolant is still leaking from the pump area.",
+        "The water pump pulley feels solid, the belt looks good, but coolant is leaking from a hose connection or the radiator itself, not directly from the pump body."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_cool_029",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine overheats at highway speed but seems fine at idle — the opposite of what I'd expect.",
+    "query_category": "diagnostic",
+    "technical_issue": "Collapsed Lower Radiator Hose",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "Ignition System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "COOLING SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 20,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 22,
+          "context": "FAN DRIVE CLUTCH TEST"
+        }
+      ],
+      "diagnostic_reasoning": "The engine overheating specifically at highway speeds, but not at idle, points to issues that are exacerbated under higher load and RPM. This differentiates it from problems like a completely stuck-closed thermostat or a non-functioning fan, which would typically cause overheating at idle or low speeds. The primary suspects are a cooling system component that cannot handle the increased heat rejection demands at speed (e.g., restricted radiator, weak water pump, partially opening thermostat) or an ignition timing issue that causes excessive heat under load. The FSM lists 'Radiator fins obstructed,' 'Thermostat defective,' 'Water pump inoperative,' 'Cooling system passages blocked,' 'Incorrect ignition timing,' and 'Incorrect distributor advance' as causes for engine overheating. (Source 36)",
+      "mechanic_instructions": "An engine that overheats at highway speed but not at idle suggests a cooling system that's insufficient under load, or an ignition timing issue. We need to check the basic cooling system integrity and then evaluate coolant flow and ignition timing under varying engine conditions. Start by checking the coolant level and the external condition of the radiator, then move to thermostat function and ignition timing.",
+      "answer_path_prompts": [
+        "Coolant level is low, or radiator fins are visibly clogged with debris.",
+        "Upper radiator hose is hot, but the lower hose remains cool, or coolant flow in the radiator neck is minimal after warm-up.",
+        "Ignition timing mark wanders erratically or does not advance properly when RPM increases."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_cool_030",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Coolant keeps boiling over and I find I have to keep adding coolant — the overflow is always wet.",
+    "query_category": "diagnostic",
+    "technical_issue": "Radiator Cap Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "Engine"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "COOLING SYSTEM"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 22,
+          "context": "COOLING SYSTEM PRESSURE TEST"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 22,
+          "context": "THERMOSTAT TEST"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 10,
+          "context": "FLUID AERATION CHECK"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of coolant boiling over and constant coolant loss through the overflow indicate a problem with the cooling system's ability to maintain pressure or dissipate heat, or an internal engine issue introducing excessive heat/pressure. The most common causes are a defective radiator cap, external leaks, a stuck thermostat, or internal engine leaks (e.g., head gasket). A cooling system pressure test is the most effective initial diagnostic step as it can identify a faulty cap, external leaks, and provide clues for internal leaks (Source 59). Observing for bubbles in the radiator is a direct check for internal engine leaks (Source 40). A thermostat check is also critical for overheating issues (Source 35).",
+      "mechanic_instructions": "The engine boiling over and the overflow being wet points to either a loss of cooling system pressure, a lack of coolant circulation, or combustion gases entering the system. First, ensure the coolant level is correct. Then, perform a cooling system pressure test as described in the FSM. This will check the radiator cap's ability to hold pressure and reveal any external leaks. While the system is pressurized, visually inspect all hoses, the radiator, water pump, and engine block for external coolant leaks. After the pressure test, start the engine and observe the coolant for signs of internal leaks.",
+      "answer_path_prompts": [
+        "The cooling system does not hold pressure, and I found an external leak (e.g., hose, radiator, water pump, core plug) or the radiator cap failed the pressure test.",
+        "The cooling system holds pressure, but the engine still overheats rapidly, and the upper radiator hose remains cool while the engine gets hot.",
+        "The cooling system holds pressure, but I see a continuous stream of bubbles in the radiator with the engine running at fast idle, or the oil looks milky/coolant is present in the oil."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_cool_031",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's coolant dripping from the side of the engine block and I can't figure out where it's coming from.",
+    "query_category": "diagnostic",
+    "technical_issue": "Leaking Freeze Plugs (Core Plugs)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "COOLING SYSTEM",
+        "ENGINE"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "LOSS OF COOLANT, 2"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 36,
+          "context": "INSPECTION"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 25,
+          "context": "289 V-8 REMOVAL"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 38,
+          "context": "MANIFOLDS"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 40,
+          "context": "HEATER HOSE REPLACEMENT"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 23,
+          "context": "THERMOSTAT REPLACEMENT"
+        }
+      ],
+      "diagnostic_reasoning": "Coolant dripping from the side of the engine block indicates an external leak in the cooling system. The FSM identifies several common external leak points on or near the engine block for a 289 V8. These include: \n1.  **Hoses and Connections:** Radiator hoses, heater hoses, and their connections to the water pump, intake manifold, or radiator can leak (Source 22, 34, 31).\n2.  **Water Pump:** The water pump, mounted on the cylinder front cover, can leak from its seal or gasket. A bleed hole in the housing allows water past the seal to be thrown out (Source 22, 34, 39).\n3.  **Core Plugs (Freeze Plugs):** These expansion-type plugs are located on the cylinder block and can corrode and leak (Source 22, 34, 47, 54).\n4.  **Intake Manifold Gasket:** On V8 engines, the intake manifold carries coolant, and a defective gasket can lead to external leakage down the block (Source 47).\n5.  **Thermostat Housing/Gasket:** The thermostat housing is located at the front of the intake manifold on V8s, and its gasket can fail (Source 42, 45).\n6.  **Carburetor Spacer:** The coolant-heated spacer between the carburetor and intake manifold, or its hoses, can leak (Source 20, 24).\n\nTo accurately diagnose, we need to determine the highest point of the leak, as gravity will cause coolant to drip lower than its origin. A thorough visual inspection is the first step.",
+      "mechanic_instructions": "A coolant leak dripping from the side of the engine block requires pinpointing the highest point of origin. Coolant flows through the block, cylinder heads, intake manifold, and various hoses. Carefully inspect the engine block, cylinder heads, intake manifold, water pump, and all connecting hoses for any signs of coolant seepage or drips. Pay close attention to the front of the engine, the sides of the block where core plugs are located, and the area around the intake manifold and thermostat housing. Report the highest point from which you can definitively trace the leak.",
+      "answer_path_prompts": [
+        "The leak is clearly visible from a hose connection (radiator or heater hose) or the water pump weep hole at the front of the engine.",
+        "The leak appears to be coming directly from a circular plug (core plug) on the side of the engine block.",
+        "The leak originates from higher up on the engine, such as near the intake manifold or cylinder head, and runs down the block.",
+        "I cannot pinpoint the exact source, but it's definitely dripping from the lower side of the block, and I don't see any obvious higher origin."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_cool_032",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The passenger floorboard is always wet and the inside of the windshield fogs up with a sweet-smelling film.",
+    "query_category": "diagnostic",
+    "technical_issue": "Heater Core Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Cooling System",
+        "HVAC"
+      ],
+      "source_citations": [],
+      "diagnostic_reasoning": "The wet passenger floorboard combined with a sweet-smelling film on the windshield strongly indicates an internal coolant leak. The most common source for these symptoms in a 1965 Mustang is a leaking heater core. The heater core is located behind the dashboard on the passenger side. A leak here would allow coolant to drip onto the floorboard. The evaporating coolant, which contains ethylene glycol, would then condense on the cooler windshield glass, leaving a sweet-smelling film. While the FSM does not contain a specific troubleshooting procedure for a 'sweet-smelling film' or 'wet passenger floorboard' directly linked to a heater core leak, this is a well-established failure mode in these vehicles.",
+      "mechanic_instructions": "The wet passenger floorboard and sweet-smelling film on the windshield point to a coolant leak, most likely from the heater core. Coolant contains ethylene glycol, which has a distinct sweet odor and leaves a film when it evaporates and condenses. We need to confirm the nature of the fluid and the coolant level. What do you observe when you check the following?",
+      "answer_path_prompts": [
+        "The fluid on the floorboard is definitely sweet-smelling, and the radiator coolant level is noticeably low.",
+        "The fluid on the floorboard is wet but has no distinct smell, and the radiator coolant level is normal.",
+        "There is no fluid on the floorboard, but the windshield still fogs with a sweet-smelling film."
+      ],
+      "confidence_disclaimer": "The retrieved FSM documents do not contain a specific troubleshooting procedure for a sweet-smelling film on the windshield or a wet passenger floorboard caused by a heater core leak. This diagnosis is based on general mechanical knowledge of common failure modes for this vehicle's cooling and HVAC systems.",
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_033",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My headlights keep getting brighter and dimmer on their own, and I've burned through two batteries in six months.",
+    "query_category": "diagnostic",
+    "technical_issue": "Voltage Regulator Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Charging System",
+        "Electrical System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 42,
+          "context": "ALTERNATOR SYSTEM TROUBLE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 16,
+          "context": "DIAGNOSIS GUIDE"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of headlights getting brighter and dimmer, coupled with repeated battery failures, strongly indicate a problem within the charging system. The FSM explicitly lists 'alternator belt worn, loose and slipping,' 'alternator not producing its rated output,' 'regulator units out of adjustment,' and 'excessive resistance in the alternator-to-battery circuit Or in the battery-to-ground circuit' as causes for headlights dimming at idle and battery issues (Source 2, page 42). Additionally, 'improperly adjusted or defective alternator voltage regulator' is cited for 'lights burn out repeatedly' (Source 1, page 16). The most logical first step is to visually inspect the easily accessible components of the charging system: the alternator belt and the main battery/charging circuit connections.",
+      "mechanic_instructions": "Your symptoms point directly to an issue with the charging system. Inconsistent voltage from the alternator or a faulty voltage regulator will cause the headlights to fluctuate and prevent the battery from charging correctly, leading to premature failure. We need to start by physically verifying the condition of the alternator belt and the primary electrical connections. This will help us quickly rule out common mechanical and connection-related faults before moving to more complex electrical diagnostics.",
+      "answer_path_prompts": [
+        "The alternator belt is visibly loose, worn, or glazed, and slips easily when twisted by hand.",
+        "Battery terminals, the main alternator output wire connection, or the battery-to-ground cable connection are loose or heavily corroded.",
+        "All belts and electrical connections in the charging circuit appear tight and clean, with no obvious damage or corrosion."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_034",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The battery warning light stays on while driving and the car eventually dies because the battery goes dead.",
+    "query_category": "diagnostic",
+    "technical_issue": "Alternator Failure / Not Charging",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Charging System",
+        "Battery"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 42,
+          "context": "ALTERNATOR SYSTEM TROUBLE"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 45,
+          "context": "ALTERNATOR  REGULATOR AND  CIRCUIT  TESTS"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 9,
+          "context": "CHECK  BATTERY"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'battery warning light stays on while driving and the car eventually dies because the battery goes dead' indicates a failure in the charging system. The FSM's 'Alternator System Trouble Diagnosis Guide' (Source 19) lists this exact symptom. The primary suspects are a loose or worn alternator belt, a faulty battery that won't hold a charge, a defective alternator, or an out-of-adjustment voltage regulator. The FSM directs to first check the belt and the battery condition. This initial triage will help narrow down the subsystem at fault.",
+      "mechanic_instructions": "The battery warning light staying on while driving and the battery dying points to a failure in the charging system. We need to start by checking the most common and easiest-to-verify components. First, inspect the alternator drive belt for proper tension and condition. Then, check the battery's state of charge and its ability to hold a charge.",
+      "answer_path_prompts": [
+        "The alternator belt is loose, worn, or slipping.",
+        "The battery is low in charge or fails a capacity test.",
+        "The alternator belt is tight and in good condition, and the battery is fully charged and tests good."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_035",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Random electrical things stop working — the lights flicker, the gauges act crazy, and the turn signals are dim.",
+    "query_category": "diagnostic",
+    "technical_issue": "Bad Ground Connections",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Charging System",
+        "Electrical System",
+        "Instrument Cluster"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 42,
+          "context": "ALTERNATOR SYSTEM TROUBLE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 17,
+          "context": "INSTRUMENT TROUBLE DIAGNOSIS GUIDE (Continued)"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 49,
+          "context": "ALL HEADLIGHTS DO NOT LIGHT, 1"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 50,
+          "context": "FUEL GAUGE ERRATIC OR INOPERATIVE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 56,
+          "context": "CONSTANT VOLTAGE REGULATOR TEST"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of flickering lights, erratic gauges, and dim turn signals point to a systemic electrical issue rather than isolated component failures. The most probable causes are a fault in the charging system (alternator, voltage regulator, or battery), or poor main electrical connections (battery cables, grounds). These issues would lead to unstable or insufficient voltage across multiple circuits. Erratic gauges specifically suggest a problem with the constant voltage regulator or its input, which is often tied to overall system voltage stability. The FSM lists 'alternator not producing its rated output' and 'Regulator units out of adjustment' as causes for headlights dimming at idle (Source 3). It also lists 'Loose battery cable' as a cause for 'ALL HEADLIGHTS DO NOT LIGHT' (Source 49). For erratic gauges, 'Loose or corroded constant voltage regulator ground' or a 'Defective constant voltage regulator' are cited (Source 40, Source 50). Therefore, the initial diagnostic steps must verify the health of the charging system and the integrity of the main power and ground connections.",
+      "mechanic_instructions": "We need to determine if the core electrical supply is stable. This means checking the charging system and main battery connections first. Perform the following observations and tests:",
+      "answer_path_prompts": [
+        "The alternator belt is loose or worn, and/or the battery voltage is below 12.4V with the engine off, or below 13.5V with the engine running at 2000 RPM.",
+        "The battery terminals or main ground cable connections are loose, corroded, or damaged.",
+        "The constant voltage regulator's output (black with green stripe wire at any gauge) does not oscillate between zero and approximately 10 volts with the ignition on, or the gauges remain erratic even after cleaning connections."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_036",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Various electrical components work intermittently — sometimes the lights work, sometimes they don't, with no pattern.",
+    "query_category": "diagnostic",
+    "technical_issue": "Corroded / Damaged Wiring Harness",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Charging System",
+        "Lighting System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 8,
+          "context": "RE-27-55 TESTER"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 42,
+          "context": "ALTERNATOR SYSTEM TROUBLE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 16,
+          "context": "DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 17,
+          "context": "HORN TROUBLE DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 18,
+          "context": "HEADLIGHT SWITCH AND BEAM SELECTOR SWITCH TESTS"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 19,
+          "context": "CHARGE INDICATOR LIGHT TEST"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 23,
+          "context": "HEADLIGHT SWITCH"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 26,
+          "context": "CHARGE INDICATOR LIGHT-EXCEPT COMET"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 57,
+          "context": "TESTING"
+        }
+      ],
+      "diagnostic_reasoning": "Intermittent operation of various electrical components, including lights, points to a general power supply or grounding issue. The most common causes for such widespread, intermittent problems are loose or corroded battery connections, a failing charging system (alternator/regulator), or a fault in a primary electrical switch or circuit breaker that supplies multiple circuits. The FSM indicates that 'Loose or corroded electrical connections' and 'Loose battery cable' can cause lights to not light or burn out repeatedly (Source 44). Alternator system trouble, including a poor battery or regulator issues, can cause headlights to dim at idle (Source 9). A defective headlight switch or its associated circuit breaker could also cause intermittent lighting issues (Source 44, 45, 46). A loose connection in the primary circuit can also cause issues (Source 3).",
+      "mechanic_instructions": "Intermittent electrical issues affecting various components often stem from a fundamental problem with the main power supply or ground. We need to determine if the issue is a poor connection at the battery, a fault in the charging system, or a specific switch/circuit breaker affecting multiple circuits.",
+      "answer_path_prompts": [
+        "The battery terminals or main ground strap are loose, corroded, or damaged.",
+        "The charge indicator light behaves normally (ON with ignition OFF, OFF with engine running), but headlights dim noticeably at idle compared to higher RPMs.",
+        "When the headlights are not working, the parking lights, tail lights, and horn still operate normally."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_037",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My turn signals don't work at all, or they come on but won't flash — they just stay lit solid.",
+    "query_category": "diagnostic",
+    "technical_issue": "Turn Signal Switch Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Lighting System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 16,
+          "context": "INSTRUMENT TROUBLE DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 15,
+          "context": "TURN INDICATOR TROUBLE DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 27,
+          "context": "TURN INDICATOR"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 30,
+          "context": "TURN INDICATOR FLASHER"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 34,
+          "context": "BULB CHART"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms, 'turn signals don't work at all' or 'come on but won't flash (stay lit solid),' are directly addressed by the FSM's 'TURN INDICATOR TROUBLE DIAGNOSIS GUIDE' (Source 15). The most common cause for lights staying solid without flashing is a defective flasher unit. Complete inoperation can be caused by a defective flasher, burned-out bulbs, or wiring issues. The flasher unit is located behind the instrument panel, on the steering column brace or front side of the air duct (Source 25). Initial diagnosis should focus on these high-probability components.",
+      "mechanic_instructions": "The turn signal flasher unit is the most common culprit for signals that illuminate but do not flash, or for complete inoperation. It's designed to interrupt the circuit, and if it fails, it can act as a direct connection, allowing current to flow but preventing the flashing action. First, locate the turn indicator flasher. On a 1965 Mustang, it's typically found in the back of the instrument panel, on the steering column brace, or on the front side of the air duct (Source 25).",
+      "answer_path_prompts": [
+        "The flasher unit is not clicking, or it clicks once and then stops, and the turn signal lights are either off or solid.",
+        "One or more turn signal bulbs are burned out, or the wrong type of bulb (e.g., single filament instead of dual filament 1157) is installed.",
+        "There is no power at the flasher unit's input terminal when the ignition is on, or at the turn signal switch when activated.",
+        "All bulbs are good, the flasher clicks normally, but the lights still don't work or stay solid when the turn signal lever is activated."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_038",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My fuel gauge always reads empty even though I just filled up. The temperature gauge seems stuck too.",
+    "query_category": "diagnostic",
+    "technical_issue": "Instrument Gauge Failure (Fuel, Temp, Oil)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Instrument Cluster",
+        "Electrical System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 18,
+          "context": "CONSTANT VOLTAGE REGULATOR TEST"
+        },
+        {
+          "source": "mustang_fsm_part_10_p451-500.pdf",
+          "page": 21,
+          "context": "DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 29,
+          "context": "CONSTANT VOLTAGE REGULATOR"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 17,
+          "context": "INSTRUMENT TROUBLE DIAGNOSIS GUIDE (Continued)"
+        }
+      ],
+      "diagnostic_reasoning": "Both the fuel gauge and temperature gauge are malfunctioning in a similar manner (stuck/empty). The Constant Voltage Regulator (CVR) supplies both of these gauges (Source 8, Source 29). If both gauges indicate improperly and in the same direction, the CVR is a primary suspect (Source 8). A defective CVR would prevent the gauges from receiving the necessary pulsating voltage, leading to inaccurate or inoperative readings (Source 29). Therefore, the most efficient first step is to test the CVR.",
+      "mechanic_instructions": "Given that both your fuel and temperature gauges are inoperative, the most likely common cause is a fault in the Constant Voltage Regulator (CVR), as it supplies both gauges. We need to verify its output. Turn the ignition switch to the ON position. Locate the gauge feed wire (black with a green stripe) at either the fuel or temperature gauge. Using a voltmeter, check the voltage at this wire. The FSM states it should oscillate between zero and approximately 10 volts (Source 19).",
+      "answer_path_prompts": [
+        "The voltage at the black with green stripe wire oscillates between 0 and 10 volts.",
+        "The voltage at the black with green stripe wire is steady (e.g., 0V, 12V, or some other constant value), or there is no voltage at all.",
+        "I cannot locate the black with green stripe wire."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_039",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My headlights flicker while driving and sometimes go out completely — I have to jiggle the switch to get them back on.",
+    "query_category": "diagnostic",
+    "technical_issue": "Headlight Switch Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Lighting System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 18,
+          "context": "HEADLIGHT SWITCH AND BEAM SELECTOR SWITCH TESTS"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 16,
+          "context": "DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 23,
+          "context": "HEADLIGHT SWITCH"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of headlights flickering, going out, and restoring function by 'jiggling the switch' strongly indicates an intermittent electrical connection within the headlight switch itself or its immediate wiring. The FSM's 'DIAGNOSIS GUIDE' for 'ALL HEADLIGHTS DO NOT LIGHT' lists 'Defective headlight switch' and 'Disconnected or broken wire from the headlight switch to the beam selector switch' as primary causes. The 'jiggling' action suggests a mechanical fault in the switch contacts or a loose wire connection at the switch. We need to isolate whether the fault is internal to the switch or in the wiring leading from it.",
+      "mechanic_instructions": "The intermittent operation of your headlights, especially when manipulating the switch, points to a fault in the headlight switch or the wiring directly connected to it. We need to determine if the switch itself is failing internally or if there's a loose connection in the wiring harness. Disconnect the battery ground cable first. Then, access the headlight switch behind the instrument panel. With the switch exposed, carefully observe the headlights while gently wiggling the switch body and the wiring harness connector attached to it. Do not force anything, just observe if the lights react to this movement.",
+      "answer_path_prompts": [
+        "The headlights react directly to wiggling the switch body or its connector, turning on and off or flickering.",
+        "The headlights do not react to wiggling the switch body or its connector, but still flicker or go out intermittently while driving.",
+        "Other electrical components (e.g., instrument panel lights, dome light) also flicker or go out when the headlights do."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_040",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The horn doesn't make any sound when I press it. There's nothing — no click, no sound at all.",
+    "query_category": "diagnostic",
+    "technical_issue": "Horn Not Working",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Horn System"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 17,
+          "context": "HORN TROUBLE DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 20,
+          "context": "HORNS"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 23,
+          "context": "FIG. 1-Headlight Switch"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 39,
+          "context": "HORN BUTTON"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'no sound at all' indicates a complete open circuit or total failure of the horn units. The FSM's 'HORN TROUBLE DIAGNOSIS GUIDE' (Source 24, Page 17) lists several potential causes for 'HORNS DO NOT OPERATE': loose connections at the horn button, open wires (yellow from battery, yellow-green stripe to horn), defective horns, or a defective circuit breaker. Given no sound or click, the most probable causes are a lack of power to the circuit (circuit breaker or main power wire) or a failure in the horn button's ability to complete the circuit. The horn circuit is protected by a 15-ampere circuit breaker located in the headlight switch (Source 50, Page 23). This is a critical first check for a complete lack of function.",
+      "mechanic_instructions": "A complete lack of horn sound, with no click, points to a break in the electrical circuit or a total failure of the horn units. We need to trace the power path. The horn circuit is protected by a 15-ampere circuit breaker in the headlight switch. Start by checking the integrity of this circuit breaker and the power supply to the horn button.",
+      "answer_path_prompts": [
+        "The 15-ampere circuit breaker for the horn circuit, located in the headlight switch, is open or tripped.",
+        "There is no voltage at the yellow wire leading to the horn button connector under the instrument panel when the ignition is ON.",
+        "There is voltage at the yellow wire at the horn button connector, but no voltage at the yellow-green stripe wire from the horn button when the button is pressed.",
+        "There is voltage at the yellow-green stripe wire at the horn terminal when the horn button is pressed, but the horn still makes no sound."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_041",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The car barely turns over when I try to start it — the starter sounds like it's struggling and cranks really slowly.",
+    "query_category": "diagnostic",
+    "technical_issue": "Starter Motor Problems — Slow Cranking or No Crank",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Starting System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_08_p351-400.pdf",
+          "page": 10,
+          "context": "CRANKING VOLTAGE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 7,
+          "context": "DIAGNOSIS AND TESTING"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 9,
+          "context": "STARTER TROUBLE DIAGNOSIS GUIDE (Continued)"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of the engine barely turning over and the starter struggling points to either a deficiency in the starting electrical system (weak battery, excessive circuit resistance, or a faulty starter) or excessive mechanical resistance within the engine itself. The FSM's 'CRANKING VOLTAGE' procedure (Source 8) is the logical first step to differentiate between these possibilities. A low voltage reading during cranking (below 9 volts) indicates a problem with the battery or the primary starter circuit. If the voltage is adequate but cranking is still slow, it points towards the starter motor itself or internal engine friction (Source 8, Source 35).",
+      "mechanic_instructions": "The slow, struggling crank indicates a problem with either the starting system's electrical supply or excessive mechanical drag within the engine. We need to determine if the starter is receiving adequate power. Connect a voltmeter across the battery terminals. Place the transmission in Neutral or Park, set the parking brake, and crank the engine. Observe the voltmeter reading while the engine is cranking.",
+      "answer_path_prompts": [
+        "The voltmeter reads 9 volts or more during cranking, but the cranking speed is still slow or uneven.",
+        "The voltmeter reads less than 9 volts during cranking.",
+        "The engine does not crank at all, or the starter makes no sound."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_elec_042",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I keep blowing the same fuse over and over. Replace it and it pops again within a few days.",
+    "query_category": "diagnostic",
+    "technical_issue": "Fuse Box / Fuse Link Problems",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical System",
+        "Heating and Ventilation"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 23,
+          "context": "FUSE PANEL"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 38,
+          "context": "VENTILATING AND HEATING TROUBLE DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 46,
+          "context": "BLOWER MOTOR"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 38,
+          "context": "HEATER CURRENT DRAW TEST"
+        },
+        {
+          "source": "mustang_fsm_part_11_p501-550.pdf",
+          "page": 42,
+          "context": "DESCRIPTION AND OPERATION"
+        }
+      ],
+      "diagnostic_reasoning": "The repeated blowing of a fuse indicates a persistent electrical fault, likely a short circuit or an overloaded component. To proceed, the specific circuit protected by the fuse must be identified. The FSM indicates the fuse panel location (Source 13) and refers to the Wiring Diagram Manual Form 7795P-65 for schematics (Source 58), which will identify the circuit. Without knowing the circuit, diagnosis is impossible. If the circuit is the heater/blower, the FSM provides specific troubleshooting steps for the blower motor (Source 22, 51, 55), including checking for loose wires or a defective motor.",
+      "mechanic_instructions": "You need to identify the specific fuse that is blowing. Locate the fuse panel on the left side cowl panel (Source 13). Consult the Wiring Diagram Manual Form 7795P-65 (Source 58) to determine which circuit this fuse protects. Once you know the circuit, report it.",
+      "answer_path_prompts": [
+        "The fuse that keeps blowing is a [X] amp fuse, and according to the wiring diagram, it protects the [specific circuit, e.g., heater blower motor, radio, turn signals].",
+        "I've identified the fuse as a [X] amp fuse, but I don't have the wiring diagram. When it blows, the [describe what stops working, e.g., the heater fan stops, the radio goes dead, the wipers stop working].",
+        "I'm unable to identify the specific fuse or the circuit it protects."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_m_043",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The transmission gets stuck in first gear and won't let me shift to second — I have to reach underneath and move the linkage by hand.",
+    "query_category": "diagnostic",
+    "technical_issue": "3-Speed — Stuck in Gear / Won't Shift",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Transmission",
+        "Linkage"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 11,
+          "context": "MANUAL LINKAGE CHECKS"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 34,
+          "context": "Column Shift Transmission."
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 31,
+          "context": "GOVERNOR"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 12,
+          "context": "CONTROL PRESSURE AND VACUUM DIAPHRAGM UNIT CHECK"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'transmission gets stuck in first gear and won't let me shift to second — I have to reach underneath and move the linkage by hand' strongly suggests an issue with the external manual linkage. The fact that you can manually shift it by hand at the transmission's lever indicates the internal transmission components are likely capable of shifting, but the control input from the shifter is not reaching them correctly. Improperly adjusted manual linkage can prevent the manual valve from being correctly positioned, leading to incorrect fluid pressure direction and shift issues (Source 11). If the linkage is confirmed good, then internal hydraulic components like the 1-2 shift valve train or governor pressure system would be the next suspects (Source 15, Source 18, Source 35).",
+      "mechanic_instructions": "First, we need to verify the manual linkage adjustment and check for any binding. This is a common cause for incorrect shifting in C4 automatics. \n\n1.  **Raise the vehicle.**\n2.  **Locate the manual lever on the transmission:** This is where the shift rod from the column connects.\n3.  **With the engine OFF, manually move the transmission's manual lever through all its detents (P, R, N, D2, D1, L).** Observe if it moves freely and if you can feel distinct detents for each gear.\n4.  **Attempt to shift the transmission into D1 (Drive 1) by hand at the transmission lever, then try to move it to D2 (Drive 2) and L (Low).** Does it move smoothly into these positions?\n5.  **Perform the manual linkage adjustment:** With the engine stopped, loosen the clamp at the shift lever (point 'A' in Fig. 16, Source 39) so the shift rod is free. Position the transmission selector lever into the D1 (large dot) position, ensuring it's against the D1 stop on the selector plate. Then, shift the manual lever at the transmission into the D1 detent position (second from the rear). Tighten the clamp on the shift rod at point 'A'.\n6.  **After adjustment, lower the vehicle and start the engine.** Check the pointer alignment and transmission operation for all selector lever detent positions, specifically testing the 1-2 shift in D1.\n\nWhat did you observe during these steps?",
+      "answer_path_prompts": [
+        "After adjusting the manual linkage, the transmission now shifts smoothly from first to second gear and through all other ranges. The manual lever at the transmission also moved freely through all detents.",
+        "The manual linkage was already correctly adjusted, or I adjusted it as per the procedure, and the manual lever at the transmission moves freely through all detents. However, the transmission still gets stuck in first gear and won't shift to second automatically.",
+        "The manual linkage rod is bent, or the lever at the transmission is stiff/damaged, preventing proper movement even after attempting adjustment. I could not move the transmission's manual lever freely through all detents by hand."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_m_044",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine revs up but the car doesn't accelerate — especially in higher gears or when I'm going uphill.",
+    "query_category": "diagnostic",
+    "technical_issue": "Clutch Slipping",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Transmission",
+        "Engine"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 15,
+          "context": "STALL TEST"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 18,
+          "context": "DIAGNOSIS GUIDE (Continued)"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'engine revs up but the car doesn't accelerate — especially in higher gears or when I'm going uphill' is a classic indication of transmission slippage. When the engine revs freely but power is not effectively transferred to the wheels, it points to a problem within the automatic transmission's ability to hold a gear. This could be due to improper band adjustment, issues with the converter one-way clutch, or general clutch/band slippage, as indicated in the FSM's diagnosis guide for 'POOR ACCELERATION' (Source 29). The 'Stall Test' (Source 25) is the direct procedure to confirm clutch or band slippage by observing engine RPM under full throttle with the brakes applied.",
+      "mechanic_instructions": "The primary suspect here is transmission slippage. When the engine revs but the car doesn't accelerate, it means the power generated by the engine isn't being fully transmitted to the drive wheels. This is often caused by worn clutches, bands, or a faulty torque converter within the C4 automatic transmission. To confirm this, we need to perform a Stall Test. This test will directly indicate if there is clutch or band slippage. Before we proceed with the Stall Test, I need you to describe the exact behavior you observe when you try to accelerate.",
+      "answer_path_prompts": [
+        "The engine RPM increases significantly, but the vehicle speed does not increase proportionally, or the car struggles to move, especially under load (e.g., uphill).",
+        "The engine struggles to gain RPM, bogs down, or misfires when you press the accelerator, indicating a lack of engine power.",
+        "The transmission shifts erratically, delays shifts, or refuses to engage certain gears, but when a gear *does* engage, the power transfer feels normal."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_m_045",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The clutch pedal is incredibly stiff and hard to push — my left leg gets exhausted in traffic.",
+    "query_category": "diagnostic",
+    "technical_issue": "Hard Clutch Pedal / Clutch Pedal Bushing Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Clutch System",
+        "Clutch Linkage"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 40,
+          "context": "CLUTCH PEDAL ADJUSTMENT"
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 34,
+          "context": "TROUBLE SYMPTOMS AND POSSIBLE CAUSES"
+        },
+        {
+          "source": "mustang_fsm_part_14_p651-691.pdf",
+          "page": 22,
+          "context": "CHECK CLUTCH LINKAGE ADJUSTMENT"
+        }
+      ],
+      "diagnostic_reasoning": "A stiff clutch pedal can stem from several issues within the clutch system. The most common culprits are improper clutch pedal adjustment or binding in the mechanical linkage. The FSM explicitly states that 'Improper adjustment of the clutch pedal is one of the most frequent causes of clutch failure' (Source 9, page 40). Additionally, 'Pedal shaft binding at support bracket,' 'Release Pedal push rod rubbing on firewall felt and insulator,' 'Burrs on clutch pedal or clutch assist spring retainer,' and 'Clutch linkage improperly adjusted or inadequately lubricated' are all listed as causes for clutch pedal issues (Source 27, page 34; Source 30, page 34). Less common, but more severe, are internal clutch issues like 'Pressure plate fingers binding' or 'Release bearing hub scrubbing on input shaft bearing retainer' (Source 30, page 34; Source 27, page 34). We will start by checking the external linkage and adjustment, as these are the easiest to verify and most probable causes.",
+      "mechanic_instructions": "A stiff clutch pedal often points to an issue with the clutch pedal adjustment or binding in the mechanical linkage. Your first step is to check the clutch pedal free travel and then visually inspect the linkage for any binding. Improper adjustment can lead to a hard pedal and premature clutch component failure.\n\n1.  **Measure Clutch Pedal Free Travel:** With the engine idling, depress the pedal just enough to take up the free travel. Measure the difference between this point and the fully released pedal position. Refer to Fig. 16 in Part 14-22 or Fig. 2 in Part 3-40 of the FSM for measurement procedure. The specified free travel should be 1/2 inch at 3000 rpm (Source 11, page 22; Source 34, page 40).\n2.  **Inspect Linkage for Binding:** While operating the pedal, observe the entire clutch linkage from the pedal to the clutch release lever. Look for any signs of rubbing, corrosion, bent components, or lack of lubrication at pivot points (e.g., pedal shaft in its support, equalizer bar, connecting rods).",
+      "answer_path_prompts": [
+        "The clutch pedal free travel is significantly out of specification, and adjusting it changes the pedal feel.",
+        "The clutch pedal free travel is within specification, but I can see or feel binding in the pedal shaft, equalizer bar, or connecting rods.",
+        "The clutch pedal free travel is within specification, and the external linkage moves freely without binding, but the pedal is still stiff."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_m_046",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The transmission makes a horrible grinding noise when I shift from first to second, and sometimes second to third.",
+    "query_category": "diagnostic",
+    "technical_issue": "Grinding When Shifting — Worn Synchros",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Transmission",
+        "Clutch",
+        "Shift Linkage"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 46,
+          "context": "DIAGNOSIS AND"
+        },
+        {
+          "source": "mustang_fsm_part_04_p151-200.pdf",
+          "page": 25,
+          "context": "DESCRIPTION"
+        },
+        {
+          "source": "mustang_fsm_part_04_p151-200.pdf",
+          "page": 5,
+          "context": "DESCRIPTION"
+        },
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 34,
+          "context": "TROUBLE SYMPTOMS AND POSSIBLE CAUSES"
+        }
+      ],
+      "diagnostic_reasoning": "A grinding noise during shifts, particularly from first to second and second to third, is a classic symptom of a manual transmission issue. The primary suspects are worn synchronizers, maladjusted shift linkage, or a clutch that is not fully disengaging. The FSM's 'Diagnosis Guide' for manual transmissions explicitly states to 'make sure the clutch is function-properly' and 'make sure the transmission shift linkage is properly adjusted' before further road testing for problems like 'gears clash when transmission is shifted from one gear ratio to another.' (Source 10, page 46). Synchronizers are designed to match gear speeds to prevent clash (Source 39, page 25; Source 46, page 5). If the clutch is not fully releasing, the input shaft will continue to spin, making synchronization impossible and causing grinding (Source 35, page 34, 'GEAR CLASH OR POOR RELEASE'). Maladjusted linkage can prevent full gear engagement. I will start by checking clutch disengagement, as it's a common and easily verifiable cause that affects all shifts.",
+      "mechanic_instructions": "A grinding noise during shifts indicates that the gears are clashing, likely due to either the clutch not fully disengaging, the shift linkage being out of adjustment, or worn internal synchronizers. We need to isolate the cause. First, let's check the clutch's ability to fully disengage. Since reverse gear is typically not synchronized, grinding when shifting into reverse from a stop is a strong indicator of a clutch disengagement problem.",
+      "answer_path_prompts": [
+        "When the car is stopped and the engine is running, it grinds when I try to shift into reverse.",
+        "When the car is stopped and the engine is running, it shifts into reverse smoothly without grinding.",
+        "The shift lever feels excessively loose or sloppy in neutral, or it's hard to tell if it's fully engaging a gear."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_a_047",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "When I put the car in Drive, there's a long pause before it moves — then it lurches forward. It also slips between gears.",
+    "query_category": "diagnostic",
+    "technical_issue": "C4 — Slipping / Delayed Engagement",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Transmission"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 17,
+          "context": "C4 AUTOMATIC DUAL RANGE DIAGNOSIS GUIDE"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 15,
+          "context": "STALL SPEED TOO HIGH"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 12,
+          "context": "ENGINE IDLE SPEED CHECK"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of a long pause before engagement in Drive, followed by a lurch, and slipping between gears, are classic indicators of issues within the C4 automatic transmission. The 'C4 AUTOMATIC DUAL RANGE DIAGNOSIS GUIDE' (Source 19, 54) lists 'Slips or Chatters in First Gear, Dl Slips or Chatters in Second Gear' and 'No Drive in Dl only' as symptoms, which align with the user's description. 'STALL SPEED TOO HIGH' (Source 36) explicitly states that 'band or clutch slippage is indicated' if stall speed exceeds specifications, which manifests as slipping between gears. The most common and initial check for these symptoms is the transmission fluid level and condition, as low fluid or burnt fluid indicates either a leak or internal component wear, leading to insufficient hydraulic pressure for proper clutch and band application (Source 1, 24, 29). An excessively high engine idle speed can also cause rough engagement (Source 12), but is less likely to cause slipping between gears.",
+      "mechanic_instructions": "The delay in engagement and slipping between gears points directly to a problem with your C4 automatic transmission. This could be due to low fluid, worn clutches or bands, or issues with the hydraulic control system. We need to start with the most basic check: the transmission fluid. Pull the dipstick with the engine running and fully warmed up, in Park, on level ground. Observe the fluid level and condition.",
+      "answer_path_prompts": [
+        "The transmission fluid level is low, and/or the fluid smells burnt.",
+        "The transmission fluid level is correct, and the fluid looks and smells normal.",
+        "The engine idle speed is excessively high (above 700 RPM in Park)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_a_048",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My automatic is stuck in one gear — it just stays in second (or whatever gear it's in) and won't shift up or down.",
+    "query_category": "diagnostic",
+    "technical_issue": "C4 — Won't Shift / Stuck in One Gear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Transmission",
+        "Vacuum System",
+        "Engine Control"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 12,
+          "context": "CONTROL PRESSURE AND VACUUM DIAPHRAGM UNIT CHECK"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 14,
+          "context": "TEST NUMBER 2-CONTROL PRESSURE DOES NOT INCREASE WITH VACUUM AT APPROXIMATELY 17.0 INCHES"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 15,
+          "context": "SHIFT POINT CHECKS"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 16,
+          "context": "AIR PRESSURE CHECKS"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 31,
+          "context": "GOVERNOR"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of the C4 automatic transmission being stuck in one gear (second, in this case) and not shifting up or down points to a failure in the transmission's control system. This could be due to issues with the vacuum diaphragm unit, which modulates throttle pressure, or problems with the control pressure regulation itself. A stuck governor valve is also a strong candidate, as it directly controls speed-sensitive shifts. Less likely, but still possible, are binding shift linkage or internal shift valve issues. The FSM's 'CONTROL PRESSURE AND VACUUM DIAPHRAGM UNIT CHECK' (Source 18, page 12) is the logical first step to isolate the problem, as it covers both vacuum and control pressure aspects, which are critical for proper automatic shifting.",
+      "mechanic_instructions": "Your C4 automatic transmission is stuck in a single gear, indicating a problem with the automatic shifting mechanism. This could be due to issues with the vacuum diaphragm unit, control pressure regulation, or the governor valve. We need to start by checking the vacuum and control pressure, as these directly influence shift points. Attach a tachometer to the engine, a vacuum gauge to the transmission vacuum line at the vacuum unit (Fig. 5), and a pressure gauge to the control pressure outlet at the transmission (Fig. 4). Firmly apply the parking brake and start the engine. Adjust the engine idle speed to the specified RPM. Observe the vacuum and control pressure readings.",
+      "answer_path_prompts": [
+        "The vacuum gauge shows a steady reading, but the control pressure does not increase as vacuum decreases, or is outside specifications (refer to FSM Group 10 for specifications).",
+        "The vacuum gauge shows a significant leak at the transmission vacuum unit or its connecting tubes and hoses.",
+        "The vacuum and control pressure readings are within specifications, but the transmission still won't shift.",
+        "The throttle/downshift linkage is binding or improperly adjusted, preventing proper idle speed adjustment or full throttle input."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_trans_a_049",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's a big puddle of red fluid under the car every time I park. The transmission seems to leak from everywhere.",
+    "query_category": "diagnostic",
+    "technical_issue": "C4 — Transmission Fluid Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Transmission",
+        "Engine"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 11,
+          "context": "OIL LEAKAGE CONVERTER AREA"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 12,
+          "context": "OIL LEAKAGE CONVERTER AREA"
+        },
+        {
+          "source": "mustang_fsm_part_05_p201-250.pdf",
+          "page": 10,
+          "context": "TRANSMISSION FLUID LEAKAGE CHECKS"
+        },
+        {
+          "source": "mustang_fsm_part_06_p251-300.pdf",
+          "page": 17,
+          "context": "ENGINE"
+        }
+      ],
+      "diagnostic_reasoning": "A 'big puddle of red fluid' strongly indicates an automatic transmission fluid leak, as factory-fill fluid is dyed red (Source 1, page 11). However, engine oil leaks can be misdiagnosed as transmission leaks, especially around the converter area, due to blow-back or seepage (Source 1, page 11; Source 32, page 10). The FSM outlines specific procedures for diagnosing leaks in the converter area, which is a common source of significant fluid loss (Source 1, page 11; Source 21, page 11). Other common transmission leak points include the oil pan gasket, filler tube O-ring, speedometer cable connection, and extension housing seals (Source 32, page 10). The initial step is to confirm the fluid type and general location to narrow down the primary suspect subsystem.",
+      "mechanic_instructions": "A 'big puddle of red fluid' points directly to an automatic transmission fluid leak. First, verify the fluid color on the transmission dipstick. Then, we need to pinpoint the general area of the leak. Engine oil can sometimes be mistaken for transmission fluid, especially around the converter housing, so confirming the fluid type is critical. After verifying the fluid color, visually inspect the underside of the car to identify the primary area of leakage.",
+      "answer_path_prompts": [
+        "The fluid on the transmission dipstick is red, and the leak appears to be coming from the front of the transmission, near the bellhousing.",
+        "The fluid on the transmission dipstick is red, and the leak appears to be coming from the transmission oil pan or the rear extension housing.",
+        "The fluid on the transmission dipstick is red, but the fluid on the ground is dark brown/black, and it seems to be dripping from higher up on the engine, above the transmission.",
+        "The fluid on the transmission dipstick is brown/black, not red, and the leak is from the transmission."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "acc_axle_050",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's oil leaking onto the inside of my rear wheels and the brake drums are getting contaminated with gear oil.",
+    "query_category": "diagnostic",
+    "technical_issue": "Rear Axle Seal Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Rear Axle",
+        "Brakes"
+      ],
+      "source_citations": [
+        {
+          "source": "mustang_fsm_part_03_p101-150.pdf",
+          "page": 12,
+          "context": "REAR AXLE SHAFT, WHEEL BEARING AND OIL SEAL REPLACEMENT"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 3,
+          "context": "DRUM BRAKES"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 20,
+          "context": "BRAKE SHOE RELINING"
+        },
+        {
+          "source": "mustang_fsm_part_01_p1-50.pdf",
+          "page": 12,
+          "context": "BOOSTER DIAGNOSIS GUIDE-FALCON, COMET, MUSTANG"
+        }
+      ],
+      "diagnostic_reasoning": "Gear oil leaking onto the inside of the rear wheels and contaminating the brake drums is a classic symptom of a failed rear axle shaft oil seal. The axle shaft passes through this seal before the wheel bearing and brake drum. If the seal fails, gear oil from the differential housing will migrate past the axle shaft and onto the brake components. The FSM explicitly states that the rear wheel bearing oil seal must be replaced whenever a rear axle shaft is removed (Source 26, page 12; Source 11, page 15). Contamination of brake linings with oil or grease necessitates their replacement (Source 3, page 16; Source 20, page 40), as it can lead to noisy or grabbing brakes, or even wheel lock-up (Source 53, page 12). Before proceeding with any repairs, we need to confirm the exact source and type of the leaking fluid.",
+      "mechanic_instructions": "The presence of gear oil on the rear brake drums strongly indicates a failed rear axle shaft oil seal. To confirm this, you need to remove the rear wheel and brake drum. Once the drum is off, visually inspect the inside of the drum, the brake shoes, and the backing plate for the source and type of fluid. Pay close attention to whether the leak originates from the center of the axle shaft (indicating an axle seal) or from the wheel cylinder (indicating brake fluid).",
+      "answer_path_prompts": [
+        "Upon removing the rear wheel and brake drum, I see a dark, thick, oily fluid (gear oil) on the inside of the brake drum and backing plate, originating from the center of the axle shaft.",
+        "Upon removing the rear wheel and brake drum, I see a reddish or clear/amber fluid (brake fluid) on the inside of the brake drum and backing plate, originating from the wheel cylinder.",
+        "I see no fluid leak on the inside of the brake drum or backing plate."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

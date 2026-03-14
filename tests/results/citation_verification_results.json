@@ -1,0 +1,416 @@
+{
+  "timestamp": "2026-03-12 17:13:37",
+  "total_urls": 25,
+  "summary": {
+    "live": 4,
+    "cloudflare_blocked": 0,
+    "access_blocked": 0,
+    "dead_404": 0,
+    "other_http_errors": 21,
+    "errors_timeouts": 0,
+    "table_rows_with_citations": 79,
+    "table_rows_with_live_citations": 18
+  },
+  "results": [
+    {
+      "url": "https://www.cjponyparts.com/resources/classic-mustang-restoration-guide-chapter-5",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        1,
+        4,
+        5,
+        22,
+        28,
+        43,
+        44,
+        46,
+        47,
+        49,
+        52,
+        76,
+        77,
+        97,
+        98,
+        105,
+        112
+      ],
+      "description": "CJ Pony Parts restoration guide Chapter 5 - Powertrain",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/mustang-chrome-thermostat-housing-install",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        26
+      ],
+      "description": "CJ Pony Parts thermostat housing install guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/1965-1966-mustang-radiator-install",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        27,
+        29,
+        30,
+        100
+      ],
+      "description": "CJ Pony Parts 1965-1966 radiator install guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/classic-mustang-heater-box-install",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        32,
+        110
+      ],
+      "description": "CJ Pony Parts heater box install guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/classic-mustang-electrical-troubleshooting-guide",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        33,
+        34,
+        35,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        87,
+        89,
+        90,
+        104
+      ],
+      "description": "CJ Pony Parts electrical troubleshooting guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/classic-mustang-wiring-harness-install",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        36,
+        94,
+        101,
+        109
+      ],
+      "description": "CJ Pony Parts wiring harness install guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/media/images/install-pdf/install_tcprckp314.pdf",
+      "source_type": "Parts supplier technical guide (PDF)",
+      "cited_by_rows": [
+        53
+      ],
+      "description": "CJ Pony Parts rack & pinion conversion manual",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/media/images/install-pdf/install_tcprckp121.pdf",
+      "source_type": "Parts supplier technical guide (PDF)",
+      "cited_by_rows": [
+        55
+      ],
+      "description": "CJ Pony Parts steering column bearing guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/classic-mustang-restoration-guide-chapter-7",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        118
+      ],
+      "description": "CJ Pony Parts restoration guide Chapter 7 - Brakes & Suspension",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/beltline-weatherstrip-kit-with-black-beads-coupe-convertible-1965/p/WSBL230/",
+      "source_type": "Parts supplier product page",
+      "cited_by_rows": [
+        78
+      ],
+      "description": "CJ Pony Parts beltline weatherstrip kit product page",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/how-to-seal-windshield",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        79
+      ],
+      "description": "CJ Pony Parts windshield sealing guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/how-to-fix-headliner",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        82
+      ],
+      "description": "CJ Pony Parts headliner fix guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/classic-mustang-door-panel-replacement",
+      "source_type": "Parts supplier technical guide",
+      "cited_by_rows": [
+        84,
+        102
+      ],
+      "description": "CJ Pony Parts door panel replacement guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://news.classicindustries.com/top-10-restoration-mistakes-on-the-first-generation-1965-73-ford-mustang",
+      "source_type": "Published technical article",
+      "cited_by_rows": [
+        11,
+        12,
+        13,
+        60,
+        61,
+        68,
+        69,
+        70,
+        71,
+        75,
+        93,
+        103,
+        106,
+        116
+      ],
+      "description": "Classic Industries - Top 10 Restoration Mistakes (1965-73 Mustang)",
+      "status": "LIVE",
+      "http_code": 200,
+      "final_url": "https://news.classicindustries.com/top-10-restoration-mistakes-on-the-first-generation-1965-73-ford-mustang",
+      "content_check": "RELEVANT (mustang, ford, 1965, restoration)",
+      "content_length": 49980,
+      "notes": ""
+    },
+    {
+      "url": "https://www.classicindustries.com/product/usb40001.html",
+      "source_type": "Ford TSB Index",
+      "cited_by_rows": [
+        119
+      ],
+      "description": "Classic Industries product page for Ford TSB index (TSB #1454)",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.hemmings.com/stories/1964-1-2-1966-mustang/",
+      "source_type": "Published technical article",
+      "cited_by_rows": [
+        2,
+        72,
+        74
+      ],
+      "description": "Hemmings - 1964\u00bd-1966 Mustang buyer's/restoration guide",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.hemmings.com/stories/solid-lifter-symphony-1965-ford-mustang/",
+      "source_type": "Published technical article",
+      "cited_by_rows": [
+        3
+      ],
+      "description": "Hemmings - Solid-lifter symphony 1965 Mustang article",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.hemmings.com/stories/swap-meet-9/",
+      "source_type": "Published technical article",
+      "cited_by_rows": [
+        113
+      ],
+      "description": "Hemmings - Swap Meet article mentioning leaf spring sag",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.forelpublishing.com/demo/demo40001.pdf",
+      "source_type": "Ford TSB Index (PDF)",
+      "cited_by_rows": [
+        85,
+        91
+      ],
+      "description": "Forel Publishing Ford TSB demo document",
+      "status": "LIVE",
+      "http_code": 200,
+      "final_url": "https://www.forelpublishing.com/demo/demo40001.pdf",
+      "content_check": "PDF (content not parsed)",
+      "content_length": 27637,
+      "notes": ""
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=j_GqRCS3EZE",
+      "source_type": "YouTube technical video",
+      "cited_by_rows": [
+        96
+      ],
+      "description": "YouTube - Motor mount replacement video",
+      "status": "LIVE",
+      "http_code": 200,
+      "final_url": "https://www.youtube.com/watch?v=j_GqRCS3EZE",
+      "content_check": "NO RELEVANT KEYWORDS FOUND",
+      "content_length": 50000,
+      "notes": "Page loaded but no Mustang/Ford-related keywords found. "
+    },
+    {
+      "url": "https://www.saac.com/forum/index.php?topic=14702.0",
+      "source_type": "Forum repair write-up",
+      "cited_by_rows": [
+        114
+      ],
+      "description": "SAAC Forum - Taillight problems thread",
+      "status": "LIVE",
+      "http_code": 200,
+      "final_url": "https://www.saac.com/forum/index.php?topic=14702.0",
+      "content_check": "RELEVANT (mustang, 1965, engine, brake, electrical)",
+      "content_length": 50000,
+      "notes": ""
+    },
+    {
+      "url": "https://www.hemmings.com/stories/smart-upgrades-make-this-65-mustang-accessible-to-a-wide-range-of-drivers-2657791453/",
+      "source_type": "Published technical article (Works Cited #1)",
+      "cited_by_rows": [],
+      "description": "Hemmings - Smart Upgrades Ecoboost '65 Mustang (Works Cited)",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/1965-mustang-vin-decoder",
+      "source_type": "Parts supplier reference (Works Cited #3)",
+      "cited_by_rows": [],
+      "description": "CJ Pony Parts 1965 Mustang VIN Decoder (Works Cited)",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.autoevolution.com/news/1965-ford-mustang-rotting-away-on-private-property-deserves-a-better-fate-226222.html",
+      "source_type": "Published article (Works Cited #5)",
+      "cited_by_rows": [],
+      "description": "AutoEvolution - 1965 Ford Mustang article (Works Cited)",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    },
+    {
+      "url": "https://www.cjponyparts.com/resources/classic-mustang-restoration-guide",
+      "source_type": "Parts supplier guide hub (Works Cited #9)",
+      "cited_by_rows": [],
+      "description": "CJ Pony Parts restoration guide main page (Works Cited)",
+      "status": "HTTP_403",
+      "http_code": 403,
+      "final_url": null,
+      "content_check": "NOT CHECKED",
+      "content_length": null,
+      "notes": "403 Forbidden - may be bot-blocked but page likely exists"
+    }
+  ]
+}

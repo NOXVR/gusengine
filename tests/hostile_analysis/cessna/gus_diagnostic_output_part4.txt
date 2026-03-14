@@ -1,0 +1,1144 @@
+[
+  {
+    "query_id": "elec_008",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The ELT battery is expired and the unit failed its annual test.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "ELT Battery Expiration / Test Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "ELT Battery System",
+        "ELT Transmitter Unit",
+        "ELT Antenna System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 34,
+          "context": "PROBABLE CAUSE > TROUBLE > *POWER LOW"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 33,
+          "context": "16-95. TROUBLE SHOOTING"
+        }
+      ],
+      "diagnostic_reasoning": "The ELT unit failing its annual test, coupled with an expired battery, strongly suggests a 'POWER LOW' condition. The troubleshooting guide for the ELT (Section 16-95) lists 'Low battery voltage' as a probable cause for 'POWER LOW'. The first step in the remedy is to measure the battery-pack voltage. If the voltage is below specification (10.8V for 6-cell magnesium or 11.2V for 4-cell lithium), the battery pack is the confirmed issue. If the battery voltage is within specification, the troubleshooting then directs to checking the transmitter or co-axial antenna cable.",
+      "mechanic_instructions": "Given the ELT battery is expired and the unit failed its annual test, the most probable cause is low battery voltage. The Service Manual's troubleshooting for 'POWER LOW' (Section 16-95) directs us to verify the battery's output. Set the ELT toggle switch to OFF. Remove the plastic plug from the remote jack and connect a Simpson 260 model voltmeter using a Switchcraft #750 jackplug. Measure the battery-pack voltage.",
+      "answer_path_prompts": [
+        "The 6-cell magnesium battery pack voltage is 10.8 volts or less, OR the 4-cell lithium battery pack voltage is 11.2 volts or less.",
+        "The battery pack voltage meets or exceeds the specified minimums (above 10.8V for 6-cell magnesium, above 11.2V for 4-cell lithium)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "inst_007",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My tachometer reads inconsistently -- different from actual RPMs.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Tachometer Inaccuracy",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Indicators",
+        "Tachometer Drive System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 34,
+          "context": "15-32. ENGINE INDICATORS. > TROUBLE > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 9,
+          "context": "11-14. BUILD-UP. > NOTE > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "The primary suspect for an inconsistent tachometer reading is the mechanical drive shaft, as the Service Manual states, 'Most tachometer difficulties will be found in the drive-shaft.' (Source 10, 15-34). Issues can include kinks, dents, sharp bends in the housing, or worn spots, breaks, and kinks in the cable itself. Improper seating of the cable in the engine fitting or tachometer is also a probable cause. If the drive system is sound, the instrument itself could be defective, though this is less common for tachometers according to the manual's emphasis.",
+      "mechanic_instructions": "An inconsistent tachometer reading typically points to an issue with the mechanical drive system. The tachometer is driven at half crankshaft speed by a flexible shaft. We need to physically inspect this drive system. Begin by examining the external condition of the tachometer drive shaft housing.",
+      "answer_path_prompts": [
+        "The drive shaft housing has visible kinks, dents, or sharp bends, or the cable feels rough when pulled out.",
+        "The drive shaft housing appears normal, and the cable pulls out smoothly without visible wear or kinks.",
+        "The tachometer is also making a noticeable noise or the pointer is oscillating excessively."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "ign_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Engine runs rough -- magneto timing has drifted from specification.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Magneto Timing Drift",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 20,
+          "context": "11-58. MAINTENANCE. Magneto-to-engine timing should be checked at the first 50 hours, first 100 hours and thereafter at each 200 hours. If timing to the engine is not within plus zero degrees and minus two degrees, the magneto should be retimed to the engine."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 40,
+          "context": "llA-55. MAGNETO-TO-ENGINE TIMING. The magneto must be installed with its timing marks correctly aligned and with the number one cylinder on its compression stroke with number one piston at its advanced firing position."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "A sharp rpm drop-off past normal is usually a sign of a fouled plug, a defective harness lead or a magneto out of time."
+        }
+      ],
+      "diagnostic_reasoning": "The user reports a rough running engine and suspects magneto timing drift. The Service Manual confirms that magneto-to-engine timing should be checked at regular intervals (50, 100, then 200 hours for Lycoming; 100 hours for Continental) and retimed if outside the +0/-2 degree tolerance (Source 1, 9, 11). A magneto out of time can cause a sharp RPM drop-off during a magneto check, indicating a rough running condition (Source 38). The immediate next step is to verify the magneto-to-engine timing for both magnetos.",
+      "mechanic_instructions": "You've identified magneto timing drift as the probable cause for the rough running engine. We need to verify the magneto-to-engine timing. This procedure involves setting the engine to the advanced firing position for cylinder number one and then using a timing light to check the magneto's contact break point. Refer to paragraph 11-57 (Lycoming) or 11A-55 (Continental) for the detailed procedure on locating the advanced firing position and timing the magneto to the engine (Source 18, 20, 25, 35, 42, 50). Pay close attention to the final motion of the crankshaft being in the normal direction of rotation when aligning timing marks. Once the engine is set, connect a timing light to the capacitor terminal at the rear of the magneto and to a good ground (Source 34, 47). Slowly advance the propeller in the normal direction of rotation until the timing light indicates the contacts break (Source 34, 44). Note the position. Repeat for the other magneto. What do you observe?",
+      "answer_path_prompts": [
+        "The timing for one or both magnetos is outside the +0/-2 degree tolerance, confirming the drift.",
+        "The timing for both magnetos is within the +0/-2 degree tolerance, indicating the drift is not the primary issue.",
+        "The timing light does not flash, or the spark is inconsistent, suggesting a magneto internal issue or wiring problem.",
+        "I encountered difficulty locating the advanced firing position or aligning the timing marks."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_011",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The trim wheel is stiff -- trim doesn't respond smoothly.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Elevator Trim Tab Cable Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Elevator Trim Control System"
+      ],
+      "source_citations": [
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 35,
+          "context": "SECTION 9 > ELEVATOR TRIM CONTROL SYSTEM > TROUBLE"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 36,
+          "context": "9-3. TROUBLE SHOOTING (Cont). > TROUBLE > PROBABLE CAUSE"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 10,
+          "context": "TROUBLE > RESISTANCE TO CONTROL > WHEEL MOVEMENT."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'trim wheel is stiff -- trim doesn't respond smoothly' directly corresponds to 'TRIM CONTROL WHEEL MOVES WITH EXCESSIVE RESISTANCE' in the Elevator Trim Control System troubleshooting section. Probable causes include high cable tension, binding pulleys, rusty or binding chains/sprockets, bent sprocket shafts, binding trim tab hinges, or a defective trim tab actuator. The initial diagnostic steps should aim to isolate the source of this resistance.",
+      "mechanic_instructions": "The trim control wheel's excessive resistance indicates a mechanical binding or improper tension within the elevator trim control system. We need to systematically check the components from the control wheel to the trim tab. Begin by checking the cable tension and visually inspecting the accessible mechanical components.",
+      "answer_path_prompts": [
+        "The trim control cables are excessively tight when checked per Figure 9-1 specifications.",
+        "Upon opening access plates, I observe rusty chains, damaged sprockets, or cables not properly seated on pulleys.",
+        "After disconnecting the actuator chain, the trim tab hinge moves freely, but the actuator itself is stiff when operated manually.",
+        "After disconnecting the actuator chain, the trim tab hinge is stiff and resists movement."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_011",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The carb heat knob is very stiff to pull -- doesn't give full heat.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Carburetor Heat Control Cable Stiff / Broken",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Controls",
+        "Induction Air System",
+        "Heating System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 11,
+          "context": "SECTION 14 > UTILITY SYSTEMS > TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 22,
+          "context": "11-66. CARBURETOR HEAT CONTROL."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 17,
+          "context": "11-47. DESCRIPTION. Ram air to the engine enters"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 39,
+          "context": "11A- 46. AIRBOX."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of a stiff carburetor heat knob that doesn't provide full heat points to a mechanical issue within the carburetor heat control system. The primary suspects are binding in the control cable or its housing, a sticking carburetor heat valve in the airbox, or improper rigging of the control. The Service Manual states that 'Most of the operational troubles in the heating... systems are caused by sticking or binding air valves and/or their controls, damaged air ducting, or defects in the exhaust muffler.' (Source 2, 8). The carburetor heat control operates a valve in the induction airbox (Source 56, 58, 59). Rigging procedures for the carburetor heat control emphasize smooth travel and full range of motion (Source 13, 21). We need to isolate whether the binding is in the control cable itself or the valve it operates.",
+      "mechanic_instructions": "The stiff carburetor heat knob and lack of full heat indicate a mechanical issue. We need to determine if the binding is in the control cable, the airbox valve, or if the control is simply mis-rigged. Remove the engine cowling per paragraph 11-3. Disconnect the carburetor heat control wire from the arm on the airbox (Source 50, 58). Then, physically test the movement of both the control wire and the airbox arm.",
+      "answer_path_prompts": [
+        "With the engine cowling removed, I disconnected the carburetor heat control wire from the arm on the airbox. The control wire itself is stiff to pull and push from the cockpit.",
+        "With the engine cowling removed, I disconnected the carburetor heat control wire from the arm on the airbox. The control wire moves freely, but the arm on the airbox (which operates the valve) is stiff or stuck.",
+        "With the engine cowling removed, I disconnected the carburetor heat control wire from the arm on the airbox. Both the control wire and the airbox arm move freely, but when reconnected and the knob is pulled full out, the airbox arm does not reach its full open position."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_018",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Oil weeping from the back of the engine around magneto/accessory area.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Accessory Case Oil Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Oil System",
+        "Ignition System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 38,
+          "context": "ENGINE COMPARTMENT Check for evidence of oil and fuel leaks"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 11,
+          "context": "11-29. ENGINE OIL SYSTEM. 11-30. DESCRIPTION. The lubricating system is of the full pressure, wet sump type."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 40,
+          "context": "Figure 11-4. No. e. Be sure magneto gasket (right magneto), magneto adapter and gaskets (left magneto) are in place"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 32,
+          "context": "The pressure relief valve at the aft end of the right oil gallery regulates oil pressure by allowing excess oil to return to the sump."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 12,
+          "context": "11-31. TROUBLE SHOOTING. Oil pressure line broken, disconnected or pinched."
+        }
+      ],
+      "diagnostic_reasoning": "Oil weeping from the magneto/accessory area suggests a breach in the engine's full-pressure, wet sump lubricating system (Source 10, 18). The most probable causes are compromised sealing surfaces or damaged lines in this vicinity. This includes the magneto mounting gaskets (Source 40), accessory housing gaskets, or flexible fluid hoses and fittings (Source 12, 45). A defective pressure relief valve, located at the aft end of the right oil gallery, could also be a source of weeping (Source 32). The initial step is to clean the area and observe the exact origin of the leak to narrow down the component.",
+      "mechanic_instructions": "Clean the engine compartment thoroughly, especially the area around the magnetos and accessory housing, to remove all oil residue. This will allow for a clear visual identification of the leak's origin. Once clean, run the engine at idle for a short period and carefully observe where the oil begins to weep from.",
+      "answer_path_prompts": [
+        "Oil is weeping directly from around the base of one of the magnetos, indicating a magneto gasket or seal issue.",
+        "Oil is weeping from a seam or gasket on the main accessory housing, not directly from a magneto.",
+        "Oil is weeping from an oil line or fitting connected to the accessory housing or a magneto.",
+        "Oil is weeping from the pressure relief valve at the aft end of the right oil gallery.",
+        "The source of the leak is unclear, or it appears to be coming from a different area of the engine."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_019",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine has developed a persistent miss and the mechanic says a cam lobe is worn flat.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Camshaft / Lifter Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Mechanical",
+        "Ignition System",
+        "Fuel System",
+        "Induction System"
+      ],
+      "source_citations": [
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE RUNS ROUGHLY OR WILL NOT ACCELERATE PROPERLY."
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 31,
+          "context": "11-9. > 11A- 14. BUILD-UP. > NOT E"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 10,
+          "context": "11-18A. STATIC RUN-UP PROCEDURES."
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 37,
+          "context": "ENGINE RUN-UP."
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 42,
+          "context": "11-59. > 11-61. > 11-64."
+        }
+      ],
+      "diagnostic_reasoning": "A persistent miss and a worn flat cam lobe point directly to a mechanical issue within the engine, specifically affecting valve lift and thus cylinder compression. The Service Manual lists 'Defective engine' and 'Perform an engine compression check' as a remedy for 'ENGINE RUNS ROUGHLY OR WILL NOT ACCELERATE PROPERLY' (Source 14, 18, 34). A worn cam lobe would cause low compression on the affected cylinder. Other common causes for rough running include ignition system issues (spark plugs, magneto timing, ignition harness), fuel system problems (carburetor, fuel contamination, primer leaks), and induction system issues (air filter, air leaks, carburetor heat control) (Source 9, 14, 18, 31, 34, 35, 43, 44). The FSM also mentions cam lobe lubrication, indicating wear is a consideration (Source 1, 36). The initial steps should verify the mechanical integrity of the engine via a compression check, then move to ignition and fuel/induction systems if compression is good.",
+      "mechanic_instructions": "A persistent miss, especially with a suspected worn cam lobe, indicates a potential mechanical issue affecting cylinder performance. Your first step is to verify the engine's mechanical integrity. Perform an engine compression check on all cylinders. This will confirm if a specific cylinder is underperforming due to a mechanical fault like a worn cam lobe, which would result in low compression. Also, conduct a magneto drop check during engine run-up to isolate potential ignition system issues, and visually inspect the induction system.",
+      "answer_path_prompts": [
+        "One or more cylinders show significantly low compression (e.g., below manufacturer's minimum or significantly lower than other cylinders).",
+        "All cylinders show good, even compression, but there is an excessive magneto drop on one or both magnetos during the run-up.",
+        "All cylinders show good, even compression, and magneto drop is normal, but there is a noticeable induction air leak or the carburetor heat control is partially open."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_012",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Fuel gauges read full when tanks are half empty -- can't trust them.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Quantity Gauge Inaccuracy",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Electrical System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 36,
+          "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 37,
+          "context": "15-45. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 46,
+          "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL QUANTITY INDICATION."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of fuel gauges reading full when tanks are half empty indicates an incorrect resistance signal being sent to or interpreted by the fuel quantity indicator. The fuel quantity system operates with a float-operated variable-resistance transmitter in each tank, where full fuel produces minimum resistance and maximum current flow, resulting in maximum pointer deflection (full). As fuel level lowers, resistance increases, current decreases, and pointer deflection is smaller (empty). Therefore, a 'full' reading when the tank is half empty suggests the system is seeing lower resistance than it should for the actual fuel level. This could be caused by a defective fuel quantity transmitter, a wiring issue (such as a short to ground or loose connection), or a defective fuel quantity indicator (gauge). The Service Manual lists 'Defective gage or sensing unit' for 'OBVIOUSLY INCORRECT TEMPERATURE READING' (which applies to any gauge), 'Loose or broken lead' for 'EXCESSIVE POINTER OSCILLATION', and 'Defective indicator or transmitter' or 'Loose or broken wiring on indicator or transmitter' for 'ERRATIC READINGS'. It also mentions 'Open circuit' or 'Loose connections or open circuit' for 'NO FUEL QUANTITY INDICATION', which could manifest as an incorrect reading if the circuit integrity is compromised. Transmitter calibration issues are also possible if the float arm or stops are bent. The initial steps should focus on isolating the faulty component by checking the wiring, then the transmitter, and finally the indicator.",
+      "mechanic_instructions": "The fuel quantity system relies on a variable-resistance transmitter in each wing tank. A 'full' reading when the tank is half empty means the gauge is receiving a signal indicating lower resistance than the actual fuel level. This could be due to a fault in the transmitter, the wiring, or the gauge itself. We need to isolate the component causing this incorrect reading. Start by checking the most accessible points.",
+      "answer_path_prompts": [
+        "I found loose or corroded electrical connections at the fuel quantity transmitter or along the wiring leading to the gauge.",
+        "After draining the fuel and accessing the transmitter, manually moving the float arm from 'Empty' to 'Full' does not produce a corresponding change on the fuel gauge, or the gauge remains stuck at 'Full'. (Observe all fuel system precautions, Section 12, page 12-1).",
+        "I have substituted the fuel quantity indicator (gauge) with a known-good unit, and the new gauge now reads correctly for the fuel level."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_020",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Visible wobble at the front of the engine -- drive belt keeps coming off.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Harmonic Balancer / Counterweight",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine",
+        "Alternator System",
+        "Propeller"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 5,
+          "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont). > TROUBLE > ALTERNATOR SYSTEM"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 9,
+          "context": "NOTE > TORQUE PROPELLER MOUNTING NUTS TO > SAFETY WIRE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 7,
+          "context": "SECTION 13 > PROPELLER > 1 TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 6,
+          "context": "TORQUE VALUES > CHECKING ALTERNATOR > BELT TENSION"
+        }
+      ],
+      "diagnostic_reasoning": "A visible wobble at the front of the engine, coupled with the drive belt repeatedly coming off, points to an issue with a rotating component in the belt path or the primary rotating mass at the front of the engine. The most probable causes are: \n1.  **Alternator System:** A loose or damaged alternator pulley, or a misaligned alternator, would directly cause the drive belt to come off and present as a visible wobble. The Service Manual details alternator belt tension adjustment and removal/installation (Source 19, page 5; Source 25, page 6).\n2.  **Propeller/Crankshaft Assembly:** The propeller is directly connected to the crankshaft (Source 13, page 3). Any looseness in the propeller mounting, damage to the propeller itself, or an issue with the crankshaft flange could cause a significant wobble at the front of the engine, which would affect the alternator drive belt that often runs off a pulley associated with the crankshaft or starter ring gear (Source 17, page 9; Source 21, page 7).\n3.  **Engine Mounts:** While less direct, excessive engine vibration due to cracked engine mounts or defective bushings could contribute to belt issues, though a localized 'wobble' usually indicates a specific rotating component problem (Source 18, page 5).",
+      "mechanic_instructions": "We need to isolate the source of the wobble. The drive belt coming off indicates a problem with the belt path. Carefully inspect the components at the front of the engine. Your next step is to observe the specific behavior of the alternator and propeller assembly.",
+      "answer_path_prompts": [
+        "The alternator pulley itself appears to be wobbling or loose on the alternator shaft, or the entire alternator assembly is visibly misaligned or loose on its mounts.",
+        "The propeller itself has visible play or wobble when rocked by hand, or there's visible damage to the propeller blades or hub.",
+        "The entire engine block is shaking excessively relative to the airframe, indicating a potential engine mount issue, but the propeller and alternator appear stable relative to the engine."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_012",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The position light lens on the wing tip is cracked and the light doesn't work.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Wing Tip Lens / Light Damage",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Aircraft Lighting System",
+        "Wings and Empennage"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 9,
+          "context": "16-51. TROUBLE SHOOTING,"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 18,
+          "context": "NOTE > 16-60. ADJUSTMENT OF LANDING AND TAXI > LIGHT (COWL MOUNTED) (BEGINNING WITH"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 19,
+          "context": "THRU AIRCRAFT SERIAL > 17260758 AND F17200904 > BEGINNING WITH AIRCRAFT"
+        }
+      ],
+      "diagnostic_reasoning": "The user reports a cracked position light lens and a non-functional light. The FSM identifies the position light as a navigation light, located on the wing tip (Source 23). Figure 16-7 details the 'Navigation and Anti-Collision Strobe Light Installation,' showing the lens (item 11) and lamp (item 12) as distinct components (Source 45, 31). The cracked lens requires replacement for weather protection and optical clarity. For the non-functional light, the 'TROUBLE SHOOTING' section 16-51 for 'ALL NAV LIGHTS OUT' lists 'Lamp burned out,' 'Open circuit in wiring,' and 'Short circuit in wiring' (Source 36, 50, 56). The diagnostic path should first confirm the condition of the lamp and the circuit breaker, as these are the most common and easily verifiable electrical faults.",
+      "mechanic_instructions": "First, address the cracked position light lens. This is a replaceable component (item 11) in the Navigation and Anti-Collision Strobe Light Installation, as shown in Figure 16-7 (Source 45, 31). You will need to remove the lens retainer (10) to access it. For the light not working, we need to isolate the electrical fault. The most probable causes are a burned-out lamp, a tripped circuit breaker, or a wiring issue. Inspect the navigation light circuit breaker and the lamp itself.",
+      "answer_path_prompts": [
+        "The lamp filament is visibly broken or tests open with an ohmmeter.",
+        "The navigation light circuit breaker is tripped, or a fuse is blown.",
+        "The circuit breaker is set, the lamp tests good, but there is no voltage at the lamp socket, or the wiring shows signs of damage/corrosion."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "elec_009",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The master switch doesn't engage -- no electrical power when I flip the switch.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Master Switch Relay Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical Power Supply System",
+        "Battery Contactor Circuit",
+        "Master Switch Circuit"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 46,
+          "context": "16-3. ELECTRICAL POWER SUPPLY SYSTEM."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 50,
+          "context": "16-27. BATTERY CONTACTOR."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 42,
+          "context": "11-59."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 40,
+          "context": "15-56. TURN -AND -SLIP INDICATOR."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 27,
+          "context": "11-83. HAND CRANKING."
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'master switch doesn't engage -- no electrical power' points directly to a failure in the primary electrical power supply system. The master switch, when closed, is designed to engage the battery contactor, supplying power to the aircraft's electrical bus (Source 39, 43). If no power is present, the issue could be a defective master switch or its circuit (Source 8, 13, 18, 24, 49, 51), a faulty battery contactor (Source 43), or a completely discharged battery that cannot energize the contactor (Source 2, 14, 43). We need to determine if the master switch is commanding the contactor, if the contactor is responding, and if there's sufficient battery power.",
+      "mechanic_instructions": "When the master switch is flipped, it should actuate the battery contactor. Listen for a distinct 'click' from the battery contactor, typically located near the battery box on the forward side of the firewall. This sound indicates the contactor is attempting to close and connect the battery to the electrical system. Also, check the battery voltage directly at the battery terminals.",
+      "answer_path_prompts": [
+        "I hear a click from the battery contactor, but still no power to the aircraft.",
+        "I hear no click from the battery contactor, and no power to the aircraft.",
+        "The battery voltage is below 10.5 volts.",
+        "I connected external power, and the aircraft electrical system now works normally."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_007",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "My 1969 172 doesn't have shoulder harnesses -- I want to add them.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Shoulder Harness Retrofit / Inspection",
+    "response_parsed": {
+      "current_state": "VEHICLE_MISMATCH",
+      "mechanic_instructions": "⚠️ YEAR MISMATCH: Your question mentions the year 1969, but the selected vehicle is a 1975 Cessna 172 & Skyhawk (AVIATION). If you meant to ask about a different year, please check your vehicle selection.",
+      "diagnostic_reasoning": "Pre-LLM firewall detected year 1969 in query. Active vehicle year: 1975.",
+      "detected_vehicle": "Year 1969 (unknown vehicle)",
+      "detected_terms": [
+        "1969"
+      ],
+      "active_vehicle": "1975 Cessna 172 & Skyhawk (AVIATION)",
+      "requires_input": false,
+      "answer_path_prompts": [],
+      "source_citations": [],
+      "intersecting_subsystems": []
+    },
+    "current_state": "VEHICLE_MISMATCH"
+  },
+  {
+    "query_id": "fuel_013",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found a fuel line rubbing against the airframe -- it's nearly worn through.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Line Chafing / Leak",
+    "response_parsed": {
+      "current_state": "PHASE_D_CONCLUSION",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 45,
+          "context": "SECTION 12 > FUEL SYSTEM > TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 4,
+          "context": "12-19. PRIMING SYSTEM. (See figure 12-2.) > 12-20. DESCRIPTION. The model 172-Series, > 12 -21. REMOVAL AND INSTALLATION."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 9,
+          "context": "11-14. BUILD-UP. > NOTE > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "The reported observation of a fuel line rubbing against the airframe and being nearly worn through is a direct indication of a compromised fuel system integrity. This condition can lead to fuel leaks, fuel starvation, and fire hazard. The Service Manual emphasizes precautions for the fuel system, including preventing fuel accumulation and capping open lines to prevent foreign matter (Source 2, 49). It also specifically notes that primer lines should be checked for crushed, kinked, or broken conditions and properly clamped to prevent fatigue due to vibration and chafing (Source 36). While this specific instance is a fuel line, the principle of preventing chafing and ensuring line integrity is directly applicable. The FSM also provides guidance on connecting lines and hoses, including the use of thread lubricators/sealers and checking for leaks after installation (Source 22, 31).",
+      "mechanic_instructions": "The worn fuel line must be replaced immediately. A fuel line rubbing against the airframe, nearly worn through, is a critical safety hazard that can lead to fuel leaks, engine fuel starvation, and fire. This is a direct violation of fuel system integrity. Refer to Section 12, 'FUEL SYSTEM,' for general precautions and procedures related to fuel lines. When replacing the line, ensure proper routing and secure clamping to prevent any future chafing against the airframe or other components. Use NS-40 (RAS-4) or equivalent thread compound sparingly on male threads, omitting the first two threads, to seal connections, exercising extreme caution to prevent any compound from entering the system (Source 22). After installation, service the fuel tanks and thoroughly check for leaks (Source 44).",
+      "answer_path_prompts": [],
+      "requires_input": false
+    },
+    "current_state": "PHASE_D_CONCLUSION"
+  },
+  {
+    "query_id": "afr_013",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The rudder pedals have excessive play and the airplane doesn't track straight on the runway.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Rudder Cable Tension / Rigging",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Rudder Control System",
+        "Nose Wheel Steering System",
+        "Brake System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 44,
+          "context": "10-3. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 43,
+          "context": "10-3. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 2,
+          "context": "5-37. NOSE WHEEL STEERING SYSTEM. Nose > 5-38. STEERING ROD ASSEMBLY. The steering > 5-39. NOSE WHEEL STEERING ADJUSTMENT."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 3,
+          "context": "5-40. > BRAKE SYSTEM. > 5 -42. TROUBLE SHOOTING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 23,
+          "context": "SECTION 5 > LANDING GEAR AND BRAKES > TABLE OF CONTENTS"
+        }
+      ],
+      "diagnostic_reasoning": "The reported 'excessive play in rudder pedals' and 'airplane doesn't track straight' point to issues within the rudder control system, which is interconnected with the nose wheel steering. The Service Manual lists 'LOST MOTION BETWEEN RUDDER PEDALS AND RUDDER' with probable causes including 'Insufficient cable tension' and 'Incorrect rigging' (Source 25, 28). 'BINDING OR JUMPY MOVEMENT OF RUDDER PEDALS' also lists 'Pedal bars need lubrication,' 'Defective rudder bar bearings,' 'Defective rudder hinge bushings,' and 'Steering rods improperly adjusted' (Source 1, 19, 25). The nose wheel steering system is directly controlled by the rudder pedals, and adjustments to one system can affect the other (Source 32, 41). Therefore, inspecting the rudder pedal assembly, cables, pulleys, and steering rods is the most direct approach. Additionally, 'DRAGGING BRAKES' is a probable cause for directional control issues (Source 34, 47), which could contribute to the aircraft not tracking straight, even if it doesn't directly explain pedal play.",
+      "mechanic_instructions": "The excessive play in the rudder pedals and poor tracking indicate a problem in the rudder control and nose wheel steering systems. We need to physically inspect the components for wear, damage, or improper adjustment. Start by checking the rudder pedal assembly and its immediate connections, then move to the cables and pulleys, and finally the nose wheel steering rods. This will help isolate whether the issue is in the pedal mechanism, the control cables, or the steering linkage to the nose wheel, or potentially a brake issue.",
+      "answer_path_prompts": [
+        "The rudder pedal bars or their bearings are worn, or the pedal bars need lubrication. (Refer to Section 10-3, 'Pedal bars need lubrication' or 'Defective rudder bar bearings' for 'BINDING OR JUMPY MOVEMENT OF RUDDER PEDALS' in the FSM.)",
+        "The rudder control cables are loose, broken, or disconnected, or not riding properly on pulleys. (Refer to Section 10-3, 'Insufficient cable tension' for 'LOST MOTION BETWEEN RUDDER PEDALS AND RUDDER' or 'Broken or disconnected cables' for 'RUDDER DOES NOT RESPOND TO PEDAL MOVEMENT' in the FSM.)",
+        "The nose wheel steering rods are improperly adjusted or show signs of wear/damage. (Refer to Section 10-3, 'Steering rods improperly adjusted' for 'BINDING OR JUMPY MOVEMENT OF RUDDER PEDALS' in the FSM, and Section 5-39 for nose wheel steering adjustment.)",
+        "One or both brakes are dragging, or there is a spongy brake pedal feel. (Refer to Section 5-42, 'DRAGGING BRAKES' or 'Air in system' for 'BRAKES FAIL TO OPERATE' in the FSM.)"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "inst_008",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The vacuum gauge reads low and the gyro instruments are sluggish -- the vacuum filter hasn't been changed.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Vacuum System Filter Clogged",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Vacuum System",
+        "Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 29,
+          "context": "15-26. TROUBLE SHOOTING--VACUUM SYSTEM > TROUBLE > LOW SUCTION GAGE READINGS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 23,
+          "context": "2-23. VACUUM SYSTEM FILTER."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 29,
+          "context": "15-26. TROUBLE SHOOTING--VACUUM SYSTEM > TROUBLE > NORMAL SUCTION GAGE READING, SLUGGISH OR ERRATIC GYRO RESPONSE."
+        }
+      ],
+      "diagnostic_reasoning": "A low vacuum gauge reading and sluggish gyro instruments, especially when the vacuum filter has not been changed, strongly indicates a clogged central air filter. The Service Manual lists 'Central air filter dirty' as a probable cause for 'LOW SUCTION GAGE READINGS' and 'Instrument air filters clogged' for 'NORMAL SUCTION GAGE READING, SLUGGISH OR ERRATIC GYRO RESPONSE' (which covers sluggish gyros). The manual also specifies changing the central air filter element every 500 hours or whenever the suction gauge reading drops below 4.6 inches of mercury. Other potential causes for low suction include leaks, a misadjusted relief valve, or a defective vacuum pump, but the filter is the most probable initial suspect given the maintenance history.",
+      "mechanic_instructions": "The most probable cause for low vacuum gauge readings and sluggish gyro instruments is a dirty or clogged central air filter. This filter restricts the airflow to the vacuum pump and instruments, reducing the system's overall suction. To confirm this, remove the central air filter element. Then, start the engine and run it up to 2200 RPM on the ground, observing the vacuum gauge reading.",
+      "answer_path_prompts": [
+        "The vacuum gauge reading increases significantly (above 4.6 inches of mercury) with the filter removed.",
+        "The vacuum gauge reading remains low (below 4.6 inches of mercury) even with the filter removed.",
+        "The filter element is visibly dirty or damaged."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_021",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Oil drips from the oil drain plug area after every oil change.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Oil Sump Drain Plug Leak",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Oil System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 21,
+          "context": "2-21. > NOTE > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 12,
+          "context": "11-31. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+        }
+      ],
+      "diagnostic_reasoning": "The recurring oil drip from the drain plug area after every oil change points directly to issues with the drain plug, its sealing, or the installation procedure. The Service Manual specifies applying NS-40 (RAS-4) MIL-T-5544 (Antiseize, Graphite Petrolatum) or equivalent to the plug threads and proper tightening and safetying (Source 1, page 21). It also mentions flushing the drain plug chamber to remove sealant residue (Source 1, page 21). If these steps are not followed, or if the plug or sump threads are damaged, a leak will occur. Less likely, but still possible, is an oil leak from another component that is migrating to the drain plug area, though the 'after every oil change' detail makes the drain plug itself the primary suspect. The troubleshooting section for 'LOW OIL PRESSURE' mentions 'Leak in pressure or suction line' (Source 6, page 12) which could be a general oil system leak.",
+      "mechanic_instructions": "The consistent oil drip from the drain plug area after every oil change indicates a problem with the drain plug, its sealing, or the oil change procedure itself. We need to physically inspect the drain plug, the sump threads, and confirm the correct installation practices are being followed. Your next step is to visually inspect the drain plug and the surrounding sump area for the following:",
+      "answer_path_prompts": [
+        "The drain plug was not properly tightened or safety-wired, or the specified anti-seize compound was not applied to the threads.",
+        "I found visible damage to the drain plug itself (e.g., cracked, deformed) or to the threads in the oil sump.",
+        "The drain plug and sump threads appear to be in good condition, and the plug was installed correctly. The oil leak seems to be originating from a different component, dripping down to the drain plug area."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "elec_010",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The ammeter pegs to the discharge side -- or it shows a high charge rate that won't decrease.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Voltage Regulator Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Electrical - Alternator System",
+        "Electrical - Battery Power System"
+      ],
+      "source_citations": [
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 4,
+          "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont. ) > TROUBLE > AMMETER INDICATES HEAVY"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 5,
+          "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont). > TROUBLE > ALTERNATOR SYSTEM"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 47,
+          "context": "16-16. TROUBLE SHOOTING THE BATTERY POWER SYSTEM. > T ROUB L E > BATTERY WILL NOT SUPPLY"
+        }
+      ],
+      "diagnostic_reasoning": "The user has reported two distinct and contradictory symptoms: either the ammeter pegs to the discharge side, or it shows a high charge rate that won't decrease. These represent two different failure modes within the electrical system. 'Ammeter indicates heavy discharge' points to issues such as shorted alternator diodes, a faulty regulator, or wiring problems preventing the battery from charging (Source 2, 19, 22, 42). 'Ammeter indicates heavy charge rate that won't decrease' points to an overcharging condition, typically caused by a faulty voltage regulator or a faulty over-voltage sensor switch (Source 2, 12, 28, 30). I need to determine which of these conditions is actually present to proceed with the correct troubleshooting path.",
+      "mechanic_instructions": "You've described two very different conditions for the ammeter. We need to isolate which one is occurring. A heavy discharge indicates the battery is not being charged, or is being drained. A high charge rate that won't decrease indicates an overcharging condition. Observe the ammeter carefully and tell me what it's doing.",
+      "answer_path_prompts": [
+        "The ammeter indicates a heavy discharge rate, or the alternator circuit breaker opens when the master switch is turned on.",
+        "The ammeter indicates a heavy charge rate that does not taper off after 1-3 minutes of engine operation at 1500 RPM with all electrical equipment off."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_008",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The control yoke feels sloppy -- there's play in the column that makes precise control difficult.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Control Yoke Bushing Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Aileron Control System",
+        "Elevator Control System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 9,
+          "context": "SECTION 6 > AILERON CONTROL SYSTEM > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 13,
+          "context": "NOTE > NOTE > 6-5"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 41,
+          "context": "SPECIAL INSPECTION ITEM > EACH 200 HOURS > EACH 100 HOURS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 29,
+          "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom 'play in the column' directly corresponds to 'LOST MOTION IN CONTROL WHEEL' as described in the Aileron Control System troubleshooting (Section 6). Probable causes include loose control cables, broken pulleys or brackets, cables off pulleys, worn rod end bearings, sprung bellcranks, or loose chains (Source 22, 38, 44). The Control 'U' assembly (Figure 6-2, Source 7) is central to both aileron and elevator control, transforming control wheel rotation into cable motion for ailerons and pivoting for elevator control. Excessive end play on the Control 'U' shaft itself (Source 7) or issues with the elevator push-pull tube or cables (Source 52) could also contribute to overall column play. The initial step is to isolate whether the play is primarily in the aileron system, elevator system, or the central Control 'U' pivot/mounting.",
+      "mechanic_instructions": "The 'sloppy' feel and play in the control column indicate lost motion within the primary flight control system. We need to determine if this play is originating from the aileron control path, the elevator control path, or the central Control 'U' assembly itself. This will narrow down the specific components to inspect. Always check for correct direction of movement, correct travel, and correct cable tension (Source 14, 19).",
+      "answer_path_prompts": [
+        "When moving the control wheel side-to-side, there is significant movement of the wheel before the ailerons begin to respond. (Indicates play in aileron control system: cables, chains, pulleys, bellcranks).",
+        "When moving the control wheel fore-and-aft, there is significant movement of the wheel before the elevators begin to respond. (Indicates play in elevator control system: Control 'U' pivot, push-pull tube, cables, bellcranks).",
+        "There is visible looseness or excessive movement at the base of the control column where it connects to the Control 'U' assembly, regardless of aileron or elevator input. (Indicates play in the Control 'U' mounting, shaft, or pivot bearings, as per Figure 6-2, Source 7)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_022",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "Oil leaks from multiple gaskets and the crankcase seems pressurized.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Crankcase Breather Blockage",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Oil System",
+        "Crankcase Ventilation"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 38,
+          "context": "IMPORTANT > SPECIAL INSPEC TION ITEM > EACH 200 HOURS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 14,
+          "context": "11-31. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > TROUBLE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 12,
+          "context": "11-31. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of oil leaking from multiple gaskets combined with a pressurized crankcase points to a failure in the engine's crankcase ventilation system. When the crankcase breather system is obstructed, combustion gases and oil vapor build pressure inside the crankcase. This internal pressure then forces oil past seals and gaskets, leading to widespread leaks. The Service Manual lists 'Crankcase and vacuum system breather lines' as a special inspection item, highlighting its importance in engine operation. While individual gasket failures (e.g., crankshaft seal, push rod housing oil seal) can cause leaks, the 'multiple gaskets' and 'pressurized crankcase' indicate a systemic issue rather than isolated component wear. Excessive blow-by due to worn rings or cylinders could also contribute to crankcase pressure, but a primary obstruction in the breather system is a more direct cause for the reported symptoms.",
+      "mechanic_instructions": "The symptom of oil leaking from multiple gaskets combined with a pressurized crankcase strongly indicates an issue with the engine's crankcase ventilation system. When the crankcase breather system is obstructed, combustion gases and oil vapor cannot escape, leading to a buildup of pressure that forces oil past seals and gaskets. This is a critical issue as sustained high crankcase pressure can lead to further seal failures and potential engine damage.\n\nYour first step is to physically inspect the crankcase breather lines for any signs of clogging or obstruction. Refer to the 'ENGINE COMPARTMENT' inspection list, item 14, in Section 2 of the Service Manual for the location of the 'Crankcase and vacuum system breather lines'.",
+      "answer_path_prompts": [
+        "The crankcase breather line is visibly clogged with sludge, ice, or is kinked/collapsed.",
+        "The breather line appears clear and unobstructed, but there is significant smoke/vapor coming from the oil filler cap when removed with the engine running.",
+        "The breather line is clear, and there is no significant smoke/vapor from the oil filler cap. The oil leaks appear to be from specific, isolated gaskets only.",
+        "I cannot locate the crankcase breather line or associated components."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "afr_014",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The ailerons have free play and the airplane doesn't respond crisply to aileron input.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Aileron Hinge / Bellcrank Wear",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Aileron Control System",
+        "Wing Leveler System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 9,
+          "context": "SECTION 6 > AILERON CONTROL SYSTEM > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 15,
+          "context": "AVAILABLE FROM CESSNA > SERVICE PARTS CENTER > (TOOL NUMBER SE 716)"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 43,
+          "context": "I 15-59. WING LEVELER. THRU SERIALS 17261898 > 15-60. DESCRIPTION. The wing leveler control > 15-61. RIGGING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 40,
+          "context": "AIRFRA > SPECIAL INSPECTION ITEM > EACH 200 HOURS"
+        }
+      ],
+      "diagnostic_reasoning": "Free play and lack of crisp response in the ailerons point to issues within the aileron control system. The primary suspects are incorrect rigging, worn components (cables, pulleys, bellcranks, push-pull rods, control 'U' mechanism), or loose aileron hinges. The Service Manual Section 6, 'AILERON CONTROL SYSTEM,' covers these components and includes a 'TROUBLE SHOOTING' section (Source 8, 37) and 'Rigging' procedures (Source 47, 48). Additionally, if installed, the optional wing leveler system (Section 15-60, Source 5, 36) could introduce play or interfere with control, as it operates the ailerons via pneumatic servos.",
+      "mechanic_instructions": "The reported free play and lack of crisp response indicate a potential issue with the aileron control system's mechanical integrity or rigging. We need to determine where the play is originating. Start by checking the aileron surfaces and their immediate linkages, then move inward to the control cables and the control 'U' mechanism. Also, confirm the status of any installed wing leveler system.",
+      "answer_path_prompts": [
+        "With the control wheel held neutral, grasp the trailing edge of each aileron and attempt to move it up and down. Is there noticeable free play at the aileron trailing edge *before* the control wheel begins to move?",
+        "With the ailerons held neutral, move the control wheel left and right. Is there excessive rotational free play in the control wheel *before* the ailerons begin to respond?",
+        "Is the aircraft equipped with a wing leveler system (refer to Figure 15-7, page 15-24)? If so, is the system currently engaged, and does disengaging it change the amount of aileron free play or response?"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "prop_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The propeller hasn't been overhauled and the mechanic says it may be due based on calendar time.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Propeller Overhaul / Inspection Requirements",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Propeller"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 7,
+          "context": "SECTION 13 > PROPELLER > 1 TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 42,
+          "context": "SPECIAL INSPECTION ITEMS > 8 (LYCOMING \"BLUE STREAKII) > ROLLS/ROYC E CONTINENTAL"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 25,
+          "context": "2-35. > 2-36. > 2-37."
+        }
+      ],
+      "diagnostic_reasoning": "The 1975 Cessna 172 & Skyhawk Series Service Manual does not specify a calendar-time overhaul interval for the fixed-pitch propeller. Section 13, 'PROPELLER,' details description, removal, installation, and repair, referring to Federal Aviation Regulations Part 43 (FAR 43), FAA Advisory Circular No. 43.13 (FAA AC 43.13), and the propeller manufacturer's instructions for major and minor repairs (Source 1, 9, 12). The manual does list a 'one-time' dye penetrant inspection for Model 1C172/MTM7653 propellers per Service Letter SE 70-31, to be accomplished within 25 hours if not already (Source 10, 19). General propeller maintenance involves washing, drying, and wiping with an oily cloth, and examining for corrosion, chipped paint, cracks, or dents (Source 13, 47). The FSM's inspection charts list propeller spinner and bulkhead inspections at 50, 100, and 200 hours, but not a propeller overhaul (Source 51). Engine overhaul intervals are specified by hours (e.g., Continental O-300 series at 1800 hours, Lycoming O-320 series at 2000 hours), but these do not apply to the propeller itself (Source 10, 22). Therefore, any calendar-time overhaul requirement would originate from the propeller manufacturer's specific instructions, as referenced by the FSM.",
+      "mechanic_instructions": "The 1975 Cessna 172 & Skyhawk Service Manual does not specify a calendar-time overhaul for the propeller. Propeller maintenance is primarily condition-based, with specific repair guidelines referencing FAR 43, FAA AC 43.13, and the propeller manufacturer's instructions. There is a 'one-time' dye penetrant inspection required for Model 1C172/MTM7653 propellers per Service Letter SE 70-31, if not already completed. You need to verify the propeller model and its inspection history, and consult the propeller manufacturer's service manual for any specific calendar-time overhaul requirements not covered in the Cessna FSM.",
+      "answer_path_prompts": [
+        "The propeller is a Model 1C172/MTM7653, and the Service Letter SE 70-31 dye penetrant inspection has not been performed.",
+        "The propeller is not a Model 1C172/MTM7653, and visual inspection shows no signs of corrosion, chipped paint, cracks, or dents.",
+        "The propeller manufacturer's service manual specifies a calendar-time overhaul, and it is due based on those instructions."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_010",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found corrosion on the main gear axle and brake caliper during the annual.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Main Gear Axle / Brake Assembly Corrosion",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Landing Gear",
+        "Brake System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 18,
+          "context": "2- 11. INSPECTION DURING STORAGE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 30,
+          "context": "5-13. MAIN WHEEL INSPECTION AND REPAIR."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 36,
+          "context": "MAIN WHEEL AXLE REMOVAL."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+          "page": 4,
+          "context": "5-49. WHEEL BRAKE INSPECTION AND REPAIR."
+        }
+      ],
+      "diagnostic_reasoning": "Corrosion on the main gear axle and brake caliper requires a thorough inspection to determine the extent of damage and the appropriate remedial action. For the axle, surface corrosion can be cleaned and treated, but deep pitting or structural compromise, especially on bonded axles, may necessitate replacement. For the brake caliper (wheel brake assembly), corrosion on critical sealing surfaces or cylinder walls will require repair or replacement to prevent leaks and ensure proper brake function. The Service Manual emphasizes careful consideration and approved remedial action for all types of corrosion (Source 1, 9). Wheel brake inspection procedures detail cleaning and inspection of cylinder walls for scores or roughness (Source 32, 39).",
+      "mechanic_instructions": "Corrosion on the main gear axle and brake caliper must be thoroughly inspected. For the main gear axle, determine the depth and extent of the corrosion. For the brake caliper, disassemble the wheel brake assembly and inspect the internal components, particularly the cylinder wall and O-ring sealing surfaces. We need to know if the corrosion is superficial or if it has compromised the integrity of these components.",
+      "answer_path_prompts": [
+        "Main gear axle corrosion is superficial, easily removed by sanding, and the brake caliper cylinder wall is smooth with no pitting.",
+        "Main gear axle shows deep pitting or material loss, or the brake caliper cylinder wall is scored, rough, or pitted.",
+        "Main gear axle corrosion is superficial, but the brake caliper cylinder wall is scored, rough, or pitted.",
+        "Main gear axle shows deep pitting or material loss, but the brake caliper cylinder wall is smooth with no pitting."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_023",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine is at TBO hours and the mechanic says I need to decide whether to overhaul or keep monitoring.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Engine Approaching / Exceeding TBO",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine",
+        "Ignition System",
+        "Fuel System",
+        "Lubrication System",
+        "Structural Components"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 42,
+          "context": "SPECIAL INSPECTION ITEMS > 8 (LYCOMING \"BLUE STREAKII) > ROLLS/ROYC E CONTINENTAL"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 7,
+          "context": "11-12. ACCESSORIES REMOVAL. Removal of en- > NOTE > 11-13. INSPECTION. For specific items to be in-"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 6,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 24,
+          "context": "11-71. STARTER MOTOR. > 11-72. REMOVAL AND INSTALLATION. > 11-73. EXHAUST SYSTEM. (Refer to figure 11-6.)"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 22,
+          "context": "MODEL > 172 AND > F172 (1972 & ON)"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 41,
+          "context": "SPECIAL INSPECTION ITEMS > 8 (LYCOMING \"BLUE STREAKII) > ROLLS/ROYC E CONTINENTAL"
+        }
+      ],
+      "diagnostic_reasoning": "The engine has reached its Time Between Overhaul (TBO) recommendation. For Lycoming O-320 series engines, overhaul is recommended at 2000 hours, and for Continental O-300 series engines, it's 1800 hours. A 'high-time inspection' is defined as a 100-hour inspection with the addition of an engine overhaul. While overhaul is recommended, the decision to continue monitoring requires a thorough assessment of the engine's current condition and performance against all inspection criteria. Key areas for inspection include magnetos, flexible fluid hoses, engine mounts, carburetor, fuel system, induction air filter, and exhaust system, as these components have specific inspection or replacement intervals that often coincide with or are critical to engine health at high hours.",
+      "mechanic_instructions": "The engine has reached its recommended Time Between Overhaul (TBO). For Lycoming O-320 series engines, this is 2000 hours; for Continental O-300 series, it's 1800 hours. At TBO, engine accessories should also be overhauled. The decision to overhaul or continue monitoring requires a comprehensive assessment of the engine's current condition and recent performance. To make an informed decision, perform a detailed inspection focusing on the following critical areas, as their condition directly impacts safety and reliability at high operating hours:\n\n1.  **Engine Mounts and Bushings:** Visually inspect for cracks or deterioration. (Refer to Section 11-9, Page 6)\n2.  **Flexible Fluid Hoses:** Inspect all hoses in the engine compartment for internal swelling, chafing, cuts, breaks, stiffness, damaged threads, loose connections, or severe discoloration. These should be replaced at engine overhaul or every five years, whichever comes first. (Refer to Section 11-13, Page 7)\n3.  **Exhaust System:** Conduct a thorough inspection for holes, cracks, burned spots, and exhaust gas deposits, especially in the heat exchange section. This inspection is required every 100 hours. (Refer to Section 11-73, Page 24)\n4.  **Induction Air Filter:** Inspect and clean the filter. A restricted filter can cause rough running and power loss. (Refer to Section 2-22, Page 22)\n5.  **Magnetos:** Check magneto-to-engine timing. For Lycoming, magnetos are recommended for removal and replacement with new exchange units at 900 hours. For Continental, internal timing should be checked at 500-hour intervals. (Refer to Section 8, Page 41 and 11-58, Page 20)\n6.  **Carburetor and Fuel System:** Inspect for proper idle cut-off, leaks, and fuel contamination. Check all screens in the fuel system. (Refer to Section 11-9, Page 6)\n7.  **Engine Run-up:** Perform an engine run-up to observe engine temperatures, pressures, static RPM, magneto drop, engine response, and any unusual noises. (Refer to Section 2-21, Page 37)\n\nReport the findings of this detailed inspection.",
+      "answer_path_prompts": [
+        "The engine shows no significant discrepancies or abnormal wear beyond expected high-time conditions, and I recommend continued monitoring with increased vigilance.",
+        "The inspection revealed significant wear, cracks, or out-of-spec components (e.g., engine mount, exhaust system, magnetos, excessive oil consumption) that warrant proceeding with an engine overhaul.",
+        "I need to perform a compression check and oil analysis to further assess internal engine condition before making a decision."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_009",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The cabin heat barely works -- it's cold in the cockpit during winter flying.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Heater / Defroster Ineffective",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Heating System",
+        "Exhaust System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 11,
+          "context": "SECTION 14 > UTILITY SYSTEMS > TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 24,
+          "context": "11-71. STARTER MOTOR. > 11-72. REMOVAL AND INSTALLATION. > 11-73. EXHAUST SYSTEM. (Refer to figure 11-6.)"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 38,
+          "context": "IMPORTANT > SPECIAL INSPEC TION ITEM > EACH 200 HOURS"
+        }
+      ],
+      "diagnostic_reasoning": "The primary causes for heating system operational troubles are sticking/binding air valves and controls, damaged air ducting, or defects in the exhaust muffler's heat exchange section (Source 1, 14-5). The exhaust muffler is critical as it generates cabin heat and defects can lead to dangerous exhaust fumes in the cabin (Source 39, WARNING). The cabin heat control operates a shut-off valve at the firewall (Source 1, 14-4). Initial troubleshooting should verify the mechanical operation of the control and valve, the integrity of the ducting, and critically, the condition of the exhaust muffler's heat exchanger.",
+      "mechanic_instructions": "The cabin heat system relies on ram air passing through the exhaust muffler's heat exchange section, controlled by a shut-off valve operated by the 'CABIN HEAT' push-pull control. Insufficient heat can stem from issues with the control, the air valve, the ducting, or the heat exchanger itself. We need to isolate the source of the restriction or heat loss. Begin by checking the physical components.",
+      "answer_path_prompts": [
+        "The 'CABIN HEAT' control moves freely, and the shut-off valve at the firewall responds fully, moving through its entire range of travel and sealing properly. No binding or sticking is observed.",
+        "The 'CABIN HEAT' control is stiff or binds, or the shut-off valve at the firewall does not move through its full range or does not seal completely when operated by the control.",
+        "There is visible damage (cracks, tears, crushing) to the flexible ducting that routes air from the engine baffle inlet to the firewall valve, or from the firewall valve into the cabin.",
+        "Upon inspection of the exhaust muffler's heat exchange section, I found holes, cracks, burned spots, or exhaust gas deposits indicating a leak. (WARNING: If exhaust fumes are detected in the cabin, this is an immediate safety concern and requires thorough inspection per Source 39, 11-76.)"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "cab_010",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The cabin heat barely works -- it's cold in the cockpit during winter flying.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Heater / Defroster Ineffective",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Heating System",
+        "Exhaust System",
+        "Utility Systems"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 11,
+          "context": "SECTION 14 > UTILITY SYSTEMS > TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 38,
+          "context": "IMPORTANT > SPECIAL INSPEC TION ITEM > EACH 200 HOURS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 24,
+          "context": "11-71. STARTER MOTOR. > 11-72. REMOVAL AND INSTALLATION. > 11-73. EXHAUST SYSTEM. (Refer to figure 11-6.)"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 14,
+          "context": "14-7. DEFROSTER SYSTEM. > 14-8. DESCRIPTION. The defrosting system is > 14-9. OPERATION. Air from the duct across the"
+        }
+      ],
+      "diagnostic_reasoning": "The primary suspects for inadequate cabin heat are issues with the heating system's control valve, ducting, or the exhaust muffler's heat exchange section. The Service Manual (Section 14-5) explicitly states that 'Most of the operational troubles in the heating, defrosting and ventilating systems are caused by sticking or binding air valves and/or their controls, damaged air ducting, or defects in the exhaust muffler.' Additionally, the exhaust muffler is the source of heated air for the cabin (Section 11-74), and defects in it, such as holes or cracks, are a critical safety concern due to potential exhaust fumes entering the cabin (Section 11-76 WARNING). A secondary consideration is a malfunctioning ventilating system allowing cold air to dilute the heated air (Section 14-15).",
+      "mechanic_instructions": "The cabin heating system relies on ram air passing through the exhaust muffler's heat exchange section and then being regulated by a shut-off valve at the firewall, controlled by the 'CABIN HEAT' push-pull knob on the instrument panel. We need to determine where the heat is being lost or prevented from entering the cabin. Start by checking the mechanical operation of the cabin heat control and the integrity of the system's components.",
+      "answer_path_prompts": [
+        "The 'CABIN HEAT' control knob moves freely, and I can visually confirm the shut-off valve at the firewall moves through its full range, from fully open to fully closed. The flexible ducting appears intact.",
+        "The 'CABIN HEAT' control knob feels stiff or does not move the shut-off valve at the firewall through its full range. The valve appears stuck or the linkage is binding.",
+        "I found damaged, burned, frayed, or crushed flexible ducting in the heating system, or there are noticeable gaps in the shut-off valve seal at the firewall.",
+        "I performed a thorough inspection of the exhaust muffler's heat exchange section and found holes, cracks, or exhaust gas deposits indicating a leak. (WARNING: This is a critical safety issue.)",
+        "The 'CABIN AIR' fresh air scoop door or its control is stuck open, allowing cold air to continuously enter the cabin, even with the 'CABIN HEAT' control pulled out."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

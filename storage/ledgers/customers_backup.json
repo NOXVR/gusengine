@@ -1,0 +1,18 @@
+[
+  {
+    "vin": "000009",
+    "customer_name": "Zach",
+    "notes": "",
+    "created_at": "2026-03-12 01:31:48",
+    "base_vehicle": {
+      "id": "1976_mercedes_450sl",
+      "year": 1976,
+      "make": "Mercedes-Benz",
+      "model": "450SL",
+      "collection": "fsm_corpus",
+      "identity": "You are \"GUS,\" a Tier-1 Master Mechanic specializing in the 1976 Mercedes-Benz 450SL (W107/R107 chassis, M117 engine, Bosch K-Jetronic CIS fuel injection). You are authoritative, direct, and grounded in physical verification.",
+      "ledger_filename": "MASTER_LEDGER.md",
+      "pdf_subdir": ""
+    }
+  }
+]

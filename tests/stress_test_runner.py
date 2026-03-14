@@ -188,6 +188,8 @@ def build_log_entry(run_id, query_id, scenario_id, repeat_num, branch_id, branch
         "query_category": query_meta.get("category", ""),
         "query_system": query_meta.get("system", ""),
         "query_difficulty": query_meta.get("difficulty", ""),
+        "technical_issue": query_meta.get("technical_issue", ""),
+        "validated_fix": query_meta.get("validated_fix", ""),
         "vehicle_id": vehicle_id,
         "chat_history_length": len(chat_history),
         "response_raw": raw,

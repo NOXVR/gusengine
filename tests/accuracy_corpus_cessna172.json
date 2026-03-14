@@ -1,0 +1,1555 @@
+{
+    "metadata": {
+        "vehicle_id": "1975_cessna_172_skyhawk_aviation",
+        "version": "1.0.0",
+        "description": "Cessna 172 Skyhawk (1969-1976) Top 100 Issues - A&P/IA verified",
+        "total_queries": 101,
+        "source": "Cessna_172_Skyhawk_1969-1976_Top_100_Issues_Database.xlsx"
+    },
+    "queries": [
+        {
+            "id": "eng_001",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Low Compression -- Cylinder(s) Below Limits",
+            "query": "During the annual, the mechanic said one cylinder is low on compression and might need to come off for a valve job.",
+            "validated_fix": "Perform a differential compression test per Lycoming SI 1191A. Minimum acceptable: 60/80 (60 PSI retained with 80 PSI applied). Leak locations determine the fix: air heard at the exhaust = exhaust valve; air at the intake/carburetor = intake valve; air at the oil filler = rings/cylinder wall; air at an adjacent cylinder = head gasket. If a valve is leaking, the cylinder must be removed for valve lapping, seat re-cutting, or valve replacement. If cylinders are below minimums, replace or overhaul the affected cylinder(s) -- use FAA-PMA approved cylinders (Superior or Continental/Lycoming factory). Torque cylinder base nuts to 30-35 ft-lbs per Lycoming SI 1029. NOTE: All maintenance must be performed by an FAA-certificated A&P/IA mechanic and documented in the engine logbook. Lycoming specifies compression checks at every 100-hour or annual inspection. Compression readings should be trended over time -- a sudden drop is more concerning than a gradual decline.",
+            "known_answer_keywords": [
+                "annual",
+                "carburetor",
+                "compression",
+                "cylinder",
+                "exhaust",
+                "gasket",
+                "inspection",
+                "lycoming"
+            ]
+        },
+        {
+            "id": "eng_002",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Oil Consumption -- Excessive",
+            "query": "I'm adding a quart of oil every 4-5 hours of flying -- the engine seems to be burning more oil than it used to.",
+            "validated_fix": "Lycoming considers up to 1 quart per 4 hours acceptable for the O-320 series, but increasing consumption indicates wear. Diagnose: (1) Check for external leaks -- valve cover gaskets, oil sump gasket, prop seal, pushrod tube seals. (2) If no external leaks, perform a differential compression test and a borescope inspection of the cylinders. (3) Worn piston rings or cylinder walls cause oil burning (blue-gray exhaust, oily spark plugs). (4) Worn valve guides allow oil past the stems (smoke on startup or deceleration). (5) Check the crankcase breather -- a clogged breather pressurizes the case and forces oil past seals. At TBO (2,000 hours for O-320-E2D) or when consumption exceeds 1 qt/3 hrs, plan for an engine overhaul. Use Aeroshell W100 or W100 Plus oil (single-grade) or Aeroshell 15W-50 (multi-grade) per Lycoming SI 1014M. NOTE: Oil consumption should be tracked in the engine logbook at every oil change. A sudden increase warrants immediate investigation.",
+            "known_answer_keywords": [
+                "compression",
+                "cylinder",
+                "exhaust",
+                "gasket",
+                "inspection",
+                "lycoming",
+                "o-320",
+                "oil"
+            ]
+        },
+        {
+            "id": "eng_003",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Rough Running / Magneto Drop Excessive",
+            "query": "During the run-up, the RPM drop on one magneto is over 175 RPM -- it exceeds the normal limit and the engine runs rough on that mag.",
+            "validated_fix": "Maximum allowable mag drop for the 172I-M is 125 RPM, max differential between mags is 50 RPM per the POH. Excessive drop indicates: (1) Fouled spark plugs -- remove, inspect, clean with a spark plug cleaner, re-gap to .016\"-.021\" per Lycoming SI 1042. Replace if worn past limits. (2) Defective ignition lead(s) -- check for cracks, chafing, or carbon tracking. Replace damaged leads. (3) Internal magneto timing off -- retime to the engine per Lycoming/magneto manufacturer specs (20° BTDC for the O-320-E2D). (4) Magneto internal failure -- worn points, weak condenser, or defective impulse coupling. Overhaul or replace the magneto (500-hour overhaul interval per Slick/Bendix recommendations). (5) Incorrect valve clearance -- check at .028\"-.080\" for intake, .028\"-.080\" for exhaust (cold) per Lycoming SI 1068A. NOTE: Never depart with a mag drop exceeding limits -- this is a GO/NO-GO item. If lead fouling is suspected, lean aggressively at idle for 30-60 seconds to burn off deposits, then re-check.",
+            "known_answer_keywords": [
+                "exhaust",
+                "ignition",
+                "lycoming",
+                "magneto",
+                "o-320",
+                "overhaul",
+                "spark plug",
+                "timing"
+            ]
+        },
+        {
+            "id": "eng_004",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Carburetor Ice -- Power Loss in Flight",
+            "query": "I was cruising at altitude and the engine started losing power gradually -- adding carburetor heat restored it immediately.",
+            "validated_fix": "Carburetor icing is a known characteristic of the carbureted Lycoming O-320-E2D with the Marvel-Schebler MA-3SPA carburetor. The venturi effect cools the air and fuel mixture, which can form ice at the throttle plate even at ambient temperatures up to 70°F (21°C) with high humidity. The ice restricts airflow and causes power loss. Procedure: apply full carburetor heat when power loss is suspected. Expect a momentary further RPM drop as the warm, less-dense air enters the engine, then RPMs should increase as ice melts. Use carb heat proactively in cruise at reduced power settings (below 75% power) when conditions are conducive (visible moisture, high humidity, temps 20-70°F). Per the Cessna 172 POH: use full carb heat ON or full OFF -- partial heat can be worse than none because it can raise the temperature into the icing range without melting the ice. NOTE: Carburetor ice is one of the most common causes of power loss incidents in carbureted Cessnas. The Cessna 172 POH Section 4 Emergency Procedures provides the specific response for power loss in flight. The carb heat valve and control cable should be inspected at every annual for full travel and correct operation.",
+            "known_answer_keywords": [
+                "annual",
+                "cable",
+                "carburetor",
+                "control",
+                "fuel",
+                "lycoming",
+                "mixture",
+                "o-320"
+            ]
+        },
+        {
+            "id": "eng_005",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Stuck Exhaust Valve",
+            "query": "The engine runs rough and the compression is low on one cylinder -- the exhaanic says the exhaust valve is stuck partially open.",
+            "validated_fix": "A stuck exhaust valve requires cylinder removal and valve service. Remove the cylinder, remove the valve(s), inspect the valve stem and guide for deposits, carbon, and corrosion. Ream the valve guide to restore proper clearance, lap the valve to the seat, and reassemble. If the guide is worn beyond limits, replace it. If the seat is damaged, re-cut or replace the seat. Use Lycoming-approved valve guide clearance: .0011\"-.0031\" for exhaust valves. Reinstall the cylinder with a new base gasket and torque to spec. Causes: (1) Lead deposits from 100LL avgas buildup on valve stems. (2) Infrequent leaning at taxi/low power (promotes lead fouling). (3) Extended ground running without leaning. PREVENTION: Lean aggressively on the ground (lean until engine roughens, then enrichen slightly). In cruise, lean per the POH to reduce lead deposits. Use TCP (Tricresyl Phosphate) fuel additive (Alcor TCP) to scavenge lead deposits -- widely used and accepted in the field. NOTE: AD 84-26-02 requires inspection of Lycoming cylinder assemblies for cracked exhaust valve heads at each overhaul.",
+            "known_answer_keywords": [
+                "cylinder",
+                "exhaust",
+                "fuel",
+                "gasket",
+                "inspection",
+                "lycoming",
+                "overhaul",
+                "valve"
+            ]
+        },
+        {
+            "id": "eng_006",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Prop Seal Oil Leak (Front Crankshaft Seal)",
+            "query": "There's oil dripping from behind the propeller spinner -- it's slinging oil onto the cowling and windshield.",
+            "validated_fix": "Replace the front crankshaft (prop) oil seal. This requires removing the propeller (torque prop bolts to 480-600 in-lbs upon reinstallation per McCauley specs), spinner, and the seal housing/cover to access the seal. Replace with a Lycoming-approved oil seal. Inspect the crankshaft seal surface for scoring -- a scored surface will destroy the new seal (a Speedi-Sleeve can be installed if minor grooving is present, with field approval). Reinstall and torque all fasteners per Lycoming overhaul manual. NOTE: A prop seal leak is also an indication of excessive crankcase pressure -- check the crankcase breather for blockage. A blocked breather pressurizes the crankcase and forces oil past seals. Also check the oil separator screen in the breather system.",
+            "known_answer_keywords": [
+                "lycoming",
+                "oil",
+                "overhaul",
+                "propeller",
+                "ring",
+                "seal",
+                "spinner"
+            ]
+        },
+        {
+            "id": "eng_007",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "High Oil Temperature",
+            "query": "The oil temperature gauge reads near or above the redline in cruise -- the engine seems to be running hotter than normal.",
+            "validated_fix": "Diagnose high oil temperature: (1) Check oil level -- low oil reduces oil system capacity and raises temp. Maintain between 6-8 quarts (never above 8, never fly below 5). (2) Verify the oil temperature gauge and sender are accurate -- compare with a known-good gauge. (3) Check the oil cooler for blockage (bugs, dirt, debris in the cooler fins). Clean the cooler and verify adequate airflow through the cooler ducting. (4) Check engine baffling and baffle seals -- missing or deteriorated baffling allows cooling air to bypass the cylinders and oil cooler, reducing cooling effectiveness. Replace deteriorated rubber baffle seals. (5) Verify correct oil type and viscosity for ambient conditions (Aeroshell W100 for warm temps, W80 for cold, or 15W-50 multi-grade). (6) If persistent, the vernatherm (oil cooler bypass valve) may be stuck, bypassing the oil cooler -- replace it. Maximum oil temperature: 245°F per Lycoming. NOTE: High oil temp is often accompanied by high cylinder head temperature -- address baffling and cooling air flow as a system.",
+            "known_answer_keywords": [
+                "cylinder",
+                "lycoming",
+                "oil",
+                "seal",
+                "valve"
+            ]
+        },
+        {
+            "id": "eng_008",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "High Cylinder Head Temperature (CHT)",
+            "query": "One or more cylinders are running hotter than the rest -- the CHT gauge on the number three cylinder is near the limit.",
+            "validated_fix": "Diagnose elevated CHT: (1) Check engine baffling and baffle seals -- this is the #1 cause. Missing, cracked, or deteriorated rubber baffle seals allow cooling air to bypass the cylinders. Replace all damaged seals. (2) Check the induction system for leaks (leaks cause lean mixture on specific cylinders = hotter CHT). (3) Verify correct fuel mixture -- too lean in climb causes excessive CHT. (4) Check ignition timing -- advanced timing causes higher CHT and potential detonation. (5) Check for a partially blocked cooling fin area (bird nest, debris, rags left inside cowling during maintenance). (6) Verify correct spark plugs -- wrong heat range causes temperature issues. Use Champion REM38E (massive electrode) or RHB32E (fine-wire) per Lycoming. Maximum CHT: 500°F (Lycoming limit). Normal operation: 350-435°F. NOTE: If CHT exceeds 435°F in cruise, enrich the mixture and reduce power. Never operate above 500°F -- detonation and engine damage will result.",
+            "known_answer_keywords": [
+                "cylinder",
+                "fuel",
+                "ignition",
+                "lycoming",
+                "mixture",
+                "ring",
+                "seal",
+                "spark plug"
+            ]
+        },
+        {
+            "id": "eng_009",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Engine Won't Start -- Flooded",
+            "query": "I turned the key and cranked and cranked but the engine won't start -- there's a strong fuel smell and it seems flooded.",
+            "validated_fix": "Flooded start procedure per the Cessna 172 POH: (1) Mixture -- IDLE CUTOFF (full lean). (2) Throttle -- FULL OPEN. (3) Crank the engine (this pumps the excess fuel out of the cylinders with the mixture lean so no combustion). (4) When the engine begins to fire, gradually advance the mixture to FULL RICH. (5) Retard the throttle to 1,000 RPM. If it still won't start, wait 5-10 minutes for fuel to evaporate. NOTE: Prevention: use the correct number of primer strokes for conditions (2-6 strokes cold depending on temperature; 0 strokes when warm). Ensure the primer is fully locked in after use -- an unlocked primer allows raw fuel to continuously flow into the intake, creating a persistent flooding condition and a fire hazard. Check that the primer lines are not leaking. Lycoming SI 1425 addresses repeated starting difficulty.",
+            "known_answer_keywords": [
+                "cylinder",
+                "fuel",
+                "lycoming",
+                "mixture",
+                "pump"
+            ]
+        },
+        {
+            "id": "eng_010",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Engine Won't Develop Full Static RPM",
+            "query": "During the run-up, the engine won't reach full static RPM -- it tops out 100-200 RPM below the expected value.",
+            "validated_fix": "Full static RPM for the 172I-M with O-320-E2D and McCauley 1C235/LFA7570 fixed-pitch prop: approximately 2,200-2,350 RPM (verify per your specific POH). Low static RPM causes: (1) Induction air filter clogged -- clean or replace the air filter element. (2) Carburetor not adjusted properly -- mixture too rich or too lean. (3) Ignition timing retarded -- retime magnetos to 20° BTDC. (4) Fouled/worn spark plugs. (5) Exhaust system leak or blockage -- inspect the muffler and exhaust pipes. (6) Propeller out of specification (blade angle incorrect). (7) Engine mechanical issue -- low compression, valve problems. NOTE: Full static RPM is checked during annual and 100-hour inspections. If RPM is too high, the prop may have been re-pitched incorrectly (dangerous -- overspeed condition). If too low, engine is down on power.",
+            "known_answer_keywords": [
+                "annual",
+                "carburetor",
+                "compression",
+                "exhaust",
+                "filter",
+                "ignition",
+                "inspection",
+                "magneto"
+            ]
+        },
+        {
+            "id": "eng_011",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Oil Screen / Filter Contamination -- Metal Particles",
+            "query": "The mechanic found metal particles on the oil screen during the oil change -- he says we need to investigate.",
+            "validated_fix": "GROUND THE AIRCRAFT until the source is identified. Collect the metal particles and have them analyzed (spectrographic oil analysis -- SOAP). The type of metal indicates the source: (1) Steel -- camshaft, lifters, gears, bearings. (2) Aluminum -- piston, crankcase, accessory housing. (3) Copper/bronze -- bushings, bearings. (4) Chrome -- piston rings, cylinder walls. Fine particles may indicate normal wear; chunks, flakes, or significant quantity indicate a failing component. Follow Lycoming SI 1492D for oil filter inspection procedures. If the analysis is concerning, the engine may need to be removed and torn down for internal inspection. NOTE: Regular oil analysis (every oil change, every 25-50 hours) establishes a baseline and allows trending. A sudden spike in any metal type is a red flag. Use an approved oil analysis lab (Blackstone Labs is widely used in GA). Lycoming recommends oil changes every 50 hours or 4 months for the O-320.",
+            "known_answer_keywords": [
+                "bearing",
+                "cylinder",
+                "filter",
+                "inspection",
+                "lycoming",
+                "o-320",
+                "oil",
+                "piston"
+            ]
+        },
+        {
+            "id": "eng_012",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Engine Mounts Cracked / Deteriorated",
+            "query": "There's increased vibration in the cockpit and the mechanic found cracks in the engine mount tubes.",
+            "validated_fix": "Replace or repair the engine mount. The Cessna 172 uses a welded steel tube engine mount that is a Lord-type dynafocal mount. Inspect per Cessna Service Bulletin and at every annual for cracks at weld joints, corrosion, and damaged mounting pads. Cracks require either mount replacement (new or overhauled mount from a certified repair station) or welding repair by an FAA-certificated repair station with welding authorization. Also replace the Lord rubber shock mounts (vibration isolators) if deteriorated -- hardened or cracked mounts transmit excessive vibration and can accelerate mount tube cracking. Lord mounts should be replaced every 5-8 years or when visibly deteriorated. NOTE: Firewall condition must be inspected whenever the engine mount is removed -- training aircraft often have firewall damage from hard landings and prop strikes that was repaired (or not) by previous owners.",
+            "known_answer_keywords": [
+                "annual",
+                "overhaul"
+            ]
+        },
+        {
+            "id": "fuel_001",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Tank Leak -- Wing Tank Seepage",
+            "query": "There's a fuel stain on the underside of the wing near the fuel tank -- it smells like avgas.",
+            "validated_fix": "The 1969-1976 Cessna 172 uses wet-wing integral fuel tanks (bladder-less -- the wing structure itself is the tank, sealed with fuel tank sealant). Leaks develop where the sealant deteriorates. Repair per Cessna Service Manual Chapter 28: locate the leak, remove the old sealant in the affected area, clean the surfaces with MEK, and reseal with approved fuel tank sealant (Pro-Seal or equivalent MIL-S-8802 specification). This work must be done by qualified personnel in a well-ventilated area. If the leak is at a fastener or skin joint, the fastener may need to be removed and resealed. NOTE: Fuel tank leaks are not only wasteful but are a fire hazard. The Cessna 172 fuel tanks are within the wing leading edge -- any leak near ignition sources (landing lights, electrical connections) must be addressed immediately. Some later-model 172s have rubber bladder tanks -- repair procedures differ.",
+            "known_answer_keywords": [
+                "fuel",
+                "ignition",
+                "seal",
+                "service manual"
+            ]
+        },
+        {
+            "id": "fuel_002",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Selector Valve -- Stuck or Leaking",
+            "query": "The fuel selector valve is stiff and hard to turn between tanks -- or it leaks fuel from the selector area in the floor.",
+            "validated_fix": "Service or replace the fuel selector valve. The 172I-M has a three-position selector (LEFT, RIGHT, BOTH). The valve can become stiff from corrosion or dried lubricant. Disassemble, clean, lubricate with a fuel-compatible lubricant, and inspect the O-rings and seals -- replace if worn or deteriorated. If the valve body is corroded or the cork/rubber seals are damaged beyond repair, replace the entire valve assembly. Any fuel leak in the cabin area is a CRITICAL SAFETY ISSUE -- fuel vapors in the cockpit are an explosion and fire hazard. Repair immediately. NOTE: Per the Cessna 172 POH, normal operation is on BOTH tanks. Selecting individual tanks is used for fuel management. Never take off with a selector position between detents -- this can result in fuel starvation.",
+            "known_answer_keywords": [
+                "fuel",
+                "ring",
+                "seal",
+                "tire",
+                "valve"
+            ]
+        },
+        {
+            "id": "fuel_003",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Cap Vent Blockage -- Fuel Starvation",
+            "query": "The engine lost power in flight and switching tanks didn't help -- the mechanic later found both fuel cap vents were blocked with debris.",
+            "validated_fix": "Inspect and clean the fuel cap vents. The 172 fuel caps have small vent holes that allow air to enter the tank as fuel is consumed. If these vents are blocked (dirt, insects, ice, paint overspray from sloppy repainting), a vacuum develops in the tank that the engine-driven fuel pump cannot overcome, resulting in fuel starvation. Clean the vent holes carefully. Replace the fuel cap O-ring if damaged. Also check the separate fuel tank vent system (a vent tube in each wing that exits through a small vent opening) for blockage. NOTE: This is a surprisingly common and insidious cause of fuel starvation. Include fuel cap vent inspection in your preflight checklist. After any painting or maintenance near the fuel caps, verify the vents are clear before flight.",
+            "known_answer_keywords": [
+                "fuel",
+                "inspection",
+                "pump",
+                "ring",
+                "vacuum"
+            ]
+        },
+        {
+            "id": "fuel_004",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Primer System Leak -- Fuel Odor in Cabin",
+            "query": "There's a persistent fuel smell in the cockpit -- the mechanic traced it to a leaking primer line.",
+            "validated_fix": "Inspect and repair the primer system. The 172 primer system has fuel lines running from the fuel strainer to the primer pump (on the instrument panel) and from the primer to the intake ports on cylinders #1 and #2 (or all four, depending on the primer configuration). Check all primer line connections, the primer itself (check the O-rings and piston seal), and verify the primer locks securely in the IN position. A primer that doesn't fully lock in allows fuel to continuously siphon into the intake manifold -- this is both a fire hazard and a potential cause of an excessively rich mixture in flight. Replace any leaking lines with approved aluminum or stainless tubing. Replace the primer assembly if the seals are worn. NOTE: NEVER fly with a fuel smell in the cockpit. Land at the nearest suitable airport and have the fuel system inspected before further flight. Fuel vapor in an enclosed cockpit is an explosion hazard.",
+            "known_answer_keywords": [
+                "cylinder",
+                "fuel",
+                "mixture",
+                "piston",
+                "pump",
+                "ring",
+                "seal",
+                "strainer"
+            ]
+        },
+        {
+            "id": "fuel_005",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Carburetor -- Leaking or Stuck Float",
+            "query": "The engine floods and runs excessively rich -- fuel drips from the carburetor drain and the engine is hard to start.",
+            "validated_fix": "Overhaul or replace the Marvel-Schebler MA-3SPA carburetor. A stuck or leaking float valve allows fuel to flood the float bowl and overflow. Remove the carburetor, disassemble, clean all passages, replace the float valve (needle and seat), inspect the float for fuel absorption (brass floats can develop pin-hole leaks and become heavy; composite floats can absorb fuel). Set the float level per the MA-3SPA overhaul manual. Replace all gaskets and seals. Reinstall and adjust idle mixture and idle speed per the Cessna maintenance manual (idle speed: 600±25 RPM, idle mixture: set for peak RPM at idle, then lean until 25-50 RPM drop). NOTE: A carburetor overhaul on the MA-3SPA should be done at engine overhaul or whenever performance degrades. A leaking carburetor on the ground is a fire hazard -- address immediately.",
+            "known_answer_keywords": [
+                "carburetor",
+                "fuel",
+                "gasket",
+                "mixture",
+                "overhaul",
+                "seal",
+                "valve"
+            ]
+        },
+        {
+            "id": "fuel_006",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Strainer / Gascolator Contamination",
+            "query": "The mechanic found water and sediment in the fuel strainer during the preflight drain.",
+            "validated_fix": "Clean or replace the fuel strainer (gascolator). Drain the strainer bowl, remove and clean the screen element, inspect the bowl and gasket, and reassemble. If the screen is corroded or damaged, replace it. Also drain all fuel sump drains (there are 5 on most 172s: one at the fuel strainer, one at each wing tank sump, and one at each wing tank low point) during preflight. If water contamination is recurring: (1) Check the fuel cap seals -- worn O-rings allow rain water entry. Replace cap O-rings. (2) Check the fuel tank vents -- improperly oriented vents can allow rain ingestion. (3) The fuel supplier may have contaminated fuel -- report to the FBO. (4) Condensation in partially filled tanks -- keep tanks full when the airplane is parked to minimize condensation space. NOTE: Water in avgas is one of the most common causes of engine failure in GA aircraft. ALWAYS drain and visually inspect fuel sumps during preflight -- this is a REQUIRED preflight action per the POH.",
+            "known_answer_keywords": [
+                "fuel",
+                "gascolator",
+                "gasket",
+                "ring",
+                "seal",
+                "strainer"
+            ]
+        },
+        {
+            "id": "ign_001",
+            "system": "Ignition System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Magneto Internal Failure -- Points/Condenser",
+            "query": "The engine started cutting out in flight and switching to one magneto made it worse -- the mechanic found bad points in the left mag.",
+            "validated_fix": "Overhaul or replace the magneto. The 1969-1976 172 uses Slick 4370/4371 or Bendix S4LN-21 magnetos (verify by engine data plate). Magneto overhaul includes: replacement of points, condenser, rotor, bearings, seals, and impulse coupling springs. Internal timing must be set per the magneto manufacturer's overhaul manual. After installation, time the magnetos to the engine at 20° BTDC (O-320-E2D specification) per Lycoming SI 1017. Recommended overhaul interval: 500 hours (Slick and Bendix recommendation -- not a hard FAA requirement, but industry best practice). NOTE: Many magneto failures occur due to moisture intrusion and internal corrosion, especially on aircraft stored outdoors. The impulse coupling should be inspected for broken springs -- a failed impulse coupling prevents starting and can cause kick-back. Always verify both mags during the pre-takeoff run-up check.",
+            "known_answer_keywords": [
+                "bearing",
+                "lycoming",
+                "magneto",
+                "o-320",
+                "overhaul",
+                "ring",
+                "seal",
+                "timing"
+            ]
+        },
+        {
+            "id": "ign_002",
+            "system": "Ignition System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Spark Plug Fouling -- Lead Deposits",
+            "query": "The engine runs rough at low power settings and the plugs keep fouling with lead deposits -- they have to be cleaned constantly.",
+            "validated_fix": "Clean the spark plugs with an approved abrasive-blast plug cleaner, re-gap to .016\"-.021\" per Lycoming SI 1042, and reinstall. Bottom plugs foul more than top plugs because lead deposits settle with gravity. Prevention: (1) Lean aggressively during taxi and ground operations -- the engine runs very rich at idle with full mixture, which promotes lead buildup. (2) In cruise, lean per the POH (lean to peak EGT or slightly rich of peak). (3) Use Alcor TCP fuel additive -- it converts lead deposits to a volatile compound that exits through the exhaust. (4) Avoid prolonged idling at full rich mixture. (5) Consider upgrading to fine-wire spark plugs (Tempest UREM38E or Champion RHB32E) -- they resist fouling better than massive-electrode plugs. NOTE: 100LL avgas contains tetraethyl lead, which is the source of the deposits. Until an unleaded avgas replacement is widely available, lead management is a constant maintenance requirement.",
+            "known_answer_keywords": [
+                "exhaust",
+                "fuel",
+                "lycoming",
+                "mixture",
+                "ring",
+                "spark plug"
+            ]
+        },
+        {
+            "id": "ign_003",
+            "system": "Ignition System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Ignition Harness Deterioration -- Cracked Leads",
+            "query": "The engine misfires intermittently and the ignition leads look old and cracked -- the insulation is deteriorating.",
+            "validated_fix": "Replace the ignition harness (complete set of ignition leads from magneto to spark plugs). Use approved harness sets -- Slick M2924 or equivalent for the O-320 with Slick magnetos. The 172 uses shielded ignition leads (required by FAA for radio noise suppression). Verify proper routing after installation -- leads must not contact exhaust components or other heat sources. Torque spark plug lead coupling nuts to 95-100 in-lbs. After installation, perform a high-tension lead test to verify no arcing. NOTE: Ignition harness life depends on environment -- heat, vibration, and ozone exposure degrade the insulation. Replace every 500 hours or when insulation shows visible cracking, whichever comes first.",
+            "known_answer_keywords": [
+                "exhaust",
+                "harness",
+                "ignition",
+                "magneto",
+                "o-320",
+                "spark plug"
+            ]
+        },
+        {
+            "id": "ign_004",
+            "system": "Ignition System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Ignition Switch Failure",
+            "query": "The ignition switch won't turn to START, or the engine keeps running when the switch is turned to OFF -- the switch is faulty.",
+            "validated_fix": "Replace the ignition switch. The 172 uses a 5-position key switch (OFF, R, L, BOTH, START). If the switch fails to ground one or both magnetos in the OFF position, the engine will continue to run -- this is a SAFETY HAZARD because the engine could fire if the propeller is moved by hand. The only way to stop the engine with a failed switch is to pull the mixture to idle cutoff. Replace the switch and verify all positions function correctly: OFF = both mags grounded (no spark), R = left grounded/right fires, L = right grounded/left fires, BOTH = both fire, START = both fire + starter engaged. NOTE: Per the POH, the pilot must verify the magneto grounding check (P-lead check) during shutdown: when the engine is at idle, momentarily turn the key to OFF -- the engine should begin to die. Immediately return to BOTH. If the engine doesn't respond to the OFF position, the magnetos are not grounding properly and the propeller must be treated as LIVE (capable of firing) at all times until fixed.",
+            "known_answer_keywords": [
+                "ignition",
+                "magneto",
+                "mixture",
+                "propeller",
+                "ring"
+            ]
+        },
+        {
+            "id": "prop_001",
+            "system": "Propeller",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Propeller Nick / Blade Damage",
+            "query": "I hit something on the runway and there's a visible nick/gouge in one propeller blade.",
+            "validated_fix": "Any propeller damage must be evaluated by an A&P mechanic or propeller repair station. Small nicks can be dressed (filed smooth with specific radius requirements per McCauley Service Bulletin) if they don't exceed dimensional limits. The dressed area must be smooth with no stress risers. If the nick exceeds the dressing limits or is in a critical area (leading edge near the tip or at the blade root), the propeller must be sent to a certified propeller repair station for inspection, repair, and rebalance. After any blade work, the propeller must be balanced -- an unbalanced prop causes destructive vibration throughout the airframe and engine. NOTE: After any prop strike (contact with the ground, objects, or anything that suddenly stops the engine), both the propeller AND the engine require inspection per Lycoming SI 1009. This typically includes a teardown inspection of the crankshaft, counterweights, and gear train -- this is an FAA requirement, not optional.",
+            "known_answer_keywords": [
+                "inspection",
+                "lycoming",
+                "propeller"
+            ]
+        },
+        {
+            "id": "prop_002",
+            "system": "Propeller",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Propeller Spinner Cracks",
+            "query": "The propeller spinner has visible cracks near the mounting holes.",
+            "validated_fix": "Replace the cracked spinner. Spinner cracks are caused by vibration fatigue. Inspect per the annual/100-hour inspection requirements. Cracks typically originate at the attachment screw holes or at the bulkhead-to-spinner joint. Replace the spinner and inspect the backing plate/bulkhead for cracks as well. Torque the spinner attachment screws per McCauley specifications. Also check the propeller balance -- an unbalanced prop accelerates spinner cracking. NOTE: A cracked spinner can shed a piece in flight, which can cause airframe damage or injury. Replace -- do not attempt to patch or stop-drill spinner cracks.",
+            "known_answer_keywords": [
+                "annual",
+                "inspection",
+                "propeller",
+                "spinner"
+            ]
+        },
+        {
+            "id": "gear_001",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Nose Gear Shimmy",
+            "query": "The nose wheel shimmies violently on takeoff and landing -- the whole airplane shakes.",
+            "validated_fix": "Nose gear shimmy has multiple contributing causes -- address ALL of them: (1) Shimmy damper -- check fluid level (fill with MIL-H-5606 hydraulic fluid) and verify proper operation. Replace if the damper is worn or leaking (Lord shimmy damper is the preferred upgrade for Cessnas). (2) Nose wheel tire balance -- an out-of-balance tire is the #1 root cause of shimmy. Have the tire dynamically balanced or replace if worn unevenly. (3) Torque link (scissors) -- check for excessive play at the pivot bolt. Tighten or replace worn bushings and bolts. (4) Steering collar shimming -- check for end play in the steering collar using a feeler gauge. Add Cessna shims (.006, .012, .020) to take up the play. (5) Nose strut servicing -- correct inflation (45-55 PSI air/nitrogen over proper oil level). A flat strut changes the geometry and promotes shimmy. (6) Wheel bearings -- check for looseness or roughness. NOTE: Nose gear shimmy is destructive -- it can crack the firewall, engine mount, and nose gear fork. Per AD 71-22-02, the nose gear fork on the 172 must be inspected for cracks every 100 hours. Never allow shimmy to persist -- fix it immediately.",
+            "known_answer_keywords": [
+                "bearing",
+                "nose gear",
+                "oil",
+                "ring",
+                "shimmy",
+                "tire"
+            ]
+        },
+        {
+            "id": "gear_002",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Flat Nose Strut -- Oil Leak",
+            "query": "The nose strut is completely flat every morning -- there's a puddle of hydraulic fluid on the hangar floor under the nose.",
+            "validated_fix": "Service or overhaul the nose strut. The 172 nose strut is an air-oil type oleo strut. Common leak points: (1) The lower seal (O-ring) -- replace the O-ring and re-service the strut with MIL-H-5606 hydraulic fluid and nitrogen/air. (2) The fill valve (Schrader valve) -- replace if it doesn't hold air. (3) The strut barrel -- if scored or corroded, the strut must be overhauled by a certified repair station (chrome re-plating of the inner tube). Service specification: 3.25\" extension (172K-M), approximately 4 oz of MIL-H-5606 hydraulic fluid, inflated to 45-55 PSI with nitrogen or dry air. NOTE: A flat nose strut changes the angle of incidence of the aircraft on the ground, promotes prop strikes during taxi, and dramatically worsens nosewheel shimmy. Never fly with a flat nose strut.",
+            "known_answer_keywords": [
+                "oil",
+                "overhaul",
+                "ring",
+                "seal",
+                "shimmy",
+                "valve"
+            ]
+        },
+        {
+            "id": "gear_003",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Main Gear Spring Steel Corrosion",
+            "query": "The mechanic found corrosion pitting on the main landing gear legs during the annual inspection.",
+            "validated_fix": "Inspect the main gear spring-steel legs per Cessna inspection criteria. Surface corrosion can be cleaned and treated with an approved corrosion inhibitor (ACF-50 or LPS-3). Pitting that exceeds the depth limits specified in the Cessna Service Manual requires the gear leg to be replaced. The main gear legs are high-strength spring steel -- corrosion pitting creates stress risers that can lead to fatigue cracking and eventual failure. Dye-penetrant or magnetic particle inspection may be required to check for cracks at pitted areas. NOTE: The 172's main gear legs are typically long-lived, but aircraft operated in salt air, coastal environments, or on unpaved/wet runways see accelerated corrosion. Protective coatings (Imron or other approved paints) should be maintained.",
+            "known_answer_keywords": [
+                "inspection",
+                "ring",
+                "service manual"
+            ]
+        },
+        {
+            "id": "gear_004",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Brake System -- Weak or Dragging Brakes",
+            "query": "The brakes are weak and I have to press very hard to stop -- or one brake drags and the airplane pulls to one side.",
+            "validated_fix": "Service the brake system: (1) Check brake fluid (MIL-H-5606 hydraulic fluid) level in the master cylinders (under the instrument panel, accessed through the left side panel). Top off if low. (2) Bleed the brakes -- air in the lines causes spongy/weak pedal feel. Bleed from the caliper bleeder, working fluid from the master cylinder down. (3) Check brake pads/linings for wear -- replace if worn to minimum thickness per Cessna specs. (4) Check the brake disc (Cleveland disc brakes on most 172I-M models) for wear, scoring, and minimum thickness. Replace if below limits. (5) If dragging: check for a seized caliper piston (disassemble, clean, and rebuild with new O-rings) or a collapsed/kinked brake hose acting as a check valve. (6) Check the parking brake valve for proper operation. NOTE: The 172 uses a toe-brake system -- left and right brakes are independent. Differential braking is used for ground steering assistance in addition to the nosewheel steering.",
+            "known_answer_keywords": [
+                "brake",
+                "cylinder",
+                "piston",
+                "ring",
+                "valve"
+            ]
+        },
+        {
+            "id": "gear_005",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Tire Wear / Damage",
+            "query": "My tires are worn flat on one side and the mechanic says they need to be replaced.",
+            "validated_fix": "Replace worn or damaged tires. The 172I-M uses 6.00 x 6 main tires (4-ply rating) and 5.00 x 5 nose tire. Acceptable wear: treads must have visible pattern remaining; any cord showing = replace immediately. Any cut that exposes cord or penetrates the casing = replace. Inflate to: main tires 42 PSI, nose tire 45 PSI (verify per specific model POH). When replacing, inspect the wheel halves for corrosion, cracks (especially McCauley wheels -- known for cracking), and proper O-ring condition. Rebalance the wheel/tire assembly. NOTE: Uneven tire wear indicates alignment or brake issues -- diagnose and fix the root cause before installing new tires. Operate on approved surfaces only -- gravel and unimproved strips accelerate tire wear.",
+            "known_answer_keywords": [
+                "brake",
+                "ring",
+                "tire"
+            ]
+        },
+        {
+            "id": "afr_001",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Wing Spar Corrosion",
+            "query": "The annual inspection found corrosion on the wing spar -- the mechanic is concerned about structural integrity.",
+            "validated_fix": "Wing spar corrosion must be evaluated by an A&P/IA per Cessna Service Bulletin SEB99-16 and applicable ADs. The 172's main spar is an extruded aluminum 'C' channel (earlier models) or 'I' beam (later). Corrosion is assessed by depth and extent: (1) Light surface corrosion -- clean with approved methods (ScotchBrite, alodine), treat with conversion coating, and apply protective primer. (2) Pitting beyond allowable depth limits -- the spar section must be repaired per an FAA-approved repair procedure or the wing must be replaced. A qualified structures DER (Designated Engineering Representative) may need to evaluate and approve the repair. NOTE: Wing spar corrosion is the most serious structural finding on a Cessna 172. It is a PRIMARY inspection item at every annual. Aircraft operated in humid/coastal environments or stored outdoors are at highest risk. AD 2003-11-04 addresses spar cap inspection on certain Cessna single-engine aircraft -- verify applicability.",
+            "known_answer_keywords": [
+                "annual",
+                "cable",
+                "inspection",
+                "ring"
+            ]
+        },
+        {
+            "id": "afr_002",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Skin Corrosion -- Fuselage and Wings",
+            "query": "There's bubbling paint and white corrosion powder on the belly skin and around the wing root.",
+            "validated_fix": "Treat surface corrosion per AC 43-4A (Corrosion Control for Aircraft). Remove the paint in the affected area, assess the corrosion type (surface, pitting, intergranular, filiform), remove corrosion mechanically (ScotchBrite pad, approved chemical treatment), measure the remaining skin thickness to ensure it's above minimum gauge, apply alodine conversion coating, and reprime/repaint with approved primers and topcoats (epoxy primer + polyurethane topcoat). If skin thickness is below minimum, the skin panel must be repaired or replaced per approved data. NOTE: Corrosion is the primary life-limiting factor on the Cessna 172 airframe. Regular washing, waxing, and application of corrosion inhibitors (ACF-50 or CorrosionX) extend airframe life. Aircraft stored in hangars last dramatically longer than those stored outside.",
+            "known_answer_keywords": [
+                "control"
+            ]
+        },
+        {
+            "id": "afr_003",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Flap Track / Roller Wear",
+            "query": "The flaps make a grinding noise when I extend or retract them -- they seem to drag.",
+            "validated_fix": "Inspect and service the flap tracks, rollers, and drive mechanism. The 172I-M has electrically-actuated flaps with a Dukes or similar actuator. Common issues: (1) Worn flap track rollers -- replace rollers and inspect the tracks for wear/corrosion. (2) Bent flap tracks -- straighten or replace. (3) Flap actuator motor/gearbox -- lubricate the gearbox, check for worn gears, and replace if the motor is weak or noisy. (4) Flap position indicator -- verify the flap gauge reads correctly at all positions (0°, 10°, 20°, 30°, 40° -- note: 172M has 40° max flaps). (5) Check the flap limit switches for proper operation at full UP and full DOWN. NOTE: Cessna 172 flap extension limits: Vfe = 100 KIAS (10°), 85 KIAS (20°+). Operating flaps above these speeds can cause structural damage. Also check the flap interconnect rod for security -- AD 72-16-02 applies to Cessna single-engine flap systems.",
+            "known_answer_keywords": [
+                "flap"
+            ]
+        },
+        {
+            "id": "afr_004",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Control Cable Corrosion / Wear",
+            "query": "The flight controls feel stiff and the mechanic found internal corrosion in the aileron cables.",
+            "validated_fix": "Replace any flight control cable that has: (1) Broken strands (even one broken strand = replace per AC 43.13-1B). (2) Internal corrosion visible between strands. (3) Excessive wear at pulleys (flat spots, reduced diameter). (4) Kinks or permanent bends. Use only FAA/PMA-approved replacement cables of the correct specification (size, material, construction). After installation, rig the controls per the Cessna 172 Service Manual -- verify proper travel, tension (measured with a cable tensiometer, adjusted for temperature per the Cessna rigging chart), and correct sense (controls move in the correct direction). NOTE: Flight control cable failure in flight is an emergency. Internal corrosion is invisible from the outside -- cables must be removed from pulleys and inspected during annual inspections. Aircraft stored outdoors or in humid environments are at highest risk.",
+            "known_answer_keywords": [
+                "annual",
+                "cable",
+                "control",
+                "inspection",
+                "pulley",
+                "ring",
+                "service manual"
+            ]
+        },
+        {
+            "id": "afr_005",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Firewall Damage / Cracks",
+            "query": "The mechanic found cracks in the firewall during the annual -- near the engine mount attachment points.",
+            "validated_fix": "Repair the firewall per approved data. The Cessna 172 firewall is stainless steel. Cracks, particularly around engine mount attachment points and nose gear attachment, are common on training aircraft due to the repeated stress of student landings. Repair per Cessna Service Manual or by an FAA-approved repair station with structural repair authorization. Repairs typically involve installing a reinforcing doubler (approved alloy and thickness) riveted over the cracked area, or replacing the firewall section. Any firewall repair must maintain the fire-resistant integrity of the firewall. NOTE: Firewall cracks are an indicator of other potential damage -- when firewall cracks are found, also inspect the engine mount, nose gear mounting, and fuselage structure near the firewall for correlated damage.",
+            "known_answer_keywords": [
+                "nose gear",
+                "service manual"
+            ]
+        },
+        {
+            "id": "elec_001",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Alternator/Generator Failure -- No Charging",
+            "query": "The ammeter shows a discharge in flight -- the alternator isn't charging and the battery is draining.",
+            "validated_fix": "Diagnose the charging system: (1) Check the alternator belt -- loose or broken belts = no charging. Replace or tension the belt (1/2\" deflection). The 172I uses a generator; 172K and later use an alternator. (2) Check the voltage regulator -- a failed regulator can cause over-voltage (burns out avionics and lights) or no charging. Replace if faulty. (3) Check the alternator output with a multimeter -- should read 13.8-14.2V at the bus with the engine running. If low, check the alternator brushes, rectifier, and field winding. (4) Check the alternator field circuit breaker/fuse -- a tripped CB kills the field excitation. Reset and verify. (5) If a generator (172I): check the brushes, commutator, and voltage regulator. NOTE: Per the POH, if the alternator fails in flight, shed non-essential electrical loads to conserve battery. A fully charged battery provides approximately 30-60 minutes of limited electrical power (essential radios and transponder only).",
+            "known_answer_keywords": [
+                "alternator",
+                "battery",
+                "circuit",
+                "voltage"
+            ]
+        },
+        {
+            "id": "elec_002",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Battery Failure / Won't Hold Charge",
+            "query": "The battery is dead every time I come back to the airplane -- it won't hold a charge.",
+            "validated_fix": "Diagnose battery drain: (1) Load-test the battery -- a Gill 35AH or Concorde battery should maintain 12.6V resting and hold voltage under load. Replace if it fails load test. (2) Check for parasitic drain -- with the master switch OFF, measure current draw at the battery. Normal: 0 amps. Any draw indicates a circuit that stays energized with the master off (common culprits: clock, ELT, aftermarket equipment wired incorrectly). (3) Check the master switch/relay -- a stuck relay allows the alternator field to drain the battery. (4) Check the voltage regulator -- a failing regulator can allow reverse current flow from battery to alternator. (5) Check all wiring for chafed insulation shorting to the airframe. NOTE: The Cessna 172's electrical system is 14V DC. The battery should be replaced every 2-3 years per manufacturer recommendation. Always disconnect the battery during storage periods exceeding 30 days, or use an aircraft-approved battery maintainer.",
+            "known_answer_keywords": [
+                "alternator",
+                "battery",
+                "circuit",
+                "ring",
+                "voltage"
+            ]
+        },
+        {
+            "id": "elec_003",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Landing Light Failure",
+            "query": "My landing light burns out frequently -- I replace the bulb and it lasts only a few months.",
+            "validated_fix": "Replace the landing light bulb (GE 4596 or equivalent -- 250W, 28V, PAR-46 sealed beam). The 172I-M has a nose-mounted landing light (in the cowl, below the prop). Frequent bulb failure is caused by: (1) Vibration -- the filament breaks from engine vibration. Use shock-mounted or LED replacements for longer life. (2) Voltage spikes from the alternator/regulator -- check the voltage regulator output (should not exceed 14.5V). (3) Loose mounting -- verify the light housing is secure and the mounting is properly cushioned. (4) Water intrusion -- check the lens seal. LED landing light conversions (Whelen Parmetheus, AeroLEDs SunSpot) are available as STCs and provide dramatically longer life, lower power draw, and brighter output. NOTE: The landing light is required for night operations. Also inspect the taxi light (if installed) at the same time.",
+            "known_answer_keywords": [
+                "alternator",
+                "seal",
+                "voltage"
+            ]
+        },
+        {
+            "id": "elec_004",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Flap Motor / Circuit Breaker Trip",
+            "query": "The flaps won't move and the flap circuit breaker pops every time I try to extend them.",
+            "validated_fix": "Diagnose: (1) Check for mechanical binding in the flap system -- a bent track, frozen roller, or jammed actuator rod causes the motor to draw excessive current, tripping the breaker. Free the binding. (2) Check the flap motor itself -- a worn motor with shorted windings draws excessive current. Measure the current draw and compare to specs. Replace the motor if it exceeds limits. (3) Check the wiring for shorts to ground -- chafed wiring between the switch and motor. (4) Verify the circuit breaker itself isn't faulty -- an old/weak breaker may trip at less than its rated amperage. Replace if suspect. NOTE: Per the POH, if the flaps fail in the extended position, this is a non-emergency -- the airplane can be landed safely with flaps extended. If they fail in the retracted position, land at a longer runway using a no-flap approach (approach speed: 70-80 KIAS, depending on weight).",
+            "known_answer_keywords": [
+                "circuit",
+                "flap",
+                "ring"
+            ]
+        },
+        {
+            "id": "inst_001",
+            "system": "Instruments / Vacuum",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Vacuum Pump Failure -- Loss of Gyro Instruments",
+            "query": "My attitude indicator and heading indicator both tumbled and became useless in flight -- the vacuum gauge reads zero.",
+            "validated_fix": "Replace the engine-driven vacuum pump. The 172 uses a dry air vacuum pump (Rapco or Parker/Airborne) that provides suction to drive the attitude indicator (AI) and directional gyro (DG). The pump is mounted on the engine accessory case and driven by the accessory gear train. Dry vacuum pumps have a finite life -- graphite vanes wear and eventually fail, often without warning. Replace the vacuum pump every 500 hours as preventive maintenance (industry best practice -- not an FAA requirement but strongly recommended). After replacement, verify vacuum gauge reads 4.8-5.2\" Hg at cruise RPM. Also replace the central air filter (vacuum system filter) -- a clogged filter restricts flow and accelerates pump wear. NOTE: Vacuum pump failure in IMC (Instrument Meteorological Conditions) is a serious emergency. Consider installing a backup vacuum source (electric standby vacuum pump) or backup electric attitude indicator. Many 172 owners install a Precise Flight standby vacuum system as a safety upgrade.",
+            "known_answer_keywords": [
+                "filter",
+                "gyro",
+                "pump",
+                "vacuum"
+            ]
+        },
+        {
+            "id": "inst_002",
+            "system": "Instruments / Vacuum",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Attitude Indicator (AI) Precession / Erratic",
+            "query": "My attitude indicator drifts and doesn't hold level -- it shows a bank when I'm flying straight and level.",
+            "validated_fix": "Replace or overhaul the attitude indicator. The gyro-driven AI uses a vacuum-powered spinning mass that maintains orientation through gyroscopic rigidity. Precession (slow drift from the correct reference) indicates worn bearings, contaminated gyro rotor, or improper vacuum. Check: (1) Verify vacuum in proper range (4.8-5.2\" Hg). If vacuum is low, service the pump/filter first. (2) If vacuum is correct and the AI still precesses, the instrument is worn and must be overhauled by a certified instrument repair station or replaced. Gyro instruments have a service life and are overhauled on condition -- typical overhaul interval: 500-1,000+ hours depending on the manufacturer and operating environment. NOTE: Never rely on a single instrument for attitude reference in IMC. Cross-check ALL instruments. An unreliable AI must be placarded INOPERATIVE and covered per the minimum equipment list or FAR 91.213 procedures.",
+            "known_answer_keywords": [
+                "bearing",
+                "filter",
+                "gyro",
+                "overhaul",
+                "pump",
+                "ring",
+                "vacuum"
+            ]
+        },
+        {
+            "id": "inst_003",
+            "system": "Instruments / Vacuum",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Pitot-Static System Error / Blockage",
+            "query": "My airspeed indicator reads incorrectly or doesn't respond -- the mechanic thinks the pitot tube might be blocked.",
+            "validated_fix": "Inspect and test the pitot-static system. (1) Check the pitot tube for blockage (insects are the #1 cause -- especially mud dauber wasps building nests inside the tube). Clear the tube carefully. Install a pitot tube cover whenever the airplane is parked. (2) Check the static ports for blockage. (3) Check all pitot-static plumbing for leaks -- perform a pitot-static leak check per FAR 91.411 (required every 24 months for IFR operations). The system must hold specified pressure and vacuum within allowable leak rates. (4) Check the alternate static source valve for proper operation. (5) Verify all instruments (ASI, altimeter, VSI) respond correctly. NOTE: Per AD 2008-26-09, certain Cessna aircraft must have the alternate static air source selector valve inspected to ensure the part number placard doesn't obstruct the port. Pitot tube heat (if installed) should be tested before flight in icing conditions.",
+            "known_answer_keywords": [
+                "pitot",
+                "static",
+                "vacuum",
+                "valve"
+            ]
+        },
+        {
+            "id": "exh_001",
+            "system": "Exhaust System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Muffler / Heat Exchanger Crack -- CO Hazard",
+            "query": "The mechanic found a crack in the muffler during the annual -- it's also the cabin heat source and could leak carbon monoxide.",
+            "validated_fix": "CRITICAL SAFETY ISSUE -- CARBON MONOXIDE HAZARD: Replace the muffler immediately. The Cessna 172's cabin heat works by passing outside air over the exhaust muffler through a shroud -- if the muffler cracks, exhaust gas (containing lethal carbon monoxide) enters the cabin heat system. Replace the muffler with a new FAA-PMA approved unit. After installation, perform a ground run with a CO detector in the cabin with the cabin heat ON to verify no CO is present. Inspect the muffler per Lycoming SI 1118 and Cessna Service Letter SE73-1 at every 100-hour and annual inspection: (1) Visual inspection of the exterior for cracks, bulges, and erosion. (2) Pressurize the muffler and check for leaks. (3) Inspect the heat exchanger shroud for holes or gaps. NOTE: CO poisoning is insidious -- it has no odor at dangerous concentrations. Install a panel-mounted CO detector (Aithre or CO Guardian) in every aircraft. AD 96-09-11 addresses exhaust system inspection requirements on certain Cessna models.",
+            "known_answer_keywords": [
+                "annual",
+                "exhaust",
+                "inspection",
+                "lycoming",
+                "muffler",
+                "shroud"
+            ]
+        },
+        {
+            "id": "exh_002",
+            "system": "Exhaust System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Exhaust Riser / Stack Cracks",
+            "query": "The exhaust pipes near the cylinder heads have visible cracks -- exhaust gases are leaking at the joints.",
+            "validated_fix": "Replace the cracked exhaust risers/stacks. Inspect per the annual/100-hour inspection. Cracks typically occur at the cylinder flange joint (thermal fatigue from expansion/contraction cycles) or at weld joints. Replace with FAA-PMA approved exhaust components. Use new gaskets at all flanges. Torque exhaust flange nuts per Lycoming specifications. After installation, check for leaks by running the engine and inspecting for exhaust soot stains at all joints. NOTE: Exhaust leaks in the engine compartment can: (1) Allow CO to enter the cabin. (2) Cause localized heating that can damage engine baffling, wiring, or rubber components. (3) Provide inaccurate EGT readings if a probe is downstream of the leak.",
+            "known_answer_keywords": [
+                "annual",
+                "cylinder",
+                "exhaust",
+                "gasket",
+                "inspection",
+                "lycoming",
+                "ring"
+            ]
+        },
+        {
+            "id": "exh_003",
+            "system": "Exhaust System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Exhaust System Corrosion -- General",
+            "query": "The entire exhaust system looks rusty and corroded -- the mechanic says it's getting thin.",
+            "validated_fix": "Replace the exhaust system. Aircraft exhaust systems corrode from both the inside (combustion byproducts, especially with leaded fuel) and outside (atmospheric moisture). When the wall thickness reduces below acceptable limits, the components must be replaced. A complete exhaust system for the 172 with O-320-E2D includes: risers, crossover tube, muffler, tailpipe, and all gaskets and clamps. Use OEM Cessna/Lycoming or FAA-PMA approved components (Power Flow tuned exhaust is an STC'd performance upgrade option -- adds ~8% HP and reduces CHT). After installation, check for leaks and verify EGT readings. NOTE: The Power Flow exhaust system (STC'd) is a popular aftermarket upgrade that provides better performance and exhaust gas scavenging than the stock system. It requires an STC and 337 form for installation.",
+            "known_answer_keywords": [
+                "exhaust",
+                "fuel",
+                "gasket",
+                "lycoming",
+                "muffler",
+                "o-320"
+            ]
+        },
+        {
+            "id": "cab_001",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Door Seal Leaks / Wind Noise",
+            "query": "The cabin is very drafty and noisy -- wind and rain leak in around the doors.",
+            "validated_fix": "Replace the door seals. Cessna 172 door seals deteriorate from UV exposure and age, becoming hard, cracked, and ineffective. Replace with new Cessna-approved door seals or aftermarket equivalents (Aircraft Spruce or Cessna service parts). Clean the door frame mating surfaces before installing new seals. Also check the door latch mechanism for proper engagement -- a door that doesn't close tightly won't seal even with new seals. Adjust the door latch striker plate if needed. Also check the cabin air vents -- worn vent seals allow leaks even when the vents are 'closed.' NOTE: Per the Cessna 172 POH, the cabin door is not to be opened in flight (except in an emergency). The 172's door latching mechanism has been the subject of several service bulletins and ADs -- verify compliance.",
+            "known_answer_keywords": [
+                "seal"
+            ]
+        },
+        {
+            "id": "cab_002",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Cracked Windshield / Window",
+            "query": "There's a crack in my windshield that's slowly growing -- can it be repaired or does it need replacement?",
+            "validated_fix": "Evaluate and replace the windshield or window per Cessna Service Manual and AC 43.13-1B. Small cracks can sometimes be stop-drilled (a small hole drilled at the tip of the crack to prevent propagation) -- this is a temporary fix per approved data. If the crack is in the pilot's primary field of vision, or if it exceeds allowable length/location limits, the panel must be replaced. Cessna 172 windshields are acrylic (Plexiglas). Replacement involves removing the old panel, cleaning the mounting frame, and installing the new panel with approved sealant and mounting hardware. NOTE: Windshield crazing (fine surface cracks from UV degradation) reduces visibility, especially at night. Treat windshields with Pledge or a plastic polish to extend life and reduce UV damage. Never use ammonia-based cleaners on acrylic -- they accelerate crazing.",
+            "known_answer_keywords": [
+                "seal",
+                "service manual"
+            ]
+        },
+        {
+            "id": "cab_003",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Seat Track / Seat Lock Failure",
+            "query": "My seat slid backward during takeoff rotation -- the seat track locks didn't hold.",
+            "validated_fix": "CRITICAL SAFETY ISSUE: Inspect and repair/replace the seat tracks and locking mechanism. Seat track/lock failure has been the cause of numerous fatal accidents in Cessna aircraft -- the seat slides aft during rotation or go-around, the pilot instinctively pulls the yoke back, the aircraft enters a stall, and there is insufficient altitude to recover. Per AD 87-20-03 (and successor ADs), Cessna single-engine seat tracks and locking pins must be inspected per Cessna Service Bulletin SEB87-11 at every annual/100-hour inspection. The inspection includes: (1) Visual inspection of the seat rails for wear, corrosion, and damage. (2) Verify ALL locking pin positions engage securely. (3) Apply a forward and aft load to the seat and verify it does not move from any pin position. (4) Replace worn seat rails or pin assemblies. NOTE: This is one of the most important recurring inspections on the Cessna 172. ALWAYS verify your seat is locked before every flight -- push back against the seat to confirm it's secure.",
+            "known_answer_keywords": [
+                "annual",
+                "inspection",
+                "ring"
+            ]
+        },
+        {
+            "id": "cab_004",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Shoulder Harness Retrofit / Inspection",
+            "query": "My 1969 172 doesn't have shoulder harnesses -- are they required?",
+            "validated_fix": "Shoulder harnesses: The 1969-1974 172 models may or may not have factory shoulder harnesses. Per FAR 91.105, shoulder harnesses must be used if installed. For aircraft without shoulder harnesses, retrofit kits are available (BAS, AmSafe). Installation requires an STC or approved data and must be performed by an A&P/IA. For existing harnesses: inspect the webbing for fraying, cuts, UV degradation, and hardware for corrosion at every annual. Inertia reels must lock when subjected to rapid deceleration -- test by jerking the belt sharply. Replace reels that don't lock reliably. NOTE: Shoulder harnesses dramatically improve survivability in a crash. The 1975 172M (and later) included inertia-reel shoulder harnesses as standard equipment. If your aircraft doesn't have them, a retrofit is one of the most important safety upgrades you can make.",
+            "known_answer_keywords": [
+                "annual",
+                "harness"
+            ]
+        },
+        {
+            "id": "eng_013",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Accessory Case Oil Leak",
+            "query": "There's oil weeping from the back of the engine around the magneto and accessory case area.",
+            "validated_fix": "Replace the accessory case gasket(s) and magneto mount pad gaskets. Disassemble the affected area, clean all mating surfaces, install new gaskets (Lycoming or approved equivalent), and reassemble. Torque all fasteners per Lycoming overhaul manual specifications. Also check the accessory case mounting studs for looseness. NOTE: Oil leaks from the accessory case often appear worse than they are due to propwash spreading the oil. However, any oil leak must be addressed -- oil on the exhaust system is a fire hazard, and progressive oil loss can lead to dangerously low oil levels.",
+            "known_answer_keywords": [
+                "exhaust",
+                "gasket",
+                "lycoming",
+                "magneto",
+                "oil",
+                "overhaul"
+            ]
+        },
+        {
+            "id": "fuel_007",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Quantity Gauge Inaccuracy",
+            "query": "My fuel gauges read full even when the tanks are half empty -- I can't trust them.",
+            "validated_fix": "Calibrate or replace the fuel quantity indicating system. The 172 uses capacitance-type fuel quantity senders in the wing tanks connected to cockpit gauges. Common failures: (1) Corroded sender plates -- remove, clean, and verify sender resistance per the Cessna 172 Service Manual wiring diagram. (2) Faulty gauge -- check by substituting a known resistance at the gauge input. (3) Ground connection -- corroded ground causes erratic readings. Per FAR 91.205, fuel quantity indicators are required equipment. However, per FAR 23.1337, the gauges are only required to be accurate at EMPTY. The POH states: fuel quantity indicators should be used only as an approximate indication. CRITICAL NOTE: NEVER rely solely on fuel gauges for fuel management. Use time-based fuel calculations (burn rate × time) as the PRIMARY method. The gauges are a secondary reference only. Running out of fuel is one of the most common causes of GA accidents -- and it is 100% preventable.",
+            "known_answer_keywords": [
+                "fuel",
+                "ring",
+                "service manual"
+            ]
+        },
+        {
+            "id": "elec_005",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "ELT Battery Expiration / Test Failure",
+            "query": "The ELT battery is expired and the unit failed its annual test.",
+            "validated_fix": "Replace the ELT battery and test the unit. Per FAR 91.207, the ELT must be inspected within 12 months of previous inspection. The battery must be replaced when 50% of its useful life has been used or when the transmitter has been activated in an emergency. Replace with the correct battery per the ELT manufacturer. After battery replacement, perform a functional test -- per FAR 91.207(d), ELT tests are only permitted during the first 5 minutes of any hour and shall not exceed 3 audible sweeps. Verify the unit is properly registered with NOAA (406 MHz ELTs). NOTE: If your 172 still has an older 121.5 MHz ELT, consider upgrading to a 406 MHz ELT -- 121.5 MHz units are no longer monitored by satellite. A 406 MHz ELT with GPS provides precise position data to SAR (Search and Rescue) within minutes.",
+            "known_answer_keywords": [
+                "battery",
+                "inspection",
+                "ring"
+            ]
+        },
+        {
+            "id": "inst_004",
+            "system": "Instruments / Vacuum",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Tachometer Inaccuracy",
+            "query": "My tachometer reads inconsistently -- it shows different RPMs than what I know the engine is producing.",
+            "validated_fix": "Check and calibrate or replace the tachometer. The 172I-M uses a mechanical tach driven by a flexible cable from the engine accessory case. Common issues: (1) The tach cable is worn, kinked, or dry -- lubricate or replace the cable. (2) The tach mechanism is worn -- replace or overhaul the instrument. (3) Verify accuracy with a hand-held digital tachometer (photo-tach or laser tach) at several RPM settings. Maximum allowable error: ±35 RPM. NOTE: An inaccurate tachometer can cause over-revving (engine damage) or under-revving (power loss). It also affects mixture management since many pilots lean by RPM drop. Verify tach accuracy at each annual.",
+            "known_answer_keywords": [
+                "annual",
+                "cable",
+                "mixture",
+                "overhaul"
+            ]
+        },
+        {
+            "id": "gear_006",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Wheel Fairing Damage / Attachment",
+            "query": "My wheel fairings (pants) are cracked and loose -- they rattle and pieces are coming off.",
+            "validated_fix": "Remove, inspect, and repair or replace the wheel fairings. Cracked fairings can be repaired with approved fiberglass repair methods (per AC 43.13-1B). Verify all mounting brackets, screws, and safety wire are intact and properly secured. Loose or detached fairings in flight can jam the rudder cables or become FOD on the runway. NOTE: Many operators remove the wheel fairings for training operations or rough-field use to prevent damage and reduce maintenance. This is acceptable -- the fairings are not required for airworthiness. However, removing them reduces cruise speed by approximately 3-5 knots due to increased drag.",
+            "known_answer_keywords": [
+                "cable",
+                "ring",
+                "rudder"
+            ]
+        },
+        {
+            "id": "eng_014",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Starter Adapter / Ring Gear Failure",
+            "query": "The starter engages but won't turn the engine -- I hear a grinding noise and the starter just spins.",
+            "validated_fix": "Inspect the starter adapter and flywheel ring gear. The Lycoming O-320 uses a starter adapter assembly that engages the ring gear. Common failures: (1) Worn or damaged starter adapter clutch -- the adapter contains an overrunning clutch that can wear, preventing proper engagement. Replace the starter adapter (Lycoming P/N LW-16471 or current replacement). (2) Damaged ring gear teeth -- if teeth are chipped or worn, the starter can't engage. Replace the ring gear (requires engine removal). (3) Worn starter drive gear (Bendix drive). Replace the starter or starter drive. NOTE: A grinding starter that doesn't turn the engine is NOT a minor issue -- continued attempts can further damage the ring gear and adapter. Diagnose before attempting more starts.",
+            "known_answer_keywords": [
+                "lycoming",
+                "o-320",
+                "ring"
+            ]
+        },
+        {
+            "id": "afr_006",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Elevator Trim Tab Cable Wear",
+            "query": "The trim wheel is stiff and the trim doesn't respond smoothly -- it's hard to get the airplane properly trimmed.",
+            "validated_fix": "Inspect and service/replace the elevator trim system. The 172 uses a cable-actuated trim tab on the elevator. Common issues: (1) Trim cable wear/corrosion -- replace the trim cable if frayed or corroded. (2) Trim cable pulleys -- inspect for wear, flat spots, and bearing failure. Replace as needed. (3) Trim tab actuator -- the jackscrew mechanism on the tab can become dry or corroded. Lubricate with approved lubricant. (4) Trim wheel mechanism -- the drum and cable can become stiff from dirt/corrosion inside the cabin mechanism. Clean and lubricate. After any trim system work, verify full travel and correct sense (wheel forward = nose down, wheel aft = nose up). Check the trim tab for security and free play within limits. NOTE: An inoperative or jammed trim system affects controllability -- per the POH, the airplane can be flown without trim, but pilot workload increases significantly, especially on long flights.",
+            "known_answer_keywords": [
+                "bearing",
+                "cable",
+                "control",
+                "elevator",
+                "pulley",
+                "ring",
+                "trim"
+            ]
+        },
+        {
+            "id": "fuel_008",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Carburetor Heat Control Cable Stiff / Broken",
+            "query": "The carb heat knob is very stiff to pull and doesn't seem to give full heat -- or it broke off in my hand.",
+            "validated_fix": "Replace or service the carburetor heat control cable. The carb heat cable operates a valve on the carburetor air box that diverts intake air through a shroud around the exhaust to pre-heat it. If the cable is stiff: lubricate with cable lubricant and check for kinks in the routing. If the cable is broken or permanently stuck: replace the cable (Cessna P/N per the IPC for your specific model). After replacement, verify full travel -- the valve must open completely for full carb heat and close completely for cold air. CRITICAL: Carburetor heat is a REQUIRED safety system. An inoperative carb heat cable is a grounding item -- the aircraft cannot be dispatched until it's repaired. Carburetor ice can cause complete engine failure, and carb heat is the only means of preventing and removing it on the O-320-E2D installation.",
+            "known_answer_keywords": [
+                "cable",
+                "carburetor",
+                "control",
+                "exhaust",
+                "o-320",
+                "shroud",
+                "valve"
+            ]
+        },
+        {
+            "id": "ign_005",
+            "system": "Ignition System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Magneto Timing Drift",
+            "query": "The engine runs rough and the mechanic found that the magneto timing has drifted from the specification.",
+            "validated_fix": "Retime the magnetos. The O-320-E2D specification is 20° BTDC (both magnetos). Use a timing light/buzzer (Eastern Electronics E-50 or equivalent) to verify and set the timing. Set the crankshaft to the correct position using the timing marks on the flywheel/ring gear. Adjust the magneto body position (internal point gap affects timing -- points must be gapped per the mag manufacturer before timing). Verify both mags fire at 20° BTDC ± 1°. NOTE: Magneto timing can drift due to: (1) Point wear changing the point gap over time. (2) Magneto mounting hardware loosening. (3) Impulse coupling wear. Timing should be verified at every annual/100-hour inspection and after any magneto service.",
+            "known_answer_keywords": [
+                "annual",
+                "inspection",
+                "magneto",
+                "o-320",
+                "ring",
+                "timing"
+            ]
+        },
+        {
+            "id": "inst_005",
+            "system": "Instruments / Vacuum",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Altimeter Error -- Setting/Calibration",
+            "query": "My altimeter doesn't match the field elevation when I set the current altimeter setting -- it's off by over 75 feet.",
+            "validated_fix": "Have the altimeter inspected and calibrated by a certified instrument repair station. Per FAR 91.411, the altimeter must be inspected every 24 calendar months for IFR operations. The inspection verifies accuracy at multiple pressure altitudes and checks for scale error, hysteresis, and friction error. Allowable tolerance: ±75 feet at sea level. If the altimeter is out of tolerance, it must be overhauled/calibrated or replaced. NOTE: Even for VFR flight, an inaccurate altimeter is a safety concern -- incorrect altitude indications can lead to CFIT (Controlled Flight Into Terrain) or airspace violations. Per FAR 91.205, an adjustable altimeter is required for all flight.",
+            "known_answer_keywords": [
+                "control",
+                "inspection",
+                "overhaul"
+            ]
+        },
+        {
+            "id": "afr_007",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Corrosion at Wing Strut Attachment",
+            "query": "The mechanic found corrosion at the wing strut attach fittings during the annual inspection.",
+            "validated_fix": "Inspect and remediate per Cessna Service Manual and applicable inspection criteria. The wing strut attach fittings are critical structural components -- the struts carry a significant portion of the wing loads. Treatment: (1) Remove the bolt, clean and inspect the bolt hole for elongation or corrosion. (2) Inspect the fitting for corrosion depth -- if beyond allowable limits, the fitting must be replaced per approved data. (3) Clean corrosion with approved methods, treat with conversion coating, and apply protective primer. (4) Replace the bolt if it shows any corrosion, wear, or elongation. (5) Use approved corrosion inhibitor in the bolt hole before reassembly. NOTE: Water accumulates at strut fittings because they are at the low point of the wing contour. Drain holes must be clear. This is a recurring inspection item -- especially on aircraft operated in coastal or humid environments.",
+            "known_answer_keywords": [
+                "cable",
+                "inspection",
+                "ring",
+                "service manual"
+            ]
+        },
+        {
+            "id": "elec_006",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Avionics Interference / Noise",
+            "query": "I hear a whining noise in my radios that changes pitch with engine RPM -- the mechanic calls it alternator whine.",
+            "validated_fix": "Diagnose and eliminate the RF interference: (1) Check the alternator filter (capacitor) -- replace if failed. (2) Check all avionics and instrument grounds -- a corroded ground connection allows noise to couple into the audio. Clean and tighten all ground connections. (3) Check the ignition harness shielding -- the 172 uses shielded ignition leads. If the shield grounding is broken or corroded, ignition noise bleeds into avionics. Verify all shield grounds are clean and tight. (4) Check for a faulty voltage regulator -- a noisy regulator injects ripple onto the bus. (5) Install a noise filter on the alternator output if not already present. NOTE: Avionics interference is almost always caused by a grounding problem. Systematic cleaning and verification of all avionics, engine, and airframe ground connections usually resolves the issue.",
+            "known_answer_keywords": [
+                "alternator",
+                "filter",
+                "harness",
+                "ignition",
+                "voltage"
+            ]
+        },
+        {
+            "id": "eng_015",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Oil Cooler Leak",
+            "query": "There's oil dripping from the oil cooler and the oil level keeps dropping.",
+            "validated_fix": "Replace or repair the oil cooler. Remove the cooler, inspect for external leaks at fittings and at the core. If a fitting is leaking, replace the fitting and O-ring/gasket. If the core is leaking (common failure from corrosion, vibration fatigue, or thermal cycling), replace the oil cooler with a new FAA-PMA approved unit. Use new hoses and fittings as needed. After installation, check the oil level and run the engine to operating temperature, then check for leaks. NOTE: Oil on the exhaust system is a fire hazard. Any oil cooler leak must be repaired before further flight. Also verify the cooler vernatherm (bypass valve) is functioning -- if stuck open, the oil bypasses the cooler entirely, leading to high oil temperatures.",
+            "known_answer_keywords": [
+                "exhaust",
+                "gasket",
+                "oil",
+                "ring",
+                "tire",
+                "valve"
+            ]
+        },
+        {
+            "id": "gear_007",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Nose Gear Fork Cracks (AD 71-22-02)",
+            "query": "The mechanic found a crack in the nose gear fork during the 100-hour inspection.",
+            "validated_fix": "Replace the nose gear fork per AD 71-22-02. This AD applies to Cessna 150, 172, 175, and 182 series with earlier-type nose gear forks. The AD requires a dye-penetrant inspection every 100 hours (or after a hard landing or severe shimmy) for cracks in the radius of the milled section of the nose gear strut attachment bolt. If cracks are found, the fork must be replaced with the updated part number per the current Cessna Parts Catalog. If the airplane has 1,500+ hours total time, the earlier fork must be replaced regardless of crack findings. NOTE: This is a recurring AD -- compliance must be documented in the airframe logbook at every 100-hour/annual inspection. The nose gear fork is a critical structural component -- a failed fork results in nose gear collapse.",
+            "known_answer_keywords": [
+                "annual",
+                "inspection",
+                "nose gear",
+                "ring",
+                "shimmy"
+            ]
+        },
+        {
+            "id": "fuel_009",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Selector Valve O-Ring Deterioration (Ethanol)",
+            "query": "The fuel selector is leaking internally -- fuel is cross-feeding between tanks or dripping from the valve.",
+            "validated_fix": "Overhaul the fuel selector valve. Remove the valve and replace all internal O-rings and seals with fuel-resistant materials (Viton or equivalent). Note: some older O-rings were not compatible with modern avgas formulations and deteriorate rapidly. Reassemble, test for leaks, and verify all detent positions function correctly (LEFT, RIGHT, BOTH). Ensure the valve handle clearly indicates the selected position. NOTE: Any fuel leak inside the cabin is a critical safety issue. The selector valve is located under the floor in the cabin area -- leaked fuel creates vapor in the enclosed cockpit space, which is an explosion hazard.",
+            "known_answer_keywords": [
+                "fuel",
+                "overhaul",
+                "ring",
+                "seal",
+                "valve"
+            ]
+        },
+        {
+            "id": "afr_008",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Stabilizer / Elevator Hinge Bolt Wear",
+            "query": "The elevator hinge bolts are worn and there's excessive play in the elevator control surface.",
+            "validated_fix": "Replace the worn hinge bolts and bushings. Remove the elevator, inspect all hinge points for elongated bolt holes and worn bushings. Replace bolts and bushings to restore proper fit with minimal play. Reassemble and verify control surface free play is within Cessna-specified limits. Also check the elevator horn for cracks or wear. After reassembly, re-rig the elevator travel and verify correct deflection limits per the Service Manual: UP = 28° ± 1°, DOWN = 23° ± 1° (verify for your specific model). NOTE: Excessive control surface play reduces control effectiveness and can cause flutter at high speeds. Flutter is a destructive oscillation that can destroy the control surface and tail structure in seconds. Any abnormal vibration or buzzing from the tail in flight requires immediate speed reduction and landing.",
+            "known_answer_keywords": [
+                "control",
+                "elevator",
+                "service manual"
+            ]
+        },
+        {
+            "id": "cab_005",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Compass Deviation / Compensation",
+            "query": "My magnetic compass has large deviations -- the heading it shows is way off from what it should be.",
+            "validated_fix": "Swing the compass. A qualified A&P or avionics technician swings the compass by placing the aircraft on known magnetic headings and adjusting the compensating magnets inside the compass to minimize deviation. A new compass deviation card is then created showing residual deviations on all cardinal and intercardinal headings. Maximum allowable residual deviation: ±10° per FAR 23.1327. After swinging, install the new deviation card on or near the compass. NOTE: The compass should be re-swung after any avionics installation (new radios, speakers, intercom), any electrical system changes, or any structural work near the compass that could affect the magnetic field. Also verify the compass fluid is clear and bubble-free -- a cloudy compass or one with a large bubble is unreliable and must be serviced or replaced.",
+            "known_answer_keywords": []
+        },
+        {
+            "id": "fuel_010",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Selector Valve O-Ring Deterioration (Ethanol)",
+            "query": "The fuel selector is leaking internally -- fuel is cross-feeding between tanks or dripping from the valve.",
+            "validated_fix": "Overhaul the fuel selector valve -- replace all internal O-rings and seals with fuel-resistant Viton materials. Test for leaks and verify all detent positions. NOTE: Any fuel leak in the cabin is a critical safety issue -- fuel vapors in the cockpit are an explosion hazard.",
+            "known_answer_keywords": [
+                "fuel",
+                "overhaul",
+                "ring",
+                "seal",
+                "valve"
+            ]
+        },
+        {
+            "id": "afr_009",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Stabilizer / Elevator Hinge Bolt Wear",
+            "query": "The elevator hinge bolts are worn and there's excessive play in the elevator control surface.",
+            "validated_fix": "Replace worn hinge bolts and bushings. Remove the elevator, inspect all hinge points for elongated bolt holes and worn bushings. Reassemble and verify control surface free play within Cessna limits. Check elevator travel: UP = 28° ± 1°, DOWN = 23° ± 1° (verify for specific model). NOTE: Excessive play can cause flutter -- a destructive oscillation that can destroy the tail in seconds.",
+            "known_answer_keywords": [
+                "control",
+                "elevator"
+            ]
+        },
+        {
+            "id": "cab_006",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Compass Deviation / Compensation",
+            "query": "My magnetic compass has large deviations -- the heading it shows is way off from what it should be.",
+            "validated_fix": "Swing the compass per FAR 23.1327 -- maximum allowable residual deviation: ±10°. Create a new deviation card. Re-swing after any avionics or electrical system changes. Verify compass fluid is clear and bubble-free.",
+            "known_answer_keywords": []
+        },
+        {
+            "id": "inst_006",
+            "system": "Instruments / Vacuum",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Altimeter Error -- Calibration",
+            "query": "My altimeter doesn't match field elevation with the current setting -- it's off by over 75 feet.",
+            "validated_fix": "Have the altimeter inspected per FAR 91.411 (required every 24 months for IFR). Allowable tolerance: ±75 feet at sea level. Overhaul or replace if out of tolerance. NOTE: An inaccurate altimeter is dangerous even for VFR -- can lead to CFIT or airspace violations.",
+            "known_answer_keywords": [
+                "overhaul"
+            ]
+        },
+        {
+            "id": "gear_008",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Nose Gear Fork Cracks (AD 71-22-02)",
+            "query": "The mechanic found a crack in the nose gear fork during the 100-hour inspection.",
+            "validated_fix": "Replace per AD 71-22-02: dye-penetrant inspection every 100 hours or after hard landing/severe shimmy. If aircraft has 1,500+ hours, earlier-type fork must be replaced regardless. NOTE: Nose gear fork failure = nose gear collapse. This is a recurring AD.",
+            "known_answer_keywords": [
+                "inspection",
+                "nose gear",
+                "ring",
+                "shimmy"
+            ]
+        },
+        {
+            "id": "elec_007",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Avionics Interference / Alternator Whine",
+            "query": "I hear a whining noise in my radios that changes pitch with engine RPM.",
+            "validated_fix": "Check alternator filter capacitor, all avionics grounds, ignition harness shielding, and voltage regulator. Systematic cleaning of all ground connections usually resolves the issue. Install alternator noise filter if needed.",
+            "known_answer_keywords": [
+                "alternator",
+                "filter",
+                "harness",
+                "ignition",
+                "voltage"
+            ]
+        },
+        {
+            "id": "eng_016",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Oil Cooler Leak",
+            "query": "There's oil dripping from the oil cooler and the level keeps dropping.",
+            "validated_fix": "Replace or repair the oil cooler. Replace leaking fittings and O-rings. If the core is leaking, replace the entire cooler with an FAA-PMA unit. Also check the vernatherm (bypass valve). NOTE: Oil on the exhaust system is a fire hazard -- repair before further flight.",
+            "known_answer_keywords": [
+                "exhaust",
+                "oil",
+                "ring",
+                "tire",
+                "valve"
+            ]
+        },
+        {
+            "id": "eng_017",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Starter Adapter / Ring Gear Failure",
+            "query": "The starter engages but won't turn the engine -- grinding noise and the starter just spins.",
+            "validated_fix": "Inspect starter adapter and ring gear. Replace starter adapter clutch (Lycoming LW-16471) if worn. Replace ring gear if teeth are damaged (requires engine removal). NOTE: Continued attempts with a failed adapter further damages the ring gear.",
+            "known_answer_keywords": [
+                "lycoming",
+                "ring"
+            ]
+        },
+        {
+            "id": "gear_009",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Wheel Fairing Damage / Attachment",
+            "query": "My wheel fairings are cracked and loose -- rattling and pieces coming off.",
+            "validated_fix": "Repair or replace fairings. Cracked fairings can be repaired with approved fiberglass methods per AC 43.13-1B. Verify all mounting hardware. NOTE: Loose fairings can jam rudder cables or become FOD. Many operators remove fairings for training use -- acceptable, but reduces cruise by ~3-5 knots.",
+            "known_answer_keywords": [
+                "cable",
+                "ring",
+                "rudder"
+            ]
+        },
+        {
+            "id": "afr_010",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Corrosion at Wing Strut Attachment",
+            "query": "Corrosion found at wing strut attach fittings during the annual.",
+            "validated_fix": "Inspect per Cessna criteria. Clean corrosion, treat with conversion coating, protect with primer. If pitting exceeds depth limits, fitting must be replaced per approved data. Clear drain holes. Apply ACF-50 or CorrosionX preventively. NOTE: Strut fittings are critical structural components -- corrosion here requires immediate attention.",
+            "known_answer_keywords": []
+        },
+        {
+            "id": "elec_008",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "ELT Battery Expiration / Test Failure",
+            "query": "The ELT battery is expired and the unit failed its annual test.",
+            "validated_fix": "Replace ELT battery per FAR 91.207. Test per regulations (first 5 minutes of any hour, max 3 sweeps). Consider upgrading older 121.5 MHz ELT to 406 MHz with GPS -- 121.5 is no longer satellite-monitored.",
+            "known_answer_keywords": [
+                "battery"
+            ]
+        },
+        {
+            "id": "inst_007",
+            "system": "Instruments / Vacuum",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Tachometer Inaccuracy",
+            "query": "My tachometer reads inconsistently -- different from actual RPMs.",
+            "validated_fix": "Check and calibrate/replace the tachometer. The 172I-M uses a mechanical cable-driven tach. Replace cable if worn/dry. Verify accuracy with hand-held digital tachometer -- max allowable error: ±35 RPM. NOTE: Inaccurate tach affects mixture management and RPM limits.",
+            "known_answer_keywords": [
+                "cable",
+                "mixture"
+            ]
+        },
+        {
+            "id": "ign_006",
+            "system": "Ignition System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Magneto Timing Drift",
+            "query": "Engine runs rough -- magneto timing has drifted from specification.",
+            "validated_fix": "Retime magnetos to 20° BTDC (O-320-E2D spec). Use timing light/buzzer. Verify both mags fire at 20° BTDC ± 1°. Timing drifts from point wear, loose mounting, or impulse coupling wear. Check at every annual.",
+            "known_answer_keywords": [
+                "annual",
+                "magneto",
+                "o-320",
+                "timing"
+            ]
+        },
+        {
+            "id": "afr_011",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Elevator Trim Tab Cable Wear",
+            "query": "The trim wheel is stiff -- trim doesn't respond smoothly.",
+            "validated_fix": "Inspect and service the trim system. Replace cable if frayed/corroded. Inspect pulleys for wear. Lubricate the jackscrew mechanism. Verify full travel and correct sense after any work. NOTE: Inoperative trim affects controllability -- especially fatiguing on long flights.",
+            "known_answer_keywords": [
+                "cable",
+                "control",
+                "pulley",
+                "trim"
+            ]
+        },
+        {
+            "id": "fuel_011",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Carburetor Heat Control Cable Stiff / Broken",
+            "query": "The carb heat knob is very stiff to pull -- doesn't give full heat.",
+            "validated_fix": "Replace or lubricate the carb heat cable. Verify full travel -- valve must open/close completely. CRITICAL: Inoperative carb heat is a GROUNDING ITEM. Carburetor ice can cause complete engine failure and carb heat is the only defense.",
+            "known_answer_keywords": [
+                "cable",
+                "carburetor",
+                "valve"
+            ]
+        },
+        {
+            "id": "eng_018",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Accessory Case Oil Leak",
+            "query": "Oil weeping from the back of the engine around magneto/accessory area.",
+            "validated_fix": "Replace accessory case gaskets and magneto mount pad gaskets. Torque all fasteners per Lycoming manual. Check mounting studs for looseness. NOTE: Oil on exhaust = fire hazard. Progressive oil loss can reach dangerously low levels.",
+            "known_answer_keywords": [
+                "exhaust",
+                "gasket",
+                "lycoming",
+                "magneto",
+                "oil"
+            ]
+        },
+        {
+            "id": "eng_019",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Camshaft / Lifter Wear",
+            "query": "The engine has developed a persistent miss and the mechanic says a cam lobe is worn flat.",
+            "validated_fix": "Replace camshaft and all lifters. Use ZDDP-rich assembly lube and break in at 2,000+ RPM for 20 minutes. Use oil with adequate ZDDP content (Aeroshell W100 Plus or equivalent). NOTE: Flat-tappet cam wear is accelerated by modern low-ZDDP oils. Always use aviation-specific oil.",
+            "known_answer_keywords": [
+                "oil"
+            ]
+        },
+        {
+            "id": "fuel_012",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Quantity Gauge Inaccuracy",
+            "query": "Fuel gauges read full when tanks are half empty -- can't trust them.",
+            "validated_fix": "Calibrate or replace fuel quantity senders. Check sender resistance, gauge response, and ground connections. CRITICAL NOTE: Per FAR 23.1337, gauges are only required accurate at EMPTY. NEVER rely solely on gauges -- use time-based fuel calculations as PRIMARY method. Running out of fuel is 100% preventable.",
+            "known_answer_keywords": [
+                "fuel"
+            ]
+        },
+        {
+            "id": "eng_020",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Harmonic Balancer / Counterweight",
+            "query": "Visible wobble at the front of the engine -- drive belt keeps coming off.",
+            "validated_fix": "Replace the harmonic balancer. Remove with proper puller (never hammer). Install new balancer with correct tool. Replace front crank seal at the same time. Verify timing marks on new balancer match old. NOTE: A slipped balancer shows incorrect timing with a timing light.",
+            "known_answer_keywords": [
+                "seal",
+                "timing"
+            ]
+        },
+        {
+            "id": "afr_012",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Wing Tip Lens / Light Damage",
+            "query": "The position light lens on the wing tip is cracked and the light doesn't work.",
+            "validated_fix": "Replace the wing tip lens and bulb. Use approved replacement lens (tinted green for starboard, red for port, white for aft). Seal properly to prevent moisture intrusion into the wing tip cavity. Verify light operation. NOTE: Per FAR 91.205, position lights are required for night flight. An inoperative nav light grounds the aircraft for night operations.",
+            "known_answer_keywords": [
+                "seal"
+            ]
+        },
+        {
+            "id": "elec_009",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Master Switch Relay Failure",
+            "query": "The master switch doesn't engage -- no electrical power when I flip the switch.",
+            "validated_fix": "Replace the master switch relay (battery contactor/solenoid). The 172's master switch activates a heavy-duty relay that connects the battery to the electrical bus. Common failure: corroded contacts inside the relay fail to make connection. Replace the relay and clean all connections. Also check the master switch itself (split-rocker on 172K and later -- one side for battery, one for alternator field). NOTE: A failed master relay can leave you without electrical power in flight. Know the location of the relay and carry a spare.",
+            "known_answer_keywords": [
+                "alternator",
+                "battery"
+            ]
+        },
+        {
+            "id": "cab_007",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Shoulder Harness Retrofit / Inspection",
+            "query": "My 1969 172 doesn't have shoulder harnesses -- I want to add them.",
+            "validated_fix": "Retrofit kits available (BAS, AmSafe) via STC. Installation by A&P/IA required. Existing harnesses: inspect webbing for fraying, UV degradation; test inertia reels for lock function. NOTE: Shoulder harnesses dramatically improve crash survivability. 1975+ 172M included inertia reels as standard. If your aircraft lacks them, this is the most important safety upgrade you can make.",
+            "known_answer_keywords": [
+                "harness"
+            ]
+        },
+        {
+            "id": "fuel_013",
+            "system": "Fuel System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Fuel Line Chafing / Leak",
+            "query": "The mechanic found a fuel line rubbing against the airframe -- it's nearly worn through.",
+            "validated_fix": "Replace the damaged fuel line with approved aircraft fuel line (hose: MIL-H-6000 or equivalent; rigid: approved aluminum alloy). Route the new line with proper standoffs and clamps to prevent future chafing. Inspect all fuel lines for chafing, security, and condition at every annual. NOTE: A fuel line failure in the engine compartment is an immediate fire hazard. Proper routing and clamping is critical.",
+            "known_answer_keywords": [
+                "annual",
+                "fuel"
+            ]
+        },
+        {
+            "id": "afr_013",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Rudder Cable Tension / Rigging",
+            "query": "The rudder pedals have excessive play and the airplane doesn't track straight on the runway.",
+            "validated_fix": "Check and adjust rudder cable tension per the Cessna 172 Service Manual rigging specifications. Measure cable tension with a cable tensiometer -- adjust for ambient temperature per the Cessna temperature/tension chart. Verify full rudder travel: LEFT = 24° ± 1°, RIGHT = 24° ± 1° (verify for specific model). Check all pulleys, fairleads, and cable guards for wear and proper routing. NOTE: Cable tension changes with temperature -- cables tightened in cold weather can become over-tensioned in hot weather (and vice versa). Always set tension at the prevailing temperature.",
+            "known_answer_keywords": [
+                "cable",
+                "pulley",
+                "rudder",
+                "service manual"
+            ]
+        },
+        {
+            "id": "inst_008",
+            "system": "Instruments / Vacuum",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Vacuum System Filter Clogged",
+            "query": "The vacuum gauge reads low and the gyro instruments are sluggish -- the vacuum filter hasn't been changed.",
+            "validated_fix": "Replace the central vacuum system filter. The 172 has an in-line vacuum filter (typically located behind the instrument panel) that prevents contaminants from entering the vacuum pump and gyro instruments. A clogged filter restricts airflow and reduces vacuum. Replace the filter element every 500 hours or at every annual (whichever comes first). After replacement, verify vacuum gauge reads 4.8-5.2\" Hg at cruise RPM. NOTE: A clogged filter accelerates vacuum pump wear and causes gyro instruments to precess and respond slowly.",
+            "known_answer_keywords": [
+                "annual",
+                "filter",
+                "gyro",
+                "pump",
+                "ring",
+                "vacuum"
+            ]
+        },
+        {
+            "id": "eng_021",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Oil Sump Drain Plug Leak",
+            "query": "Oil drips from the oil drain plug area after every oil change.",
+            "validated_fix": "Replace the drain plug gasket (crush washer) with a new copper or aluminum crush washer at every oil change. If the plug still leaks, inspect the sump drain fitting for stripped or damaged threads. A Heli-Coil repair may be needed for damaged threads. Use the correct torque -- over-tightening strips the aluminum sump threads. NOTE: Oil on the bottom of the engine drips onto the exhaust and creates a fire hazard and a significant odor. Always use a new crush washer at each oil change.",
+            "known_answer_keywords": [
+                "exhaust",
+                "gasket",
+                "oil"
+            ]
+        },
+        {
+            "id": "elec_010",
+            "system": "Electrical System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Voltage Regulator Failure",
+            "query": "The ammeter pegs to the discharge side -- or it shows a high charge rate that won't decrease.",
+            "validated_fix": "Replace the voltage regulator. An over-voltage condition (>14.5V) destroys avionics, light bulbs, and boils the battery. The 172K and later use a solid-state voltage regulator for the alternator. Replace the regulator with an approved unit. Also install/verify the over-voltage protection circuit -- many 172s have been retrofitted with a Zeftronics over-voltage protector that shuts down the alternator field if voltage exceeds a set point (~15.5V). NOTE: Over-voltage damage to avionics can cost thousands -- a $50 voltage regulator replacement is cheap insurance.",
+            "known_answer_keywords": [
+                "alternator",
+                "battery",
+                "circuit",
+                "oil",
+                "voltage"
+            ]
+        },
+        {
+            "id": "cab_008",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Control Yoke Bushing Wear",
+            "query": "The control yoke feels sloppy -- there's play in the column that makes precise control difficult.",
+            "validated_fix": "Replace the control yoke shaft bushings. The yoke pivots on bushings in the instrument panel bracket. When these wear, they introduce free play that makes the controls feel sloppy. Remove the yoke, replace the bushings, and reassemble. Verify control travel and freedom of movement. NOTE: Excessive yoke play is not only annoying but reduces control precision, especially during instrument flight. Address during annual inspection.",
+            "known_answer_keywords": [
+                "annual",
+                "control",
+                "inspection",
+                "ring"
+            ]
+        },
+        {
+            "id": "eng_022",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Crankcase Breather Blockage",
+            "query": "Oil leaks from multiple gaskets and the crankcase seems pressurized.",
+            "validated_fix": "Inspect and clean the crankcase breather system. Remove the breather tube and elbow, clean all passages, and verify unrestricted airflow. Clean or replace the oil separator screen in the breather circuit. A blocked breather pressurizes the crankcase, forcing oil past every gasket and seal -- this can mimic multiple simultaneous oil leaks. After cleaning the breather, many of the leaks will stop. NOTE: Check the breather at every oil change -- it's a 5-minute preventive maintenance item that prevents expensive gasket replacement.",
+            "known_answer_keywords": [
+                "circuit",
+                "gasket",
+                "oil",
+                "seal"
+            ]
+        },
+        {
+            "id": "afr_014",
+            "system": "Airframe / Structure",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Aileron Hinge / Bellcrank Wear",
+            "query": "The ailerons have free play and the airplane doesn't respond crisply to aileron input.",
+            "validated_fix": "Inspect and replace worn aileron hinge bolts, bushings, and bellcrank components. Remove the ailerons, inspect all hinge points for elongated holes and worn bushings. Replace as needed. After reassembly, verify aileron travel: UP = 20° ± 1°, DOWN = 15° ± 1° (verify for specific model). Check aileron cable tension per the rigging chart. NOTE: Aileron free play can cause adverse handling and flutter risk at higher speeds.",
+            "known_answer_keywords": [
+                "aileron",
+                "bellcrank",
+                "cable"
+            ]
+        },
+        {
+            "id": "prop_003",
+            "system": "Propeller",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Propeller Overhaul / Inspection Requirements",
+            "query": "The propeller hasn't been overhauled and the mechanic says it may be due based on calendar time.",
+            "validated_fix": "Inspect and overhaul the propeller per McCauley Service Bulletin and Lycoming/Cessna recommendations. The McCauley 1C235 fixed-pitch propeller on the 172I-M has no mandatory TBO, but McCauley recommends overhaul every 1,500-2,000 hours or 5-6 years of calendar time (whichever comes first). Overhaul includes: disassembly, non-destructive testing (NDT -- dye penetrant or eddy current), dimensional checks, blade dressing, and rebalancing. Done by a certified propeller repair station. NOTE: Calendar time limits are important -- propellers develop internal corrosion even if not flown. A propeller that has been on the aircraft for 20+ years without overhaul should be inspected/overhauled regardless of hour time.",
+            "known_answer_keywords": [
+                "lycoming",
+                "overhaul",
+                "propeller",
+                "tbo"
+            ]
+        },
+        {
+            "id": "gear_010",
+            "system": "Landing Gear",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Main Gear Axle / Brake Assembly Corrosion",
+            "query": "The mechanic found corrosion on the main gear axle and brake caliper during the annual.",
+            "validated_fix": "Inspect, clean, and treat or replace corroded brake components. Cleveland brake assemblies (standard on the 172) are aluminum and steel -- both corrode. Clean corrosion per approved methods. Replace corroded axle hardware. Rebuild the brake caliper with new seals, pistons, and linings if corrosion has affected sealing surfaces. Also check brake disc minimum thickness and replace if below limits. NOTE: Brake system corrosion is accelerated by aircraft stored outdoors or on wet/grass surfaces. Apply ACF-50 corrosion preventive to non-friction surfaces during annual.",
+            "known_answer_keywords": [
+                "annual",
+                "brake",
+                "piston",
+                "ring",
+                "seal"
+            ]
+        },
+        {
+            "id": "eng_023",
+            "system": "Engine (Lycoming O-320-E2D)",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Engine Approaching / Exceeding TBO",
+            "query": "The engine is at TBO hours and the mechanic says I need to decide whether to overhaul or keep monitoring.",
+            "validated_fix": "The Lycoming O-320-E2D TBO is 2,000 hours. For Part 91 (private) operations, TBO is a RECOMMENDATION, not a mandatory requirement -- the engine can continue to operate past TBO if it is maintained in an airworthy condition (good compression, oil consumption within limits, no metal in oil, all ADs complied with). However, engine failure risk increases past TBO. Options: (1) Major overhaul -- complete teardown, inspection, and rebuild to factory new limits. Cost: $25,000-35,000+ installed. (2) Top overhaul -- replace cylinders, pistons, rings, valves, and guides without splitting the crankcase. Less expensive but doesn't address crankshaft, camshaft, or bearing wear. (3) Factory remanufacture -- exchange for a zero-time factory remanufactured engine (Lycoming). (4) Continue operating with enhanced monitoring (frequent oil analysis, compression checks, borescope inspections). NOTE: Insurance companies may require overhaul at TBO. For Part 135 (commercial) operations, TBO IS mandatory. The decision to operate past TBO should be made with input from your A&P/IA and with full understanding of the risks.",
+            "known_answer_keywords": [
+                "bearing",
+                "compression",
+                "cylinder",
+                "inspection",
+                "lycoming",
+                "o-320",
+                "oil",
+                "overhaul"
+            ]
+        },
+        {
+            "id": "cab_009",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Heater / Defroster Ineffective",
+            "query": "The cabin heat barely works -- it's cold in the cockpit during winter flying.",
+            "validated_fix": "Inspect the cabin heat system: (1) Check the heater valve and cable -- the valve on the muffler shroud must open fully. Adjust or replace the cable and valve. (2) Check the muffler shroud for leaks or gaps -- air bypasses the shroud and reduces heating. Seal or replace the shroud. (3) Check the heater ducting from the shroud to the cabin -- disconnected or collapsed ducts lose heat. (4) Check the exhaust muffler -- the heat comes from the muffler surface, and a corroded muffler may have reduced surface area. (5) Check the cabin air inlet -- if the fresh air inlet is restricted, the volume of air through the heater is reduced. NOTE: The Cessna 172's cabin heat system is entirely engine-exhaust-dependent. If the heat system is inadequate, verify the muffler integrity FIRST -- a cracked muffler not only reduces heat but introduces CO into the cabin. Never fly in icing conditions without adequate defroster capability.",
+            "known_answer_keywords": [
+                "cable",
+                "exhaust",
+                "heater",
+                "muffler",
+                "seal",
+                "shroud",
+                "tire",
+                "valve"
+            ]
+        },
+        {
+            "id": "cab_010",
+            "system": "Cabin / Interior",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Heater / Defroster Ineffective",
+            "query": "The cabin heat barely works -- it's cold in the cockpit during winter flying.",
+            "validated_fix": "Inspect the cabin heat system: (1) Check the heater valve and cable -- must open fully. (2) Check muffler shroud for leaks/gaps. (3) Check heater ducting for disconnections. (4) Check muffler integrity -- cracked muffler reduces heat AND introduces CO. (5) Check cabin air inlet for restriction. NOTE: Verify muffler integrity FIRST -- a cracked muffler is a CO hazard. Never fly in icing conditions without adequate defroster capability.",
+            "known_answer_keywords": [
+                "cable",
+                "heater",
+                "muffler",
+                "shroud",
+                "valve"
+            ]
+        },
+        {
+            "id": "exh_004",
+            "system": "Exhaust System",
+            "category": "symptom_diagnosis",
+            "difficulty": "medium",
+            "technical_issue": "Exhaust Stud / Nut Corrosion / Breakage",
+            "query": "The exhaust manifold studs are corroded and one broke off during removal -- now there's a stuck stud in the cylinder head.",
+            "validated_fix": "Extract the broken stud using a stud extractor (EZ-Out) after soaking with penetrating oil. If extraction fails, drill and re-tap or install a Heli-Coil thread insert per approved repair data. Replace all exhaust studs and brass/stainless lock nuts with new hardware during any exhaust service. Apply high-temperature anti-seize compound to new studs for future serviceability. NOTE: Exhaust fastener corrosion is universal on aircraft -- the heat cycling and combustion byproducts attack the threads. Always use anti-seize and replace hardware whenever the exhaust system is serviced.",
+            "known_answer_keywords": [
+                "exhaust",
+                "oil",
+                "ring"
+            ]
+        }
+    ]
+}

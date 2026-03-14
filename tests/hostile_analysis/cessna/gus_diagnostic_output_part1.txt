@@ -1,0 +1,1205 @@
+[
+  {
+    "query_id": "eng_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "During the annual, the mechanic said one cylinder is low on compression and might need to come off for a valve job.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Low Compression -- Cylinder(s) Below Limits",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "general_knowledge",
+      "intersecting_subsystems": [
+        "Engine",
+        "Power Section",
+        "Valvetrain"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 31,
+          "context": "1. Check carburetor heat control for proper rigging. If partially open it would cause a slight power loss. 2. Check magneto timing, spark plugs and igni- tion harness for settings and conditions. 3. Check condition of induction air filter. Clean if necessary. 4. Perform an engine compression check. (Re- fer to engine Manufacturer's Manual)."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 10,
+          "context": "4. Perform an engine compression check. (Re- fer to engine Manufacturer's Manual)."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "Defective engine. Check compression. Listen for unusual engine noises. Engine repair is required."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 31,
+          "context": "From the hydraulic tappets, pressure oil travels out through the hollow push rods and drilled rocker a r m s where it is spilled over the valve mechanism. Cylinder walls and piston pins are spray-lubricated by oil escaping from the connecting rod bearings."
+        }
+      ],
+      "diagnostic_reasoning": "The mechanic reports low compression in one cylinder. The Service Manual confirms that an engine compression check is a standard diagnostic step for engine deficiencies (Source 6, 10) and indicates that a 'defective engine' with low compression requires 'engine repair' (Source 35, 56). However, the manual does not provide specific troubleshooting steps to pinpoint the *cause* of low compression (e.g., valve vs. ring issues). Based on general aviation piston engine diagnostics, low compression in a single cylinder is typically caused by a leak past the intake valve, exhaust valve, or piston rings. A leak-down test is the most effective method to differentiate between these possibilities by identifying the source of the escaping air. The FSM mentions valve mechanisms and cylinder walls/piston pins as engine components (Source 58), which are directly involved in compression sealing.",
+      "mechanic_instructions": "You've identified low compression in one cylinder. To determine the exact cause, perform a leak-down test on that cylinder. Bring the cylinder to Top Dead Center (TDC) on the compression stroke and apply compressed air. Listen carefully for where the air is escaping. This will tell us if the issue is with the valves, rings, or another component.",
+      "answer_path_prompts": [
+        "I hear air escaping from the exhaust pipe.",
+        "I hear air escaping from the carburetor or intake manifold.",
+        "I hear air escaping from the crankcase breather or oil filler neck.",
+        "I hear air escaping from an adjacent cylinder or from outside the cylinder head."
+      ],
+      "confidence_disclaimer": "The Cessna Service Manual specifies performing an engine compression check for engine deficiencies but does not detail the specific diagnostic steps or interpretations for a leak-down test to pinpoint the source of compression loss. The instructions provided for interpreting the leak-down test results are based on general mechanical knowledge for aviation piston engines.",
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I'm adding a quart of oil every 4-5 hours of flying -- the engine seems to be burning more oil than it used to.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Oil Consumption -- Excessive",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Oil System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 21,
+          "context": "2-21. > NOTE > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 35,
+          "context": "PROBABLE CAUSE > TROUBLE > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 14,
+          "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 29,
+          "context": "3 FUEL TANK FILLER > 4 FUEL TANK SUMP DRAINS > 6 PITOT AND STATIC PORTS"
+        }
+      ],
+      "diagnostic_reasoning": "High oil consumption (adding a quart every 4-5 hours) points to either external oil leaks or internal engine oil burning. The Service Manual lists specific external leak points such as a 'Damaged crankshaft seal' or 'Damaged push rod housing oil seal' as probable causes for oil leaks (Source 43). It also generally advises checking for 'oil and fuel leaks' in the engine compartment (Source 32). Internal oil burning is typically due to worn piston rings, cylinder walls, or valve guides, which would be indicated by blue exhaust smoke. While the manual doesn't have a direct troubleshooting entry for 'high oil consumption,' it does mention 'high oil consumption may be experienced' if incorrect oil is used during break-in (Source 1, 28), implying internal engine condition is a factor. Furthermore, 'Defective engine' requiring 'compression check' is listed as a probable cause for 'ENGINE RUNS ROUGHLY OR WILL NOT ACCELERATE PROPERLY' (Source 9, 49, 51), which could be related to internal wear causing oil consumption. Dirty or diluted oil can also contribute to wear (Source 23, 29). I need to determine if the oil is leaking externally or being consumed internally.",
+      "mechanic_instructions": "A quart of oil every 4-5 hours is excessive consumption. We need to determine if this oil is leaking externally or being burned internally. Start by performing a thorough visual inspection for leaks and observing the exhaust.",
+      "answer_path_prompts": [
+        "I see visible oil streaks or puddles on the engine, cowling, or hangar floor.",
+        "I see blue smoke from the exhaust, especially on engine start-up or during power changes.",
+        "I see no visible leaks or blue smoke, but the oil on the dipstick appears dirty or diluted quickly after an oil change.",
+        "The engine is new or recently overhauled (within 50 hours of operation)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "During the run-up, the RPM drop on one magneto is over 175 RPM -- it exceeds the normal limit and the engine runs rough on that mag.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Rough Running / Magneto Drop Excessive",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "11-59. MAGNETO CHECK."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 20,
+          "context": "NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 4,
+          "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 31,
+          "context": "11-9. > 11A- 14. BUILD-UP. > NOT E"
+        }
+      ],
+      "diagnostic_reasoning": "The reported RPM drop exceeding 125 RPM on one magneto, accompanied by rough engine operation, indicates an issue within the ignition system specific to that magneto. The Service Manual states that an RPM drop exceeding 125 RPM or a differential greater than 50 RPM between magnetos is outside normal limits (Source 1, page 21). A 'sharp rpm drop-off past normal is usually a sign of a fouled plug, a defective harness lead or a magneto out of time' (Source 6, page 21). The FSM also directs that 'If ignition trouble should develop, spark plugs and ignition wiring should be checked first' (Source 15, page 20). Other potential causes for power loss, such as carburetor heat or induction filter, are less likely to manifest as a problem isolated to a single magneto's performance during a run-up.",
+      "mechanic_instructions": "The excessive RPM drop and rough running on one magneto during run-up points directly to a fault in that magneto's ignition circuit. Per the Service Manual, we need to start by inspecting the most common failure points. Begin by checking the spark plugs and ignition harness for the cylinders associated with the affected magneto.",
+      "answer_path_prompts": [
+        "The spark plugs for the affected magneto's cylinders are fouled, worn, or improperly gapped. (Refer to paragraph 11-60 for spark plug maintenance, Source 6, page 21; and 11-9 for troubleshooting, Source 45, page 4).",
+        "The ignition harness leads for the affected magneto show signs of damage, chafing, or a lack of continuity. (Refer to paragraph 11-9 for troubleshooting, Source 45, page 4).",
+        "The magneto-to-engine timing for the affected magneto is outside the specified tolerance of plus zero, minus two degrees. (Refer to paragraph 11-58 for timing checks, Source 27, page 20; and 11A-18A for static run-up checks, Source 10, page 31).",
+        "The magneto itself is defective, showing signs of internal moisture or other malfunction not attributable to plugs, harness, or timing. (Refer to paragraph 11-58 for troubleshooting, Source 15, page 20)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I was cruising at altitude and the engine started losing power gradually -- adding carburetor heat restored it immediately.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Carburetor Ice -- Power Loss in Flight",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Fuel System",
+        "Induction Air System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 39,
+          "context": "11A- 46. AIRBOX. > 11A- 47. REMOVAL AND INSTALLATION. > 11-3."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 17,
+          "context": "11-46. INDUCTION AIR SYSTEM. > 11-47. DESCRIPTION. Ram air to the engine enters > SHOP NOTES:"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 6,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 31,
+          "context": "11-9. > 11A- 14. BUILD-UP. > NOT E"
+        }
+      ],
+      "diagnostic_reasoning": "The immediate restoration of power upon applying carburetor heat strongly indicates carburetor icing. The induction airbox contains a valve, operated by the carburetor heat control, which permits air from an exhaust heated source to be selected in the event carburetor icing or filter icing should be encountered (Source 39, 41). This system is designed to melt ice in the carburetor. A secondary, less likely, cause could be a restricted induction air filter, which might also be bypassed or affected by the carburetor heat system, leading to power restoration (Source 6, 29, 34). Improper rigging of the carburetor heat control could also contribute to power loss if it was partially open, but the symptom describes *adding* heat to resolve the issue (Source 18, 26).",
+      "mechanic_instructions": "The symptom of gradual power loss at altitude, immediately resolved by applying carburetor heat, is a classic indication of carburetor icing. The carburetor heat system introduces warm air to melt ice that forms in the carburetor, which can restrict airflow and disrupt the fuel-air mixture. We need to confirm the proper operation of the carburetor heat system and rule out other induction air issues. Observe the carburetor heat control and the engine's response.",
+      "answer_path_prompts": [
+        "When carburetor heat was applied, the engine RPM increased significantly and smoothly, and power was fully restored.",
+        "When carburetor heat was applied, the engine RPM increased slightly, but the power was not fully restored, or the engine ran rough.",
+        "The carburetor heat control feels stiff or does not move through its full range of travel."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine runs rough and the compression is low on one cylinder -- the exhaanic says the exhaust valve is stuck partially open.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Stuck Exhaust Valve",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Mechanical",
+        "Ignition System",
+        "Fuel/Induction System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 31,
+          "context": "11-9. > 11A- 14. BUILD-UP. > NOT E"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 6,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 18,
+          "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 36,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 52,
+          "context": "11-9. TROUBLE SHOOTING (Cont). ~"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms are 'engine runs rough' and 'low compression on one cylinder,' with the mechanic suspecting a 'stuck exhaust valve.' Low compression on a single cylinder directly points to a mechanical issue within that cylinder, such as a valve problem. The Service Manual lists 'Perform an engine compression check' and 'Defective engine. Check compression. Listen for unusual engine noises. Engine repair is required' under troubleshooting for low RPM or rough running (Source 1, 9, 15, 26, 32, 53). While a stuck exhaust valve isn't explicitly listed, it falls under 'Defective engine' requiring repair. Other potential causes for rough running and perceived low performance include ignition system issues (fouled spark plugs, defective harness, magneto problems) (Source 1, 9, 15, 26, 29, 32, 38, 47) or fuel/induction system problems (restricted air filter, induction leaks, leaking primer, defective carburetor) (Source 24, 26, 36, 52, 53). However, the specific mention of low compression on *one cylinder* and a *stuck exhaust valve* makes the mechanical issue the primary suspect. The initial step is to physically verify the valve's condition.",
+      "mechanic_instructions": "Given the low compression on one cylinder and the suspicion of a stuck exhaust valve, we need to physically inspect the valve train for that cylinder. Remove the rocker box cover on the affected cylinder and visually inspect the exhaust valve, rocker arm, pushrod, and valve spring for any signs of sticking, excessive play, or damage. This will confirm or rule out the mechanic's initial assessment.",
+      "answer_path_prompts": [
+        "Upon removing the rocker box cover, the exhaust valve on the affected cylinder is visibly stuck open, or there is excessive play/damage in the rocker arm, pushrod, or valve spring.",
+        "The valve train components (rocker arm, pushrod, valve spring) appear normal and move freely, but the spark plug from the affected cylinder is heavily fouled, cracked, or has an incorrect gap.",
+        "The valve train and spark plug appear normal, but there is a noticeable air leak around the intake manifold gasket or a primer line connection on the affected cylinder, or the primer itself is leaking fuel."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's oil dripping from behind the propeller spinner -- it's slinging oil onto the cowling and windshield.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Prop Seal Oil Leak (Front Crankshaft Seal)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Oil System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 14,
+          "context": "11- 31. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > TROUBLE > REMEDY"
+        }
+      ],
+      "diagnostic_reasoning": "The symptom of oil dripping from behind the propeller spinner and slinging onto the cowling and windshield directly points to an oil leak at the front of the engine. The Service Manual's troubleshooting section for 'OIL LEAK AT FRONT OF ENGINE' lists 'Damaged crankshaft seal' as the probable cause. This is the most direct and probable cause given the location of the leak.",
+      "mechanic_instructions": "An oil leak at the front of the engine, particularly one that is slinging oil, is most commonly caused by a damaged crankshaft seal. You need to visually inspect the crankshaft seal for signs of damage or leakage. Remove the propeller spinner to gain clear access to the front of the engine and the crankshaft seal.",
+      "answer_path_prompts": [
+        "The crankshaft seal is visibly damaged or leaking.",
+        "The crankshaft seal appears intact, but oil is present in the area.",
+        "No oil leak is visible around the crankshaft seal, but oil is still present on the cowling/windshield."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_007",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The oil temperature gauge reads near or above the redline in cruise -- the engine seems to be running hotter than normal.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "High Oil Temperature",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Lubrication System",
+        "Engine Instruments"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 35,
+          "context": "PROBABLE CAUSE > REMEDY > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 35,
+          "context": "PROBABLE CAUSE > TROUBLE > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 13,
+          "context": "11-31. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 22,
+          "context": "MODEL > 172 AND > F172 (1972 & ON)"
+        }
+      ],
+      "diagnostic_reasoning": "High oil temperature in cruise can be caused by a faulty oil temperature gauge or bulb, or an actual engine overheating condition. The Service Manual lists 'Oil temperature gage defective' and 'Defective oil temperature bulb' as probable causes for high oil temperature. Other probable causes include low oil supply, high viscosity oil, prolonged ground operation at high engine speed, excessive rate of climb, lean fuel-air mixture, oil congealed in the cooler, clogged oil cooler air or oil passages, a defective oil cooler thermostatic/bypass valve, or installed winter baffles. The first step in troubleshooting is to verify the accuracy of the gauge itself. The oil temperature gauge is a Bourdon-type pressure instrument connected by armored capillary tubing to a temperature bulb. Damage to the capillary tube can also cause the gauge to be inoperative. After verifying the gauge, the next steps involve checking the oil system and cooling system components.",
+      "mechanic_instructions": "A high oil temperature reading near or above the redline in cruise requires immediate investigation. First, we need to determine if this is an actual engine overheating condition or a false reading from a faulty instrument. The most direct initial check is to verify the oil temperature gauge's accuracy and inspect its associated components. Then, we will check the oil level and grade, and inspect the oil cooler and engine baffles.",
+      "answer_path_prompts": [
+        "The oil temperature gauge reads normal when compared to a known good gauge, or the capillary tube/fittings are visibly damaged.",
+        "The oil temperature gauge reads the same as a known good gauge, and the oil level is low or the oil grade is incorrect for the ambient temperature.",
+        "The oil temperature gauge reads the same as a known good gauge, the oil level and grade are correct, but the oil cooler air passages are visibly clogged or winter baffles are installed.",
+        "The oil temperature gauge reads the same as a known good gauge, the oil level and grade are correct, and the oil cooler appears clear and baffles are appropriate for the conditions."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_008",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "One or more cylinders are running hotter than the rest -- the CHT gauge on the number three cylinder is near the limit.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "High Cylinder Head Temperature (CHT)",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine",
+        "Ignition System",
+        "Fuel System",
+        "Cooling System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 2,
+          "context": "11-7. DESCRIPTION. An air cooled, wet- sump, four-cylinder, horizontally-opposed, direct-drive, carbureted \"Blue Streak\" (Lycoming) 0- 320-E series engine is used to power ALL 172 series air- craft. The 0-320-E series engine is also used to power the F172 series aircraft beginning with the 1972 model year. The cylinders, numbered from front to rear, a r e  staggered to permit a separate throw on the crankshaft for each connecting rod. The right front cylinder is number 1 and cylinders on the right side are identified by odd numbers 1 and 3. The left front cylinder is number 2 and the cylinders on the left side are identified as numbers 2 and 4. Refer to paragraph 11-8 for engine data. For repair and overhaul of the engine, accessories and propeller, refer to the appropriate publications issued by their manufacturer's. These publications a r e  available from the Cessna Service Parts Center. http://www.ioffer.com/selling/userfriendlycds http://stores.ebay.com/UserFriendlyCDs"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 3,
+          "context": "11-8. ENGINE DATA. MODEL (Lycoming) BHP at RPM Number of Cylinders Displacement Bore Stroke Compression Ratio Magnetos Right Magneto Left Magneto Firing Order Spark Plugs Torque Value Carburetor (Marvel-Schebler) Oil Sump Capacity With Filter Element Change Tachometer Approximate Dry Weight With Standard Accessories Oil Pressure Minimum Idling Normal Maximum (Cold Oil Starting) Oil Temperature Normal Operation Maximum Permissible Cylinder Head Temperature 0- 320- E2D 150 BHP at 2700 RPM 4-Horizontally Opposed 319.8 Cubic Inches 5.125 Inches 3.875 Inches 7.0:l Slick No. 4051 (Left) No. 4050 (Right) Fires 25° BTC 1-3 Lower and 2-4 Upper Fires 25' BTC 1-3 Upper and 2-4 Lower I 1-3-2-4 18MM (Refer to Current Lycoming Active Factory Approved Spark Plug Chart) 390*30 Lb-In. MA- 4SPA 8 U.S. Quarts 9 U.S. Quarts Mechanical 269 Pounds (Weight is Approximate and Will Vary with Optional Equipment Installed) 25 PSI 60 to 85 PSI 100 PSI Within Green Arc Red Line (245°F) 500 \" F Maximum Change 2 11-3 http://www.ioffer.com/selling/userfriendlycds http://stores.ebay.com/UserFriendlyCDs"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). ~ TROUBLE ENGINE STARTS BUT DIES, OR WILL NOT IDLE. (Cont. ) PROBABLE CAUSE REMEDY -~~ Vaporized fuel. (Most likely to occur in hot weather with a hot engine. Refer to paragraph 11-79. Induction air leaks. Check visually. Correct the cause of leaks. Manual primer leaking. Disconnect primer outlet line. If fuel leaks through primer, repair or replace primer. Leaking float valve or float level set too high. Perform an idle mixture check. Attemp"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 10,
+          "context": "Average the results of the RPM obtained. Refer d. If the average results of the RPM obtained does to following chart for applicable RPM. not meet the limits specified in the chart, the follow- ing recommended checks may be performed to deter- mine a possible deficiency. 1. Check carburetor heat control for proper rigging. If partially open it would cause a slight power loss. 2. Check magneto timing, spark plugs and igni- tion harness for settings and conditions. 3. Check condition of induction air filter. Clear if necessary. 4. Perform an engine compression check. (Re- fer to engine Manufacturer's Manual). 1972 AND ON 17263470, 17263492 THRU 17263494, 17263497, 17263541 THRU 17263558, 17263560 AND ON & F17201255 AND ON MODEL 0-320-E2D 0-320-E2D ~ 172 1969 MODEL 172 AND ON & 1972 MODEL F172 AND ON WHEN CESSNA SINGLE-ENGINE SERVICE LETTER SE74-16 HAS BEEN INCORPORATED 172 & F172 0-32 0-E2D 172 & F172 ~ #172 & F172 11- 19. ENGINE BAFFLES. 11-20. DESCRIPTION. The sheet metal baffles in- stalled on the engine directs the flow of air around the cylinders and other engine components to provide optimum cooling."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "NOTE An absence of rpm drop may be an indication of faulty grounding of one side of the ignition system, a disconnected ground lead at mag- neto or possibly the magneto timing is set too far in advance. 11-60. SPARK PLUGS. Two 18-mm spark plugs are installed in each cylinder and screw into helicoil type thread inserts. The spark plugs are shielded to pre- vent spark plug noise in the radios and have an inter- nal resistor to provide longer terminal life. Spark plug life will vary with operating conditions. A spark plug that is kept clean and properly gapped will give better and longer service than one that is allowed to collect lead deposits and is improperly gapped. NOTE At each 100- hour inspection, remove, clean, inspect and regap all spark plugs. Install lower spark plugs in upper portion of cylin- ders and install upper spark plugs in lower portion of cylinders. Since deterioration of lower spark plugs is usually more rapid than that of the upper plugs, rotating helps prolong spark plug life. 11-61. ENGINE CONTROLS. 11-62. DESCRIPTION. The throttle, mixture and carburetor heat controls are of the push-pull type."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 20,
+          "context": "NOTE If ignition trouble should develop, spark plugs and ignition wiring should be checked fir st. If the trouble appears definitely to be associated with a magneto, the following may be used to help disclose the source of trouble. a. Remove high-tension outlet plate and check dis- b. If any moisture is evident, lightly wipe with a tributor block for moisture. soft, dry, clean, lint-free cloth. Install outlet plate. NOTE Since these magnetos MUST NOT BE DIS- ASSEMBLED, a new magneto should be installed if the moisture check does not remedy the trouble. 11-20 http://www.ioffer.com/selling/userfriendlycds http://stores.ebay.com/UserFriendlyCDs"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 17,
+          "context": "11-48. REMOVAL AND INSTALLATION. a. Remove cowling as required for access in accor- b. Mark the intake pipes as they are removed from dance with paragraph 11-3. the engine so they may be reassembled in the same location from which they were removed. from sump. Remove any clamps attaching wires and lines to the intake pipes. cylinder. der mounting pad and intake pipe flange. Use new gaskets and install intake pipes in the same location from which they were removed. c .  Loosen hose clamps and slide hose connections d. Remove the nuts, washers and lock washers at e. Remove intake pipe and clean gasket from cylin- f .  Reverse the preceding steps for reinstallation. 11-49. IGNITION SYSTEM. 11-50. DESCRIPTION. The ignition system is com- prised of two magnetos, two spark plugs in each cyl- inder, an ignition wiring harness, an ignition switch mounted on the instrument panel and required wiring between the ignition switch and magnetos. 11-17 http://www.ioffer.com/selling/userfriendlycds http://stores.ebay.com/UserFriendlyCDs"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 40,
+          "context": "Locating the advanced firing position of number one cylinder may be obtained by rotating the crankshaft opposite to its normal direction of ro- tation until it is approximately 30 degrees before top center (BTC) on the compression stroke of number one cylinder. Then, rotate crankshaft in normal di- rection of rotation to align the correct timing mark on the outer surface of the crankshaft flange, with the parting surface of the crankcase below the crankshaft as the reference point, making sure the final motion of the crankshaft is in the direction of normal rotation, NOTE Various other methods and equipment may be used to arrive at the number one piston ad- vanced firing position. One such method is: An accurate top center indicator which screws into a spark plug mounting hole and a pendu- lum pointer mounted on a 360-degree timing disc may be used. The timing disc should be adapted to fit over the end of the propeller spinner in such a manner that it may be ro- tated as necessary. In all cases, it must be definitely determined that the number one cylinder is at the correct firing position, on the compression stroke, when the crankshaft is turned in its normal direction of rotation. After the engine has been placed in the correct firing position, install and time the magneto to the engine in the fol- lowing manner."
+        }
+      ],
+      "diagnostic_reasoning": "A cylinder running hotter than the rest, with the CHT gauge near its 500°F limit, indicates a localized issue affecting combustion efficiency, mixture, or cooling for that specific cylinder. Cylinder #3 is on the right side, rear (Source 22). The most probable causes, based on the FSM, are: \n1.  **Ignition System Fault:** Fouled, incorrectly gapped, or damaged spark plugs, or a faulty ignition lead/magneto issue specific to cylinder #3. The FSM states, 'If ignition trouble should develop, spark plugs and ignition wiring should be checked first.' (Source 47). Spark plugs should be inspected and regapped at 100-hour intervals (Source 44). Incorrect magneto timing can also cause power loss (Source 38).\n2.  **Lean Fuel-Air Mixture:** An induction air leak around the intake pipe or manifold gasket for cylinder #3 would cause a lean mixture, leading to higher combustion temperatures. The FSM lists 'Induction air leaks' as a probable cause for engine issues and advises to 'Check visually. Correct the cause of leaks.' (Source 56).\n3.  **Localized Cooling Issue:** Damaged or misaligned engine baffles around cylinder #3 could restrict airflow, reducing cooling efficiency. Baffles are designed to direct air for optimum cooling (Source 38).",
+      "mechanic_instructions": "Cylinder #3 is running hot, near the 500°F CHT limit. We need to isolate the cause. Start by checking the components directly affecting combustion and mixture for that cylinder. \n\nFirst, inspect the ignition system components for cylinder #3. Then, check for any air leaks in the induction system specific to that cylinder. Finally, visually inspect the engine baffles around cylinder #3 for any damage or misalignment.",
+      "answer_path_prompts": [
+        "The spark plugs for cylinder #3 are fouled, worn, or incorrectly gapped, or the ignition lead is damaged.",
+        "There is a visible air leak around the intake pipe or manifold gasket for cylinder #3.",
+        "The engine baffles around cylinder #3 are damaged or misaligned, restricting cooling airflow.",
+        "The magneto-to-engine timing is off for the magneto supplying cylinder #3 (Right Magneto, firing 1-3 lower and 2-4 upper, or Left Magneto, firing 1-3 upper and 2-4 lower, depending on which plug is affected). (Source 29, 40)"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_009",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I turned the key and cranked and cranked but the engine won't start -- there's a strong fuel smell and it seems flooded.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Engine Won't Start -- Flooded",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Ignition System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 26,
+          "context": "11-79. HOT WEATHER. Engine starting in hot"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 4,
+          "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 18,
+          "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+        }
+      ],
+      "diagnostic_reasoning": "The strong fuel smell and flooded condition indicate an over-rich fuel mixture preventing ignition. The primary suspects are improper starting procedure (over-priming), a leaking manual primer, or a defective carburetor (specifically a leaking float valve or high float level). Fouled spark plugs are a direct consequence of flooding and will prevent the engine from starting even if the fuel issue is resolved. The FSM provides a specific procedure for starting a flooded engine (Source 22, page 26, paragraph 11-79). If this does not resolve the issue, the next step is to identify the source of the excessive fuel or the lack of ignition.",
+      "mechanic_instructions": "A strong fuel smell and a flooded engine typically result from an excessive fuel-air mixture. First, attempt the standard procedure for a flooded engine. If the engine still fails to start, we need to determine if the flooding is due to a component malfunction or if the spark plugs are too fouled to ignite the mixture. Perform the following actions and report your observations:",
+      "answer_path_prompts": [
+        "The engine started and ran after following the flooded engine starting procedure (throttle 1/2 OPEN, mixture IDLE CUT-OFF, then RICH as it fires).",
+        "The engine still won't start. When you disconnect the manual primer outlet line (refer to paragraph 11-9, Source 7, page 5), fuel leaks continuously from the primer.",
+        "The engine still won't start. When you remove the spark plugs, they are wet with fuel and appear black or heavily carbonized (refer to paragraph 11-9, Source 1, page 4, or Source 4, page 18)."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_010",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "During the run-up, the engine won't reach full static RPM -- it tops out 100-200 RPM below the expected value.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Engine Won't Develop Full Static RPM",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Induction System",
+        "Ignition System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 31,
+          "context": "11A-18A. STATIC RUN-UP PROCEDURES."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 10,
+          "context": "11-18A. STATIC RUN-UP PROCEDURES."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "11-59. MAGNETO CHECK."
+        }
+      ],
+      "diagnostic_reasoning": "Low static RPM during run-up indicates a low engine power condition. The Service Manual (paragraphs 11-18A and 11A-18A) outlines specific checks for this symptom. These include issues with the carburetor heat control, induction air filter, magneto timing/spark plugs/ignition harness, and engine compression. I will prioritize the more common and easily verifiable items first.",
+      "mechanic_instructions": "A static RPM run-up that is 100-200 RPM below the expected value points to a deficiency in engine power. We need to systematically check the most probable causes as outlined in the Service Manual, Section 11-18A or 11A-18A. Start by checking the induction and ignition systems.",
+      "answer_path_prompts": [
+        "The carburetor heat control linkage is improperly rigged, and the heat valve is partially open, allowing heated air into the induction system.",
+        "The induction air filter is visibly clogged with dirt or debris, restricting airflow.",
+        "During a magneto check (paragraph 11-59), the RPM drop on one or both magnetos exceeds 125 RPM, or the differential between them is greater than 50 RPM."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_011",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found metal particles on the oil screen during the oil change -- he says we need to investigate.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Oil Screen / Filter Contamination -- Metal Particles",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Oil System",
+        "Engine Mechanical"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 37,
+          "context": "NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 12,
+          "context": "11-31. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 14,
+          "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 26,
+          "context": "11-79. HOT WEATHER. Engine starting in hot > 11-26 > 11-80. DUSTY CONDITIONS. Dust induced into the"
+        }
+      ],
+      "diagnostic_reasoning": "Metal particles on the oil screen or filter element are a critical indicator. The primary concern is internal engine damage, which the Service Manual explicitly states 'justifies further examination to determine the cause' (Source 1, 5, 20). This could include chips or particles from bearings (Source 1, 5, 20) or metal particles from a damaged oil pump (Source 8, 24, 36, 38, 39, 53). However, it's also possible to find 'small particles or metallic shavings' in new or newly overhauled engines that are 'generally of no consequence' (Source 1, 5, 20). Another possibility, especially if oil dilution has occurred, is that 'sludge and carbon deposits' have been dislodged and collected in the screen (Source 18, 50). The next step is to precisely identify the nature of these particles.",
+      "mechanic_instructions": "The presence of metal particles on the oil screen requires immediate investigation. If an external oil filter element was installed, you need to perform a detailed inspection of the filter element itself. Remove the outer perforated paper cover, then use a sharp knife to cut through the folds of the filter element at both ends. Carefully unfold the pleated element and examine the material trapped within. Describe the nature of the particles you find.",
+      "answer_path_prompts": [
+        "The particles are distinct, hard chips or flakes, some appearing to be from bearings or other internal engine components.",
+        "The particles are fine, metallic shavings, consistent with normal break-in material for a new or recently overhauled engine.",
+        "The particles are soft, dark, and appear to be sludge or carbon deposits, not metallic."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "eng_012",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's increased vibration in the cockpit and the mechanic found cracks in the engine mount tubes.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Engine Mounts Cracked / Deteriorated",
+    "response_parsed": {
+      "current_state": "PHASE_C_TESTING",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Engine Mount System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+          "page": 41,
+          "context": "18-67. ENGINE MOUNT SUPPORT CRADLE DAM- AGE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 11,
+          "context": "11-27. REPAIR. Repair of the engine mount shall be performed carefully as outlined in Section 18."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 6,
+          "context": "11-9. TROUBLE SHOOTING (Cont). ENGINE RUNS ROUGHLY OR WILL NOT ACCELERATE PROPERLY. (Cont. )"
+        }
+      ],
+      "diagnostic_reasoning": "The increased cockpit vibration is directly attributable to the cracked engine mount tubes. The engine mount is designed to support the engine and absorb vibrations, preventing their transmission to the airframe. Cracks compromise this structural integrity and vibration dampening function. The Service Manual lists 'Cracked engine mount' as a probable cause for an engine running roughly, which would manifest as increased vibration. The next step is to assess the extent and location of the damage to determine the appropriate repair procedure as outlined in Section 18.",
+      "mechanic_instructions": "The cracked engine mount tubes are the direct cause of the increased vibration. The engine mount is a critical structural component designed to absorb engine vibrations. Cracks in this structure will allow excessive vibration to transmit to the airframe and cockpit. You need to determine the extent and location of the damage to decide if a repair is feasible or if the entire mount requires replacement. Refer to Section 18 for detailed repair procedures.",
+      "answer_path_prompts": [
+        "The cracks are minor, not adjacent to engine attaching lugs, and can be repaired by rewelding and extending a gusset.",
+        "The cracks are extensive, or located at engine mounting lugs or engine mount-to-fuselage attaching fittings, requiring replacement of the mount."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_C_TESTING"
+  },
+  {
+    "query_id": "fuel_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's a fuel stain on the underside of the wing near the fuel tank -- it smells like avgas.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Tank Leak -- Wing Tank Seepage",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 45,
+          "context": "SECTION 12 > FUEL SYSTEM > TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 2,
+          "context": "* THRU 17260805 & F1720904 > BEGINNING WITH 17260806 & F1720905 > 12-5."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 3,
+          "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 36,
+          "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+        }
+      ],
+      "diagnostic_reasoning": "A fuel stain on the underside of the wing near the fuel tank, smelling of avgas, indicates a leak in the fuel system components located in or around the wing tank. The primary suspects are the fuel tank sump drain, the fuel vent system, or the fuel quantity transmitter. The fuel tanks are located in the inboard section of each wing (Source 1, 7). Sump drain plugs/valves are provided in each tank for draining (Source 8, 39, 51), and a leak here would directly manifest as a stain on the underside. The fuel vent line extends overboard through the lower wing skin (Source 1, 7, 18, 21), and a plugged vent can cause pressurization or fuel starvation (Source 2, 14, 21, 24), potentially leading to fuel escaping from the vent or other weak points. Fuel quantity transmitters are installed in the top of the fuel tanks (Source 8, 18, 36), and a leaking gasket during installation or due to age could allow fuel to seep out and run down the wing structure.",
+      "mechanic_instructions": "A fuel stain on the underside of the wing near the fuel tank points to a leak in the wing's fuel system. We need to physically locate the source. Start by inspecting the most accessible components on the underside of the wing.",
+      "answer_path_prompts": [
+        "I see fuel weeping or dripping directly from the fuel tank sump drain plug/valve on the underside of the wing.",
+        "I see fuel residue or active dripping from the fuel vent line exit on the lower wing skin, adjacent to the wing strut.",
+        "The sump drain and vent line appear dry. I see signs of fuel around the fuel filler cap or an access plate on the top of the wing, indicating a leak running down from above."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The fuel selector valve is stiff and hard to turn between tanks -- or it leaks fuel from the selector area in the floor.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Selector Valve -- Stuck or Leaking",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 26,
+          "context": "2-44. FUEL SELECTOR VALVE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 3,
+          "context": "12-12. FUEL SELECTOR VALVE."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 46,
+          "context": "12-4. TROUBLE SHOOTING."
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms, a stiff fuel selector valve and fuel leaks from the selector area, point directly to issues with the fuel selector valve itself or its immediate connections. The Service Manual (Source 19, page 26) explicitly states to check the valve control detent plate for cleanliness and wear, and drive shaft attach points for security, binding, wear, and lubrication, as these can cause poor detent feel and binding. For leaks, a 'defective fuel selector valve' is listed as a probable cause for fuel flow issues (Source 10, page 46), and valve repair involves replacement of seals, springs, and balls (Source 1, page 3), which are common failure points for leaks and stiffness. Loose fuel line connections are also a possibility for leaks.",
+      "mechanic_instructions": "First, you need to visually inspect the fuel selector valve area. Remove the pedestal cover as necessary (Source 8, page 41). Check the valve control detent plate and the drive shaft attach points for any visible dirt accumulation, corrosion, or signs of binding. Then, look for any evidence of fuel leaks around the base of the selector valve or its connected fuel lines. Finally, operate the valve handle through all positions to assess its freedom of movement and detent feel, noting any specific points of stiffness or resistance.",
+      "answer_path_prompts": [
+        "The detent plate or drive shaft area is visibly dirty, corroded, or shows signs of binding when operating the valve.",
+        "Fuel is visibly leaking from the base of the selector valve or its fuel line connections.",
+        "The valve handle is stiff, but there are no visible external obstructions, dirt, or leaks around the detent plate, drive shaft, or fuel line connections."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine lost power in flight and switching tanks didn't help -- the mechanic later found both fuel cap vents were blocked with debris.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Cap Vent Blockage -- Fuel Starvation",
+    "response_parsed": {
+      "current_state": "PHASE_D_CONCLUSION",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 2,
+          "context": "12-11. CHECKING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 46,
+          "context": "12-4. TROUBLE SHOOTING."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 3,
+          "context": "NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "The reported engine power loss in flight, which was not alleviated by switching fuel tanks, is a classic symptom of fuel starvation. The mechanic's finding of both fuel cap vents being blocked with debris directly confirms this. A plugged fuel vent prevents atmospheric pressure from entering the fuel tank as fuel is consumed, creating a vacuum that restricts fuel flow to the carburetor. The Service Manual explicitly states that a plugged fuel vent can lead to 'possible fuel starvation of the engine or collapse of the fuel tanks' (Paragraph 12-11, page 2, Source 1, 6, 9, 12) and lists 'Plugged fuel vent' as a probable cause for 'NO FUEL TO CARBURETOR' (Paragraph 12-4, page 46, Source 19, 39, 43). The fact that both tanks were affected indicates a common blockage or simultaneous blockage of individual vents, preventing proper fuel delivery.",
+      "mechanic_instructions": "The diagnosis is confirmed: fuel starvation due to blocked fuel tank vents. Ensure all debris has been thoroughly removed from both fuel cap vents and the associated vent lines. Verify the proper function of the fuel vent system by performing the procedure outlined in Paragraph 12-11, 'CHECKING,' on page 2 of Section 12 (Source 1, 6, 9). This involves pressurizing the tank via the vent line and checking for continuous bubbles from the bleed hole in a container of water, and then checking the crossover line by pressurizing one tank and loosening the filler cap on the opposite wing. Any remaining restriction must be corrected before returning the aircraft to service.",
+      "answer_path_prompts": [],
+      "requires_input": false
+    },
+    "current_state": "PHASE_D_CONCLUSION"
+  },
+  {
+    "query_id": "fuel_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "There's a persistent fuel smell in the cockpit -- the mechanic traced it to a leaking primer line.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Primer System Leak -- Fuel Odor in Cabin",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Engine Controls"
+      ],
+      "source_citations": [
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 4,
+          "context": "12-19. PRIMING SYSTEM. (See figure 12-2.) > 12-20. DESCRIPTION. The model 172-Series, > 12 -21. REMOVAL AND INSTALLATION."
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 6,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+        },
+        {
+          "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 45,
+          "context": "SECTION 12 > FUEL SYSTEM > TABLE OF CONTENTS"
+        }
+      ],
+      "diagnostic_reasoning": "The user has identified a persistent fuel smell in the cockpit, traced to a leaking primer line. The Service Manual lists 'Manual primer leaking' as a probable cause for engine issues and specifies to 'Disconnect primer outlet line. If fuel leaks through primer, repair or replace primer.' (Source 11, 14, 29, 36). The manual also instructs to 'Visually inspect primer lines for crushed, kinked, or broken condition. Ensure proper clamping to prevent fatigue due to vibration and chafing.' (Source 1, 4, 5, 10). The next step is to physically verify the nature and location of the leak to determine if repair or replacement of the line or the primer unit itself is necessary.",
+      "mechanic_instructions": "You've traced the fuel smell to a leaking primer line. This is a critical safety item. Before proceeding, ensure all fuel system precautions are observed as outlined in Section 12-3 of the Service Manual (Source 34, 40, 49, 51). Your next step is to visually inspect the entire primer line from the fuel strainer connection to the intake manifold, paying close attention to the primer pump body and all fittings. We need to determine the exact nature of the leak.",
+      "answer_path_prompts": [
+        "Fuel is leaking directly from the primer pump body or its shaft when operated, or continuously.",
+        "Fuel is leaking from a fitting or connection along the primer line.",
+        "The primer line itself is visibly crushed, kinked, chafed, or broken.",
+        "No visible leak is apparent, but the fuel smell persists, and the line appears intact."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_005",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine floods and runs excessively rich -- fuel drips from the carburetor drain and the engine is hard to start.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Carburetor -- Leaking or Stuck Float",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Carburetion"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 6,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 16,
+          "context": "11-37. DISASSEMBLY, INSPECTION AND RE- > 11-38. INSTALLATION. > 11-39. OIL COOLER."
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptoms of an excessively rich condition, fuel dripping from the carburetor drain, and hard starting strongly point to an issue with the fuel metering in the carburetor or an external fuel leak. The primary suspects are a leaking float valve or an improperly set high float level within the carburetor, which would cause the float bowl to overfill and drip fuel, leading to flooding and rich running (Source 5, 20, 24). Another significant possibility is a leaking manual primer, which would continuously introduce excess fuel into the intake manifold, resulting in a rich mixture and hard starting (Source 10, 20, 24, 26, 28). An incorrectly adjusted rich idle mixture could also contribute to the rich running and hard starting, but is less likely to cause fuel dripping from the drain on its own (Source 1, 23, 29, 54).",
+      "mechanic_instructions": "The engine flooding and running excessively rich, with fuel dripping from the carburetor drain, indicates an uncontrolled fuel flow. We need to determine if the issue is internal to the carburetor's float system or an external leak from the primer. Perform the following checks:",
+      "answer_path_prompts": [
+        "After performing an idle mixture check (paragraph 11-45), the engine RPM does not increase or decreases immediately when slowly moving the mixture control toward IDLE CUT-OFF, indicating an uncorrectable rich mixture. (This points to a leaking float valve or high float level in the carburetor.)",
+        "You disconnect the manual primer outlet line, and fuel continuously drips or flows from the primer. (This points to a defective manual primer.)",
+        "After performing an idle mixture check (paragraph 11-45), the engine RPM momentarily increases by more than 25 RPM when slowly moving the mixture control toward IDLE CUT-OFF, indicating a rich idle mixture that can be adjusted. (This points to an incorrectly adjusted idle mixture screw.)"
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "fuel_006",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The mechanic found water and sediment in the fuel strainer during the preflight drain.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Fuel Strainer / Gascolator Contamination",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Carburetion"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 20,
+          "context": "2-21. > NOTE > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 4,
+          "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+        }
+      ],
+      "diagnostic_reasoning": "The presence of water and sediment in the fuel strainer indicates contamination within the aircraft's fuel system. This is a critical issue that can lead to fuel starvation, rough engine operation, or complete engine failure. The Service Manual explicitly states that if water is found in the fuel strainer, there is a possibility that the wing tank sumps or fuel lines also contain water. Therefore, a complete drain of the entire fuel system, including tank sumps, lines, strainer, and carburetor, is required to eliminate the contamination and prevent further issues.",
+      "mechanic_instructions": "The presence of water and sediment in the fuel strainer indicates contamination within the fuel system. This requires a complete drain to prevent engine malfunction. First, drain the fuel tank sumps. Then, drain the fuel lines, the fuel strainer again, and finally the carburetor. Collect samples from each drain point for visual inspection. (Refer to paragraph 2-19 for fuel drains and paragraph 2-20 for carburetor drain plug inspection, Source 1, 4, 22).",
+      "answer_path_prompts": [
+        "Water and/or sediment continues to drain from the fuel tank sumps after initial draining.",
+        "Only clean fuel drains from the fuel tank sumps after initial draining.",
+        "No fuel drains from the fuel tank sumps."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "ign_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine started cutting out in flight and switching to one magneto made it worse -- the mechanic found bad points in the left mag.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Magneto Internal Failure -- Points/Condenser",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Engine"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 41,
+          "context": "THESE CONTACT POINTS ARE USABLE > THESE CONTACT POINTS NEED REPLACEMENT > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 42,
+          "context": "11-59. > 11-61. > 11-64."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 19,
+          "context": "11-52. MAGNETOS. > (WARNING) > 11-54. REMOVAL AND INSTALLATION."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 42,
+          "context": "SPECIAL INSPECTION ITEMS > 8 (LYCOMING \"BLUE STREAKII) > ROLLS/ROYC E CONTINENTAL"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 39,
+          "context": "11A- 46. AIRBOX. > 11A- 47. REMOVAL AND INSTALLATION. > 11-3."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 40,
+          "context": "NOTE > (WARNING) > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "The reported symptom of 'engine cutting out in flight' and worsening when switching to a single magneto strongly indicates an ignition system fault. The mechanic's finding of 'bad points in the left mag' points directly to the magneto as the source of the issue. The Service Manual (Source 1, page 41; Source 42, page 41) states that excessive metal transfer on contact points will cause engine misfire. However, there is a critical contradiction in the FSM regarding the serviceability of Slick magnetos (Models 4051/4050) depending on the engine type. Section 11 (Lycoming engines) states these magnetos 'MUST NOT BE DISASSEMBLED' and the 'breaker assembly are non- replaceable' (Source 20, page 19; Source 16, page 19). Conversely, Section 11A (Continental engines) describes accessing the breaker assembly and 'adjusting contact breaker points' or 'replacing breaker assembly' (Source 39, page 39; Source 41, page 40). To proceed with the correct repair path, the engine type must be confirmed.",
+      "mechanic_instructions": "The engine cutting out and worsening on a single magneto points to a fault in the ignition system, specifically the magneto. Your finding of bad points in the left magneto is consistent with this. Before proceeding, we need to confirm the engine type, as the service manual has conflicting instructions for magneto repair based on whether it's a Lycoming or Continental engine.",
+      "answer_path_prompts": [
+        "The aircraft has a Lycoming engine.",
+        "The aircraft has a Continental engine."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "ign_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine runs rough at low power settings and the plugs keep fouling with lead deposits -- they have to be cleaned constantly.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Spark Plug Fouling -- Lead Deposits",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Fuel System",
+        "Ignition System",
+        "Induction System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 18,
+          "context": "TROUBLE > ENGINE WILL NOT IDLE OR RUN PROPERLY."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT DIES, OR WILL NOT IDLE. (Cont. )"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 4,
+          "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "11-59. MAGNETO CHECK."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 31,
+          "context": "11-9. > 11A- 14. BUILD-UP. > NOT E"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 6,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY OR WILL NOT ACCELERATE PROPERLY. (Cont. )"
+        }
+      ],
+      "diagnostic_reasoning": "The symptoms of rough running at low power settings and persistent lead fouling of spark plugs point to either an overly rich fuel-air mixture or an inefficient ignition system leading to incomplete combustion. \n\n**Fuel System (Rich Mixture):** A leaking carburetor float valve or a float level set too high would cause a continuous rich condition, especially at low power, leading to lead deposits and rough running (Source 42). An improperly adjusted rich idle mixture or a leaking manual primer would also cause these symptoms (Source 10, 12, 40, 49). A restricted air filter could also cause a rich mixture (Source 16, 39, 49).\n\n**Ignition System (Incomplete Combustion):** Defective spark plugs, a faulty ignition harness, or a defective magneto can all lead to a weak or intermittent spark, resulting in incomplete combustion. This would manifest as rough running and rapid fouling of the spark plugs with unburnt fuel and lead deposits (Source 1, 18, 12). Incorrect magneto timing can also contribute to inefficient combustion (Source 4, 26, 38, 52).\n\nI will start by having you check for a rich fuel condition, as this directly explains the lead fouling, and then move to the ignition system if the fuel system checks out.",
+      "mechanic_instructions": "The persistent lead fouling of your spark plugs, coupled with rough running at low power, strongly suggests either an excessively rich fuel mixture or an ignition system that isn't providing a strong, consistent spark. We need to isolate which system is at fault.\n\nFirst, we'll check for a rich fuel condition. Perform an idle mixture check to see if the engine is running rich. If the idle mixture adjustment cannot correct a rich indication, it points to a leaking float valve or a float level set too high in the carburetor, or a leaking manual primer. (Refer to paragraph 11-9, 'ENGINE STARTS BUT DIES, OR WILL NOT IDLE,' in the Service Manual, page 5).\n\nWhat do you observe when performing an idle mixture check?",
+      "answer_path_prompts": [
+        "The engine runs rough, and adjusting the idle mixture screw has little to no effect on smoothing it out or leaning it.",
+        "The engine smooths out and leans properly when the idle mixture screw is adjusted, but the plugs still foul quickly.",
+        "The engine runs rough, but the idle mixture adjustment seems to work as expected, and the plugs are still fouling.",
+        "The engine runs smoothly at idle, but still runs rough at low power settings, and the plugs are fouling."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "ign_003",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The engine misfires intermittently and the ignition leads look old and cracked -- the insulation is deteriorating.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Ignition Harness Deterioration -- Cracked Leads",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Fuel System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 5,
+          "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 17,
+          "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 20,
+          "context": "NOTE > NOTE > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "11-59. MAGNETO CHECK. > NOTE > 11-60. SPARK PLUGS. Two 18-mm spark plugs are"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 41,
+          "context": "THESE CONTACT POINTS ARE USABLE > THESE CONTACT POINTS NEED REPLACEMENT > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "The intermittent misfire, coupled with the visual observation of old, cracked ignition leads with deteriorating insulation, strongly points to an ignition system fault. The Service Manual explicitly states that 'If ignition trouble should develop, spark plugs and ignition wiring should be checked first.' (Source 26, 31). 'Defective ignition harness' and 'Spark plugs fouled or improperly gapped' are listed as probable causes for rough running or improper idling (Source 17, 23, 24). A 'Defective ignition system' or 'Defective magneto' are also listed as potential causes (Source 1, 17, 23, 24). Fuel system issues like a 'Defective carburetor' or 'Induction air leaks' can also cause rough running and misfires (Source 8, 20, 24, 29, 35, 43, 46), but the direct visual evidence of ignition lead degradation makes ignition the primary suspect.",
+      "mechanic_instructions": "Given the visual evidence of deteriorating ignition leads, we need to systematically check the ignition system. Start by confirming the integrity of the ignition leads and spark plugs, as these are the most common points of failure and directly align with your observation. Then, we'll check the magnetos if the initial inspection doesn't reveal the fault.",
+      "answer_path_prompts": [
+        "I found visible arcing or carbon tracking on the ignition leads, especially in low light, or the resistance of one or more leads is out of specification.",
+        "I removed the spark plugs and found one or more are fouled, improperly gapped, or show signs of damage.",
+        "I performed a magneto check (paragraph 11-59) and observed an excessive RPM drop (over 125 RPM) or a differential greater than 50 RPM on one magneto, or an absence of RPM drop.",
+        "The ignition leads and spark plugs appear to be in good condition, and the magneto check was normal. I suspect a fuel or induction issue."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "ign_004",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The ignition switch won't turn to START, or the engine keeps running when the switch is turned to OFF -- the switch is faulty.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Ignition Switch Failure",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Ignition System",
+        "Starting System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 18,
+          "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 21,
+          "context": "11-59. MAGNETO CHECK. > NOTE > 11-60. SPARK PLUGS. Two 18-mm spark plugs are"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 23,
+          "context": "11- 69. TROUBLE SHOOTING > TROUBLE > STARTER WILL NOT OPERATE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+          "page": 40,
+          "context": "NOTE > (WARNING) > NOTE"
+        }
+      ],
+      "diagnostic_reasoning": "The user reports two distinct symptoms related to the ignition switch: the switch will not turn to START, and the engine continues to run when the switch is in the OFF position. Both symptoms point to a potential fault within the ignition switch or its associated wiring.\n\n1.  **For the 'won't turn to START' issue:** The Service Manual lists 'Defective master switch or circuit' and 'Defective starter switch or switch circuit' as probable causes for 'STARTER WILL NOT OPERATE.' The prescribed remedy is to 'Check continuity of master switch and circuit. Install new switch or wires.' (Source 44, 51). This indicates an electrical failure in the switch's ability to complete the starter circuit, or a mechanical obstruction preventing the key from turning.\n\n2.  **For the 'engine keeps running when OFF' issue:** The Service Manual states that the magneto 'P' lead should be grounded when the ignition switch is in the OFF position (Source 1). If the engine continues to run, this grounding is not occurring. This could be due to a defective ignition switch (failure to ground the P-lead internally) or a broken/disconnected 'P' lead wire between the switch and the magnetos (Source 1, 32, 35, 60). The remedy for a 'Magneto \"P\" lead grounded' (which is the opposite of the symptom, but points to the P-lead circuit) is to 'Check continuity. \"P\" lead should not be grounded in the ON position, but should be grounded in OFF position. Repair or replace \"P\" lead.' (Source 1).\n\nTherefore, the primary diagnostic step is to check the electrical continuity of the ignition switch for both its starter engagement function and its magneto grounding function, and to verify its mechanical operation.",
+      "mechanic_instructions": "You've identified a potential fault with the ignition switch, which is a good lead given the symptoms. We need to verify the switch's internal electrical operation for both the starter circuit and the magneto grounding circuit, as well as its mechanical function.\n\nFirst, ensure the aircraft battery is disconnected to prevent accidental engine start or electrical damage. Then, perform continuity checks on the ignition switch terminals as follows:",
+      "answer_path_prompts": [
+        "I measured continuity: No continuity between the battery input terminal and the starter terminal when the switch is in the START position, OR continuity between the magneto 'P' lead terminal and ground when the switch is in the ON position (it should only be grounded in OFF).",
+        "I measured continuity: Good continuity between the battery input terminal and the starter terminal when the switch is in the START position, AND no continuity between the magneto 'P' lead terminal and ground when the switch is in the ON position, but good continuity to ground when in the OFF position.",
+        "The ignition switch key is physically stuck and cannot be turned to the START position at all."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "prop_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "I hit something on the runway and there's a visible nick/gouge in one propeller blade.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Propeller Nick / Blade Damage",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Propeller"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 7,
+          "context": "SECTION 13 > PROPELLER > 1 TABLE OF CONTENTS"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 25,
+          "context": "2-35. > 2-36. > 2-37."
+        }
+      ],
+      "diagnostic_reasoning": "The Cessna Service Manual states that propeller repair, including evaluation of damage to determine if it's major or minor, must be done in accordance with Federal Aviation Regulations (FAR 43), FAA Advisory Circular No. 43.13 (FAA AC 43.13), and the specific propeller manufacturer's instructions. The Cessna manual itself does not provide detailed repair procedures for nicks or gouges on propeller blades. Therefore, the initial step is to assess the physical characteristics of the damage to determine the appropriate repair path as defined by the propeller manufacturer's manual and FAA guidelines. General inspection for defects is mentioned in Section 2-38, but specific repair defers to Section 5, which in turn defers to external documents for propellers.",
+      "mechanic_instructions": "A visible nick or gouge on a propeller blade requires immediate attention. The Cessna Service Manual defers detailed propeller repair procedures to Federal Aviation Regulations (FAR 43), FAA Advisory Circular No. 43.13, and the propeller manufacturer's specific Service Manual (Section 13, paragraph 13-3). Your first step is to thoroughly inspect the damage to determine its severity. This will guide you to the correct repair procedure in the propeller manufacturer's manual.",
+      "answer_path_prompts": [
+        "The nick/gouge is shallow, less than 1/16 inch deep, and located away from the blade tip or hub.",
+        "The nick/gouge is deeper than 1/16 inch, or it is located near the blade tip, hub, or leading edge.",
+        "There are multiple nicks/gouges, or signs of cracking originating from the damage."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "prop_002",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The propeller spinner has visible cracks near the mounting holes.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Propeller Spinner Cracks",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Propeller Assembly",
+        "Engine Installation"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 9,
+          "context": "NOTE > TORQUE PROPELLER MOUNTING NUTS TO > SAFETY WIRE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 25,
+          "context": "2-35. > 2-36. > 2-37."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+          "page": 7,
+          "context": "SECTION 13 > PROPELLER > 1 TABLE OF CONTENTS"
+        }
+      ],
+      "diagnostic_reasoning": "Visible cracks near the propeller spinner mounting holes can stem from several issues. The most direct mechanical causes are improper propeller installation, specifically incorrect torque on mounting nuts or misaligned spinner bulkheads, which can induce stress (Source 1, 15, 34, 39, 51). Another possibility is excessive vibration from an unbalanced or damaged propeller, which would transfer stress to the spinner (Source 26, 12, 49). Finally, the spinner material itself could be fatigued or have sustained minor impact damage, leading to cracks independent of installation or propeller balance (Source 22, 28). Initial inspection should focus on verifying the integrity of the propeller mounting and the propeller blades.",
+      "mechanic_instructions": "The visible cracks near the propeller spinner mounting holes require immediate investigation. First, we need to determine if the cracks are a symptom of improper installation, propeller damage, or material fatigue. Carefully inspect the propeller and spinner assembly. What do you observe regarding the propeller mounting and the condition of the propeller blades?",
+      "answer_path_prompts": [
+        "Propeller mounting nuts are loose or safety wire is broken, or spinner bulkheads are visibly misaligned, causing stress on the spinner.",
+        "Propeller blades show nicks, dents, or other signs of impact or damage, indicating a potential imbalance or structural issue.",
+        "Cracks are localized to the spinner material itself, with no apparent issues with propeller mounting hardware, alignment, or blade condition."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  },
+  {
+    "query_id": "gear_001",
+    "branch_id": 0,
+    "branch_path": "root",
+    "turn": 1,
+    "query_text": "The nose wheel shimmies violently on takeoff and landing -- the whole airplane shakes.",
+    "query_category": "symptom_diagnosis",
+    "technical_issue": "Nose Gear Shimmy",
+    "response_parsed": {
+      "current_state": "PHASE_A_TRIAGE",
+      "confidence": "verified",
+      "intersecting_subsystems": [
+        "Landing Gear",
+        "Nose Wheel Steering System"
+      ],
+      "source_citations": [
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 40,
+          "context": "NOSE STRUT WILL NOT HOLD > AIR PRESSURE. > HYDRAULIC FLUID LEAKAGE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 24,
+          "context": "NOTE > 2-27. > NOTE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 24,
+          "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+          "page": 45,
+          "context": "5-28. NOSE WHEEL REMOVAL AND INSTALLATION. > NOTE > 5-29. NOSE WHEEL DISASSEMBLY. (Cleveland)."
+        },
+        {
+          "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+          "page": 25,
+          "context": "2-35. > 2-36. > 2-37."
+        }
+      ],
+      "diagnostic_reasoning": "Violent nose wheel shimmy on takeoff and landing points directly to issues with the nose gear's stability and damping mechanisms. The primary suspects are the shimmy dampener, which is specifically designed to prevent this symptom, and components that allow excessive play or imbalance in the nose wheel assembly. The Service Manual's troubleshooting sections for 'NOSE STRUT WILL NOT HOLD AIR PRESSURE' and 'WHEEL BOUNCE EVIDENT EVEN ON SMOOTH SURFACE' list several relevant probable causes: 'Shimmy dampener lacks fluid,' 'Defective shimmy dampener,' 'Loose or worn nose wheel steering linkage,' 'Nose wheel out of balance,' 'Loose or defective nose wheel bearings,' and 'Loose torque links.' Incorrect tire inflation can also contribute. I will prioritize checking the shimmy dampener, wheel bearings, and torque links as these are critical for nose wheel stability.",
+      "mechanic_instructions": "A violent nose wheel shimmy indicates a breakdown in the nose gear's ability to maintain directional stability. This is often caused by a faulty shimmy dampener, excessive play in the wheel assembly, or an unbalanced wheel. We need to physically inspect the nose gear components to isolate the cause. Start by checking the shimmy dampener and the nose wheel itself.",
+      "answer_path_prompts": [
+        "The nose wheel shimmy dampener is leaking fluid or feels loose/ineffective when manually compressed and extended.",
+        "The nose wheel has noticeable side-to-side or up-and-down play when rocked, or the wheel bearings feel rough when rotated.",
+        "The nose gear torque links are loose, worn, or show signs of damage, or the nose wheel tire pressure is significantly off specification.",
+        "The nose wheel appears visibly out of balance, or there are flat spots/uneven wear on the tire."
+      ],
+      "requires_input": true
+    },
+    "current_state": "PHASE_A_TRIAGE"
+  }
+]

@@ -1,0 +1,353 @@
+[
+  {
+    "id": "c172_001",
+    "issue": "Carburetor Icing / RPM Drop",
+    "system": "Engine / Induction",
+    "query": "My Cessna 172 is experiencing a gradual RPM drop during cruise flight, and the engine is running rough. Applying carburetor heat seems to temporarily restore power. What's going on?",
+    "ground_truth": "Carburetor icing. The venturi effect in the carburetor causes a temperature drop that can freeze moisture in the air, restricting airflow and fuel flow. Apply full carburetor heat immediately when symptoms appear. The RPM will drop further initially as hot, less dense air enters, then recover as ice melts. Prevention: apply carb heat before reducing power, monitor for conditions conducive to carb ice (high humidity, temperatures 20-70°F). Reference the carburetor heat control procedures in the service manual.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 13.5,
+    "citation_count": 4,
+    "citations": [
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 10,
+        "context": "11-18A. STATIC RUN-UP PROCEDURES."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 31,
+        "context": "11A-18A. STATIC RUN-UP PROCEDURES."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 5,
+        "context": "11-9. TROUBLE SHOOTING (Cont)."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 6,
+        "context": "11-9. TROUBLE SHOOTING (Cont)."
+      }
+    ],
+    "instructions": "The temporary restoration of power with carburetor heat strongly indicates carburetor icing. This occurs when moisture in the induction air freezes in the carburetor venturi, restricting airflow and enriching the mixture, leading to power loss and rough running. Your immediate action should be to verify the proper function and rigging of the carburetor heat control system. If the system is not fully engaging or is partially open when not commanded, it could contribute to or fail to resolve icing conditions. After confirming the carburetor heat system, we will check the induction air filter, as a restriction there can also cause power loss and rough running.",
+    "reasoning": "The primary suspect for a gradual RPM drop and rough running that is temporarily resolved by applying carburetor heat is carburetor icing. The Service Manual lists 'Check carburetor heat control for proper rigging. If partially open it would cause a slight power loss' (Source 1, page 10; Source 25, page 31) as a potential cause for low RPM, which implies the system's function in maintaining power. The observed symptom is the direct opposite: applying heat *restores* power, which is the intended function of carburetor heat when ice is present. Other potential causes for rough running and power loss include a restricted induction air filter (Source 1, page 10; Source 25, page 31; Source 21, page 6) or a defective carburetor (Source 12, page 5; Source 37, page 5; Source 21, page 5). While these could cause similar symptoms, the immediate and temporary relief from carburetor heat points strongly to ice. Therefore, the initial diagnostic steps should confirm the carburetor heat system's operation and then inspect the air filter.",
+    "answer_paths": [
+      "When carburetor heat is applied, the RPM drop is immediate and significant, and the engine runs even rougher.",
+      "When carburetor heat is applied, the RPM drop is minimal, and the engine smooths out, but the power loss returns shortly after carburetor heat is removed.",
+      "Carburetor heat has no noticeable effect on RPM or engine smoothness.",
+      "The carburetor heat control lever feels loose or does not move through its full range of travel."
+    ]
+  },
+  {
+    "id": "c172_002",
+    "issue": "Magneto Failure / Rough Running",
+    "system": "Ignition",
+    "query": "During my run-up, when I switch to the left magneto, the engine runs rough and the RPM drops more than 175 RPM. What should I check?",
+    "ground_truth": "Excessive RPM drop on one magneto indicates a problem in that magneto's ignition circuit. Check: (1) Spark plugs on the left magneto circuit — fouled, worn, or improperly gapped plugs are the most common cause. Clean and re-gap to 0.015-0.019 inches. (2) Magneto timing — check and adjust per service manual specifications. (3) Ignition harness leads — check for cracks, chafing, or high resistance. (4) Magneto points and condenser — inspect for wear, pitting, or improper gap. (5) Check for cracked distributor block or rotor. Maximum allowable RPM drop per the POH is typically 125-175 RPM, and differential between magnetos should not exceed 50 RPM.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 19.6,
+    "citation_count": 2,
+    "citations": [
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 20,
+        "context": "11-59. MAGNETO CHECK."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 21,
+        "context": "11-59. MAGNETO CHECK."
+      }
+    ],
+    "instructions": "The excessive RPM drop and rough running on the left magneto during run-up points directly to a fault in the left ignition system. This could be a fouled spark plug, a defective ignition harness lead, or the magneto itself being out of time or internally faulty.\n\nFirst, perform the standard Magneto Check procedure as outlined in Section 11-59 of the Service Manual (Source 1, 6, 10):\n1. Start and run the engine until oil and cylinder head temperatures are in the normal operating range.\n2. Advance engine speed to 1700 RPM.\n3. Turn the ignition switch to the \"R\" (Right) position and note the RPM drop. Return to \"BOTH\".\n4. Turn the ignition switch to the \"L\" (Left) position and note the RPM drop. Return to \"BOTH\".\n\nThe RPM drop should not exceed 125 RPM on either magneto, nor show greater than 50 RPM differential between magnetos (Source 6, 10). A sharp RPM drop-off past normal, as you described, is usually a sign of a fouled plug, a defective harness lead, or a magneto out of time (Source 10).\n\nWhat are your precise observations during the left magneto check?",
+    "reasoning": "The reported excessive RPM drop (over 175 RPM) and rough running when switching to the left magneto during run-up strongly indicates a fault within the left ignition system. The Service Manual states that the RPM drop should not exceed 125 RPM on either magneto (Source 6, 10). A 'sharp rpm drop-off past normal' is specifically attributed to a fouled spark plug, a defective harness lead, or a magneto out of time (Source 10). Other potential causes for engine power loss, such as carburetor heat or compression, are less likely to be isolated to a single magneto circuit.",
+    "answer_paths": [
+      "The engine runs very rough, with a distinct misfire, and the RPM drops significantly (over 125 RPM) when on the left magneto.",
+      "The engine runs smoothly on the left magneto, but the RPM drop is still excessive (over 125 RPM).",
+      "The RPM drop is now within normal limits (less than 125 RPM), and the engine runs smoothly on the left magneto.",
+      "There is no RPM drop, or a very small drop, when switching to the left magneto."
+    ]
+  },
+  {
+    "id": "c172_003",
+    "issue": "Nose Gear Shimmy",
+    "system": "Landing Gear",
+    "query": "My Cessna 172 has developed a violent shaking of the nose wheel during landing rollout and taxiing. It's getting progressively worse. What's causing this?",
+    "ground_truth": "Nose wheel shimmy. Check: (1) Shimmy dampener — the most common cause. The dampener fluid may be low or the dampener worn/failed. Service or replace the shimmy dampener per the service manual. (2) Nose wheel tire balance and condition — worn or flat-spotted tires cause shimmy. (3) Nose wheel bearings — worn or loose bearings allow lateral play. (4) Torque links (scissors) — check for excessive play in the torque link bolt and bushings. Tighten or replace worn bushings. (5) Nose gear trunnion — check for wear. The service manual specifies inspection intervals and tolerances for all nose gear components.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 11.4,
+    "citation_count": 4,
+    "citations": [
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+        "page": 37,
+        "context": "5-24. NOSE GEAR."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+        "page": 40,
+        "context": "NOSE STRUT WILL NOT HOLD > AIR PRESSURE. > HYDRAULIC FLUID LEAKAGE"
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+        "page": 24,
+        "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+        "page": 8,
+        "context": "GROSSWEIGHT > NOTE > FUEL CAPACITY"
+      }
+    ],
+    "instructions": "A violent shaking of the nose wheel during landing rollout and taxiing indicates nose wheel shimmy. This is typically caused by issues with the nose gear's stability or the wheel assembly itself. We need to physically inspect the most common culprits. First, check the shimmy dampener, as it's designed to prevent this exact issue. Then, inspect the nose wheel assembly for balance and bearing play. Finally, check the structural integrity of the nose gear linkage and torque links.",
+    "reasoning": "The violent shaking of the nose wheel during landing rollout and taxiing is a classic symptom of nose wheel shimmy. The Service Manual's troubleshooting section for the nose strut directly lists several probable causes for nose wheel shimmy. These include issues with the shimmy dampener (lacks fluid, defective), loose or worn nose wheel steering linkage, nose wheel out of balance, loose or defective nose wheel bearings, and loose torque links. Incorrect tire inflation is also cited as a cause for main wheel shimmy, which can apply to the nose wheel. Given the 'progressively worse' nature, it suggests a component that is failing or becoming increasingly loose.",
+    "answer_paths": [
+      "The nose gear shimmy dampener is low on fluid, leaking, or feels loose/defective when manipulated.",
+      "The nose wheel tire pressure is incorrect, or the wheel has noticeable play when rocked, indicating loose bearings or an unbalanced condition.",
+      "There is excessive play or looseness in the nose gear torque links or the steering linkage."
+    ]
+  },
+  {
+    "id": "c172_004",
+    "issue": "Exhaust System Crack / CO Risk",
+    "system": "Exhaust",
+    "query": "There's a strong exhaust smell in the cockpit of my Cessna 172 during flight, and I've noticed some black soot stains around the exhaust pipe connections. Is this dangerous?",
+    "ground_truth": "CRITICAL SAFETY ISSUE. Exhaust leaks near or forward of the firewall can allow carbon monoxide (CO) into the cabin through the heating system, which draws air over the exhaust muffler/heat shroud. Immediate actions: (1) Open all vents and windows. (2) Turn cabin heat OFF immediately. (3) Land as soon as practicable. Maintenance: Inspect the entire exhaust system — muffler, risers, pipes, clamps, gaskets, and the heater shroud for cracks, holes, or loose connections. The service manual specifies detailed exhaust system inspection procedures including the muffler/heater assembly. Any crack or leak requires immediate repair or replacement. Never fly with a suspected exhaust leak.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 13.3,
+    "citation_count": 2,
+    "citations": [
+      {
+        "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 24,
+        "context": "11-73. EXHAUST SYSTEM."
+      },
+      {
+        "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+        "page": 11,
+        "context": "SECTION 14 > UTILITY SYSTEMS"
+      }
+    ],
+    "instructions": "Yes, a strong exhaust smell in the cabin is an extreme danger and requires immediate attention. Exhaust fumes contain carbon monoxide, which is odorless and lethal. The black soot stains you've observed are definitive evidence of an exhaust leak. Your immediate task is to locate the source of these leaks.\n\nProceed as follows:\n1.  Remove the engine cowling in accordance with paragraph 11-3 of the Service Manual.\n2.  Loosen or remove any shrouds necessary to make ALL surfaces of the exhaust system visible.\n3.  Thoroughly inspect the entire exhaust system, paying close attention to the areas around welds, the heat exchange section of the muffler, and any areas showing soot or discoloration. Look for holes, cracks, and burned spots.\n\nWhat do you observe?",
+    "reasoning": "A strong exhaust smell in the cabin, coupled with black soot stains around exhaust pipe connections, is a critical indication of an exhaust system leak. The Service Manual explicitly states that 'Any time exhaust fumes are detected in the cabin, an immediate inspection must be preformed' and that 'fumes constitute an extreme danger' due to potential holes or cracks. The soot stains are direct evidence of exhaust gas escaping. The primary suspect is a breach in the exhaust system itself, particularly in areas adjacent to welds or the heat exchange section of the muffler, which could allow fumes to enter the cabin's heating or ventilation system. A secondary possibility is a compromised firewall seal allowing engine compartment fumes into the cabin, though the soot points directly to the exhaust pipes.",
+    "answer_paths": [
+      "I found a visible crack or hole in an exhaust pipe or the muffler, with heavy soot around it.",
+      "I see soot stains, but no obvious cracks or holes in the exhaust system components themselves. The soot seems to be coming from a loose connection or gasket.",
+      "The exhaust system appears intact with no visible cracks, holes, or loose connections. The soot stains are present, but I can't pinpoint an active leak. I also checked the firewall, and it seems to have some compromised seals."
+    ]
+  },
+  {
+    "id": "c172_005",
+    "issue": "Low Cylinder Compression",
+    "system": "Engine",
+    "query": "During the annual inspection, my mechanic found that cylinder #3 on my Cessna 172's Lycoming O-320 has compression of only 42/80. The other cylinders are 68-72/80. What does this mean and what's the fix?",
+    "ground_truth": "Low compression on a single cylinder indicates internal engine wear. Common causes: (1) Worn or stuck exhaust valve — the most common cause. Perform a leak-down test: air leaking from the exhaust pipe confirms an exhaust valve not seating properly. (2) Worn piston rings — air leaking past the rings will be heard at the oil filler or breather tube. (3) Worn or damaged cylinder walls. (4) Intake valve not seating. Minimum acceptable compression per Lycoming is 60/80 (or within 15 psi of the highest cylinder). At 42/80, this cylinder is below limits. Typical remedies: valve lapping/resurfacing if the valve seat is the issue, or cylinder removal for inspection and possible overhaul (new rings, hone, valve work). Reference the engine section of the service manual for compression test procedures and limits.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 13.8,
+    "citation_count": 4,
+    "citations": [
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 2,
+        "context": "11-6. ENGINE."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 10,
+        "context": "11-18A. STATIC RUN-UP PROCEDURES. In a case"
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 5,
+        "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+        "page": 7,
+        "context": "SECTION 1 > GENERAL DESCRTPTION > TABLE OF CONTENTS"
+      }
+    ],
+    "instructions": "The 42/80 compression on cylinder #3 indicates a significant leak in that cylinder. The Cessna Service Manual defers to the Lycoming O-320 Manufacturer's Manual for detailed engine repair and overhaul procedures, including specific compression check interpretations and fixes. To pinpoint the source of the leak, perform a differential compression test on cylinder #3. Apply compressed air to the cylinder with the piston at Top Dead Center (TDC) on the compression stroke and listen carefully for escaping air.",
+    "reasoning": "The reported compression of 42/80 on cylinder #3 is significantly lower than the other cylinders (68-72/80), indicating a substantial leak in that cylinder's combustion chamber. The Cessna Service Manual explicitly states that for engine repair and overhaul, including compression checks, you must refer to the appropriate publications issued by the engine manufacturer (Lycoming) (Source 1, Source 9). The manual lists 'Perform an engine compression check. (Refer to engine Manufacturer's Manual)' as a diagnostic step for power loss (Source 16, Source 46) and 'Defective engine. Check compression. Listen for unusual engine noises. Engine repair is required.' for starting issues (Source 42). This indicates that while the Cessna manual identifies low compression as an engine problem, it defers the detailed diagnostic and repair procedures to the Lycoming manual. Therefore, the next logical step, based on general aviation engine maintenance practices, is to perform a differential compression test to pinpoint the exact source of the leak.",
+    "answer_paths": [
+      "Air is heard escaping from the exhaust pipe.",
+      "Air is heard escaping from the carburetor intake.",
+      "Air is heard escaping from the oil filler neck or crankcase breather.",
+      "Air is heard escaping from the spark plug hole of an adjacent cylinder or a crack in the cylinder head."
+    ]
+  },
+  {
+    "id": "c172_006",
+    "issue": "Fuel Contamination / Water in Fuel",
+    "system": "Fuel",
+    "query": "When I sumped the fuel drains on my Cessna 172 this morning, I found water droplets and some sediment in the fuel sample. What should I do?",
+    "ground_truth": "Water and sediment contamination in aviation fuel is a serious safety concern. Immediate actions: (1) Continue draining all sump points (wing tank drains, fuel strainer/gascolator drain, lowest point drains) until samples run clear with no visible water or debris. (2) Check fuel cap seals — deteriorated or missing O-ring seals allow rainwater to enter the tanks. Replace damaged seals. (3) Check for condensation — large air spaces in partially filled tanks promote condensation, especially with temperature changes. Keep tanks full when the aircraft is stored. (4) Inspect the fuel strainer/gascolator screen — clean and inspect per the service manual. (5) If contamination is severe, the tanks may need to be drained and flushed. Reference the fuel system inspection and servicing section of the service manual.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 11.1,
+    "citation_count": 3,
+    "citations": [
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+        "page": 20,
+        "context": "2-19. FUEL DRAINS."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 4,
+        "context": "11-9. TROUBLE SHOOTING."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+        "page": 3,
+        "context": "12-17. REMOVAL AND INSTALLATION."
+      }
+    ],
+    "instructions": "You've got water and sediment in the fuel, which means the entire fuel system is suspect. Your immediate action is to thoroughly drain the system. This isn't just a quick sump; we need to clear out all potential collection points.\n\n1.  **Drain Fuel Tanks:** Remove the sump drain plugs or valves from both wing fuel tanks and drain all fuel until clear. (Refer to paragraph 12-7.a for tank draining, and 12-3 for general fuel system precautions).\n2.  **Drain Fuel Strainer:** With the fuel selector valve in the 'OFF' position, drain the fuel strainer and lines using the quick-drain control. (Refer to paragraph 12-17.b).\n3.  **Drain Carburetor:** With the fuel valve OFF, remove the carburetor drain plug and clean off any sealant present on the end of the plug or in the threads. Inspect the drain plug hole in the carburetor and remove any remaining sealant. Flush the float chamber by turning the fuel valve to ON for 15-30 seconds, collecting the drained fuel for inspection. (Refer to paragraph 2-20).\n\nAfter completing these draining steps, you need to re-sample the fuel to confirm the contamination has been cleared.",
+    "reasoning": "Finding water droplets and sediment in the fuel sample indicates contamination within the fuel system. The primary suspects are the fuel tanks, fuel lines, fuel strainer, and potentially the carburetor float chamber. The Service Manual explicitly states that if water is found in the fuel strainer (or sumped fuel), there is a possibility that the wing tank sumps or fuel lines contain water, and therefore, all fuel drain plugs should be removed and all water drained from the system. This comprehensive draining is the mandatory first step to address the contamination. The carburetor drain plug also needs inspection and cleaning if water is suspected in the fuel.",
+    "answer_paths": [
+      "After draining, subsequent fuel samples from all points (tanks, strainer, carburetor) are clear of water and sediment.",
+      "After draining, subsequent fuel samples still show water or sediment, but in reduced amounts.",
+      "After draining, subsequent fuel samples still show significant water or sediment, indicating persistent contamination."
+    ]
+  },
+  {
+    "id": "c172_007",
+    "issue": "Alternator Failure",
+    "system": "Electrical",
+    "query": "In flight, my Cessna 172's ammeter is showing a discharge and the low-voltage warning light came on. What's happening and what should I do?",
+    "ground_truth": "The alternator has failed or the voltage regulator has malfunctioned, and the aircraft is now running solely on battery power. Immediate actions: (1) Check the alternator circuit breaker — reset if tripped (one attempt only). (2) Turn off all non-essential electrical equipment to conserve battery. (3) Keep essential items: one radio, transponder if required. (4) Plan to land as soon as practical — battery capacity is limited (30-60 minutes depending on load). Maintenance: Check (1) alternator drive belt — broken or slipping belt is the most common cause. (2) Voltage regulator — faulty regulator prevents proper charging. (3) Alternator brushes — worn brushes lose contact. (4) Alternator field wire and connections. (5) The overvoltage sensor may have tripped. The service manual's electrical system section covers alternator inspection, belt tension specs, and voltage regulator testing.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 13.9,
+    "citation_count": 3,
+    "citations": [
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+        "page": 6,
+        "context": "16-43. OVER-VOLTAGE WARNING SYSTEM."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+        "page": 5,
+        "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont)."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+        "page": 3,
+        "context": "16-35. ALTERNATOR POWER SYSTEM."
+      }
+    ],
+    "instructions": "An ammeter showing discharge and a warning light indicates the alternator system is not charging the battery. This could be due to an over-voltage trip-off, which shuts down the alternator and causes the ammeter to show a discharge, or a direct failure of the alternator or voltage regulator. The over-voltage warning light is labeled 'HIGH VOLTAGE' and is red. First, confirm the label of the warning light. Regardless, the immediate in-flight procedure for an over-voltage trip-off, which produces these symptoms, is to recycle the master switch. This may reset the over-voltage sensor if the condition was transient.\n\nTo recycle the over-voltage sensor:\n1. Turn off both sections of the master switch (Battery and Alternator).\n2. Turn on both sections of the master switch.\n\nObserve the ammeter and the warning light after performing this action.",
+    "reasoning": "The reported symptoms (ammeter discharge, warning light) are characteristic of a failure in the alternator charging system. The Service Manual describes an 'over-voltage warning system' that, when tripped, 'turns off the alternator system and the red warning light comes on. The ammeter will show a discharge.' (Source 1, 21, 24). While the user states 'low-voltage warning light,' the FSM only details a 'HIGH VOLTAGE' warning light for this system. It is possible the user is observing the effect (low voltage due to discharge) rather than the specific label of the light. The immediate prescribed action for an over-voltage trip-off is to recycle the master switch. This is the most critical first step to attempt to restore charging in flight. If this does not resolve the issue, or if the light is definitively not the 'HIGH VOLTAGE' light, then a deeper alternator system malfunction (faulty regulator, alternator, or wiring) is indicated.",
+    "answer_paths": [
+      "After recycling the master switch, the ammeter shows a charge, and the warning light is off.",
+      "After recycling the master switch, the ammeter still shows a discharge, and the warning light remains on.",
+      "The warning light is definitively NOT labeled 'HIGH VOLTAGE' and is a different 'low-voltage' indicator."
+    ]
+  },
+  {
+    "id": "c172_008",
+    "issue": "Flap Motor / Flap System Failure",
+    "system": "Flight Controls",
+    "query": "The flaps on my Cessna 172 are stuck and won't extend or retract when I operate the flap switch. I can hear a clicking sound from the flap motor area but nothing moves. What's wrong?",
+    "ground_truth": "The electric flap system has a mechanical or electrical failure. The clicking indicates the relay/solenoid is engaging but the motor can't drive the mechanism. Common causes: (1) Flap motor failure — worn brushes, burned commutator, or internal short. (2) Stripped or worn flap drive screw (jackscrew) — the screw threads wear over time, especially in high-use training aircraft. Inspect the jackscrew for thread damage. (3) Flap transmission/gearbox failure. (4) Bent flap tracks — misalignment prevents flap travel. (5) Flap position limit switches — failed switches prevent motor operation. (6) Corroded or damaged wiring to the flap motor. The service manual covers flap system rigging, motor inspection, jackscrew lubrication, and limit switch adjustment procedures.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 19.4,
+    "citation_count": 2,
+    "citations": [
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+        "page": 18,
+        "context": "SECTION 7 > WING FLAP CONTROL SYSTEM > 7-4. TROUBLE SHOOTING."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+        "page": 17,
+        "context": "SECTION 7 > WING FLAP CONTROL SYSTEM > 7-2. DESCRIPTION."
+      }
+    ],
+    "instructions": "The clicking sound from the flap motor area indicates that electrical power is likely reaching the flap control circuit, but the motor or the mechanical system is failing to operate. We need to isolate whether the issue is electrical power delivery to the motor, the motor itself, or a mechanical bind in the flap system. Perform the following checks to narrow down the cause:",
+    "reasoning": "The symptom 'flaps stuck, won't extend or retract' with a 'clicking sound from the flap motor area' points to several potential issues within the wing flap control system. The clicking suggests that electrical power is reaching at least part of the circuit, but either the motor is failing to operate, or a mechanical bind is stalling it. The troubleshooting chart in Section 7-4 of the Service Manual lists 'BOTH FLAPS FAIL TO MOVE' as a primary trouble, with probable causes including a popped circuit breaker, defective switch, defective motor, broken or disconnected wires, disconnected or defective transmission, bind in drive pulleys, or flaps binding on tracks. The clicking sound helps narrow the focus, indicating that a complete open circuit (like a fully tripped breaker with no reset attempt) is less likely than an intermittent electrical fault, a stalled motor, or a mechanical jam.",
+    "answer_paths": [
+      "The flap circuit breaker is popped, and resets but immediately pops again when the flap switch is operated.",
+      "The flap circuit breaker is not popped, and the flap switch feels normal, but the clicking sound is coming directly from the flap motor/transmission assembly, and the drive pulleys do not move.",
+      "The flap circuit breaker is not popped, the flap switch feels normal, and I can hear the motor attempting to turn, but the flap drive pulleys are jammed and cannot be moved by hand.",
+      "The flap circuit breaker is not popped, the flap switch feels normal, and the motor runs, but the flaps still do not move, and the drive pulleys are turning freely without engaging the cables."
+    ]
+  },
+  {
+    "id": "c172_009",
+    "issue": "Engine Oil Leak",
+    "system": "Engine / Lubrication",
+    "query": "My Cessna 172 is leaving oil drips on the ramp after every flight. There's oil all over the belly and I can see oil on the nose gear tire. Oil consumption has increased noticeably. Where is it coming from?",
+    "ground_truth": "Oil leaks on the Lycoming O-320 can originate from multiple sources. Systematic inspection: (1) Rocker cover gaskets — the most common source. Cork gaskets deteriorate and shrink over time. Replace with new gaskets, torque evenly. (2) Oil filler cap and tube — check the O-ring seal. (3) Crankcase through-bolts and parting line — seepage at the case halves indicates deteriorated sealant or case fretting. (4) Pushrod tube seals — O-ring seals on the pushrod housings weep oil as they age. (5) Oil cooler and lines — check fittings and hose connections. (6) Accessory case gasket — rear of engine. (7) Prop governor pad seal. Clean the engine thoroughly, run it, then inspect to identify the source. Oil on the belly typically tracks rearward from the source. The service manual covers engine lubrication system components and inspection procedures.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 11.2,
+    "citation_count": 3,
+    "citations": [
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 14,
+        "context": "11- 31. TROUBLE SHOOTING (Cont)."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+        "page": 34,
+        "context": "11A- 3 1. TROUBLE SHOOTING."
+      },
+      {
+        "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+        "page": 34,
+        "context": "15-32. ENGINE INDICATORS."
+      }
+    ],
+    "instructions": "The oil on the belly and nose gear, combined with increased consumption, points to an external engine oil leak. We need to physically inspect the engine for the source. Remove the engine cowling per paragraph 11-3 (Source 16) and thoroughly clean the engine to pinpoint the exact origin of the leak. Pay close attention to the front of the engine, cylinder areas, and oil system components.",
+    "reasoning": "The reported oil drips on the ramp, oil on the belly, nose gear tire, and increased oil consumption strongly indicate an external oil leak from the engine. The Service Manual's troubleshooting section directly lists 'OIL LEAK AT FRONT OF ENGINE' with a probable cause of 'Damaged crankshaft seal' and 'OIL LEAK AT PUSH ROD HOUSING' with a probable cause of 'Damaged push rod housing oil seal' (Source 8, 34, 42). Additionally, the oil pressure system, including lines and the external oil filter, are common points for leaks (Source 5, 18, 20, 38, 40, 44, 46, 51). The location of the oil (belly, nose gear) suggests a leak originating from the front or underside of the engine, which would then be distributed by airflow.",
+    "answer_paths": [
+      "I see oil leaking from the front of the engine, around the propeller hub. This suggests a crankshaft seal issue.",
+      "I see oil leaking from the cylinder area, specifically around the pushrod tubes. This points to pushrod housing oil seals.",
+      "I see oil leaking from the external oil filter assembly or its associated lines. This indicates a filter or line integrity issue.",
+      "I see oil leaking from the oil pressure line or another accessory on the engine."
+    ]
+  },
+  {
+    "id": "c172_010",
+    "issue": "Control Cable Stiffness / Binding",
+    "system": "Flight Controls",
+    "query": "The elevator controls on my Cessna 172 feel stiff and require more force than normal. There's a notchy, grinding feeling when I move the yoke fore and aft. What could cause this?",
+    "ground_truth": "Stiff or binding control cables indicate friction in the control system. Common causes: (1) Control cable pulleys — worn, flat-spotted, or seized pulley bearings create friction and notchiness. Inspect all pulleys in the elevator cable routing for free rotation. (2) Control cables — frayed cables, kinks, or cables rubbing against structure. Inspect cables for broken strands and proper routing through fairleads. (3) Cable tension — incorrect cable tension (too tight) increases friction. Check and adjust per the service manual rigging specifications. (4) Elevator bellcrank — worn bushings or pivot points. (5) Elevator hinge points — worn hinge bearings or corrosion. (6) Foreign object in cable routing — debris can catch in pulleys or fairleads. The service manual covers control system rigging, cable tensions, pulley inspection, and lubrication requirements.",
+    "state": "PHASE_A_TRIAGE",
+    "latency_s": 11.4,
+    "citation_count": 4,
+    "citations": [
+      {
+        "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+        "page": 29,
+        "context": "SECTION 8 > ELEVATOR CONTROL SYSTEM > TROUBLE"
+      },
+      {
+        "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+        "page": 30,
+        "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+      },
+      {
+        "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+        "page": 35,
+        "context": "SECTION 9 > ELEVATOR TRIM CONTROL SYSTEM > TROUBLE"
+      },
+      {
+        "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+        "page": 12,
+        "context": "6-4. CONTROL \"U\"."
+      }
+    ],
+    "instructions": "The notchy, grinding feel in your elevator controls suggests a mechanical issue within the control system. We need to isolate where this binding is occurring. Start by accessing the elevator control system components. You'll need to remove seats, upholstery, and access plates as necessary (Source 1). Then, physically inspect the following areas:",
+    "reasoning": "The symptom of stiff, notchy, and grinding elevator controls requiring excessive force points to mechanical binding or friction within the elevator control system. The Service Manual's troubleshooting for 'BINDING OR JUMPY MOTION FELT IN MOVEMENT OF ELEVATORS' (Source 13) lists defective bellcranks or bellcrank pivot bearings, defective elevator hinges, and cables not riding correctly on pulleys as probable causes. Lack of lubrication is also a general cause for binding. The control 'U' (Source 19) is the primary input for elevator movement, so binding there could also cause the symptom. The elevator trim control system (Source 25, 30, 48) could also contribute if its cables or pulleys are binding, though a 'grinding' feel is more indicative of the main elevator system's mechanical components.",
+    "answer_paths": [
+      "When moving the elevators by hand, do you feel binding or observe excessive play in the forward or rear bellcranks, or in the elevator hinges? (Refer to Section 8-3, Source 13)",
+      "With access plates open, do you see any elevator control cables out of their pulley grooves, frayed, or rubbing against structure? (Refer to Section 8-3, Source 13)",
+      "Is the control 'U' mechanism itself binding or making noise when operated, independent of the cable system? (Refer to Section 6-6, Source 19)",
+      "Is the elevator trim control wheel moving with excessive resistance, or do you observe any binding in the trim system cables or pulleys? (Refer to Section 9, Source 25)"
+    ]
+  }
+]
