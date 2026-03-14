@@ -1,0 +1,55 @@
+{
+  "test_id": "F09_vague",
+  "fault_id": 9,
+  "variant": "vague",
+  "query": "The fuel gauge doesn't work. It just sits on empty even though I know there's fuel in there.",
+  "fsm_section": "\u00a712-4 + \u00a715-45",
+  "fsm_trouble": "NO FUEL QUANTITY INDICATION",
+  "fsm_probable_cause": "Open circuit / Defective fuel quantity transmitter",
+  "fsm_remedy": "Tighten connections; repair or replace wiring",
+  "expected_system": "fuel/instruments",
+  "response_time_seconds": 42.48,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The fuel gauge reading empty with fuel in the tank indicates a fault in the fuel quantity indicating system. First, check the circuit breaker for the fuel quantity system. If it's tripped, reset it. If it trips again or is already good, we need to check the electrical path to the fuel quantity transmitter in the tank. This will help us determine if the issue is with the wiring, the transmitter, or the gauge itself.",
+  "gus_reasoning": "The symptom 'fuel gauge sits on empty' with known fuel in the tank points directly to a 'NO FUEL QUANTITY INDICATION' issue. The Service Manual's troubleshooting section for this symptom lists 'Open circuit', 'Loose connections or open circuit', and 'Defective fuel quantity indicator or transmitter' as probable causes (Source 16). Additionally, 'Low voltage' and 'Defective master switch' are listed for 'ERRATIC READINGS' or 'POINTER FAILS TO GO OFF SCALE WITH CURRENT OFF' (Source 29, 35), which could manifest as a stuck-on-empty condition. The most logical first steps are to check the simplest electrical issues: the circuit breaker, then the wiring and connections at the fuel quantity transmitter, as these are common failure points and directly impact the gauge's ability to receive a signal. The FSM explicitly suggests 'Reset circuit breaker' as a remedy for an 'Open circuit' (Source 16). If the circuit breaker is good, the next step is to verify the electrical path to the transmitter.",
+  "gus_answer_paths": [
+    "The fuel quantity circuit breaker was tripped, and resetting it restored the gauge function.",
+    "The fuel quantity circuit breaker was tripped, but it immediately tripped again after resetting.",
+    "The fuel quantity circuit breaker is not tripped and appears to be in good condition.",
+    "I cannot locate a specific circuit breaker for the fuel quantity system."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL QUANTITY INDICATION."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 36,
+      "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 37,
+      "context": "15-45. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 19,
+      "context": "15-3. INSTRUMENT PANEL. (Refer to figure 15-1.) > 15-4. DESCRIPTION. The instrument panel assem- > 15-5. REMOVAL AND INSTALLATION. The sta-"
+    }
+  ],
+  "gus_rag_chunk_count": 55,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "The fuel gauge doesn't work. It just sits on empty even though I know there's fuel in there.",
+    "critical_keywords": [
+      "fuel gauge",
+      "empty",
+      "fuel"
+    ]
+  },
+  "timestamp": "2026-03-14T14:57:13.513712"
+}

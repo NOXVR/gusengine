@@ -1,0 +1,76 @@
+{
+  "test_id": "F09_expert",
+  "fault_id": 9,
+  "variant": "expert",
+  "query": "Left fuel quantity gauge reads zero despite confirmed fuel in the tank. Right gauge reads normally.",
+  "fsm_section": "\u00a712-4 + \u00a715-45",
+  "fsm_trouble": "NO FUEL QUANTITY INDICATION",
+  "fsm_probable_cause": "Open circuit / Defective fuel quantity transmitter",
+  "fsm_remedy": "Tighten connections; repair or replace wiring",
+  "expected_system": "fuel/instruments",
+  "response_time_seconds": 72.37,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to determine if the issue is electrical continuity, the sensing unit, or the gauge itself. Begin by checking the electrical integrity of the left fuel quantity system.",
+  "gus_reasoning": "The left fuel quantity gauge reads zero, but the tank has confirmed fuel, and the right gauge operates normally. This isolates the problem to the left fuel quantity system. The most probable causes are a fault in the left fuel quantity transmitter, an open circuit or poor ground in its wiring, a defective gauge, or a tripped circuit breaker. A defective master switch is also a possibility, though less likely to affect only one gauge. The FSM troubleshooting for 'NO FUEL QUANTITY INDICATION' (Section 12-4, page 46) directly points to 'Open circuit' (remedy: reset circuit breaker), 'Loose connections or open circuit' (remedy: repair wiring), and 'Defective fuel quantity indicator or transmitter' (remedy: refer to Section 15). We will start by checking the most accessible electrical components and connections.",
+  "gus_answer_paths": [
+    "The fuel quantity circuit breaker for the left tank is tripped (popped out).",
+    "The electrical lead or ground strap at the left fuel quantity transmitter is visibly loose, corroded, or disconnected.",
+    "The left fuel quantity gauge needle flickers or moves slightly when the master switch is cycled ON/OFF, or when the gauge is gently tapped.",
+    "All other electrical instruments and lights on the main bus are functioning normally, with no other electrical anomalies observed."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL QUANTITY INDICATION."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 36,
+      "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 37,
+      "context": "15-45. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 19,
+      "context": "PROBABLE CAUSE > TROUBLE > FLAPS FAIL TO EXTEND."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part07_p301-350.pdf",
+      "page": 23,
+      "context": "SECTION 20 > WIRING DIAGRAMS > THRU 1975 MODELS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 47,
+      "context": "FUEL QUANTITY INDICATORS > L E F > V E N"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "* THRU 17260805 & F1720904 > BEGINNING WITH 17260806 & F1720905 > 12-5."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 45,
+      "context": "SECTION 12 > FUEL SYSTEM > TABLE OF CONTENTS"
+    }
+  ],
+  "gus_rag_chunk_count": 55,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (Aviation)",
+    "symptom_signature": "Left fuel quantity gauge reads zero despite confirmed fuel in the tank. Right gauge reads normally.",
+    "critical_keywords": [
+      "Left fuel quantity gauge",
+      "zero",
+      "confirmed fuel",
+      "Right gauge reads normally"
+    ]
+  },
+  "timestamp": "2026-03-14T14:58:27.383559"
+}

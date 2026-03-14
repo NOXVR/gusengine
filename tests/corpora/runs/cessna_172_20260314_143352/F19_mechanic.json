@@ -1,0 +1,31 @@
+{
+  "test_id": "F19_mechanic",
+  "fault_id": 19,
+  "variant": "mechanic",
+  "query": "Insufficient cabin heat output. Control cable travel appears full. What does the FSM list for insufficient heat?",
+  "fsm_section": "\u00a77-4 / \u00a710-3",
+  "fsm_trouble": "INSUFFICIENT CABIN HEAT",
+  "fsm_probable_cause": "Heat control cable misadjusted / Heat valve not opening fully / Leaking exhaust shroud",
+  "fsm_remedy": "Adjust cable / Repair valve / Replace shroud",
+  "expected_system": "heating/ventilation",
+  "response_time_seconds": 32.51,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The FSM indicates that most heating system troubles are caused by sticking air valves, damaged ducting, or defects in the exhaust muffler. Since you've confirmed full control cable travel, we need to verify the physical response of the components the cable operates and the integrity of the air path.\n\nFirst, inspect the cabin heat shut-off valve, located on the right forward side of the firewall. Manually check its movement to ensure it responds freely to the 'CABIN HEAT' control and moves through its full range of travel, sealing properly when pushed in and fully opening when pulled out. Also, visually inspect the flexible ducting connecting the heating system components for any signs of burning, fraying, crushing, or disconnections.",
+  "gus_reasoning": "The customer reports insufficient cabin heat output, but notes that the control cable travel appears full. This immediately shifts focus from the control cable itself to the components it operates or the air path. The Service Manual (Source 14, 19, page 11) explicitly lists 'sticking or binding air valves and/or their controls, damaged air ducting, or defects in the exhaust muffler' as the most common operational troubles in the heating system. Given the full cable travel, the primary suspect is a sticking or binding shut-off valve that isn't fully opening, or damaged ducting preventing heated air from reaching the cabin. A defective exhaust muffler heat exchange section is also a strong candidate as it's the heat source. I will start by having you physically verify the valve operation and inspect the ducting, as these are the most accessible and common issues.",
+  "gus_answer_paths": [
+    "The cabin heat shut-off valve moves freely and fully, and the ducting appears intact and connected.",
+    "The cabin heat shut-off valve is sticking or does not move through its full range, or the ducting is visibly damaged/disconnected.",
+    "The cabin heat shut-off valve moves freely, the ducting is intact, but I hear an exhaust leak or smell exhaust fumes in the cabin."
+  ],
+  "gus_sources": [],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Insufficient cabin heat output.",
+    "critical_keywords": [
+      "Control cable travel appears full"
+    ]
+  },
+  "timestamp": "2026-03-14T15:23:00.482303"
+}

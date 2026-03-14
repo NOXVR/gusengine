@@ -1,0 +1,56 @@
+{
+  "test_id": "F13_expert",
+  "fault_id": 13,
+  "variant": "expert",
+  "query": "Both main wheels exhibit noticeable resistance during ground push-back. Brakes were released. Wheels are warm to touch.",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "BRAKES DRAG",
+  "fsm_probable_cause": "Brake disc warped / Return springs weak or broken / Piston stuck in cylinder",
+  "fsm_remedy": "Replace disc / Replace springs / Free or replace piston",
+  "expected_system": "brakes",
+  "response_time_seconds": 34.07,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The main wheels are exhibiting resistance during push-back and are warm, even with the brakes released. This indicates a dragging brake condition. First, we need to verify that the brake pedals and parking brake system are fully disengaged and not causing any residual pressure. Inspect the pilot and copilot rudder pedals for any binding or obstruction that might prevent them from returning to their full 'off' position. Then, check the parking brake handle and its cable linkage (refer to Figure 5-14 on page 7 of Source 47) to ensure it is fully released and not applying tension to the master cylinders.",
+  "gus_reasoning": "The symptom of 'noticeable resistance' and 'warm to touch' on both main wheels, despite the brakes being released, points directly to a dragging brake condition or excessive friction in the wheel assembly. The Service Manual's troubleshooting section for 'Dragging Brakes' (Source 57, page 3) lists several probable causes. I will start by investigating the most accessible and common causes related to brake system engagement: brake pedal binding and parking brake linkage issues, as these would directly cause the reported symptoms on both wheels. This approach allows for a quick visual and tactile check before delving into internal hydraulic components or wheel bearing inspection.",
+  "gus_answer_paths": [
+    "Both brake pedals are free, and the parking brake linkage is fully slack, but the wheels still drag.",
+    "One or both brake pedals are stiff or not fully returning, or the parking brake linkage is tight even when released.",
+    "The wheels spin freely with no resistance after jacking the aircraft."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 3,
+      "context": "5 -42. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 6,
+      "context": "5-55. PARKING BRAKE SYSTEM."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 24,
+      "context": "5-3. > TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 39,
+      "context": "SPECIAL INSPECTION ITEM > EACH 200 HOURS > FUEL SYSTEM"
+    }
+  ],
+  "gus_rag_chunk_count": 57,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk, main wheels",
+    "symptom_signature": "Noticeable resistance during ground push-back on both main wheels. Brakes were released. Wheels are warm to touch.",
+    "critical_keywords": [
+      "main wheels",
+      "resistance",
+      "push-back",
+      "brakes released",
+      "warm to touch"
+    ]
+  },
+  "timestamp": "2026-03-14T15:09:03.236067"
+}

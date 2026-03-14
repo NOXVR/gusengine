@@ -1,0 +1,49 @@
+{
+  "test_id": "F15_expert",
+  "fault_id": 15,
+  "variant": "expert",
+  "query": "Suction gauge reading above the normal 4.5-5.5 range. Attitude indicator and heading indicator appear to be working but spinning faster than normal.",
+  "fsm_section": "\u00a715-26",
+  "fsm_trouble": "HIGH SUCTION GAGE READINGS",
+  "fsm_probable_cause": "Defective suction relief valve / Restricted suction relief valve filter",
+  "fsm_remedy": "Replace or adjust valve / Clean or replace filter",
+  "expected_system": "instruments/vacuum",
+  "response_time_seconds": 45.05,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The reported high suction gauge reading, coupled with the gyros spinning faster than normal, indicates an over-pressure condition in the vacuum system. This could be a faulty gauge or a problem with the suction relief valve. First, we need to confirm the accuracy of the suction gauge. Then, if the reading is confirmed high, we will address the relief valve.",
+  "gus_reasoning": "The primary symptom is a high suction gauge reading, corroborated by gyroscopic instruments (attitude and heading indicators) spinning faster than normal. This combination strongly points to an actual over-pressure condition in the vacuum system. The most direct cause for high suction readings, according to the troubleshooting guide, is an improperly adjusted or malfunctioning suction relief valve (Source 18, 43). A defective suction gauge is also listed as a cause for high readings (Source 18, 43), but the observed gyro behavior makes it less likely to be the sole issue. Clogged filters are generally associated with low or sluggish readings, not high (Source 25, 37). Therefore, the first step is to verify the gauge's accuracy, then proceed to the relief valve.",
+  "gus_answer_paths": [
+    "The suction gauge reading is confirmed high when checked with a known good gauge.",
+    "The suction gauge reading is normal when checked with a known good gauge, indicating the original gauge is faulty."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 29,
+      "context": "15-26. TROUBLE SHOOTING--VACUUM SYSTEM > TROUBLE > HIGH SUCTION GAGE READINGS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 27,
+      "context": "15-21. TROUBLE SHOOTING--VERTICAL SPEED INDICATOR. (Cont) > TROUBLE > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 33,
+      "context": "15- 28. TROUBLE SHOOTING--VACUUM PUMP. > LOW PRESSURE. > 15-29. REMOVAL AND INSTALLATION OF COMPO-"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 30,
+      "context": "15-27. TROUBLE SHOOTING--GYROS. (Cont)."
+    }
+  ],
+  "gus_rag_chunk_count": 52,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Suction gauge reading above the normal 4.5-5.5 range. Attitude indicator and heading indicator appear to be working but spinning faster than normal.",
+    "critical_keywords": []
+  },
+  "timestamp": "2026-03-14T15:13:29.816280"
+}

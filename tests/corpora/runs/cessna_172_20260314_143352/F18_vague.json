@@ -1,0 +1,63 @@
+{
+  "test_id": "F18_vague",
+  "fault_id": 18,
+  "variant": "vague",
+  "query": "The wheel thing is really hard to turn left and right. It feels stuck.",
+  "fsm_section": "\u00a76",
+  "fsm_trouble": "AILERON CONTROL STIFF",
+  "fsm_probable_cause": "Cable tension too high / Pulleys binding / Bellcrank binding",
+  "fsm_remedy": "Adjust cable tension / Lubricate or replace pulleys / Lubricate or replace bellcrank",
+  "expected_system": "flight controls",
+  "response_time_seconds": 42.42,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Clarify what 'wheel thing' refers to. Is the resistance felt when operating the control wheel in the cockpit (for flight control) or when steering the aircraft on the ground (for ground handling)?",
+  "gus_reasoning": "The customer's description 'The wheel thing is really hard to turn left and right. It feels stuck.' is ambiguous regarding whether 'wheel thing' refers to the aircraft's flight controls (aileron control wheel) or its ground steering (nose wheel). Both systems have documented failure modes that would cause significant resistance to turning. The Aileron Control System troubleshooting explicitly mentions 'RESISTANCE TO CONTROL WHEEL MOVEMENT' (Source 1). The Nose Wheel Steering System is critical for ground handling, and issues with its steering rod assembly, needle bearing, or torque links (Source 17, 43) would manifest as difficulty turning. To proceed, it is essential to first clarify which 'wheel thing' the customer is referring to, as the diagnostic paths for flight controls and ground steering are distinct.",
+  "gus_answer_paths": [
+    "The resistance is felt when operating the control wheel in the cockpit, affecting aileron movement.",
+    "The resistance is felt when steering the aircraft on the ground, affecting nose wheel movement."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 9,
+      "context": "TROUBLE > RESISTANCE TO CONTROL > WHEEL MOVEMENT."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 40,
+      "context": "AIRFRA > SPECIAL INSPECTION ITEM > EACH 200 HOURS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 2,
+      "context": "5-37. NOSE WHEEL STEERING SYSTEM. Nose"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 1,
+      "context": "NOTE > 1243030-5 . . . . . . . . . .  0.006 inch > 1243030-6 . . . . . . . . . .  0.012 inch"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 24,
+      "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 29,
+      "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+    }
+  ],
+  "gus_rag_chunk_count": 57,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION) - specific configuration (engine, transmission) not stated by customer.",
+    "symptom_signature": "The 'wheel thing' is really hard to turn left and right. It feels stuck.",
+    "critical_keywords": [
+      "wheel thing",
+      "hard to turn left and right",
+      "stuck"
+    ]
+  },
+  "timestamp": "2026-03-14T15:19:29.621329"
+}

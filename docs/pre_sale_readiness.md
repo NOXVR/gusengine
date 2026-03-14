@@ -44,6 +44,8 @@ Based on GusEngine's novel architecture, the following are potentially patentabl
 
 7. **Deployment Integrity Verification for Distributed AI Diagnostic Systems** — An automated startup-time health verification system that cross-references a vehicle registry against a vector database, verifying that each registered diagnostic domain has a corresponding vector collection with a non-zero point count, and emitting structured health status banners with per-collection granularity — ensuring that deployment events (container rebuilds, infrastructure migrations) cannot silently degrade diagnostic coverage. *(Added 2026-03-13)*
 
+8. **Multi-Diagnosis Queue Protocol** — A session management system in which the AI diagnostic engine detects when a user presents multiple unrelated symptoms spanning different subsystems, automatically decomposes them into a numbered issue queue, and works through each issue sequentially via a guided UX flow. Upon detecting a multi-diagnosis prompt, the system acknowledges all issues, assigns each to a diagnostic track, and begins the full diagnostic state machine (Triage → Funnel → Testing → Conclusion) for the first issue only. Upon reaching conclusion for each issue, the system presents a resolution gate ("Fixed — move to next issue" / "Still having the problem — continue debugging") before advancing to the next queued issue. The system maintains a `pending_issues` manifest in every response, providing session-wide visibility into resolved vs. unresolved issues. This prevents the cognitive overload of parallel multi-fault diagnosis while ensuring no reported issue is forgotten or dropped. *(Added 2026-03-14, deployment ready)*
+
 ### Innovation Changelog
 
 | Date | Claim | Innovation | Evidence |
@@ -51,6 +53,8 @@ Based on GusEngine's novel architecture, the following are potentially patentabl
 | 2026-03-13 | #5 | V11 Multi-Pass Self-Verification | Deployed, logs prove 3-pass execution with automatic revision |
 | 2026-03-13 | #6 | Cognitive Query Expansion | Deployed and proven: 5/5 queries parse as `json_parse`, 6 sub-queries each, 100% expansion utilization. Includes multi-stage parse robustness (JSON → balanced-bracket → regex fallback) and per-request `expansion_info` observability metadata. |
 | 2026-03-13 | #7 | Deployment Integrity Verification | Deployed, logs prove 6/6 collection health check |
+| 2026-03-14 | — | Image-Based Citation References | **In progress.** System prompt updated to direct mechanics to FSM diagrams/figures when found in context. FSM text chunks already contain figure references organically (e.g., "Fig. 2 — Filter housing"), enabling Gus to cite diagrams by page and describe what they show — without a separate image processing pipeline. Formal image catalog infrastructure (type-tagged `image_reference` chunks with dedicated storage/retrieval) is codified and deployed but undergoing validation for incremental value over existing text-based figure references. |
+| 2026-03-14 | #8 | Multi-Diagnosis Queue Protocol | **Deployment ready.** Proven capable via 3-turn Mustang test: user presented 3 unrelated faults (U-joint, heater valve, hot-start flooding) in one prompt → Gus decomposed into 3 independent tracks, resolved sequentially, and maintained awareness of pending issues across turns. System prompt update drafted to codify the detection/queue/resolve/gate flow. |
 | | | *Future entries will be appended here* | |
 
 ### How to File

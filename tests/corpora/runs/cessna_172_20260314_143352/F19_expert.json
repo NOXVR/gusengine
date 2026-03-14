@@ -1,0 +1,34 @@
+{
+  "test_id": "F19_expert",
+  "fault_id": 19,
+  "variant": "expert",
+  "query": "Cabin heat output minimal with control set to full hot. Defrost seems to work slightly. Outside air temp is 20F.",
+  "fsm_section": "\u00a77-4 / \u00a710-3",
+  "fsm_trouble": "INSUFFICIENT CABIN HEAT",
+  "fsm_probable_cause": "Heat control cable misadjusted / Heat valve not opening fully / Leaking exhaust shroud",
+  "fsm_remedy": "Adjust cable / Repair valve / Replace shroud",
+  "expected_system": "heating/ventilation",
+  "response_time_seconds": 35.91,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The most common cause for your symptom is a sticking or binding cabin heat shut-off valve or its control linkage. This valve is located on the right forward side of the firewall. You need to physically verify its operation.\n\n1.  Locate the 'CABIN HEAT' push-pull control on the instrument panel.\n2.  Locate the shut-off valve on the right forward side of the firewall, which is connected to this control.\n3.  Operate the 'CABIN HEAT' control from full 'IN' (cold) to full 'OUT' (hot).\n4.  Observe the shut-off valve's movement. Ensure it moves freely and completely through its full range of travel, from fully closed to fully open. Also, check that the control linkage is not binding or disconnected.",
+  "gus_reasoning": "The primary suspect for minimal cabin heat with the control set to full hot, especially when defrost works slightly, is a sticking or binding air valve or its control. The Service Manual explicitly lists this as a common operational trouble for the heating, defrosting, and ventilating systems (Source 21, 40). A partially restricted valve would allow some air (hence slight defrost) but not full heat. Other causes like damaged ducting or muffler defects are plausible but less likely to be the 'most common' cause as stated in the FSM. The next logical step is to physically inspect the operation of the cabin heat control and the associated shut-off valve.",
+  "gus_answer_paths": [
+    "The cabin heat control moves freely, and the shut-off valve on the firewall moves through its full range of travel, from fully closed to fully open, with no binding.",
+    "The cabin heat control feels stiff or binds, and/or the shut-off valve on the firewall does not move through its full range of travel when the control is operated.",
+    "The cabin heat control moves freely, but the shut-off valve on the firewall does not move at all, indicating a disconnected linkage."
+  ],
+  "gus_sources": [],
+  "gus_rag_chunk_count": 50,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Minimal cabin heat output with control set to full hot. Defrost seems to work slightly. Outside air temp is 20F.",
+    "critical_keywords": [
+      "Cabin heat",
+      "full hot",
+      "Defrost",
+      "20F"
+    ]
+  },
+  "timestamp": "2026-03-14T15:22:26.467518"
+}

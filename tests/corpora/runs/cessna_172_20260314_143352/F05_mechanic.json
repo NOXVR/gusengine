@@ -1,0 +1,34 @@
+{
+  "test_id": "F05_mechanic",
+  "fault_id": 5,
+  "variant": "mechanic",
+  "query": "Reported power loss in flight. Carb heat partially restored power. What are the FSM-listed causes for in-flight power loss?",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE LOSES POWER IN FLIGHT",
+  "fsm_probable_cause": "Carburetor icing / Plugged fuel strainer / Defective magneto",
+  "fsm_remedy": "Apply carburetor heat / Clean strainer / Replace magneto",
+  "expected_system": "engine/fuel",
+  "response_time_seconds": 56.31,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Given that carburetor heat partially restored power, we need to investigate the fuel system, the induction air system, and the integrity of the carburetor heat system itself. Your next step is to physically inspect the fuel and induction systems for obvious issues and verify the functionality of the carburetor heat system. Start by checking for water in the fuel, as this is a common issue that can cause power loss and might be temporarily masked by carb heat.",
+  "gus_reasoning": "The symptom of 'power loss in flight' with 'carb heat partially restored power' strongly points to issues affecting the fuel-air mixture or the carburetor heat system itself. Carburetor icing is the most direct cause, as carb heat is specifically designed to combat it. However, other fuel system issues like a defective carburetor or fuel restrictions/contamination could also be partially mitigated by the warming effect of carb heat. Furthermore, a defect in the exhaust system that compromises the carburetor heat shroud would explain why carb heat was only *partially* effective, as the heat source itself would be impaired. Less likely, but still possible, are a restricted induction air filter or ignition system issues, where the warming of the intake charge might offer a slight, temporary improvement.",
+  "gus_answer_paths": [
+    "I drained the fuel strainer and found significant water and sediment.",
+    "The carburetor heat control moves freely, but the airbox flap does not fully open/close, or the flexible ducting is damaged.",
+    "The induction air filter is visibly clogged with debris.",
+    "I performed a magneto check (per 11-59) and found an RPM drop exceeding 125 RPM on one magneto, or a differential greater than 50 RPM between magnetos."
+  ],
+  "gus_sources": [],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (aviation)",
+    "symptom_signature": "Reported power loss in flight. Carb heat partially restored power.",
+    "critical_keywords": [
+      "power loss",
+      "in flight",
+      "carb heat partially restored power"
+    ]
+  },
+  "timestamp": "2026-03-14T14:48:12.608272"
+}

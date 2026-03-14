@@ -1,0 +1,56 @@
+{
+  "test_id": "F19_vague",
+  "fault_id": 19,
+  "variant": "vague",
+  "query": "It's freezing in here when I fly. The heater doesn't seem to do anything even when I pull the knob all the way.",
+  "fsm_section": "\u00a77-4 / \u00a710-3",
+  "fsm_trouble": "INSUFFICIENT CABIN HEAT",
+  "fsm_probable_cause": "Heat control cable misadjusted / Heat valve not opening fully / Leaking exhaust shroud",
+  "fsm_remedy": "Adjust cable / Repair valve / Replace shroud",
+  "expected_system": "heating/ventilation",
+  "response_time_seconds": 41.71,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Check the physical operation of the 'CABIN HEAT' control and the associated shut-off valve. The Service Manual indicates that sticking or binding air valves and/or their controls, or damaged air ducting, are common causes for heating system issues. You need to visually confirm the valve's movement and the integrity of the ducts. Also, inspect the exhaust muffler's heat exchange section for any signs of damage or leaks, as this is where the air is heated.",
+  "gus_reasoning": "The primary suspects for a 'no heat' complaint, even with the control pulled, are issues with the cabin heat shut-off valve, its control linkage, or the integrity of the heat exchange system. The Service Manual explicitly states that 'Most of the operational troubles in the heating, defrosting and ventilating systems are caused by sticking or binding air valves and/or their controls, damaged air ducting, or defects in the exhaust muffler.' (Source 40, Page 11; Source 42, Page 11). Therefore, the initial diagnostic steps should focus on physically verifying the operation of the control, the valve, and inspecting the associated ducting and muffler for obvious damage or obstructions. A secondary consideration is the fresh airscoop door, which could dilute heated air if stuck open (Source 27, Page 14).",
+  "gus_answer_paths": [
+    "The 'CABIN HEAT' control knob moves freely, and I can see the shut-off valve move through its full range, but there's still no heat. The ducts appear intact.",
+    "The 'CABIN HEAT' control knob moves freely, but the shut-off valve is stuck or does not move through its full range.",
+    "The 'CABIN HEAT' control knob is stiff or binds when I try to pull it out, and the shut-off valve does not move fully.",
+    "I found damaged, disconnected, or obstructed flexible ducting in the heating system.",
+    "The 'CABIN AIR' control knob is stuck, and the fresh airscoop door is visibly open, even when the 'CABIN AIR' control is pushed in."
+  ],
+  "gus_sources": [
+    {
+      "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 11,
+      "context": "14-5. TROUBLE SHOOTING"
+    },
+    {
+      "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 14,
+      "context": "14-15. TROUBLE SHOOTING"
+    },
+    {
+      "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 24,
+      "context": "11-74. DESCRIPTION"
+    },
+    {
+      "source": "Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 7,
+      "context": "11-12. ACCESSORIES REMOVAL."
+    }
+  ],
+  "gus_rag_chunk_count": 52,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172/Skyhawk",
+    "symptom_signature": "No cabin heat, even when the control knob is pulled all the way out, resulting in a freezing cabin.",
+    "critical_keywords": [
+      "freezing",
+      "heater",
+      "knob all the way"
+    ]
+  },
+  "timestamp": "2026-03-14T15:21:49.037641"
+}

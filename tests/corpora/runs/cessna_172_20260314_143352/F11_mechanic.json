@@ -1,0 +1,54 @@
+{
+  "test_id": "F11_mechanic",
+  "fault_id": 11,
+  "variant": "mechanic",
+  "query": "High oil temperature, pressure within limits. What FSM probable causes and remedies apply to elevated oil temp?",
+  "fsm_section": "\u00a711-9 / \u00a711A-31",
+  "fsm_trouble": "HIGH OIL TEMPERATURE",
+  "fsm_probable_cause": "Insufficient oil / Defective oil cooler / Clogged oil passages",
+  "fsm_remedy": "Service oil / Replace cooler / Flush oil system",
+  "expected_system": "engine/oil",
+  "response_time_seconds": 50.04,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to isolate the cause of the high oil temperature. Given that oil pressure is within limits, we'll start by verifying the temperature reading and then inspect the oil cooling system. What do you observe when performing the following checks?",
+  "gus_reasoning": "The reported high oil temperature with normal oil pressure points to either an inaccurate gauge reading or a problem with the oil cooling system itself. The FSM troubleshooting guide for 'HIGH OIL TEMPERATURE' (Section 11-31 / 11A-31) lists several probable causes. I've prioritized checking the instrumentation first, as a false reading is a simple explanation. Next, I'll focus on the oil cooler and its associated components (airflow, bypass valve) as they directly control oil temperature. Finally, I'll consider the oil itself (viscosity) and external factors like winter baffles.",
+  "gus_answer_paths": [
+    "The oil temperature gauge reads high, but an independent, known-good temperature probe inserted into the oil sump or near the oil temperature bulb confirms the actual oil temperature is normal.",
+    "The oil cooler core is visibly obstructed with dirt, debris, or the winter baffles are still installed, restricting airflow.",
+    "With the engine at operating temperature, the oil cooler core feels cold to the touch, indicating oil is bypassing the cooler when it should be flowing through it for cooling.",
+    "The engine oil currently in the sump is a higher viscosity grade (e.g., SAE 50 in cold weather) than recommended for the current ambient temperature range, or appears unusually thick."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 13,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 14,
+      "context": "11- 31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 35,
+      "context": "llA-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 35,
+      "context": "PROBABLE CAUSE > TROUBLE > PROBABLE CAUSE"
+    }
+  ],
+  "gus_rag_chunk_count": 45,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (engine type not specified, but FSM covers Lycoming and Continental)",
+    "symptom_signature": "High oil temperature, pressure within limits.",
+    "critical_keywords": [
+      "High oil temperature",
+      "pressure within limits"
+    ]
+  },
+  "timestamp": "2026-03-14T15:04:59.820591"
+}

@@ -1,0 +1,55 @@
+{
+  "test_id": "F14_vague",
+  "fault_id": 14,
+  "variant": "vague",
+  "query": "The speed thing on the dashboard seems wrong. It shows way less speed than I think I'm going.",
+  "fsm_section": "\u00a715-17",
+  "fsm_trouble": "LOW OR SLUGGISH AIRSPEED INDICATION",
+  "fsm_probable_cause": "Pitot tube obstructed / Pitot line leaking",
+  "fsm_remedy": "Clear obstruction / Repair line",
+  "expected_system": "instruments/pitot",
+  "response_time_seconds": 33.92,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The airspeed indicator is showing a lower speed than expected. This points to a potential issue with the pitot-static system. We need to determine if the problem is isolated to the pitot system or if it's a broader static system issue affecting multiple instruments. Visually inspect the pitot tube for any obstructions and then check the behavior of the other static instruments.",
+  "gus_reasoning": "The primary suspect for a 'low or sluggish airspeed indication' is an issue with the pitot-static system, specifically an obstruction or leak in the pitot tube or line. The FSM (Source 1, page 24) explicitly lists 'Pitot tube obstructed, leak or obstruction in pitot line' as a probable cause for 'LOW OR SLUGGISH AIRSPEED INDICATION'. The pitot system conveys ram air pressure to the airspeed indicator (Source 20, page 19). If this pressure is compromised, the indicator will read low. While static line issues can also cause incorrect indications for all three instruments (airspeed, altimeter, VSI) (Source 15, page 24), the user only mentioned the airspeed indicator. Therefore, the initial diagnostic step should focus on physically inspecting the pitot tube and checking the pitot line for obstructions or leaks, while also observing the other static instruments to narrow down the system.",
+  "gus_answer_paths": [
+    "The pitot tube is visibly obstructed (e.g., by debris, ice, or a cover).",
+    "The pitot tube is clear, and the altimeter and vertical speed indicator are working normally.",
+    "The pitot tube is clear, but the altimeter and vertical speed indicator are also showing incorrect or sluggish readings.",
+    "The pitot tube is clear, and all other static instruments (altimeter, VSI) are working normally, but the airspeed indicator still reads low after a thorough visual inspection of the pitot tube and accessible pitot line."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 24,
+      "context": "15- 17. TROUBLE SHOOTING--PITOT STATIC SYSTEM."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 19,
+      "context": "15-10. PITOT AND STATIC SYSTEMS."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 26,
+      "context": "15-20. TROUBLE SHOOTING--ALTIMETER"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 36,
+      "context": "15-42. TROUBLE SHOOTING. (C ont."
+    }
+  ],
+  "gus_rag_chunk_count": 54,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "The speed thing on the dashboard seems wrong. It shows way less speed than I think I'm going.",
+    "critical_keywords": [
+      "speed thing",
+      "dashboard",
+      "less speed"
+    ]
+  },
+  "timestamp": "2026-03-14T15:10:40.870881"
+}

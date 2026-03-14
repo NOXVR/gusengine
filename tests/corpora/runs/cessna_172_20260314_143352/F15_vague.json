@@ -1,0 +1,51 @@
+{
+  "test_id": "F15_vague",
+  "fault_id": 15,
+  "variant": "vague",
+  "query": "One of the round gauges on the dash seems to be reading too high. I think it's the suction one?",
+  "fsm_section": "\u00a715-26",
+  "fsm_trouble": "HIGH SUCTION GAGE READINGS",
+  "fsm_probable_cause": "Defective suction relief valve / Restricted suction relief valve filter",
+  "fsm_remedy": "Replace or adjust valve / Clean or replace filter",
+  "expected_system": "instruments/vacuum",
+  "response_time_seconds": 44.88,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "You're reporting a high reading on the suction gauge. This typically indicates an issue with the vacuum system's filtration or regulation, or a faulty gauge. We need to isolate the cause. Start by checking the most common and accessible components.",
+  "gus_reasoning": "The primary suspects for a high suction gauge reading are a clogged instrument air filter, a malfunctioning or improperly adjusted suction relief valve, or a defective suction gauge itself. The service manual directly lists clogged instrument air filters and relief valve issues under 'HIGH SUCTION GAGE READINGS'. A defective gauge is also a common cause for any incorrect instrument reading. I will start by having the mechanic check the filters, as it's a straightforward initial step, then move to the relief valve, and finally consider the gauge itself.",
+  "gus_answer_paths": [
+    "I removed the instrument air filters, and the suction gauge reading immediately dropped to normal.",
+    "I inspected the suction relief valve screen, and it was clogged. After cleaning/replacing, the reading is normal.",
+    "The suction relief valve was improperly adjusted. After adjusting it to 5.3 \u00b1 0.1 inches of mercury at 2200 RPM, the reading is normal.",
+    "I substituted the suction gauge with a known-good unit, and the new gauge reads correctly. The original gauge is defective."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 29,
+      "context": "15-26. TROUBLE SHOOTING--VACUUM SYSTEM > TROUBLE > HIGH SUCTION GAGE READINGS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 33,
+      "context": "15-31. VACUUM RELIEF VALVE ADJUSTMENT."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 37,
+      "context": "15-45. TROUBLE SHOOTING."
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "One of the round gauges on the dash seems to be reading too high. I think it's the suction one.",
+    "critical_keywords": [
+      "round gauges",
+      "dash",
+      "reading too high",
+      "suction one"
+    ]
+  },
+  "timestamp": "2026-03-14T15:12:43.265001"
+}

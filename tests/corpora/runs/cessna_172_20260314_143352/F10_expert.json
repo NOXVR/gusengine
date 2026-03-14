@@ -1,0 +1,59 @@
+{
+  "test_id": "F10_expert",
+  "fault_id": 10,
+  "variant": "expert",
+  "query": "Oil pressure gauge dropped to zero in flight. Oil temperature is rising. I'm looking for immediate actions and probable causes.",
+  "fsm_section": "\u00a711A-31",
+  "fsm_trouble": "NO OIL PRESSURE",
+  "fsm_probable_cause": "Insufficient oil / Defective pressure relief valve / Defective oil pump",
+  "fsm_remedy": "Service oil / Replace relief valve / Replace or repair pump",
+  "expected_system": "engine/oil",
+  "response_time_seconds": 68.0,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Zero oil pressure and rising oil temperature in flight is an emergency. Your immediate action should be to reduce power and land as soon as safely possible. Once on the ground, do not restart the engine until a thorough inspection is performed. Your first steps are to physically verify the oil level and inspect for external leaks, then check the oil pressure gauge system.",
+  "gus_reasoning": "The combination of zero oil pressure and rising oil temperature in flight is a critical indication of a severe engine lubrication system failure. The most probable and dangerous causes are a complete loss of oil, a failed oil pump, or a major leak in the pressure system. While an instrumentation error (defective gauge) is possible, the rising temperature makes it less likely to be the sole issue. The oil pressure relief valve or oil cooler bypass valve could also contribute to both symptoms by affecting pressure regulation and heat dissipation. The initial diagnostic path must prioritize verifying the actual oil level and checking for external leaks, as these are immediate threats and can be visually confirmed. Simultaneously, the integrity of the oil pressure gauge and its line should be checked to rule out an instrumentation fault. The FSM troubleshooting guides for 'NO OIL PRESSURE' and 'HIGH OIL TEMPERATURE' are directly applicable.",
+  "gus_answer_paths": [
+    "The oil dipstick shows the oil level is critically low or empty, and I found a significant oil leak.",
+    "The oil dipstick shows the oil level is normal, and there are no visible external oil leaks.",
+    "The oil pressure gauge line is congealed or pinched, or the gauge itself is obviously defective (e.g., pointer stuck)."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 12,
+      "context": "11-31. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 34,
+      "context": "11A- 3 1. TROUBLE SHOOTING. > TROUBLE > NO OIL PRESSURE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 13,
+      "context": "11-31. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > REMEDY"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 35,
+      "context": "llA-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 11,
+      "context": "11-23. REPAIR. Repair of an individual segment of > 11-24. ENGINE MOUNT. (Refer to figure 11-2.) > 11-25. DESCRIPTION. The engine mount is com-"
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "not_stated",
+    "symptom_signature": "Oil pressure gauge dropped to zero in flight. Oil temperature is rising.",
+    "critical_keywords": [
+      "Oil pressure gauge dropped to zero",
+      "Oil temperature is rising",
+      "in flight"
+    ]
+  },
+  "timestamp": "2026-03-14T15:01:21.657581"
+}

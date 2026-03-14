@@ -1,0 +1,70 @@
+{
+  "test_id": "F04_expert",
+  "fault_id": 4,
+  "variant": "expert",
+  "query": "Rough running at idle, RPM fluctuating about 50 RPM. Smooths out above 1200 RPM.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE ROUGH AT IDLE",
+  "fsm_probable_cause": "Idle mixture too rich or too lean / Fouled spark plugs",
+  "fsm_remedy": "Adjust idle mixture / Clean or replace plugs",
+  "expected_system": "engine",
+  "response_time_seconds": 62.28,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The engine is running rough at idle with RPM fluctuations, but smooths out above 1200 RPM. This indicates a problem with the idle circuit, ignition at low RPM, or an air leak. We need to check the idle speed and mixture adjustment first, as this is a common cause for such symptoms. Perform the idle speed and mixture adjustment procedure as follows:\n\n1.  Start and run the engine until oil and cylinder head temperatures are in the normal operating range.\n2.  Advance engine speed to approximately 1000 RPM, then retard the throttle to the idle position. The engine RPM should stabilize at 600 \u00b1 25 RPM. If not, adjust the idle speed screw IN to increase and OUT to decrease RPM. (Refer to paragraph 11-45.c, Source 17)\n3.  Once idle speed is stabilized, slowly move the mixture control toward the IDLE CUT-OFF position and observe the tachometer for any minute change. A momentary increase of approximately 25 RPM is desirable. An increase of more than 25 RPM indicates a rich idle mixture, and an immediate decrease (without a momentary increase) indicates a lean idle mixture. (Refer to paragraph 11-45.d, f, Source 14, 17)\n4.  Quickly return the mixture control to the FULL RICH position before the engine stops. (Refer to paragraph 11-45.e, Source 14)\n5.  If the idle mixture is too rich, turn the idle mixture adjustment center screw one or two notches clockwise. If too lean, turn it one or two notches counterclockwise. After each adjustment, run the engine up to approximately 1800 RPM to clear excess fuel and obtain a correct idle speed, then repeat steps 3 and 4. (Refer to paragraph 11-45.g, h, Source 14, 29, 37)\n\nReport your observations during this process.",
+  "gus_reasoning": "The symptom of rough running and RPM fluctuation at idle, which smooths out at higher RPMs, strongly points to issues affecting the engine's low-speed operation. The most probable causes, as supported by the FSM, are incorrect idle mixture/speed adjustment, issues with spark plugs or the ignition harness, or induction air leaks. These issues primarily manifest at idle where the engine is more sensitive to mixture and ignition quality. I will start by having you check the idle mixture and speed, as this is a common adjustment and the FSM provides a clear procedure for it (Source 14, 17, 29). If the idle mixture is off, it will cause the exact symptoms described. If adjustment doesn't resolve it, we'll move to ignition and air leaks.",
+  "gus_answer_paths": [
+    "I adjusted the idle mixture, and the engine now idles smoothly at 600 RPM with a 25 RPM rise before cut-off.",
+    "I adjusted the idle mixture, but the engine still runs rough, or the RPM rise during cut-off is incorrect/unstable.",
+    "I performed the magneto check (paragraph 11-59) and found an RPM drop exceeding 125 RPM on one magneto, or a differential greater than 50 RPM between magnetos, or a sharp RPM drop-off."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 16,
+      "context": "11-37. DISASSEMBLY, INSPECTION AND RE- > 11-38. INSTALLATION. > 11-39. OIL COOLER."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 17,
+      "context": "11-46. INDUCTION AIR SYSTEM. > 11-47. DESCRIPTION. Ram air to the engine enters > SHOP NOTES:"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 21,
+      "context": "11-59. MAGNETO CHECK. > NOTE > 11-60. SPARK PLUGS. Two 18-mm spark plugs are"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 41,
+      "context": "THESE CONTACT POINTS ARE USABLE > THESE CONTACT POINTS NEED REPLACEMENT > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 29,
+      "context": "15-26. TROUBLE SHOOTING--VACUUM SYSTEM > TROUBLE > HIGH SUCTION GAGE READINGS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 10,
+      "context": "11-18. REPLACEMENT. > 11-18A. STATIC RUN-UP PROCEDURES. In a case > YEAR"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    }
+  ],
+  "gus_rag_chunk_count": 51,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "Rough running at idle, RPM fluctuating about 50 RPM. Smooths out above 1200 RPM.",
+    "critical_keywords": []
+  },
+  "timestamp": "2026-03-14T14:44:13.717402"
+}

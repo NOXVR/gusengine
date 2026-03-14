@@ -1,0 +1,62 @@
+{
+  "test_id": "F20_expert",
+  "fault_id": 20,
+  "variant": "expert",
+  "query": "Severe nose wheel shimmy on takeoff roll and landing rollout above 30 knots. Shimmy dampener was serviced at last annual.",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "NOSE WHEEL SHIMMY",
+  "fsm_probable_cause": "Shimmy dampener low on fluid / Worn steering components / Tire flat-spotted",
+  "fsm_remedy": "Service dampener / Replace worn parts / Replace tire",
+  "expected_system": "landing gear",
+  "response_time_seconds": 38.39,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to physically inspect the nose gear assembly. Start by raising the nose of the aircraft to get the nose wheel off the ground. Then, perform the following checks to identify any play or defects in the system components that could be causing the shimmy.",
+  "gus_reasoning": "The reported 'Severe nose wheel shimmy' at speeds above 30 knots points directly to issues with the nose landing gear assembly. The primary suspect is the shimmy dampener, as its sole purpose is to prevent this exact symptom. Even though it was recently serviced, it could be defective or have lost fluid. Other high-probability causes involve excessive play or imbalance in the nose wheel assembly itself, including loose or defective wheel bearings, loose torque links, or worn steering linkage. These components directly affect the stability and control of the nose wheel. I will start by having you physically inspect these areas for obvious signs of wear, looseness, or fluid leaks.",
+  "gus_answer_paths": [
+    "When the nose wheel is off the ground, I can feel significant free play (side-to-side or rotational) in the wheel itself, or the wheel wobbles.",
+    "I observe hydraulic fluid leaking from the shimmy dampener, or the dampener shaft moves freely with little resistance when compressed/extended by hand.",
+    "I find noticeable looseness or wear in the nose gear torque links or the nose wheel steering linkage when attempting to move the wheel or linkage by hand.",
+    "The nose wheel assembly appears visually sound with no obvious play, leaks, or loose components, but the tire shows uneven wear patterns."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 40,
+      "context": "NOSE STRUT WILL NOT HOLD AIR PRESSURE. HYDRAULIC FLUID LEAKAGE FROM NOSE STRUT. PROBABLE CAUSE REMEDY"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 24,
+      "context": "NOTE > 2-27. > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 1,
+      "context": "NOTE > 1243030-5 . . . . . . . . . .  0.006 inch > 1243030-6 . . . . . . . . . .  0.012 inch"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 37,
+      "context": "NOTE > 5-17. MAIN WHEEL AXLE INSTALLATION. (FLAT > GEAR. )"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 2,
+      "context": "5-37. NOSE WHEEL STEERING SYSTEM. Nose > 5-38. STEERING ROD ASSEMBLY. The steering > 5-39. NOSE WHEEL STEERING ADJUSTMENT."
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Severe nose wheel shimmy on takeoff roll and landing rollout above 30 knots. Shimmy dampener was serviced at last annual.",
+    "critical_keywords": [
+      "Severe nose wheel shimmy",
+      "takeoff roll",
+      "landing rollout",
+      "above 30 knots",
+      "shimmy dampener was serviced"
+    ]
+  },
+  "timestamp": "2026-03-14T15:24:32.066348"
+}

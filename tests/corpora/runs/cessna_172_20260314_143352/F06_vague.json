@@ -1,0 +1,84 @@
+{
+  "test_id": "F06_vague",
+  "fault_id": 6,
+  "variant": "vague",
+  "query": "The engine stopped getting gas I think. It just quit in the air.",
+  "fsm_section": "\u00a712-4",
+  "fsm_trouble": "NO FUEL TO CARBURETOR",
+  "fsm_probable_cause": "Fuel selector valve not turned on / Fuel line disconnected or broken / Plugged fuel strainer",
+  "fsm_remedy": "Repair or replace selector valve / Connect or repair fuel lines / Clean strainer",
+  "expected_system": "fuel",
+  "response_time_seconds": 61.83,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to determine if the engine quit due to a lack of fuel, contaminated fuel, or an ignition issue. Your next steps should focus on physical verification of the fuel system and a basic check of engine response.",
+  "gus_reasoning": "The pilot reports the engine 'stopped getting gas' and 'quit in the air.' This points strongly to a fuel system issue, but a sudden in-flight quit could also be an ignition problem. My differential diagnosis prioritizes fuel supply and delivery issues, including empty tanks, incorrect fuel selector valve position, plugged fuel strainer or carburetor screen, water contamination, a plugged fuel vent, or vapor lock. Ignition system failure is also a critical consideration. Induction air leaks are a less likely but possible cause for an engine quit. The initial diagnostic steps will focus on verifying fuel presence, flow, and quality, and then checking for basic ignition function.",
+  "gus_answer_paths": [
+    "The fuel selector valve was in the 'BOTH ON' position, and both fuel gauges indicated approximately 1/4 tank each before the engine quit.",
+    "I drained the fuel strainer and tank sumps. There was some water and sediment in the strainer, and the fuel flow was intermittent.",
+    "When attempting to restart, the engine cranks normally but shows no signs of combustion (no firing, no sputtering).",
+    "I attempted to prime the engine. It sputtered briefly but did not start, then went back to no combustion."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 20,
+      "context": "2-21. > NOTE > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "* THRU 17260805 & F1720904 > BEGINNING WITH 17260806 & F1720905 > 12-5."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 17,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    }
+  ],
+  "gus_rag_chunk_count": 50,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk with a carbureted engine (either 'Blue Streak' Lycoming O-320-E series or Continental O-300-D).",
+    "symptom_signature": "The engine stopped getting gas. It just quit in the air.",
+    "critical_keywords": [
+      "stopped getting gas",
+      "quit in the air"
+    ]
+  },
+  "timestamp": "2026-03-14T14:49:15.944686"
+}

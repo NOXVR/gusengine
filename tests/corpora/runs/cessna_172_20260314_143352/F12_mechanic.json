@@ -1,0 +1,55 @@
+{
+  "test_id": "F12_mechanic",
+  "fault_id": 12,
+  "variant": "mechanic",
+  "query": "Aircraft leaning to one side on the ground. What does the FSM landing gear troubleshooting table list as probable causes?",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "AIRCRAFT LEANS TO ONE SIDE",
+  "fsm_probable_cause": "Landing gear attaching parts not tight / Landing gear spring excessively sprung",
+  "fsm_remedy": "Tighten loose parts / Remove and install new parts",
+  "expected_system": "landing gear",
+  "response_time_seconds": 54.56,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The FSM troubleshooting table for 'AIRCRAFT LEANS TO ONE SIDE' (Source 7, page 24) lists several probable causes. Begin by performing a thorough visual inspection and basic checks of the landing gear and associated components. What do you observe?",
+  "gus_reasoning": "The FSM troubleshooting table for 'AIRCRAFT LEANS TO ONE SIDE' (Source 7, 48) lists several probable causes across multiple subsystems. I've prioritized the most common and easily verifiable causes for initial inspection. Incorrect tire inflation is a frequent cause and simple to check. Structural issues like loose attaching parts, an excessively sprung landing gear spring, or incorrect shimming are direct mechanical causes. Bent axles and dragging brakes are also plausible and require visual inspection.",
+  "gus_answer_paths": [
+    "I observe one or more main landing gear tires are under-inflated compared to specifications (refer to Figure 1-1 for pressure).",
+    "I observe loose or damaged landing gear attaching parts, or the landing gear spring-strut appears visibly bent or excessively compressed on one side.",
+    "I observe a brake dragging on one of the main wheels, or the wheel is difficult to rotate by hand.",
+    "I observe a visibly bent axle on one of the main wheels, or the wheel bearings feel excessively tight when rotating the wheel off the ground."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 24,
+      "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 7,
+      "context": "SECTION 1 > GENERAL DESCRTPTION > TABLE OF CONTENTS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 3,
+      "context": "5-40. > BRAKE SYSTEM. > 5 -42. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 25,
+      "context": "5-5. REMOVAL. > 5-1.) The following procedural steps remove the > 5-6. INSTALLATION. (FLAT.) (See sheet 1 of"
+    }
+  ],
+  "gus_rag_chunk_count": 50,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk, fixed tricycle landing gear (may be flat or tubular spring-steel main gear struts depending on specific model year within the range)",
+    "symptom_signature": "Aircraft leaning to one side on the ground.",
+    "critical_keywords": [
+      "leaning",
+      "one side",
+      "ground"
+    ]
+  },
+  "timestamp": "2026-03-14T15:07:26.027321"
+}

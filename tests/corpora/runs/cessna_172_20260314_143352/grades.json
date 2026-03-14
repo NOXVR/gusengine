@@ -1,0 +1,1285 @@
+[
+  {
+    "test_id": "F01_vague",
+    "fault_id": 1,
+    "variant": "vague",
+    "fault_description": "ENGINE WILL NOT START \u2014 fuel system",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "start",
+      "ignition",
+      "engine"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "fuel selector",
+      "magneto",
+      "spark plug",
+      "fuel system"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to systematically check the primary systems required for engine start: fuel, spark, and compression. Start with "
+  },
+  {
+    "test_id": "F01_expert",
+    "fault_id": 1,
+    "variant": "expert",
+    "fault_description": "ENGINE WILL NOT START \u2014 fuel system",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "start",
+      "ignition",
+      "engine"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "fuel delivery"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "You've confirmed the starter is engaging. Now we need to verify the engine is getting fuel and spark. Let's start with f"
+  },
+  {
+    "test_id": "F01_mechanic",
+    "fault_id": 1,
+    "variant": "mechanic",
+    "fault_description": "ENGINE WILL NOT START \u2014 fuel system",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "start",
+      "ignition",
+      "engine"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "empty"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The engine is cranking but not starting. We need to determine if the issue is with fuel, spark, or air/compression. Star"
+  },
+  {
+    "test_id": "F02_vague",
+    "fault_id": 2,
+    "variant": "vague",
+    "fault_description": "ENGINE WILL NOT START \u2014 ignition",
+    "system_pass": true,
+    "system_matches": [
+      "spark",
+      "engine",
+      "start"
+    ],
+    "cause_pass": false,
+    "cause_matches": [],
+    "overall_pass": false,
+    "diagnosis_preview": "We need to determine if the engine is receiving fuel and spark, and if the starter system is functioning correctly. Star"
+  },
+  {
+    "test_id": "F02_expert",
+    "fault_id": 2,
+    "variant": "expert",
+    "fault_description": "ENGINE WILL NOT START \u2014 ignition",
+    "system_pass": true,
+    "system_matches": [
+      "ignition",
+      "magneto",
+      "spark",
+      "engine",
+      "start"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "magneto",
+      "spark plug",
+      "ignition",
+      "defective",
+      "harness"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Given the abnormal RPM drop on the left magneto and the current no-start condition, we need to isolate the fault within "
+  },
+  {
+    "test_id": "F02_mechanic",
+    "fault_id": 2,
+    "variant": "mechanic",
+    "fault_description": "ENGINE WILL NOT START \u2014 ignition",
+    "system_pass": true,
+    "system_matches": [
+      "ignition",
+      "magneto",
+      "spark",
+      "engine",
+      "start"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "magneto",
+      "spark plug",
+      "ignition",
+      "defective"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "For a no-start condition, even with good fuel flow at the gascolator, we need to systematically check for spark, fuel qu"
+  },
+  {
+    "test_id": "F03_vague",
+    "fault_id": 3,
+    "variant": "vague",
+    "fault_description": "ENGINE STARTS BUT DIES",
+    "system_pass": true,
+    "system_matches": [
+      "engine",
+      "idle",
+      "start",
+      "die"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "mixture",
+      "carburetor",
+      "fuel"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to isolate whether the issue is with basic fuel supply, the carburetor's ability to maintain fuel flow, or anoth"
+  },
+  {
+    "test_id": "F03_expert",
+    "fault_id": 3,
+    "variant": "expert",
+    "fault_description": "ENGINE STARTS BUT DIES",
+    "system_pass": true,
+    "system_matches": [
+      "engine",
+      "idle",
+      "start",
+      "die"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "mixture",
+      "carburetor",
+      "fuel",
+      "rich",
+      "lean"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The engine fires but won't sustain idle, dying after 2-3 seconds. This points to an issue with the engine's ability to m"
+  },
+  {
+    "test_id": "F03_mechanic",
+    "fault_id": 3,
+    "variant": "mechanic",
+    "fault_description": "ENGINE STARTS BUT DIES",
+    "system_pass": true,
+    "system_matches": [
+      "engine",
+      "idle",
+      "start",
+      "die"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "mixture",
+      "carburetor",
+      "fuel"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The engine starts briefly and then dies, which is a classic symptom of a fuel delivery issue preventing sustained operat"
+  },
+  {
+    "test_id": "F04_vague",
+    "fault_id": 4,
+    "variant": "vague",
+    "fault_description": "ENGINE ROUGH AT IDLE",
+    "system_pass": true,
+    "system_matches": [
+      "engine",
+      "idle",
+      "rough",
+      "vibrat"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "mixture",
+      "spark plug",
+      "fouled",
+      "carburetor",
+      "ignition",
+      "magneto"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The rough running at idle suggests an issue with combustion or engine vibration isolation. We need to start by checking "
+  },
+  {
+    "test_id": "F04_expert",
+    "fault_id": 4,
+    "variant": "expert",
+    "fault_description": "ENGINE ROUGH AT IDLE",
+    "system_pass": true,
+    "system_matches": [
+      "engine",
+      "idle",
+      "rough"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "mixture",
+      "idle mixture",
+      "spark plug",
+      "ignition",
+      "rich",
+      "lean"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The engine is running rough at idle with RPM fluctuations, but smooths out above 1200 RPM. This indicates a problem with"
+  },
+  {
+    "test_id": "F04_mechanic",
+    "fault_id": 4,
+    "variant": "mechanic",
+    "fault_description": "ENGINE ROUGH AT IDLE",
+    "system_pass": true,
+    "system_matches": [
+      "engine",
+      "idle",
+      "rough"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "mixture",
+      "spark plug",
+      "carburetor",
+      "ignition",
+      "magneto"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Start by performing a magneto check to assess the ignition system, as this can quickly identify issues with spark plugs,"
+  },
+  {
+    "test_id": "F05_vague",
+    "fault_id": 5,
+    "variant": "vague",
+    "fault_description": "ENGINE LOSES POWER IN FLIGHT",
+    "system_pass": true,
+    "system_matches": [
+      "engine",
+      "power",
+      "loss",
+      "flight"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "magneto"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The engine losing strength progressively during flight indicates a reduction in power output. We need to narrow down whe"
+  },
+  {
+    "test_id": "F05_expert",
+    "fault_id": 5,
+    "variant": "expert",
+    "fault_description": "ENGINE LOSES POWER IN FLIGHT",
+    "system_pass": true,
+    "system_matches": [
+      "power",
+      "loss"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "carburetor ic",
+      "carb heat",
+      "mixture",
+      "icing"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The symptoms strongly suggest carburetor icing, but we need to confirm this and rule out other fuel/air system issues. P"
+  },
+  {
+    "test_id": "F05_mechanic",
+    "fault_id": 5,
+    "variant": "mechanic",
+    "fault_description": "ENGINE LOSES POWER IN FLIGHT",
+    "system_pass": true,
+    "system_matches": [
+      "power",
+      "loss",
+      "flight"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "carburetor ic",
+      "carb heat",
+      "mixture",
+      "icing"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Given that carburetor heat partially restored power, we need to investigate the fuel system, the induction air system, a"
+  },
+  {
+    "test_id": "F06_vague",
+    "fault_id": 6,
+    "variant": "vague",
+    "fault_description": "NO FUEL TO CARBURETOR",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "carburetor",
+      "engine"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "fuel selector",
+      "strainer",
+      "plugged"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to determine if the engine quit due to a lack of fuel, contaminated fuel, or an ignition issue. Your next steps "
+  },
+  {
+    "test_id": "F06_expert",
+    "fault_id": 6,
+    "variant": "expert",
+    "fault_description": "NO FUEL TO CARBURETOR",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "carburetor",
+      "engine"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "strainer",
+      "plugged",
+      "fuel delivery"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Given the engine-out in flight, we need to quickly determine the most likely cause to attempt a restart or prepare for a"
+  },
+  {
+    "test_id": "F06_mechanic",
+    "fault_id": 6,
+    "variant": "mechanic",
+    "fault_description": "NO FUEL TO CARBURETOR",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "carburetor",
+      "starvation"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "fuel selector",
+      "fuel line",
+      "strainer",
+      "plugged",
+      "broken",
+      "fuel delivery"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The 12-4 troubleshooting table for 'NO FUEL TO CARBURETOR' lists several probable causes, even with the selector valve o"
+  },
+  {
+    "test_id": "F07_vague",
+    "fault_id": 7,
+    "variant": "vague",
+    "fault_description": "WATER IN FUEL",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "water",
+      "contamina",
+      "engine"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "water",
+      "contamina",
+      "drain",
+      "sump",
+      "moisture"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Given the recent rain exposure, we need to systematically check for moisture in the fuel and ignition systems. Start by "
+  },
+  {
+    "test_id": "F07_expert",
+    "fault_id": 7,
+    "variant": "expert",
+    "fault_description": "WATER IN FUEL",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "water",
+      "contamina",
+      "engine"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "water",
+      "contamina",
+      "drain",
+      "sump",
+      "moisture",
+      "fuel strainer"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Given the aircraft's exposure to rain and your suspicion of contamination, the first step is to check for water in the f"
+  },
+  {
+    "test_id": "F07_mechanic",
+    "fault_id": 7,
+    "variant": "mechanic",
+    "fault_description": "WATER IN FUEL",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "water",
+      "contamina",
+      "engine",
+      "misfire"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "water",
+      "contamina"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Given the intermittent misfire and rough running after rain, we need to systematically check for water contamination and"
+  },
+  {
+    "test_id": "F08_vague",
+    "fault_id": 8,
+    "variant": "vague",
+    "fault_description": "PRESSURIZED FUEL TANK",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "tank",
+      "pressure",
+      "vent"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "vent",
+      "plugged",
+      "fuel vent"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The pressurized fuel tank indicates a restriction in the venting system. We need to check the fuel vent line and the ble"
+  },
+  {
+    "test_id": "F08_expert",
+    "fault_id": 8,
+    "variant": "expert",
+    "fault_description": "PRESSURIZED FUEL TANK",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "tank",
+      "pressure",
+      "vent"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "vent",
+      "plugged",
+      "fuel vent"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The symptoms indicate a pressurized fuel tank. We need to check the fuel vent system. Refer to Section 12-11, 'CHECKING'"
+  },
+  {
+    "test_id": "F08_mechanic",
+    "fault_id": 8,
+    "variant": "mechanic",
+    "fault_description": "PRESSURIZED FUEL TANK",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "tank",
+      "pressure",
+      "vent"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "vent",
+      "plugged",
+      "fuel vent",
+      "12-13"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "For a pressurized fuel tank, the FSM-listed probable cause is a plugged bleed hole in the fuel vent. The correction invo"
+  },
+  {
+    "test_id": "F09_vague",
+    "fault_id": 9,
+    "variant": "vague",
+    "fault_description": "NO FUEL QUANTITY INDICATION",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "gauge",
+      "quantity",
+      "indicator"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "circuit",
+      "wiring",
+      "transmitter",
+      "connection",
+      "open circuit"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The fuel gauge reading empty with fuel in the tank indicates a fault in the fuel quantity indicating system. First, chec"
+  },
+  {
+    "test_id": "F09_expert",
+    "fault_id": 9,
+    "variant": "expert",
+    "fault_description": "NO FUEL QUANTITY INDICATION",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "gauge",
+      "quantity",
+      "indicator"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "circuit",
+      "wiring",
+      "transmitter",
+      "connection",
+      "open circuit",
+      "ground"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to determine if the issue is electrical continuity, the sensing unit, or the gauge itself. Begin by checking the"
+  },
+  {
+    "test_id": "F09_mechanic",
+    "fault_id": 9,
+    "variant": "mechanic",
+    "fault_description": "NO FUEL QUANTITY INDICATION",
+    "system_pass": true,
+    "system_matches": [
+      "fuel",
+      "gauge",
+      "quantity",
+      "indicator"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "circuit",
+      "wiring",
+      "transmitter",
+      "connection",
+      "open circuit",
+      "ground"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "You have no fuel quantity indication on the left tank gauge, and the circuit breaker is confirmed to be in. We need to s"
+  },
+  {
+    "test_id": "F10_vague",
+    "fault_id": 10,
+    "variant": "vague",
+    "fault_description": "NO OIL PRESSURE",
+    "system_pass": true,
+    "system_matches": [
+      "oil",
+      "pressure"
+    ],
+    "cause_pass": false,
+    "cause_matches": [],
+    "overall_pass": false,
+    "diagnosis_preview": "Identify the specific red light that is illuminated and the gauge whose needle is 'all the way down.' This will narrow d"
+  },
+  {
+    "test_id": "F10_expert",
+    "fault_id": 10,
+    "variant": "expert",
+    "fault_description": "NO OIL PRESSURE",
+    "system_pass": true,
+    "system_matches": [
+      "oil",
+      "pressure",
+      "engine",
+      "lubrication"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "oil level",
+      "oil pump",
+      "relief valve",
+      "pressure relief"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Zero oil pressure and rising oil temperature in flight is an emergency. Your immediate action should be to reduce power "
+  },
+  {
+    "test_id": "F10_mechanic",
+    "fault_id": 10,
+    "variant": "mechanic",
+    "fault_description": "NO OIL PRESSURE",
+    "system_pass": true,
+    "system_matches": [
+      "oil",
+      "pressure",
+      "engine",
+      "lubrication"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "oil level",
+      "oil pump"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Given the critical nature of zero oil pressure and rising oil temperature, immediate action is required. We need to dete"
+  },
+  {
+    "test_id": "F11_vague",
+    "fault_id": 11,
+    "variant": "vague",
+    "fault_description": "HIGH OIL TEMPERATURE",
+    "system_pass": true,
+    "system_matches": [
+      "oil",
+      "temperature",
+      "engine",
+      "overheat"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "oil level",
+      "oil cooler",
+      "clogged",
+      "viscosity"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to determine if this is a true high oil temperature condition or an instrument malfunction. First, verify the oi"
+  },
+  {
+    "test_id": "F11_expert",
+    "fault_id": 11,
+    "variant": "expert",
+    "fault_description": "HIGH OIL TEMPERATURE",
+    "system_pass": true,
+    "system_matches": [
+      "oil",
+      "temperature",
+      "engine"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "oil cooler",
+      "oil passage",
+      "clogged",
+      "viscosity"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The reported high oil temperature with normal oil pressure in cruise suggests either a faulty temperature indication or "
+  },
+  {
+    "test_id": "F11_mechanic",
+    "fault_id": 11,
+    "variant": "mechanic",
+    "fault_description": "HIGH OIL TEMPERATURE",
+    "system_pass": true,
+    "system_matches": [
+      "oil",
+      "temperature"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "oil cooler",
+      "viscosity"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to isolate the cause of the high oil temperature. Given that oil pressure is within limits, we'll start by verif"
+  },
+  {
+    "test_id": "F12_vague",
+    "fault_id": 12,
+    "variant": "vague",
+    "fault_description": "AIRCRAFT LEANS TO ONE SIDE",
+    "system_pass": true,
+    "system_matches": [
+      "landing gear",
+      "lean",
+      "gear"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "gear attach",
+      "spring",
+      "sprung",
+      "shimm",
+      "tire",
+      "strut",
+      "tight"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "First, confirm the aircraft model and year. Assuming a 1975 Cessna 172/Skyhawk, which typically uses tubular spring-stee"
+  },
+  {
+    "test_id": "F12_expert",
+    "fault_id": 12,
+    "variant": "expert",
+    "fault_description": "AIRCRAFT LEANS TO ONE SIDE",
+    "system_pass": true,
+    "system_matches": [
+      "landing gear",
+      "lean",
+      "gear"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "gear attach",
+      "spring",
+      "sprung",
+      "tire",
+      "strut",
+      "tight"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The aircraft is listing to the left, with the left main gear appearing lower. We need to systematically check the most c"
+  },
+  {
+    "test_id": "F12_mechanic",
+    "fault_id": 12,
+    "variant": "mechanic",
+    "fault_description": "AIRCRAFT LEANS TO ONE SIDE",
+    "system_pass": true,
+    "system_matches": [
+      "landing gear",
+      "lean",
+      "gear"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "spring",
+      "sprung",
+      "shimm",
+      "tire",
+      "loose"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The FSM troubleshooting table for 'AIRCRAFT LEANS TO ONE SIDE' (Source 7, page 24) lists several probable causes. Begin "
+  },
+  {
+    "test_id": "F13_vague",
+    "fault_id": 13,
+    "variant": "vague",
+    "fault_description": "BRAKES DRAG",
+    "system_pass": true,
+    "system_matches": [
+      "brake",
+      "drag",
+      "wheel"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "cylinder",
+      "return spring",
+      "hydraulic",
+      "master cylinder"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to determine if the dragging is due to a control input issue, a hydraulic problem, or a mechanical issue at the "
+  },
+  {
+    "test_id": "F13_expert",
+    "fault_id": 13,
+    "variant": "expert",
+    "fault_description": "BRAKES DRAG",
+    "system_pass": true,
+    "system_matches": [
+      "brake",
+      "drag",
+      "wheel",
+      "resist"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "cylinder",
+      "hydraulic",
+      "master cylinder"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The main wheels are exhibiting resistance during push-back and are warm, even with the brakes released. This indicates a"
+  },
+  {
+    "test_id": "F13_mechanic",
+    "fault_id": 13,
+    "variant": "mechanic",
+    "fault_description": "BRAKES DRAG",
+    "system_pass": true,
+    "system_matches": [
+      "brake",
+      "drag",
+      "wheel"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "piston",
+      "cylinder",
+      "return spring",
+      "master cylinder"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to isolate the source of the brake drag affecting both main wheels. Start by checking the most common and easily"
+  },
+  {
+    "test_id": "F14_vague",
+    "fault_id": 14,
+    "variant": "vague",
+    "fault_description": "LOW OR SLUGGISH AIRSPEED",
+    "system_pass": true,
+    "system_matches": [
+      "airspeed",
+      "pitot",
+      "indicator",
+      "speed"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "pitot tube",
+      "obstruct",
+      "pitot line",
+      "leak",
+      "pitot"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The airspeed indicator is showing a lower speed than expected. This points to a potential issue with the pitot-static sy"
+  },
+  {
+    "test_id": "F14_expert",
+    "fault_id": 14,
+    "variant": "expert",
+    "fault_description": "LOW OR SLUGGISH AIRSPEED",
+    "system_pass": true,
+    "system_matches": [
+      "airspeed",
+      "pitot",
+      "indicator",
+      "speed"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "pitot tube",
+      "obstruct",
+      "pitot line",
+      "leak",
+      "pitot"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The airspeed indicator reading low and responding sluggishly suggests a problem in the pitot-static system. We need to i"
+  },
+  {
+    "test_id": "F14_mechanic",
+    "fault_id": 14,
+    "variant": "mechanic",
+    "fault_description": "LOW OR SLUGGISH AIRSPEED",
+    "system_pass": true,
+    "system_matches": [
+      "airspeed",
+      "pitot",
+      "speed"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "pitot tube",
+      "obstruct",
+      "pitot line",
+      "leak",
+      "pitot"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "For a low and sluggish airspeed indication, the FSM points directly to issues within the pitot system. You need to inspe"
+  },
+  {
+    "test_id": "F15_vague",
+    "fault_id": 15,
+    "variant": "vague",
+    "fault_description": "HIGH SUCTION GAGE READINGS",
+    "system_pass": true,
+    "system_matches": [
+      "suction",
+      "vacuum",
+      "gauge"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "suction relief",
+      "vacuum",
+      "relief valve",
+      "filter"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "You're reporting a high reading on the suction gauge. This typically indicates an issue with the vacuum system's filtrat"
+  },
+  {
+    "test_id": "F15_expert",
+    "fault_id": 15,
+    "variant": "expert",
+    "fault_description": "HIGH SUCTION GAGE READINGS",
+    "system_pass": true,
+    "system_matches": [
+      "suction",
+      "vacuum",
+      "gauge",
+      "gyro"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "suction relief",
+      "vacuum",
+      "relief valve",
+      "filter"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The reported high suction gauge reading, coupled with the gyros spinning faster than normal, indicates an over-pressure "
+  },
+  {
+    "test_id": "F15_mechanic",
+    "fault_id": 15,
+    "variant": "mechanic",
+    "fault_description": "HIGH SUCTION GAGE READINGS",
+    "system_pass": true,
+    "system_matches": [
+      "suction",
+      "vacuum",
+      "gauge"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "suction relief",
+      "vacuum",
+      "relief valve",
+      "filter"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The suction gauge reading above limits indicates an issue within the vacuum system. We need to systematically check the "
+  },
+  {
+    "test_id": "F16_vague",
+    "fault_id": 16,
+    "variant": "vague",
+    "fault_description": "ALTERNATOR NOT CHARGING",
+    "system_pass": true,
+    "system_matches": [
+      "alternator",
+      "charg",
+      "electrical",
+      "voltage",
+      "battery"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "alternator",
+      "drive belt",
+      "voltage regulator",
+      "belt"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The 'ALT' light and radio static indicate a problem with the charging system. We need to determine if the alternator is "
+  },
+  {
+    "test_id": "F16_expert",
+    "fault_id": 16,
+    "variant": "expert",
+    "fault_description": "ALTERNATOR NOT CHARGING",
+    "system_pass": true,
+    "system_matches": [
+      "alternator",
+      "charg",
+      "electrical",
+      "voltage"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "alternator",
+      "voltage regulator"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to determine why the alternator system is not charging. Start by checking the most common and easily verifiable "
+  },
+  {
+    "test_id": "F16_mechanic",
+    "fault_id": 16,
+    "variant": "mechanic",
+    "fault_description": "ALTERNATOR NOT CHARGING",
+    "system_pass": true,
+    "system_matches": [
+      "alternator",
+      "charg",
+      "electrical",
+      "voltage",
+      "battery"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "alternator",
+      "voltage regulator"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "To isolate the fault between the voltage regulator and the alternator, we need to test the alternator's ability to produ"
+  },
+  {
+    "test_id": "F17_vague",
+    "fault_id": 17,
+    "variant": "vague",
+    "fault_description": "INSTRUMENT LIGHTS WILL NOT LIGHT",
+    "system_pass": true,
+    "system_matches": [
+      "light",
+      "instrument",
+      "panel"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "rheostat",
+      "circuit",
+      "wiring",
+      "breaker"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The instrument panel lights are out. For your 1975 model, the instrument flood lighting is controlled by a transistorize"
+  },
+  {
+    "test_id": "F17_expert",
+    "fault_id": 17,
+    "variant": "expert",
+    "fault_description": "INSTRUMENT LIGHTS WILL NOT LIGHT",
+    "system_pass": true,
+    "system_matches": [
+      "light",
+      "instrument",
+      "panel"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "rheostat",
+      "circuit",
+      "wiring",
+      "breaker"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The circuit breaker is normal, and the rheostat is at full bright. For 1971 and later models, instrument flood lighting "
+  },
+  {
+    "test_id": "F17_mechanic",
+    "fault_id": 17,
+    "variant": "mechanic",
+    "fault_description": "INSTRUMENT LIGHTS WILL NOT LIGHT",
+    "system_pass": true,
+    "system_matches": [
+      "light",
+      "instrument",
+      "panel"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "rheostat",
+      "circuit",
+      "wiring",
+      "breaker"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Turn the master switch ON. Set the instrument light rheostat to its full clockwise (brightest) position. Using a voltmet"
+  },
+  {
+    "test_id": "F18_vague",
+    "fault_id": 18,
+    "variant": "vague",
+    "fault_description": "AILERON CONTROL STIFF",
+    "system_pass": true,
+    "system_matches": [
+      "aileron",
+      "control",
+      "wheel"
+    ],
+    "cause_pass": false,
+    "cause_matches": [],
+    "overall_pass": false,
+    "diagnosis_preview": "Clarify what 'wheel thing' refers to. Is the resistance felt when operating the control wheel in the cockpit (for flight"
+  },
+  {
+    "test_id": "F18_expert",
+    "fault_id": 18,
+    "variant": "expert",
+    "fault_description": "AILERON CONTROL STIFF",
+    "system_pass": true,
+    "system_matches": [
+      "aileron",
+      "control",
+      "wheel"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "cable",
+      "tension",
+      "pulley",
+      "bellcrank",
+      "binding",
+      "friction",
+      "lubric",
+      "rigging"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The aileron control system is experiencing excessive friction. We need to isolate where this friction is occurring. Firs"
+  },
+  {
+    "test_id": "F18_mechanic",
+    "fault_id": 18,
+    "variant": "mechanic",
+    "fault_description": "AILERON CONTROL STIFF",
+    "system_pass": true,
+    "system_matches": [
+      "aileron",
+      "control",
+      "stiff",
+      "wheel"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "cable",
+      "tension",
+      "pulley",
+      "bellcrank",
+      "binding",
+      "friction",
+      "rigging"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The FSM lists 'RESISTANCE TO CONTROL WHEEL MOVEMENT' as a symptom. We need to systematically check the aileron control s"
+  },
+  {
+    "test_id": "F19_vague",
+    "fault_id": 19,
+    "variant": "vague",
+    "fault_description": "INSUFFICIENT CABIN HEAT",
+    "system_pass": true,
+    "system_matches": [
+      "heat",
+      "cabin",
+      "defrost"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "cabin heat"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "Check the physical operation of the 'CABIN HEAT' control and the associated shut-off valve. The Service Manual indicates"
+  },
+  {
+    "test_id": "F19_expert",
+    "fault_id": 19,
+    "variant": "expert",
+    "fault_description": "INSUFFICIENT CABIN HEAT",
+    "system_pass": true,
+    "system_matches": [
+      "heat",
+      "cabin",
+      "defrost"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "firewall",
+      "cabin heat"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The most common cause for your symptom is a sticking or binding cabin heat shut-off valve or its control linkage. This v"
+  },
+  {
+    "test_id": "F19_mechanic",
+    "fault_id": 19,
+    "variant": "mechanic",
+    "fault_description": "INSUFFICIENT CABIN HEAT",
+    "system_pass": true,
+    "system_matches": [
+      "heat",
+      "cabin"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "cable",
+      "control cable",
+      "firewall",
+      "cabin heat"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The FSM indicates that most heating system troubles are caused by sticking air valves, damaged ducting, or defects in th"
+  },
+  {
+    "test_id": "F20_vague",
+    "fault_id": 20,
+    "variant": "vague",
+    "fault_description": "NOSE WHEEL SHIMMY",
+    "system_pass": true,
+    "system_matches": [
+      "nose wheel",
+      "shimmy",
+      "vibrat",
+      "nose gear"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "shimmy dampen",
+      "dampener",
+      "bearing",
+      "torque link"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to isolate the source of this severe nose wheel vibration. Start by physically inspecting the nose gear assembly"
+  },
+  {
+    "test_id": "F20_expert",
+    "fault_id": 20,
+    "variant": "expert",
+    "fault_description": "NOSE WHEEL SHIMMY",
+    "system_pass": true,
+    "system_matches": [
+      "nose wheel",
+      "shimmy",
+      "nose gear"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "shimmy dampen",
+      "dampener",
+      "steering",
+      "bearing",
+      "torque link",
+      "worn",
+      "fluid"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "We need to physically inspect the nose gear assembly. Start by raising the nose of the aircraft to get the nose wheel of"
+  },
+  {
+    "test_id": "F20_mechanic",
+    "fault_id": 20,
+    "variant": "mechanic",
+    "fault_description": "NOSE WHEEL SHIMMY",
+    "system_pass": true,
+    "system_matches": [
+      "nose wheel",
+      "shimmy",
+      "nose gear"
+    ],
+    "cause_pass": true,
+    "cause_matches": [
+      "dampener",
+      "steering",
+      "tire",
+      "bearing",
+      "torque link"
+    ],
+    "overall_pass": true,
+    "diagnosis_preview": "The FSM troubleshooting points to several potential causes for nose wheel shimmy. We need to systematically check for me"
+  }
+]

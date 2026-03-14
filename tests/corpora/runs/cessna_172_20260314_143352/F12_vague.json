@@ -1,0 +1,51 @@
+{
+  "test_id": "F12_vague",
+  "fault_id": 12,
+  "variant": "vague",
+  "query": "My plane sits crooked on the ground. It leans to the left like one side is lower.",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "AIRCRAFT LEANS TO ONE SIDE",
+  "fsm_probable_cause": "Landing gear attaching parts not tight / Landing gear spring excessively sprung",
+  "fsm_remedy": "Tighten loose parts / Remove and install new parts",
+  "expected_system": "landing gear",
+  "response_time_seconds": 47.94,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "First, confirm the aircraft model and year. Assuming a 1975 Cessna 172/Skyhawk, which typically uses tubular spring-steel main gear struts. The lean to the left indicates an issue on that side. We need to systematically check the most common causes. Begin by checking the left main wheel tire pressure and then visually inspect the left main landing gear strut and its attachment points.",
+  "gus_reasoning": "The primary symptom is the aircraft leaning to one side. The service manual's troubleshooting section for 'AIRCRAFT LEANS TO ONE SIDE' directly points to several probable causes: 'Incorrect tire inflation', 'Landing gear spring excessively sprung', 'Landing gear attaching parts not tight', and 'Incorrect shimming at inboard end of spring'. Additionally, structural damage to the main gear bulkheads from a hard landing could also cause this symptom. I will begin with the simplest and most common checks first, which are tire pressure and a visual inspection of the landing gear strut and its attachments, before moving to more involved structural checks.",
+  "gus_answer_paths": [
+    "The left main tire pressure is significantly lower than specified, or the tire appears visibly deflated.",
+    "The left main landing gear spring-strut appears visibly bent, cracked, or excessively compressed compared to the right side.",
+    "The bolts, nuts, or U-bolts securing the left main landing gear strut to the fuselage are loose, or there's visible damage to the attachment points.",
+    "There is visible structural damage (buckling, cracks, sheared rivets) around the left main landing gear bulkhead or floorboards, indicating a hard landing."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 24,
+      "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 41,
+      "context": "18-57. REPAIRABLE DAMAGE. Fuselage skin re- > 18-58. DAMAGE NECESSITATING REPLACEMENT > 18- 58A. BONDED DOORS."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 40,
+      "context": "18-41. WING LEADING EDGE. > 18-42. NEGLIGIBLE DAMAGE. Refer to paragraph > 18-13."
+    }
+  ],
+  "gus_rag_chunk_count": 49,
+  "gus_complaint_echo": {
+    "vehicle_config": "Aircraft (assuming 1975 Cessna 172/Skyhawk with non-retractable tricycle landing gear, likely tubular spring-steel main gear struts as per 1971+ models)",
+    "symptom_signature": "Plane sits crooked on the ground, leans to the left, one side is lower.",
+    "critical_keywords": [
+      "plane",
+      "crooked",
+      "leans to the left",
+      "one side is lower"
+    ]
+  },
+  "timestamp": "2026-03-14T15:05:49.263663"
+}

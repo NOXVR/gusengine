@@ -1,0 +1,34 @@
+{
+  "test_id": "F10_vague",
+  "fault_id": 10,
+  "variant": "vague",
+  "query": "There's a red light on the dashboard that came on and I don't know what it means. The needle is all the way down.",
+  "fsm_section": "\u00a711A-31",
+  "fsm_trouble": "NO OIL PRESSURE",
+  "fsm_probable_cause": "Insufficient oil / Defective pressure relief valve / Defective oil pump",
+  "fsm_remedy": "Service oil / Replace relief valve / Replace or repair pump",
+  "expected_system": "engine/oil",
+  "response_time_seconds": 44.41,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Identify the specific red light that is illuminated and the gauge whose needle is 'all the way down.' This will narrow down the potential causes significantly.",
+  "gus_reasoning": "The combination of a 'red light on the dashboard' and a 'needle all the way down' points to a critical system malfunction. The most direct and complete match in the service manual is the Over-voltage Warning System, which explicitly describes a 'red warning light labeled \"HIGH VOLTAGE\"' and an ammeter showing 'discharge' (needle down) when an over-voltage trip-off occurs (Source 7). This aligns perfectly with both reported symptoms. However, a loss of oil pressure is also a highly critical condition where the oil pressure gauge needle would be at zero ('all the way down'), and such a condition would typically be accompanied by a warning light, even if not explicitly detailed as 'red' in the provided FSM snippets (Source 1, 20, 24, 43). A low fuel condition is also plausible for the 'needle all the way down' symptom, but the FSM does not explicitly link a red warning light to it (Source 22, 44). To accurately diagnose, we must first identify which specific light and gauge are indicating the issue.",
+  "gus_answer_paths": [
+    "The red light is labeled 'HIGH VOLTAGE' and the ammeter needle is all the way to the discharge side.",
+    "The red light is for 'OIL PRESSURE' and the oil pressure gauge needle is at zero.",
+    "The red light is for 'LOW FUEL' and the fuel quantity gauge needle is on 'E' (empty).",
+    "The red light is for something else, or there is no label, and the needle is on a different gauge."
+  ],
+  "gus_sources": [],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "red light on the dashboard that came on and the needle is all the way down.",
+    "critical_keywords": [
+      "red light",
+      "dashboard",
+      "needle is all the way down"
+    ]
+  },
+  "timestamp": "2026-03-14T15:00:12.160827"
+}

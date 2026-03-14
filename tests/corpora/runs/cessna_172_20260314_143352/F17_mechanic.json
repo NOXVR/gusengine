@@ -1,0 +1,45 @@
+{
+  "test_id": "F17_mechanic",
+  "fault_id": 17,
+  "variant": "mechanic",
+  "query": "No instrument lighting. Rheostat and circuit breaker checked. What does the FSM troubleshooting say for instrument lights will not light?",
+  "fsm_section": "\u00a716-51",
+  "fsm_trouble": "INSTRUMENT LIGHTS WILL NOT LIGHT",
+  "fsm_probable_cause": "Defective bulbs / Open circuit / Defective rheostat",
+  "fsm_remedy": "Replace bulbs / Repair circuit / Replace rheostat",
+  "expected_system": "electrical/lighting",
+  "response_time_seconds": 40.29,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Turn the master switch ON. Set the instrument light rheostat to its full clockwise (brightest) position. Using a voltmeter, check for battery voltage at the instrument light with the rheostat turned full clockwise. Then, slowly turn the rheostat counterclockwise and observe if the voltage decreases smoothly. Refer to the wiring diagrams in Section 20, specifically 'Compass and Instrument Lights' on pages 20-29 or 20-31, and 'Instrument Panel Post Lighting' on pages 20-72 or 20-73, to identify the correct test points. (Source 2, Source 8, Source 13)",
+  "gus_reasoning": "You've checked the circuit breaker and rheostat, but the FSM troubleshooting for 'INSTRUMENT LIGHTS WILL NOT LIGHT (1971 MODELS & ON)' (Source 1, Source 38, Source 51) provides a specific method for testing the rheostat's function. The next logical step is to verify the voltage output of the rheostat, as a 'checked' status doesn't confirm its operational integrity. This test will help determine if the rheostat itself is faulty or if the issue lies further downstream in the wiring or the lamps.",
+  "gus_answer_paths": [
+    "I read battery voltage with the rheostat full clockwise, and the voltage decreases smoothly as I turn it counterclockwise.",
+    "I read no voltage at the instrument light, or the voltage drops suddenly before the rheostat is turned full counterclockwise.",
+    "I read battery voltage, but the lights still do not illuminate."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 11,
+      "context": "16-51. TROUBLE SHOOTING (Cont). > INSTRUMENT LIGHTS WILL > NOT LIGHT (1971 MODELS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 18,
+      "context": "NOTE > 16-60. ADJUSTMENT OF LANDING AND TAXI > LIGHT (COWL MOUNTED) (BEGINNING WITH"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 46,
+      "context": "16- 1. ELECTRICAL SYSTEMS. > 16-2. GENERAL. This section contains service in- > 16-3. ELECTRICAL POWER SUPPLY SYSTEM."
+    }
+  ],
+  "gus_rag_chunk_count": 51,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "No instrument lighting.",
+    "critical_keywords": []
+  },
+  "timestamp": "2026-03-14T15:18:45.695427"
+}

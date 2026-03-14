@@ -1,0 +1,67 @@
+{
+  "test_id": "F20_vague",
+  "fault_id": 20,
+  "variant": "vague",
+  "query": "The front wheel shakes like crazy when I'm rolling on the runway. The whole nose vibrates.",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "NOSE WHEEL SHIMMY",
+  "fsm_probable_cause": "Shimmy dampener low on fluid / Worn steering components / Tire flat-spotted",
+  "fsm_remedy": "Service dampener / Replace worn parts / Replace tire",
+  "expected_system": "landing gear",
+  "response_time_seconds": 50.19,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to isolate the source of this severe nose wheel vibration. Start by physically inspecting the nose gear assembly. This shaking can be caused by several issues, from the wheel itself to the strut's dampening or its structural connections. We'll check the most likely culprits first.",
+  "gus_reasoning": "The reported 'shaking like crazy' and 'whole nose vibrates' during runway roll strongly indicates a dynamic instability or looseness in the nose landing gear assembly. The service manual's troubleshooting sections for landing gear and nose strut issues (Source 24, 30, 38) list several probable causes that align with this symptom. I've prioritized checks that address the most common and impactful causes of such severe vibration: issues with the wheel's rotational integrity (bearings, balance), the strut's dampening (shimmy dampener), and the structural connections of the nose gear (torque links, strut clamps). These checks are designed to quickly isolate the subsystem responsible for the instability.",
+  "gus_answer_paths": [
+    "The nose wheel has excessive side-to-side play, or the tire shows uneven wear/damage, or the wheel feels unbalanced when spun by hand.",
+    "The shimmy dampener is leaking fluid, or the piston rod moves freely with no resistance, indicating a lack of fluid or internal defect.",
+    "The torque links have noticeable play at their attachment points, or the main nose strut attaching clamps are loose, allowing the strut to shift."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 24,
+      "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 24,
+      "context": "NOTE > 2-27. > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 40,
+      "context": "NOSE STRUT WILL NOT HOLD > AIR PRESSURE. > HYDRAULIC FLUID LEAKAGE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 38,
+      "context": "NOSE STRUT WILL NOT HOLD > AIR PRESSURE. > HYDRAULIC FLUID LEAKAGE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 30,
+      "context": "NOSE STRUT WILL NOT HOLD > AIR PRESSURE. > HYDRAULIC FLUID LEAKAGE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 37,
+      "context": "NOTE > 5-17. MAIN WHEEL AXLE INSTALLATION. (FLAT > GEAR. )"
+    }
+  ],
+  "gus_rag_chunk_count": 54,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "The front wheel shakes like crazy when rolling on the runway. The whole nose vibrates.",
+    "critical_keywords": [
+      "front wheel",
+      "shakes",
+      "crazy",
+      "rolling",
+      "runway",
+      "nose vibrates"
+    ]
+  },
+  "timestamp": "2026-03-14T15:23:52.177814"
+}

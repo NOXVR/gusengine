@@ -1,0 +1,64 @@
+{
+  "test_id": "F04_vague",
+  "fault_id": 4,
+  "variant": "vague",
+  "query": "My plane shakes a lot when it's just sitting there running on the ground. Feels rough.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE ROUGH AT IDLE",
+  "fsm_probable_cause": "Idle mixture too rich or too lean / Fouled spark plugs",
+  "fsm_remedy": "Adjust idle mixture / Clean or replace plugs",
+  "expected_system": "engine",
+  "response_time_seconds": 53.88,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The rough running at idle suggests an issue with combustion or engine vibration isolation. We need to start by checking the ignition system. Perform a magneto check as outlined in paragraph 11-59 of the Service Manual. This will help determine if the issue is related to the magnetos, spark plugs, or ignition harness. Also, visually inspect the engine mounts and carburetor heat control for obvious issues.",
+  "gus_reasoning": "The customer reports a rough idle condition. This symptom can stem from several subsystems. I've identified seven potential causes: fouled spark plugs, defective ignition system components (magneto/harness), carburetor issues (float level, accelerating pump), engine mount/shock pad issues, restricted induction air filter, improperly rigged carburetor heat control, and a leaking manual primer. Internal engine issues are a less likely but critical consideration. I will start by having the mechanic perform a magneto check, as this is a primary diagnostic for ignition system health and can quickly point to spark plug, harness, or magneto timing issues, which are common causes of rough running. This test is explicitly described in the FSM. If the magneto check is inconclusive, we will move to fuel/air mixture and engine mounting components.",
+  "gus_answer_paths": [
+    "The RPM drop on one or both magnetos exceeds 125 RPM, or the differential between magnetos is greater than 50 RPM, or there is no RPM drop.",
+    "The RPM drop is within limits (not exceeding 125 RPM on either magneto, and less than 50 RPM differential), and the engine mounts appear visually sound with no cracks or excessive play.",
+    "The carburetor heat control is partially open or improperly rigged, or the induction air filter is visibly restricted."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 21,
+      "context": "11-59. MAGNETO CHECK."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 6,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 11,
+      "context": "11-24. ENGINE MOUNT. (Refer to figure 11-2.) > 11-25. DESCRIPTION. The engine mount is com-"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 31,
+      "context": "11-9. > 11A- 14. BUILD-UP. > NOT E"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 41,
+      "context": "18-64. ENGINE MOUNT."
+    }
+  ],
+  "gus_rag_chunk_count": 50,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (Lycoming 'Blue-Streak' or Rolls Royce Continental O-300-series engine)",
+    "symptom_signature": "plane shakes a lot when it's just sitting there running on the ground. Feels rough.",
+    "critical_keywords": [
+      "shakes",
+      "rough",
+      "running on the ground"
+    ]
+  },
+  "timestamp": "2026-03-14T14:43:09.937069"
+}

@@ -1,0 +1,84 @@
+{
+  "test_id": "F08_vague",
+  "fault_id": 8,
+  "variant": "vague",
+  "query": "When I took the fuel cap off it was like opening a soda bottle. There was pressure in there.",
+  "fsm_section": "\u00a712-4",
+  "fsm_trouble": "PRESSURIZED FUEL TANK",
+  "fsm_probable_cause": "Plugged fuel vent",
+  "fsm_remedy": "Check per paragraph 12-13",
+  "expected_system": "fuel",
+  "response_time_seconds": 65.19,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The pressurized fuel tank indicates a restriction in the venting system. We need to check the fuel vent line and the bleed hole in the vent valve assembly. Refer to Section 12-11, 'CHECKING' in the Service Manual. (Source 47, page 2; Source 11, page 3)\n\n1.  Attach a rubber tube to the end of the vent line protruding beneath the wing.\n2.  Blow into the tube to slightly pressurize the tank. This checks if the vent line is open.\n3.  After slightly pressurizing the tank, insert the end of the rubber tube into a container of water and watch for a continuous stream of bubbles. This indicates if the bleed hole in the valve assembly is open and relieving pressure.\n\nWhat do you observe during this test?",
+  "gus_reasoning": "The symptom of a pressurized fuel tank upon opening the filler cap strongly indicates a problem with the fuel tank's venting system. The Service Manual for the 1975 Cessna 172 & Skyhawk explicitly lists 'Plugged fuel vent' and 'Plugged bleed hole in fuel vent' as probable causes for a 'PRESSURIZED FUEL TANK' (Source 52, page 46). These are the most direct and probable causes. The manual also provides a specific procedure for checking the vent and bleed hole (Source 47, page 2; Source 11, page 3). Other fuel system components like the fuel selector valve are less likely to cause pressurization directly, and structural damage is a low probability unless there's evidence of recent impact or maintenance. Therefore, the initial diagnostic step must be to physically check the fuel vent system.",
+  "gus_answer_paths": [
+    "Air can be blown into the tank, but there are no continuous bubbles in the water, or the bubbles stop quickly.",
+    "Air cannot be blown into the tank at all.",
+    "Air can be blown into the tank, and there is a continuous stream of bubbles in the water.",
+    "The vent line is visibly kinked or damaged."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL TO CARBURETOR."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "* THRU 17260805 & F1720904 > BEGINNING WITH 17260806 & F1720905 > 12-5."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 39,
+      "context": "SPECIAL INSPECTION ITEM > EACH 200 HOURS > FUEL SYSTEM"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 45,
+      "context": "SECTION 12 > FUEL SYSTEM > TABLE OF CONTENTS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "Figure 12-4. Fuel Vent Location > figure 12-2 for line routing."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL TO CARBURETOR."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    }
+  ],
+  "gus_rag_chunk_count": 55,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (assumed based on mechanic identity)",
+    "symptom_signature": "When I took the fuel cap off it was like opening a soda bottle. There was pressure in there.",
+    "critical_keywords": [
+      "fuel cap",
+      "pressure"
+    ]
+  },
+  "timestamp": "2026-03-14T14:55:19.849449"
+}

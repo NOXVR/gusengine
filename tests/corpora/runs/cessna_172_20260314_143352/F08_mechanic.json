@@ -1,0 +1,41 @@
+{
+  "test_id": "F08_mechanic",
+  "fault_id": 8,
+  "variant": "mechanic",
+  "query": "Pressurized fuel tank condition. What is the FSM-listed probable cause and correction for a pressurized tank?",
+  "fsm_section": "\u00a712-4",
+  "fsm_trouble": "PRESSURIZED FUEL TANK",
+  "fsm_probable_cause": "Plugged fuel vent",
+  "fsm_remedy": "Check per paragraph 12-13",
+  "expected_system": "fuel",
+  "response_time_seconds": 22.12,
+  "gus_phase": "PHASE_D_CONCLUSION",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "For a pressurized fuel tank, the FSM-listed probable cause is a plugged bleed hole in the fuel vent. The correction involves checking the fuel vent and bleed hole for obstructions. Perform the following procedure as outlined in paragraph 12-11 of the Service Manual:\n\n1.  Attach a rubber tube to the end of the vent line beneath the wing.\n2.  Blow into the tube to slightly pressurize the tank. If air can be blown into the tank, the vent line is open.\n3.  After the tank is slightly pressurized, insert the end of the rubber tube into a container of water and watch for a continuous stream of bubbles. This indicates the bleed hole in the valve assembly is open and relieving pressure.\n4.  After completing step 'c', blow into the tube again to slightly pressurize the tank, and loosen (but do not remove) the filler cap on the opposite wing to check the tank crossover line. If pressure escapes from the filler cap, the crossover line is open.\n5.  Any fuel vent found plugged or restricted must be corrected prior to returning the aircraft to service.",
+  "gus_reasoning": "The Service Manual directly identifies 'Plugged bleed hole in fuel vent' as the probable cause for a pressurized fuel tank. While the troubleshooting table in Section 12-4 (Source 4, page 46) incorrectly references paragraph 12-13 for the remedy, the correct procedure for checking the fuel vent and bleed hole is detailed in paragraph 12-11, titled 'CHECKING' (Source 1, page 2; Source 6, page 3). This procedure involves physically checking the vent line and bleed hole for obstructions.",
+  "gus_answer_paths": [],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    }
+  ],
+  "gus_rag_chunk_count": 54,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "Pressurized fuel tank condition.",
+    "critical_keywords": []
+  },
+  "timestamp": "2026-03-14T14:56:29.533715"
+}

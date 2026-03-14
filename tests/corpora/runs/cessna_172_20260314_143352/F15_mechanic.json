@@ -1,0 +1,44 @@
+{
+  "test_id": "F15_mechanic",
+  "fault_id": 15,
+  "variant": "mechanic",
+  "query": "Suction gauge reads above limits. What are the FSM troubleshooting table probable causes for high suction readings?",
+  "fsm_section": "\u00a715-26",
+  "fsm_trouble": "HIGH SUCTION GAGE READINGS",
+  "fsm_probable_cause": "Defective suction relief valve / Restricted suction relief valve filter",
+  "fsm_remedy": "Replace or adjust valve / Clean or replace filter",
+  "expected_system": "instruments/vacuum",
+  "response_time_seconds": 37.64,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The suction gauge reading above limits indicates an issue within the vacuum system. We need to systematically check the components responsible for vacuum generation and regulation. Start by inspecting the air filters and the suction relief valve, as these are common points of failure for this symptom. The FSM troubleshooting for 'HIGH SUCTION GAGE READINGS' points to these items first.",
+  "gus_reasoning": "The primary suspects for a high suction gauge reading are issues that restrict airflow into the vacuum system or prevent the relief valve from regulating pressure. Clogged air filters are a common and easily verifiable cause. A malfunctioning or misadjusted suction relief valve is also a direct cause of improper pressure regulation. Restrictions or leaks in the lines can also lead to high readings. Finally, the gauge itself could be faulty. I will start by having you check the most accessible and common culprits: the air filters and the relief valve.",
+  "gus_answer_paths": [
+    "The instrument air filters are visibly dirty or restricted, or removing them causes the suction reading to drop.",
+    "The suction relief valve screen is clogged, or the valve itself is stuck/malfunctioning, and adjusting it does not bring the reading within limits (4.6 to 5.4 inches of mercury).",
+    "There are no obvious issues with the air filters or the relief valve, but there are visible kinks, damage, or loose connections in the vacuum lines between the instruments and the relief valve.",
+    "A known-good suction gauge reads within normal limits (4.6 to 5.4 inches of mercury) when substituted for the installed gauge."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 29,
+      "context": "15-26. TROUBLE SHOOTING--VACUUM SYSTEM"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 33,
+      "context": "15-31. VACUUM RELIEF VALVE ADJUSTMENT."
+    }
+  ],
+  "gus_rag_chunk_count": 60,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Suction gauge reads above limits.",
+    "critical_keywords": [
+      "Suction gauge",
+      "above limits"
+    ]
+  },
+  "timestamp": "2026-03-14T15:14:08.954357"
+}

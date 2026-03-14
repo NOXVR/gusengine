@@ -1,0 +1,52 @@
+{
+  "test_id": "F02_mechanic",
+  "fault_id": 2,
+  "variant": "mechanic",
+  "query": "No-start, good fuel flow confirmed at the gascolator. Suspect ignition system. What are the FSM-listed ignition causes for a no-start?",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE WILL NOT START (Ignition)",
+  "fsm_probable_cause": "Defective magneto / Fouled or defective spark plugs",
+  "fsm_remedy": "Repair or replace magneto / Clean, gap, or replace spark plugs",
+  "expected_system": "engine/ignition",
+  "response_time_seconds": 47.82,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "For a no-start condition, even with good fuel flow at the gascolator, we need to systematically check for spark, fuel quality at the carburetor, and proper control settings. Start by confirming spark at the cylinders, as this is the most direct way to verify the primary ignition path.",
+  "gus_reasoning": "The customer reports a 'no-start' condition with confirmed good fuel flow at the gascolator, and suspects the ignition system. The FSM troubleshooting guide for 'ENGINE FAILS TO START' (Source 30, 22) lists several probable causes across ignition, fuel, and controls. While fuel flow at the gascolator is confirmed, issues downstream (e.g., water in the carburetor, a defective carburetor itself) or operational errors (mixture control) can still prevent starting. However, given the user's suspicion, we will prioritize ignition system checks first, followed by critical fuel and control checks that are quick to verify for a no-start condition. The FSM states that 'spark plugs and ignition wiring should be checked first' if ignition trouble develops (Source 24, 28). A magneto check (Source 26) requires a running engine, which is not applicable here.",
+  "gus_answer_paths": [
+    "I checked for spark at the spark plugs (removed one, grounded it, and observed while cranking / used an ignition tester), and there IS spark.",
+    "I checked for spark at the spark plugs, and there is NO spark.",
+    "I drained the carburetor bowl and found significant water contamination.",
+    "I verified the mixture control is in the full RICH position, and it was correctly set.",
+    "I disconnected the magneto 'P' lead at the magneto (with all safety precautions observed) and attempted to start. The engine still did not start."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 41,
+      "context": "THESE CONTACT POINTS ARE USABLE > THESE CONTACT POINTS NEED REPLACEMENT > NOTE"
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (aviation)",
+    "symptom_signature": "No-start, good fuel flow confirmed at the gascolator.",
+    "critical_keywords": []
+  },
+  "timestamp": "2026-03-14T14:39:12.458768"
+}

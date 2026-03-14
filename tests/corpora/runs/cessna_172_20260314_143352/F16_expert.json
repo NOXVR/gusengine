@@ -1,0 +1,36 @@
+{
+  "test_id": "F16_expert",
+  "fault_id": 16,
+  "variant": "expert",
+  "query": "Low voltage annunciator illuminated in flight. Ammeter showing discharge. Bus voltage dropping. I've shed non-essential loads.",
+  "fsm_section": "\u00a716-33",
+  "fsm_trouble": "ALTERNATOR NOT CHARGING",
+  "fsm_probable_cause": "Defective alternator / Broken or slipping drive belt / Faulty voltage regulator",
+  "fsm_remedy": "Replace alternator / Replace or adjust belt / Replace regulator",
+  "expected_system": "electrical",
+  "response_time_seconds": 57.38,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to determine why the alternator system is not charging. Start by checking the most common and easily verifiable points. Since you're on the ground now, we can perform some basic checks.",
+  "gus_reasoning": "The reported symptoms of a low voltage annunciator, ammeter discharge, and dropping bus voltage strongly indicate a failure in the aircraft's electrical power generation system. The most probable causes involve the alternator itself, the voltage regulator, or the mechanical drive for the alternator. The master switch's role in exciting the alternator field is also critical. An over-voltage trip could also disable the system, and a short in other electrical components could cause a heavy discharge. The initial diagnostic path will focus on easily verifiable mechanical and electrical checks to quickly narrow down the root cause.",
+  "gus_answer_paths": [
+    "The alternator drive belt is intact and properly tensioned.",
+    "The alternator drive belt is loose or broken.",
+    "Cycling the master switch (both BAT and ALT portions OFF then ON) restores normal charging (ammeter shows charge, voltage stabilizes).",
+    "Cycling the master switch has no effect; the ammeter still shows discharge and voltage drops."
+  ],
+  "gus_sources": [],
+  "gus_rag_chunk_count": 55,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Low voltage annunciator illuminated in flight, ammeter showing discharge, bus voltage dropping. Non-essential loads have been shed.",
+    "critical_keywords": [
+      "Low voltage annunciator",
+      "ammeter showing discharge",
+      "bus voltage dropping",
+      "in flight",
+      "shed non-essential loads"
+    ]
+  },
+  "timestamp": "2026-03-14T15:15:45.402970"
+}

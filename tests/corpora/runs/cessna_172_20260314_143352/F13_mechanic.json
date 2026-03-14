@@ -1,0 +1,65 @@
+{
+  "test_id": "F13_mechanic",
+  "fault_id": 13,
+  "variant": "mechanic",
+  "query": "Brake drag on both mains, wheels warm after taxi. What does the FSM say about brake drag probable causes?",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "BRAKES DRAG",
+  "fsm_probable_cause": "Brake disc warped / Return springs weak or broken / Piston stuck in cylinder",
+  "fsm_remedy": "Replace disc / Replace springs / Free or replace piston",
+  "expected_system": "brakes",
+  "response_time_seconds": 60.71,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to isolate the source of the brake drag affecting both main wheels. Start by checking the most common and easily verifiable external causes that would affect both brakes. Perform the following checks:",
+  "gus_reasoning": "The customer reports brake drag on both main wheels, which warm after taxi. This indicates a persistent friction issue. The FSM's 'Trouble Shooting' section for 'DRAGGING BRAKES' (Source 6, page 3) lists several probable causes. Given that both mains are affected, I'm prioritizing causes that would impact both brake systems simultaneously or are common points of failure. These include issues with the parking brake linkage, rudder pedal binding, internal master cylinder problems preventing fluid return (like a restricted compensating port or a faulty piston return spring), or mechanical issues within the wheel brake assemblies themselves. My initial instructions will guide the mechanic to check these common and easily verifiable points first.",
+  "gus_answer_paths": [
+    "The parking brake handle is fully released, but the linkage at the master cylinders appears to be holding the pistons slightly depressed. (Points to Parking Brake System)",
+    "Both rudder pedals return freely to their full aft position without any binding or stiffness. (Rules out Brake Control Linkage binding)",
+    "When the brakes are briefly depressed and released, fluid does not visibly return freely to the master cylinder reservoirs, or there's a noticeable delay. (Points to Master Cylinder/Hydraulic Line Restriction)",
+    "A visual inspection of the main wheel brake assemblies reveals obvious physical damage, excessive dirt, or components that are clearly binding or not fully retracting. (Points to Wheel Brake Assembly mechanical issues)"
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 4,
+      "context": "5-43. BRAKE MASTER CYLINDERS."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 3,
+      "context": "5 -42. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 5,
+      "context": "Figure 5-13. Brake Master Cylinder"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 6,
+      "context": "5-55. PARKING BRAKE SYSTEM."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 33,
+      "context": "Figure 5-3. Main Wheel and Brake Assembly (Cleveland)"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 7,
+      "context": "Figure 5-14. Parking Brake System"
+    }
+  ],
+  "gus_rag_chunk_count": 60,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (Aviation)",
+    "symptom_signature": "Brake drag on both main landing gear wheels, wheels warm after taxi.",
+    "critical_keywords": [
+      "Brake drag",
+      "both mains",
+      "warm after taxi"
+    ]
+  },
+  "timestamp": "2026-03-14T15:10:05.450865"
+}

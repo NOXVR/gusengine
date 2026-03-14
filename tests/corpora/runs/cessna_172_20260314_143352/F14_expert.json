@@ -1,0 +1,29 @@
+{
+  "test_id": "F14_expert",
+  "fault_id": 14,
+  "variant": "expert",
+  "query": "Airspeed indicator reading approximately 20 knots low compared to GPS groundspeed. Sluggish response to power changes.",
+  "fsm_section": "\u00a715-17",
+  "fsm_trouble": "LOW OR SLUGGISH AIRSPEED INDICATION",
+  "fsm_probable_cause": "Pitot tube obstructed / Pitot line leaking",
+  "fsm_remedy": "Clear obstruction / Repair line",
+  "expected_system": "instruments/pitot",
+  "response_time_seconds": 39.13,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The airspeed indicator reading low and responding sluggishly suggests a problem in the pitot-static system. We need to isolate whether the issue is with the pitot pressure line, the static pressure line, or the instrument itself. Your first step is to perform a leakage test on the pitot system.",
+  "gus_reasoning": "The primary complaint of a low and sluggish airspeed indication points directly to issues within the pitot-static system. The Service Manual's troubleshooting section for 'LOW OR SLUGGISH AIRSPEED INDICATION' lists pitot tube obstruction, leaks in the pitot line, and leaks or obstructions in the static line as probable causes. A defective instrument mechanism is also a possibility. While engine performance issues could indirectly affect perceived airspeed, the direct symptom is an instrument reading discrepancy. Therefore, the initial diagnostic path must focus on physically verifying the integrity and function of the pitot and static systems.",
+  "gus_answer_paths": [
+    "The airspeed indicator registers in the cruise range and holds steady for several minutes, indicating no leak in the pitot system. (Proceed to static system check)",
+    "The airspeed indicator registers in the cruise range but slowly drops, indicating a leak in the pitot system. (Proceed to pitot line inspection)",
+    "The airspeed indicator does not register or responds erratically during the test, indicating a significant obstruction or severe leak in the pitot system. (Proceed to pitot line inspection)"
+  ],
+  "gus_sources": [],
+  "gus_rag_chunk_count": 47,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "Airspeed indicator reading approximately 20 knots low compared to GPS groundspeed. Sluggish response to power changes.",
+    "critical_keywords": []
+  },
+  "timestamp": "2026-03-14T15:11:21.503985"
+}

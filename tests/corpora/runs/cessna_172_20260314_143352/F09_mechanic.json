@@ -1,0 +1,65 @@
+{
+  "test_id": "F09_mechanic",
+  "fault_id": 9,
+  "variant": "mechanic",
+  "query": "No fuel quantity indication on left tank gauge. Circuit breaker is in. What does the FSM say about fuel quantity indication failure?",
+  "fsm_section": "\u00a712-4 + \u00a715-45",
+  "fsm_trouble": "NO FUEL QUANTITY INDICATION",
+  "fsm_probable_cause": "Open circuit / Defective fuel quantity transmitter",
+  "fsm_remedy": "Tighten connections; repair or replace wiring",
+  "expected_system": "fuel/instruments",
+  "response_time_seconds": 57.37,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "You have no fuel quantity indication on the left tank gauge, and the circuit breaker is confirmed to be in. We need to systematically check the fuel system and the electrical circuit for the gauge. First, verify the actual fuel level in the left tank. Then, we'll check the electrical supply to the gauge and the integrity of the wiring and components.",
+  "gus_reasoning": "The customer reports no fuel quantity indication on the left tank gauge, and the circuit breaker is confirmed to be in. The FSM troubleshooting guide for 'NO FUEL QUANTITY INDICATION' (Source 9, 25, 28) lists several probable causes: empty fuel tanks, open circuits/loose connections, and defective fuel quantity indicator or transmitter. Section 15-45 (Source 23, 32, 41) further details 'FAILURE TO INDICATE' causes, including 'No power to indicator or transmitter,' 'Grounded wire,' 'Low voltage,' and 'Defective indicator or transmitter.' A defective master switch is also a possibility for general gauge issues (Source 38, 41). Given the 'circuit breaker in' status, the most immediate checks are the actual fuel level and the electrical path beyond the breaker. I will prioritize verifying the fuel level, then checking for power at the indicator, and then the integrity of the wiring and the transmitter/indicator units themselves.",
+  "gus_answer_paths": [
+    "The left fuel tank is visually confirmed to be full or partially full.",
+    "The left fuel tank is visually confirmed to be empty.",
+    "There is no voltage at the fuel quantity indicator on the instrument panel.",
+    "There is voltage at the fuel quantity indicator, but the gauge still reads empty/no indication."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL QUANTITY INDICATION."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 37,
+      "context": "15-45. TROUBLE SHOOTING. > TROUBLE > FAILURE TO INDICATE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 36,
+      "context": "15-44. DESCRIPTION. Fuel Quantity System"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 35,
+      "context": "ELECTRICAL LOAD ANALYSIS CHART > STANDARD EQUIPMENT (RUNNING LOAD) > Fuel Indicators"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 35,
+      "context": "15-42. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "12-9. FUEL VENTS."
+    }
+  ],
+  "gus_rag_chunk_count": 56,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "No fuel quantity indication on left tank gauge. Circuit breaker is in.",
+    "critical_keywords": [
+      "No fuel quantity indication",
+      "left tank gauge",
+      "circuit breaker is in"
+    ]
+  },
+  "timestamp": "2026-03-14T14:59:26.252430"
+}

@@ -1,0 +1,83 @@
+{
+  "test_id": "F07_vague",
+  "fault_id": 7,
+  "variant": "vague",
+  "query": "It starts but sputters and coughs. It rained all week and the plane was outside.",
+  "fsm_section": "\u00a712-4",
+  "fsm_trouble": "STARTING (fuel related) \u2014 Water in fuel",
+  "fsm_probable_cause": "Water in fuel",
+  "fsm_remedy": "Drain fuel tank sumps, fuel lines and fuel strainer",
+  "expected_system": "fuel",
+  "response_time_seconds": 65.26,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Given the recent rain exposure, we need to systematically check for moisture in the fuel and ignition systems. Start by draining the fuel sumps and strainer to check for water. Then, perform a magneto check to assess the ignition system's performance. Finally, inspect the spark plugs for any signs of fouling or moisture.",
+  "gus_reasoning": "The primary suspects for an engine that 'starts but sputters and coughs' after being exposed to rain are moisture-related issues. This includes water contamination in the fuel system and moisture affecting the ignition system, specifically the magnetos or spark plugs. The FSM troubleshooting guides consistently point to these areas for rough running or starting issues. I will prioritize physical checks for moisture in the fuel system, followed by an operational check of the ignition system (magnetos) and a physical inspection of the spark plugs, as these are the most probable causes given the environmental conditions and are directly supported by the service manual.",
+  "gus_answer_paths": [
+    "When draining the fuel sumps and strainer, I observed significant water contamination.",
+    "During the magneto check (FSM 11-59), I noted an excessive RPM drop or no drop on one or both magnetos.",
+    "Upon removing the spark plugs, I found them to be wet, fouled, or improperly gapped."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 20,
+      "context": "11-59. MAGNETO CHECK. > NOTE > 11-60. SPARK PLUGS. Two 18-mm spark plugs are"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 21,
+      "context": "11-59. MAGNETO CHECK. > NOTE > 11-60. SPARK PLUGS. Two 18-mm spark plugs are"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 41,
+      "context": "THESE CONTACT POINTS ARE USABLE > THESE CONTACT POINTS NEED REPLACEMENT > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 42,
+      "context": "11-59. > 11-61. > 11-64."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL TO CARBURETOR."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 20,
+      "context": "NOTE > NOTE > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 21,
+      "context": "2-21. > NOTE > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 6,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "starts but sputters and coughs",
+    "critical_keywords": [
+      "rained all week",
+      "plane was outside"
+    ]
+  },
+  "timestamp": "2026-03-14T14:52:09.460999"
+}

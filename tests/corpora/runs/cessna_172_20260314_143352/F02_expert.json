@@ -1,0 +1,61 @@
+{
+  "test_id": "F02_expert",
+  "fault_id": 2,
+  "variant": "expert",
+  "query": "No start condition. During last mag check before shutdown, I noticed an abnormal RPM drop on the left mag. Now it won't fire at all.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE WILL NOT START (Ignition)",
+  "fsm_probable_cause": "Defective magneto / Fouled or defective spark plugs",
+  "fsm_remedy": "Repair or replace magneto / Clean, gap, or replace spark plugs",
+  "expected_system": "engine/ignition",
+  "response_time_seconds": 42.47,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Given the abnormal RPM drop on the left magneto and the current no-start condition, we need to isolate the fault within the left ignition system. First, check the electrical integrity of the left magneto's 'P' lead, then inspect the spark plugs and ignition harness. Finally, if those are clear, we'll look at the magneto itself.",
+  "gus_reasoning": "The 'abnormal RPM drop on the left mag' during the last run-up, followed by a 'no start' condition, strongly points to an issue within the left ignition system. The most probable causes are a grounded 'P' lead, defective spark plugs or ignition harness, or an internal fault within the left magneto itself. The FSM troubleshooting for 'ENGINE FAILS TO START' and 'ENGINE WILL NOT IDLE OR RUN PROPERLY' lists these as primary suspects. We need to systematically check these components to isolate the fault.",
+  "gus_answer_paths": [
+    "The left magneto 'P' lead shows continuity to ground with the ignition switch in the 'ON' position.",
+    "Inspection of the spark plugs from the cylinders associated with the left magneto reveals heavy fouling or improper gapping, or the ignition harness shows visible damage.",
+    "Fuel is not reaching the carburetor, or the carburetor drain shows water/sediment.",
+    "All spark plugs, ignition harness, and 'P' lead continuity for the left magneto check out as normal."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 43,
+      "context": "TROUBLE > ENGINE FAILS TO START."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 20,
+      "context": "NOTE > NOTE > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 37,
+      "context": "ENGINE RUN-UP."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "No start condition. During last mag check before shutdown, an abnormal RPM drop was noticed on the left mag. Now it won't fire at all.",
+    "critical_keywords": [
+      "no start",
+      "abnormal RPM drop",
+      "left mag",
+      "won't fire"
+    ]
+  },
+  "timestamp": "2026-03-14T14:38:23.137478"
+}

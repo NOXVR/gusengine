@@ -1,0 +1,57 @@
+{
+  "test_id": "F03_expert",
+  "fault_id": 3,
+  "variant": "expert",
+  "query": "Engine fires but won't sustain idle. It catches for 2-3 seconds then quits. Happens consistently.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE STARTS BUT DIES",
+  "fsm_probable_cause": "Mixture control not in full rich / Idle speed set too low",
+  "fsm_remedy": "Set mixture to full rich / Adjust idle speed",
+  "expected_system": "engine",
+  "response_time_seconds": 48.76,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The engine fires but won't sustain idle, dying after 2-3 seconds. This points to an issue with the engine's ability to maintain combustion without external assistance, likely due to improper fuel-air mixture at idle. We need to determine if the engine is starving for fuel, running too lean, or too rich, or if there's an ignition issue. Your next step is to observe the engine's behavior during and immediately after priming.",
+  "gus_reasoning": "The FSM's 'TROUBLE SHOOTING' section for 'ENGINE STARTS BUT DIES, OR WILL NOT IDLE' (Source 3, 27, 29, 50) directly addresses this symptom. The most probable causes revolve around the fuel and induction systems. A key diagnostic step outlined is to determine if the engine will start when primed but dies when priming is discontinued, which points to a defective carburetor or plugged idling jet. Induction air leaks also cause a lean condition leading to dying. Spark plug issues can cause rough running and dying. A leaking primer or high float level can cause an overly rich condition. Vaporized fuel is also a possibility, especially in hot conditions. I will start by asking about the engine's behavior with priming, as this is a direct FSM troubleshooting step to isolate fuel delivery issues.",
+  "gus_answer_paths": [
+    "Engine starts when primed, but immediately dies when priming is discontinued, even with the mixture control in the full RICH position.",
+    "Engine starts, but runs very rough and dies, and you can visually identify loose or cracked induction hoses, or hear a distinct hissing sound indicating an air leak around the carburetor or intake manifold.",
+    "Engine starts, but runs very rough, and a quick check of the spark plugs reveals them to be heavily fouled or improperly gapped.",
+    "Engine starts, but runs excessively rich (e.g., black smoke, strong fuel smell), and you find fuel leaking from the manual primer outlet line, or suspect a high float level.",
+    "The issue primarily occurs in hot weather or with a hot engine, and you suspect vapor formation in the fuel system."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 26,
+      "context": "11-79. HOT WEATHER. Engine starting in hot > 11-26 > 11-80. DUSTY CONDITIONS. Dust induced into the"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 4,
+      "context": "12-19. PRIMING SYSTEM. (See figure 12-2.) > 12-20. DESCRIPTION. The model 172-Series, > 12 -21. REMOVAL AND INSTALLATION."
+    }
+  ],
+  "gus_rag_chunk_count": 52,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk, piston engine, carbureted.",
+    "symptom_signature": "Engine fires, runs for 2-3 seconds, then quits. This happens consistently.",
+    "critical_keywords": [
+      "fires",
+      "won't sustain idle",
+      "quits",
+      "consistently"
+    ]
+  },
+  "timestamp": "2026-03-14T14:41:09.269434"
+}

@@ -1,0 +1,54 @@
+{
+  "test_id": "F08_expert",
+  "fault_id": 8,
+  "variant": "expert",
+  "query": "Fuel cap difficult to remove, audible pressure release upon opening. Fuel seemed to bulge up when uncapped.",
+  "fsm_section": "\u00a712-4",
+  "fsm_trouble": "PRESSURIZED FUEL TANK",
+  "fsm_probable_cause": "Plugged fuel vent",
+  "fsm_remedy": "Check per paragraph 12-13",
+  "expected_system": "fuel",
+  "response_time_seconds": 44.56,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The symptoms indicate a pressurized fuel tank. We need to check the fuel vent system. Refer to Section 12-11, 'CHECKING' in the Service Manual. This procedure will help determine if the vent line, the bleed hole in the vent valve, or the crossover line is obstructed. Begin by accessing the vent line beneath the wing.",
+  "gus_reasoning": "The reported symptoms of a difficult-to-remove fuel cap, audible pressure release, and fuel bulging upon opening are classic indicators of a pressurized fuel tank. The Service Manual's troubleshooting chart for 'PRESSURIZED FUEL TANK' directly points to 'Plugged fuel vent' and 'Plugged bleed hole in fuel vent' as probable causes (Source 3, 19). Section 12-11, 'CHECKING' the fuel vents, further confirms that 'Field experience has demonstrated that the fuel vent can become plugged... Also, the bleed hole in the vent valve assembly could possibly become plugged, allowing pressure from expanding fuel to pressurize the tanks.' (Source 1, 22). The procedure for checking the vent system involves physically testing the vent line and the bleed hole, as well as the crossover line (Source 15, 22, 32). Therefore, the initial diagnostic path must focus on these components of the fuel vent system.",
+  "gus_answer_paths": [
+    "Air can be blown into the vent line, but no continuous stream of bubbles appears when the tube is placed in water, or pressure does not escape from the opposite tank's filler cap when loosened. (Indicates plugged bleed hole or crossover line issue)",
+    "Air cannot be blown into the vent line at all. (Indicates a completely plugged vent line)",
+    "Air can be blown into the vent line, a continuous stream of bubbles appears in water, and pressure escapes from the opposite tank's filler cap. (Indicates vent system is clear, suggesting an issue with the fuel cap itself or another less common cause)"
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > PRESSURIZED FUEL TANK."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "* THRU 17260805 & F1720904 > BEGINNING WITH 17260806 & F1720905 > 12-5."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 39,
+      "context": "SPECIAL INSPECTION ITEM > EACH 200 HOURS > FUEL SYSTEM"
+    }
+  ],
+  "gus_rag_chunk_count": 57,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "Fuel cap difficult to remove, audible pressure release upon opening. Fuel seemed to bulge up when uncapped.",
+    "critical_keywords": [
+      "Fuel cap",
+      "pressure release",
+      "bulge up"
+    ]
+  },
+  "timestamp": "2026-03-14T14:56:05.915976"
+}

@@ -1,0 +1,64 @@
+{
+  "test_id": "F01_mechanic",
+  "fault_id": 1,
+  "variant": "mechanic",
+  "query": "Engine cranks, no start. What does the FSM troubleshooting table list as probable causes for a no-start condition?",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE WILL NOT START",
+  "fsm_probable_cause": "Fuel selector valve not turned on / Fuel tanks empty",
+  "fsm_remedy": "Turn selector valve on / Service with proper fuel",
+  "expected_system": "engine/fuel",
+  "response_time_seconds": 56.44,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The engine is cranking but not starting. We need to determine if the issue is with fuel, spark, or air/compression. Start by checking the most common and easily verifiable items first.",
+  "gus_reasoning": "The FSM troubleshooting tables for 'ENGINE FAILS TO START' and 'NO FUEL TO CARBURETOR' list several probable causes across the ignition, fuel, and engine mechanical systems. Given the symptom 'Engine cranks, no start,' we need to systematically check for the presence of fuel, air, and spark, and ensure proper compression. The most common and easily verifiable issues are related to fuel supply (empty tanks, selector position, obstructions) and ignition (fouled plugs, switch issues). We will start with these high-probability, non-invasive checks to quickly narrow down the problem.",
+  "gus_answer_paths": [
+    "Fuel tanks are full, and the fuel selector valve is in the 'ON' position. I've also drained the fuel strainer and found no water or debris.",
+    "I've removed a spark plug and confirmed there is no spark when cranking the engine.",
+    "I've removed a spark plug and confirmed there IS spark when cranking the engine, but the plugs appear wet with fuel, indicating flooding.",
+    "I've removed a spark plug and confirmed there IS spark when cranking the engine, but the plugs appear dry, and I've confirmed fuel flow to the carburetor."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 26,
+      "context": "11-79. HOT WEATHER. Engine starting in hot > 11-26 > 11-80. DUSTY CONDITIONS. Dust induced into the"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 30,
+      "context": "11-9. > 11A- 14. BUILD-UP. > NOT E"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL TO CARBURETOR."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 37,
+      "context": "ENGINE RUN-UP."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    }
+  ],
+  "gus_rag_chunk_count": 56,
+  "gus_complaint_echo": {
+    "vehicle_config": "not_stated",
+    "symptom_signature": "Engine cranks, no start.",
+    "critical_keywords": [
+      "cranks",
+      "no start"
+    ]
+  },
+  "timestamp": "2026-03-14T14:36:56.728507"
+}

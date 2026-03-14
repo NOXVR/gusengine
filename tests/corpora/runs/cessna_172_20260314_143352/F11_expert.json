@@ -1,0 +1,54 @@
+{
+  "test_id": "F11_expert",
+  "fault_id": 11,
+  "variant": "expert",
+  "query": "Oil temp reading above normal limits in cruise. Oil pressure is normal. Outside air temp is moderate.",
+  "fsm_section": "\u00a711-9 / \u00a711A-31",
+  "fsm_trouble": "HIGH OIL TEMPERATURE",
+  "fsm_probable_cause": "Insufficient oil / Defective oil cooler / Clogged oil passages",
+  "fsm_remedy": "Service oil / Replace cooler / Flush oil system",
+  "expected_system": "engine/oil",
+  "response_time_seconds": 39.93,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The reported high oil temperature with normal oil pressure in cruise suggests either a faulty temperature indication or an issue with the oil cooling system. First, we need to verify the accuracy of the oil temperature reading. The FSM recommends checking the gage with a known good unit. This will help distinguish between an actual high temperature and a false reading.",
+  "gus_reasoning": "The primary symptom is high oil temperature with normal oil pressure during cruise. This immediately points to either an issue with the oil temperature indication system (gage or bulb) or a problem with the oil cooling system itself. The FSM troubleshooting for 'HIGH OIL TEMPERATURE' lists defective gages/bulbs, and issues with the oil cooler (thermostatic/bypass valve, clogged air or oil passages). Given that oil pressure is normal, internal engine issues causing high temperature (like low oil supply or incorrect oil viscosity) are less likely to be the primary cause, as these often manifest with pressure anomalies first. Operational factors like prolonged ground operation or excessive climb are also ruled out by the 'in cruise' condition. Therefore, the most probable causes are a faulty temperature indication, or a compromised oil cooler system. We will start by verifying the temperature indication, as it's a simpler diagnostic step.",
+  "gus_answer_paths": [
+    "The oil temperature gage reads normal when swapped with a known good unit, or the temperature bulb resistance is within specification when tested.",
+    "The oil temperature gage still reads high when swapped with a known good unit, and the temperature bulb resistance is also out of specification, indicating a true high temperature."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 35,
+      "context": "PROBABLE CAUSE > REMEDY > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 13,
+      "context": "11-31. TROUBLE SHOOTING (Cont). > PROBABLE CAUSE > REMEDY"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 14,
+      "context": "PROBABLE CAUSE > TROUBLE > REMEDY"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 35,
+      "context": "PROBABLE CAUSE > TROUBLE > PROBABLE CAUSE"
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Oil temperature reading above normal limits in cruise. Oil pressure is normal. Outside air temp is moderate.",
+    "critical_keywords": [
+      "Oil temp reading above normal limits",
+      "cruise",
+      "Oil pressure is normal",
+      "Outside air temp is moderate"
+    ]
+  },
+  "timestamp": "2026-03-14T15:04:08.274565"
+}

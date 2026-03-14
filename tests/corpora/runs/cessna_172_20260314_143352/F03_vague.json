@@ -1,0 +1,57 @@
+{
+  "test_id": "F03_vague",
+  "fault_id": 3,
+  "variant": "vague",
+  "query": "It starts up but then immediately dies a few seconds later. I have to keep restarting it.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE STARTS BUT DIES",
+  "fsm_probable_cause": "Mixture control not in full rich / Idle speed set too low",
+  "fsm_remedy": "Set mixture to full rich / Adjust idle speed",
+  "expected_system": "engine",
+  "response_time_seconds": 65.05,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to isolate whether the issue is with basic fuel supply, the carburetor's ability to maintain fuel flow, or another system. Start by verifying the fundamental fuel controls and then perform a priming test.",
+  "gus_reasoning": "The primary symptom, 'engine starts but immediately dies,' points directly to issues preventing sustained combustion. The troubleshooting guide for 'ENGINE STARTS BUT DIES, OR WILL NOT IDLE' (Source 1, 35, 40, 41, 45, 48, 53) lists several probable causes. I've prioritized initial checks related to fuel supply and carburetor function, as these are common and directly addressed by specific diagnostic steps in the manual, such as the priming test. Basic fuel management (tanks, selector, mixture) is the simplest to verify first. Following that, the carburetor's ability to maintain fuel flow after priming is a critical indicator. Fuel contamination, ignition issues, and idle adjustments are also strong candidates that need to be differentiated.",
+  "gus_answer_paths": [
+    "I confirmed the fuel tanks are NOT empty, the fuel selector valve is ON, and the mixture control is in the FULL RICH position. The engine still starts and dies.",
+    "When I keep the primer active, the engine continues to run, but dies immediately once priming is stopped (with mixture control in FULL RICH).",
+    "I drained the fuel strainer and found significant water or debris in the fuel.",
+    "I checked the spark plugs, and they are heavily fouled or improperly gapped.",
+    "I visually inspected the induction system and found a noticeable air leak, or I disconnected the primer outlet line and found fuel leaking from the primer."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 26,
+      "context": "11-79. HOT WEATHER. Engine starting in hot > 11-26 > 11-80. DUSTY CONDITIONS. Dust induced into the"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 16,
+      "context": "11-37. DISASSEMBLY, INSPECTION AND RE- > 11-38. INSTALLATION. > 11-39. OIL COOLER."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 17,
+      "context": "11-46. INDUCTION AIR SYSTEM. > 11-47. DESCRIPTION. Ram air to the engine enters > SHOP NOTES:"
+    }
+  ],
+  "gus_rag_chunk_count": 56,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (implied O-300-Series Continental or Lycoming engine)",
+    "symptom_signature": "Engine starts up but then immediately dies a few seconds later. Requires constant restarting.",
+    "critical_keywords": []
+  },
+  "timestamp": "2026-03-14T14:40:19.010405"
+}

@@ -1,0 +1,50 @@
+{
+  "test_id": "F18_mechanic",
+  "fault_id": 18,
+  "variant": "mechanic",
+  "query": "Excessive aileron control friction. What are the FSM probable causes for stiff aileron controls?",
+  "fsm_section": "\u00a76",
+  "fsm_trouble": "AILERON CONTROL STIFF",
+  "fsm_probable_cause": "Cable tension too high / Pulleys binding / Bellcrank binding",
+  "fsm_remedy": "Adjust cable tension / Lubricate or replace pulleys / Lubricate or replace bellcrank",
+  "expected_system": "flight controls",
+  "response_time_seconds": 45.35,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The FSM lists 'RESISTANCE TO CONTROL WHEEL MOVEMENT' as a symptom. We need to systematically check the aileron control system for binding or improper adjustment. Begin by checking the control wheel for free movement and then inspect the accessible components for the following:\n\n1.  **Control Cables:** Check for proper tension. Cables that are too tight will cause resistance. Refer to Section 6-18 for rigging specifications (Source 17, 41).\n2.  **Pulleys and Brackets:** Inspect all pulleys for binding, damage, or if the cable has come off a pulley. Check pulley brackets for damage.\n3.  **Bellcranks:** Inspect aileron bellcranks for distortion, damage, or binding. Access is typically through hand holes on the underside of the wing (Source 3).\n4.  **Control 'U' Chains and Sprockets:** Inspect the chains and sprockets within the control 'U' assembly for rust or binding. This is located behind the instrument panel (Source 13, 29).\n5.  **Clevis Bolts:** Check all clevis bolts in the system to ensure they are not over-tightened, which can cause binding at pivot points.\n6.  **U-joints:** Inspect universal joints for defects, as they can cause resistance in the control column (Source 17).\n7.  **Wing Leveler System (if installed):** If the aircraft is equipped with a wing leveler, check its pneumatic servos and connecting cables/hoses for any signs of binding or interference with the main aileron control cables (Source 16, 22, 28). Manual override of the system should allow free movement if the issue is within the wing leveler itself.",
+  "gus_reasoning": "The reported symptom of 'Excessive aileron control friction' or 'stiff aileron controls' directly correlates with the 'RESISTANCE TO CONTROL WHEEL MOVEMENT' troubleshooting entry in Section 6 of the Service Manual (Source 17). This section outlines several probable mechanical causes within the aileron control system. The most probable causes involve improper cable tension, binding pulleys, or issues with bellcranks, chains, sprockets, U-joints, or clevis bolts. The Wing Leveler system, if installed, could also contribute to friction if its components are binding, as it mechanically interfaces with the ailerons (Source 16, 22). The initial diagnostic path should focus on a systematic physical inspection of these components, starting with the most common and accessible points of friction.",
+  "gus_answer_paths": [
+    "The control wheel feels stiff throughout its entire range of motion, and I found one or more control cables are excessively tight or a pulley is visibly binding.",
+    "The stiffness is primarily felt when initiating movement from neutral, and I found rust or binding in the control 'U' chains or sprockets, or a defective U-joint.",
+    "The stiffness is intermittent or localized to one aileron, and I found a distorted bellcrank, an over-tightened clevis bolt, or a binding wing leveler servo (if installed).",
+    "The control system feels generally sluggish, but no specific binding point is obvious; cable tension appears within limits, but movement is not smooth."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 10,
+      "context": "TROUBLE > RESISTANCE TO CONTROL > WHEEL MOVEMENT."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 43,
+      "context": "I 15-59. WING LEVELER. THRU SERIALS 17261898 > 15-60. DESCRIPTION. The wing leveler control > 15-61. RIGGING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 41,
+      "context": "CONTROL SYSTEMS"
+    }
+  ],
+  "gus_rag_chunk_count": 57,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Excessive aileron control friction, stiff aileron controls",
+    "critical_keywords": [
+      "aileron",
+      "control friction",
+      "stiff"
+    ]
+  },
+  "timestamp": "2026-03-14T15:21:05.824597"
+}

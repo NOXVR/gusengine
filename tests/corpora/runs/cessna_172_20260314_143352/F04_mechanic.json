@@ -1,0 +1,63 @@
+{
+  "test_id": "F04_mechanic",
+  "fault_id": 4,
+  "variant": "mechanic",
+  "query": "Rough idle, stable at higher RPM. Suspect mixture or spark plug issue. What does the FSM troubleshooting say?",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE ROUGH AT IDLE",
+  "fsm_probable_cause": "Idle mixture too rich or too lean / Fouled spark plugs",
+  "fsm_remedy": "Adjust idle mixture / Clean or replace plugs",
+  "expected_system": "engine",
+  "response_time_seconds": 54.84,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Start by performing a magneto check to assess the ignition system, as this can quickly identify issues with spark plugs, ignition harness, or the magnetos themselves. This procedure is outlined in paragraph 11-59 of the Service Manual. You'll need to run the engine to 1700 RPM and observe the RPM drop when switching to 'R' and 'L' magneto positions. A sharp drop-off or excessive differential indicates an issue.",
+  "gus_reasoning": "The FSM troubleshooting guide for 'ENGINE STARTS BUT DIES, OR WILL NOT IDLE' and 'ENGINE WILL NOT IDLE OR RUN PROPERLY' (Source 6, Source 46) directly addresses the reported symptom of a rough idle. Given the user's suspicion of mixture or spark plug issues, the most probable causes fall into the Ignition System (spark plugs, harness, magnetos) and Fuel/Induction System (carburetor adjustments, plugged jet, air leaks, water in fuel, vaporized fuel). I will start with a magneto check as it's a quick, comprehensive test for the ignition system, followed by checks for fuel contamination and induction air leaks, which are common causes of rough idle.",
+  "gus_answer_paths": [
+    "The RPM drop on one magneto is significantly higher than the other, or exceeds 125 RPM on either side, or the drop is sharp and erratic.",
+    "The RPM drop is within limits (not exceeding 125 RPM on either magneto, and less than 50 RPM differential), and the engine runs smoothly on both magnetos individually.",
+    "The engine runs rough even at 1700 RPM, and the magneto check results are inconsistent or difficult to interpret."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE WILL NOT IDLE OR RUN PROPERLY. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 21,
+      "context": "11-59. MAGNETO CHECK."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 20,
+      "context": "NOTE > NOTE > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 16,
+      "context": "11-45. IDLE SPEED AND MIXTURE ADJUSTMENTS."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 17,
+      "context": "11-46. INDUCTION AIR SYSTEM. > 11-47. DESCRIPTION. Ram air to the engine enters > SHOP NOTES:"
+    }
+  ],
+  "gus_rag_chunk_count": 51,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION) (inferred from FSM documents)",
+    "symptom_signature": "Rough idle, stable at higher RPM",
+    "critical_keywords": [
+      "mixture",
+      "spark plug"
+    ]
+  },
+  "timestamp": "2026-03-14T14:45:10.059340"
+}

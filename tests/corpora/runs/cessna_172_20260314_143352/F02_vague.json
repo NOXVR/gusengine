@@ -1,0 +1,34 @@
+{
+  "test_id": "F02_vague",
+  "fault_id": 2,
+  "variant": "vague",
+  "query": "My plane won't start and it was fine last week. I don't know what's wrong.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE WILL NOT START (Ignition)",
+  "fsm_probable_cause": "Defective magneto / Fouled or defective spark plugs",
+  "fsm_remedy": "Repair or replace magneto / Clean, gap, or replace spark plugs",
+  "expected_system": "engine/ignition",
+  "response_time_seconds": 40.94,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to determine if the engine is receiving fuel and spark, and if the starter system is functioning correctly. Start by checking the most basic elements. First, confirm the battery has enough charge to crank the engine, then verify fuel supply and check for contamination.",
+  "gus_reasoning": "The primary complaint is a sudden 'no start' after the aircraft was recently operational. This points to easily verifiable issues first. I'm prioritizing the most common and straightforward checks: battery condition, fuel quantity, fuel selector position, and fuel contamination. These checks can quickly rule out a significant portion of potential causes across the electrical and fuel systems, which are frequently implicated in no-start scenarios. The FSM troubleshooting guides support these initial checks for 'ENGINE WILL NOT START'.",
+  "gus_answer_paths": [
+    "The starter motor engages and cranks the engine normally, but it doesn't catch and start.",
+    "The starter motor clicks but does not crank the engine, or cranks very slowly.",
+    "The starter motor does nothing at all when the key is turned.",
+    "I have confirmed the fuel tanks are full and the selector valve is ON, but I found water in the fuel strainer when I drained it."
+  ],
+  "gus_sources": [],
+  "gus_rag_chunk_count": 51,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "Plane won't start, was fine last week.",
+    "critical_keywords": [
+      "plane",
+      "won't start",
+      "last week"
+    ]
+  },
+  "timestamp": "2026-03-14T14:37:39.170239"
+}

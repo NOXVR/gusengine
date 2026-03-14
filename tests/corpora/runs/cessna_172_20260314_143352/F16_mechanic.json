@@ -1,0 +1,47 @@
+{
+  "test_id": "F16_mechanic",
+  "fault_id": 16,
+  "variant": "mechanic",
+  "query": "Alternator failure light on, ammeter shows discharge. What FSM troubleshooting entries cover the alternator charging system?",
+  "fsm_section": "\u00a716-33",
+  "fsm_trouble": "ALTERNATOR NOT CHARGING",
+  "fsm_probable_cause": "Defective alternator / Broken or slipping drive belt / Faulty voltage regulator",
+  "fsm_remedy": "Replace alternator / Replace or adjust belt / Replace regulator",
+  "expected_system": "electrical",
+  "response_time_seconds": 55.62,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "To isolate the fault between the voltage regulator and the alternator, we need to test the alternator's ability to produce a charge independently of the regulator's control. First, ensure the master switch is OFF and the negative lead is disconnected from the battery. Then, remove the cowl and locate the voltage regulator, typically mounted on the left-hand side of the firewall. Disconnect the electrical plug from the regulator. With the regulator plug removed, start the engine. Momentarily jumper the 'A+' and 'F' terminals together on the *regulator plug* (the harness side, not the regulator itself). Observe the ship's ammeter. This test bypasses the regulator, directly energizing the alternator field. Refer to Figure 16-5 on page 8 of Source 27 for regulator wiring context.",
+  "gus_reasoning": "The reported symptoms, 'Alternator failure light on' and 'ammeter shows discharge,' directly point to a malfunction in the alternator charging system. The FSM provides a specific troubleshooting procedure for 'ALTERNATOR SYSTEM WILL NOT KEEP BATTERY CHARGED' (Source 39, 48, 49, 50). The initial steps involve verifying the charge rate and bus voltage, then inspecting the voltage regulator's field relay. If the relay operates, the next step is to bypass the regulator to test the alternator's raw output capability. This test, described in Source 39, step 4, involves momentarily jumpering the 'A+' and 'F' terminals on the regulator plug. This action directly energizes the alternator field, allowing us to determine if the alternator itself can produce a charge. If it does, the regulator is the likely culprit. If it does not, the alternator or its primary wiring is at fault. This approach efficiently narrows down the primary suspects: the voltage regulator and the alternator.",
+  "gus_answer_paths": [
+    "The ship's ammeter shows a heavy rate of charge when the 'A+' and 'F' terminals are jumpered.",
+    "The ship's ammeter does NOT show a heavy rate of charge when the 'A+' and 'F' terminals are jumpered."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 4,
+      "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont. )"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 5,
+      "context": "16-39. TROUBLE SHOOTING THE ALTERNATOR SYSTEM (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 3,
+      "context": "TROUBLE"
+    }
+  ],
+  "gus_rag_chunk_count": 52,
+  "gus_complaint_echo": {
+    "vehicle_config": "Not specified by customer, assumed 1975 Cessna 172/Skyhawk based on FSM context.",
+    "symptom_signature": "Alternator failure light on, ammeter shows discharge.",
+    "critical_keywords": [
+      "Alternator failure light",
+      "ammeter shows discharge"
+    ]
+  },
+  "timestamp": "2026-03-14T15:16:42.528672"
+}

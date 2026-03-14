@@ -1,0 +1,85 @@
+{
+  "test_id": "F11_vague",
+  "fault_id": 11,
+  "variant": "vague",
+  "query": "The temperature thing for the oil is really high. Higher than I've ever seen it.",
+  "fsm_section": "\u00a711-9 / \u00a711A-31",
+  "fsm_trouble": "HIGH OIL TEMPERATURE",
+  "fsm_probable_cause": "Insufficient oil / Defective oil cooler / Clogged oil passages",
+  "fsm_remedy": "Service oil / Replace cooler / Flush oil system",
+  "expected_system": "engine/oil",
+  "response_time_seconds": 58.52,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to determine if this is a true high oil temperature condition or an instrument malfunction. First, verify the oil level and type. Then, we'll check the oil temperature gauge and the oil cooler's function.",
+  "gus_reasoning": "High oil temperature can stem from several issues, ranging from a faulty instrument reading to actual engine overheating. The most probable mechanical causes involve the oil cooling system, specifically a defective or stuck oil cooler thermostatic/bypass valve, or clogged oil cooler passages. Incorrect oil level or viscosity can also directly contribute. Less common but still plausible are a defective oil pressure relief valve, a lean fuel-air mixture causing the engine to run hot, or even maintenance oversights like leaving winter baffles installed. My initial approach is to rule out instrument error, then verify the basic oil conditions, and finally check the oil cooler's function.",
+  "gus_answer_paths": [
+    "The oil level is correct, the correct grade oil is present, and a known good oil temperature gauge reads normal.",
+    "The oil level is correct, the correct grade oil is present, and a known good oil temperature gauge also reads high. When feeling the front of the oil cooler core, it is cold.",
+    "The oil level is correct, the correct grade oil is present, and a known good oil temperature gauge also reads high. When feeling the front of the oil cooler core, it is hot, but the air passages appear clear.",
+    "The oil level is low, or the oil is not the correct grade/viscosity for the ambient temperature."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 13,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 28,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 37,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 38,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 20,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 10,
+      "context": "15-42. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 22,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 35,
+      "context": "llA-31. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 41,
+      "context": "llA-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 43,
+      "context": "llA-31. TROUBLE SHOOTING (Cont)."
+    }
+  ],
+  "gus_rag_chunk_count": 50,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (engine type not stated by customer)",
+    "symptom_signature": "The temperature thing for the oil is really high. Higher than I've ever seen it.",
+    "critical_keywords": [
+      "temperature thing",
+      "oil",
+      "really high"
+    ]
+  },
+  "timestamp": "2026-03-14T15:03:26.844829"
+}

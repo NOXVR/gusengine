@@ -1,0 +1,59 @@
+{
+  "test_id": "F17_vague",
+  "fault_id": 17,
+  "variant": "vague",
+  "query": "I can't see the gauges at night. The panel lights aren't working at all.",
+  "fsm_section": "\u00a716-51",
+  "fsm_trouble": "INSTRUMENT LIGHTS WILL NOT LIGHT",
+  "fsm_probable_cause": "Defective bulbs / Open circuit / Defective rheostat",
+  "fsm_remedy": "Replace bulbs / Repair circuit / Replace rheostat",
+  "expected_system": "electrical/lighting",
+  "response_time_seconds": 42.16,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The instrument panel lights are out. For your 1975 model, the instrument flood lighting is controlled by a transistorized dimming assembly with a concentric knob on the lower left side of the pilot's switch panel (Source 52, Source 51). First, check the circuit breaker for the instrument lights. Then, ensure the dimming control is not set to minimum brightness.",
+  "gus_reasoning": "The symptom 'panel lights aren't working at all' for a 1975 model points directly to the troubleshooting section for 'INSTRUMENT LIGHTS WILL NOT LIGHT (1971 MODELS & ON)' (Source 54). The most probable causes, in order of ease of checking and likelihood, are an open circuit breaker, a fault in the dimming control (rheostat/transistorized dimming assembly), or an open circuit in the wiring. A complete failure of all lamps simultaneously is less likely. The master switch is a possibility if all electrical systems are dead, but the complaint specifies only panel lights. I will start by having the mechanic check the circuit breaker and the dimming control's position, as these are the initial steps in the FSM's diagnostic flow.",
+  "gus_answer_paths": [
+    "The instrument light circuit breaker is tripped (popped out).",
+    "The instrument light circuit breaker is set (pushed in).",
+    "The dimming control knob is turned fully counter-clockwise (minimum brightness setting)."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 11,
+      "context": "16-51. TROUBLE SHOOTING (Cont). > INSTRUMENT LIGHTS WILL > NOT LIGHT (1971 MODELS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 26,
+      "context": "16-72. REMOVAL AND INSTALLATION. For re- > 16-73. COMPASS AND RADIO DIAL LIGHTING. > 16-74. DESCRIPTION. The compass and radio dial"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 18,
+      "context": "NOTE > 16-60. ADJUSTMENT OF LANDING AND TAXI > LIGHT (COWL MOUNTED) (BEGINNING WITH"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 46,
+      "context": "16- 1. ELECTRICAL SYSTEMS. > 16-2. GENERAL. This section contains service in- > 16-3. ELECTRICAL POWER SUPPLY SYSTEM."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 9,
+      "context": "16-49. AIRCRAFT LIGHTING SYSTEM. > 16-50. DESCRIPTION. The aircraft lighting system > 16-51. TROUBLE SHOOTING,"
+    }
+  ],
+  "gus_rag_chunk_count": 55,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Can't see the gauges at night. The panel lights aren't working at all.",
+    "critical_keywords": [
+      "gauges",
+      "panel lights",
+      "aren't working at all"
+    ]
+  },
+  "timestamp": "2026-03-14T15:17:26.186184"
+}

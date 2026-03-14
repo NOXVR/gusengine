@@ -1,0 +1,76 @@
+{
+  "test_id": "F18_expert",
+  "fault_id": 18,
+  "variant": "expert",
+  "query": "Aileron control forces noticeably heavier than normal in both directions. Full deflection achievable but requires excessive force.",
+  "fsm_section": "\u00a76",
+  "fsm_trouble": "AILERON CONTROL STIFF",
+  "fsm_probable_cause": "Cable tension too high / Pulleys binding / Bellcrank binding",
+  "fsm_remedy": "Adjust cable tension / Lubricate or replace pulleys / Lubricate or replace bellcrank",
+  "expected_system": "flight controls",
+  "response_time_seconds": 47.85,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The aileron control system is experiencing excessive friction. We need to isolate where this friction is occurring. First, disconnect the aileron control cables from the aileron bellcranks in the wings. This will separate the control wheel and internal linkages from the external aileron surfaces and their associated cables and pulleys. Then, check the freedom of movement for both sections.",
+  "gus_reasoning": "The primary suspect for 'heavier than normal' aileron control forces is increased friction or binding within the aileron control system. This could stem from a lack of lubrication, worn components, or improper rigging. The Control 'U' mechanism, which translates control wheel rotation to cable movement, and the aileron bellcranks, which connect cables to the ailerons, are critical points where friction can develop. The service manual highlights the need for lubrication at various pivot and bearing points within the control system (Source 1, 6, 35) and details repair for worn components in the Control 'U' (Source 40). Improper cable tension (too tight) is also a plausible cause, as the FSM specifies a precise tension for the aileron carry-thru cable (Source 27, 49). To narrow down the cause, we need to determine if the friction is originating in the cockpit controls, the cable/pulley system, or the ailerons themselves.",
+  "gus_answer_paths": [
+    "The control wheels and internal linkages move freely, but the ailerons themselves are stiff when moved by hand.",
+    "The control wheels and internal linkages are still stiff, but the ailerons move freely when disconnected and moved by hand.",
+    "Both the control wheels/internal linkages AND the ailerons/external cables are stiff."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 34,
+      "context": "NOTES > 2-18"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 12,
+      "context": "6-4. CONTROL \"U\". > 6-5. DESCRIPTION. The control \"U\" transforms > 6-6. REMOVAL AND INSTALLATION."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 9,
+      "context": "SECTION 6 > AILERON CONTROL SYSTEM > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 33,
+      "context": "Figure 2-5. Lubrication (Sheet 2 of 3)"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 11,
+      "context": "REFER TO FIGURE 6-3 > * BEGINNING WITH 17264786 > AND F17201385."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 15,
+      "context": "AVAILABLE FROM CESSNA > SERVICE PARTS CENTER > (TOOL NUMBER SE 716)"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 21,
+      "context": "11-61. ENGINE CONTROLS. > 11-62. DESCRIPTION. The throttle, mixture and > 11-63. RIGGING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 17,
+      "context": "SECTION 7 > WING FLAP CONTROL SYSTEM > TABLE OF CONTENTS"
+    }
+  ],
+  "gus_rag_chunk_count": 52,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Aileron control forces noticeably heavier than normal in both directions. Full deflection achievable but requires excessive force.",
+    "critical_keywords": [
+      "Aileron control forces",
+      "heavier",
+      "both directions",
+      "full deflection achievable",
+      "excessive force"
+    ]
+  },
+  "timestamp": "2026-03-14T15:20:18.972515"
+}

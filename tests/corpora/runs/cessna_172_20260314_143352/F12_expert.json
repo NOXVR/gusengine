@@ -1,0 +1,50 @@
+{
+  "test_id": "F12_expert",
+  "fault_id": 12,
+  "variant": "expert",
+  "query": "Aircraft lists to the left when parked. Left main gear appears to sit lower than right. No recent hard landing.",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "AIRCRAFT LEANS TO ONE SIDE",
+  "fsm_probable_cause": "Landing gear attaching parts not tight / Landing gear spring excessively sprung",
+  "fsm_remedy": "Tighten loose parts / Remove and install new parts",
+  "expected_system": "landing gear",
+  "response_time_seconds": 39.2,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The aircraft is listing to the left, with the left main gear appearing lower. We need to systematically check the most common causes for this condition. Begin by verifying the tire pressure, then inspect the main gear strut and its attachments.",
+  "gus_reasoning": "The aircraft listing to one side, specifically the left main gear appearing lower, points directly to issues with the left main landing gear assembly or its immediate support structure. The most probable and easily verifiable causes are incorrect tire inflation or a 'sprung' main gear strut, both of which would directly affect the aircraft's stance. The Service Manual's troubleshooting section for 'AIRCRAFT LEANS TO ONE SIDE' lists 'Landing gear spring excessively sprung' and 'Landing gear attaching parts not tight' as probable causes. While structural damage to bulkheads or bent axles are possibilities, they are less likely given the 'no recent hard landing' statement and should be investigated after simpler checks. We will start with the most common and accessible checks.",
+  "gus_answer_paths": [
+    "The left main gear tire pressure is significantly lower than specified, or the tire shows obvious signs of deflation.",
+    "The left main gear spring strut appears visibly bent, bowed, or compressed more than the right side, indicating it is 'sprung'.",
+    "The bolts or rivets securing the left main landing gear strut to the fuselage are loose or show signs of movement.",
+    "The left main gear axle is visibly bent or deformed."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 24,
+      "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 23,
+      "context": "NOTE > NOTE > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 41,
+      "context": "18-57. REPAIRABLE DAMAGE. Fuselage skin re- > 18-58. DAMAGE NECESSITATING REPLACEMENT > 18- 58A. BONDED DOORS."
+    }
+  ],
+  "gus_rag_chunk_count": 49,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172/Skyhawk, fixed tricycle landing gear with tubular spring-steel main gear struts (post-1971 model).",
+    "symptom_signature": "Aircraft lists to the left when parked. Left main gear appears to sit lower than right. No recent hard landing.",
+    "critical_keywords": [
+      "lists to the left",
+      "left main gear appears to sit lower",
+      "no recent hard landing"
+    ]
+  },
+  "timestamp": "2026-03-14T15:06:29.966192"
+}

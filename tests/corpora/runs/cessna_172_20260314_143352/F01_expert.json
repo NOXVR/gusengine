@@ -1,0 +1,82 @@
+{
+  "test_id": "F01_expert",
+  "fault_id": 1,
+  "variant": "expert",
+  "query": "Engine cranks normally but won't fire. I've verified battery and starter engagement. Suspect fuel delivery issue.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE WILL NOT START",
+  "fsm_probable_cause": "Fuel selector valve not turned on / Fuel tanks empty",
+  "fsm_remedy": "Turn selector valve on / Service with proper fuel",
+  "expected_system": "engine/fuel",
+  "response_time_seconds": 63.02,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "You've confirmed the starter is engaging. Now we need to verify the engine is getting fuel and spark. Let's start with fuel, as you suspect. First, confirm the fuel supply and flow to the carburetor. Then, we'll check for spark.",
+  "gus_reasoning": "The user reports the engine cranks but won't fire, and suspects a fuel delivery issue. Given the symptom, the engine is not achieving combustion. This requires fuel, air, compression, and spark. Since the starter is confirmed functional, we need to investigate the other three. I will prioritize the most common and easiest-to-verify issues in both the fuel and ignition systems, as both are critical for a 'no-fire' condition. The FSM troubleshooting guides for 'ENGINE FAILS TO START' and 'NO FUEL TO CARBURETOR' provide a clear path. I will start by confirming basic fuel presence and flow, then move to ignition, as these are the most probable and straightforward initial checks.",
+  "gus_answer_paths": [
+    "Fuel tanks are full, selector valve is ON, and fuel flows freely from the carburetor drain.",
+    "Fuel tanks are full, selector valve is ON, but no fuel or only a trickle comes from the carburetor drain.",
+    "Fuel tanks are empty or the selector valve is OFF.",
+    "I've checked for spark at the plugs, and there is no spark on any cylinder."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 36,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 37,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 44,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 39,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL TO CARBURETOR."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 1,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 32,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 55,
+      "context": "ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    }
+  ],
+  "gus_rag_chunk_count": 55,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION), likely Lycoming O-320-E2D engine.",
+    "symptom_signature": "Engine cranks normally but won't fire. Battery and starter engagement verified.",
+    "critical_keywords": [
+      "cranks normally",
+      "won't fire",
+      "battery",
+      "starter engagement",
+      "fuel delivery issue"
+    ]
+  },
+  "timestamp": "2026-03-14T14:35:58.788705"
+}

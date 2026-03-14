@@ -1,0 +1,55 @@
+{
+  "test_id": "F17_expert",
+  "fault_id": 17,
+  "variant": "expert",
+  "query": "Instrument panel lighting inoperative. Rheostat rotated to full bright. Circuit breaker checked, appears normal.",
+  "fsm_section": "\u00a716-51",
+  "fsm_trouble": "INSTRUMENT LIGHTS WILL NOT LIGHT",
+  "fsm_probable_cause": "Defective bulbs / Open circuit / Defective rheostat",
+  "fsm_remedy": "Replace bulbs / Repair circuit / Replace rheostat",
+  "expected_system": "electrical/lighting",
+  "response_time_seconds": 36.22,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The circuit breaker is normal, and the rheostat is at full bright. For 1971 and later models, instrument flood lighting is controlled by a rheostat on the lower, left-hand portion of the instrument panel (Source 9, 23). You need to access the instrument light circuit to measure voltage. With the master switch ON and the rheostat turned full clockwise, measure the voltage at the instrument light assembly.",
+  "gus_reasoning": "The user reports inoperative instrument panel lighting on a 1975 Cessna 172, with the rheostat at full bright and the circuit breaker appearing normal. According to the 'INSTRUMENT LIGHTS WILL NOT LIGHT (1971 MODELS & ON)' troubleshooting guide (Source 1, 48), after verifying the circuit breaker, the next steps are to check for an open circuit in the wiring, test the rheostat, and then test the lamps. The most efficient next step is to check for voltage at the instrument light assembly. This will help differentiate between a power supply issue (rheostat, upstream wiring, master switch) and a load issue (lamps, downstream wiring). If voltage is present but lights are out, the lamps or their immediate wiring are suspect. If no voltage is present, the rheostat or upstream wiring is the problem. A sudden voltage drop with rheostat rotation points directly to a faulty rheostat.",
+  "gus_answer_paths": [
+    "I measure battery voltage at the instrument light assembly with the master switch ON and the rheostat full clockwise, but the lights are still out.",
+    "I measure no voltage at the instrument light assembly with the master switch ON and the rheostat full clockwise.",
+    "I measure voltage, but it drops suddenly as I turn the rheostat counterclockwise, before reaching full dim."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 11,
+      "context": "16-51. TROUBLE SHOOTING (Cont). > INSTRUMENT LIGHTS WILL > NOT LIGHT (1971 MODELS"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part06_p251-300.pdf",
+      "page": 18,
+      "context": "NOTE > 16-60. ADJUSTMENT OF LANDING AND TAXI > LIGHT (COWL MOUNTED) (BEGINNING WITH"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 40,
+      "context": "1 5 -5 6. TURN -AND -SLIP INDICATOR. > 15-57. DESCRJPTION. The turn-and-slip indicator > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 35,
+      "context": "PROBABLE CAUSE > TROUBLE > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 37,
+      "context": "15-45. TROUBLE SHOOTING. > TROUBLE > PROBABLE CAUSE"
+    }
+  ],
+  "gus_rag_chunk_count": 54,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (aviation)",
+    "symptom_signature": "Instrument panel lighting inoperative. Rheostat rotated to full bright. Circuit breaker checked, appears normal.",
+    "critical_keywords": []
+  },
+  "timestamp": "2026-03-14T15:18:03.905184"
+}

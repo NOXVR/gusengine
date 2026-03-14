@@ -1,0 +1,68 @@
+{
+  "test_id": "F13_vague",
+  "fault_id": 13,
+  "variant": "vague",
+  "query": "It feels like the brakes are always on a little bit. The plane is hard to push on the ground.",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "BRAKES DRAG",
+  "fsm_probable_cause": "Brake disc warped / Return springs weak or broken / Piston stuck in cylinder",
+  "fsm_remedy": "Replace disc / Replace springs / Free or replace piston",
+  "expected_system": "brakes",
+  "response_time_seconds": 60.14,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to determine if the dragging is due to a control input issue, a hydraulic problem, or a mechanical issue at the wheel. Start by checking the brake controls and then the wheels for signs of friction.",
+  "gus_reasoning": "The symptom 'brakes are always on a little bit' and 'plane is hard to push on the ground' directly points to 'DRAGGING BRAKES' as described in the troubleshooting section of the service manual (Source 44). My differential diagnosis includes several probable causes from different subsystems: mechanical issues with the brake pedal or parking brake linkage, internal master cylinder faults (return spring, Lock-O-Seal clearance, compensating port restriction), hydraulic line restrictions, and issues at the wheel brake assembly itself (discs, parts movement) or wheel bearings. To begin narrowing down the cause, we need to first verify the control inputs are fully released and then check for physical signs of dragging at the wheels, such as heat, which can also help localize the problem to one or both sides.",
+  "gus_answer_paths": [
+    "With the parking brake released, physically check the parking brake handle and cable for free movement. Then, press and release both rudder/brake pedals. Do they return fully and freely without any binding or resistance?",
+    "After attempting to push the aircraft, carefully feel the main wheel hubs and brake assemblies. Are they noticeably hot to the touch, and is the heat localized to one wheel or both?",
+    "Visually inspect the brake master cylinders (located just forward of the pilot rudder pedals) for any signs of external leakage. Also, check the fluid level in both reservoirs. Is the fluid level correct, and are there any visible obstructions around the master cylinder piston rods?"
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 3,
+      "context": "5 -42. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 4,
+      "context": "5-43. BRAKE MASTER CYLINDERS. The brake > 5-44. BRAKE MASTER CYLINDER REMOVAL AND > INSTALLATION."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 24,
+      "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 5,
+      "context": "DO NOT DAMAGE > LOCK-O-SEAL > 0.040 f 0.005-INCH"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 17,
+      "context": "2-3. > 2-4. > 2-5."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 6,
+      "context": "NOTE > 5-54. BRAKE SYSTEM BLEEDING. Bleeding with > NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 24,
+      "context": "NOTE > 2-27. > NOTE"
+    }
+  ],
+  "gus_rag_chunk_count": 56,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (Aviation)",
+    "symptom_signature": "brakes are always on a little bit, plane is hard to push on the ground",
+    "critical_keywords": [
+      "brakes",
+      "hard to push"
+    ]
+  },
+  "timestamp": "2026-03-14T15:08:27.668214"
+}

@@ -1,0 +1,81 @@
+{
+  "test_id": "F01_vague",
+  "fault_id": 1,
+  "variant": "vague",
+  "query": "I can't get my plane to start. It just cranks and cranks but nothing happens.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE WILL NOT START",
+  "fsm_probable_cause": "Fuel selector valve not turned on / Fuel tanks empty",
+  "fsm_remedy": "Turn selector valve on / Service with proper fuel",
+  "expected_system": "engine/fuel",
+  "response_time_seconds": 61.65,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "We need to systematically check the primary systems required for engine start: fuel, spark, and compression. Start with the most common and easiest to verify:\n\n1.  **Fuel System Check:** Confirm adequate fuel in the tanks. Then, open the fuel strainer drain (refer to Section 12 for location) and check for water or contaminants. Ensure the fuel selector valve is in an 'ON' position to a tank known to contain fuel.\n2.  **Ignition System Check (Spark):** Remove a spark plug, ground it, and observe for spark while cranking the engine. Alternatively, perform a magneto check as outlined in paragraph 11-59, noting any absence of RPM drop.\n3.  **Ignition System Check (Impulse Coupling):** Listen for the distinct 'clicks' of the impulse coupling engaging during cranking. This indicates the coupling is operating. If no clicks are heard, the impulse coupling may be faulty (refer to paragraph 11-58).\n4.  **Fuel System Check (Vent):** Inspect the fuel vent line (protruding beneath the wing) for obstructions. You can attach a rubber tube and blow into it to check for openness, then insert it into water to check the bleed hole for continuous bubbles, as described in paragraph 12-11.\n5.  **Engine Mechanical Check (Compression):** If fuel and spark are confirmed to be present and normal, perform an engine compression check on all cylinders. Refer to the engine Manufacturer's Manual for specific procedures, as mentioned in paragraph 11A-18A.4.",
+  "gus_reasoning": "The symptom 'cranks and cranks but nothing happens' indicates a no-start condition where the engine turns over but fails to ignite. This points to fundamental issues with fuel, spark, or compression. The FSM troubleshooting for 'ENGINE FAILS TO START' lists several probable causes across these subsystems. I've prioritized initial checks that are common, relatively easy to verify, and cover distinct failure paths. Checking fuel supply and spark plugs/harness are the first steps recommended by the FSM for ignition trouble. Verifying impulse coupling operation is a specific ignition check. A plugged fuel vent is a distinct fuel system issue that can cause starvation. Finally, if fuel and spark are present, low compression is a critical engine mechanical factor that would prevent starting.",
+  "gus_answer_paths": [
+    "Fuel is present in the tanks, the selector valve is ON, and the fuel strainer drain shows clean fuel with no water. However, the engine still won't start.",
+    "No fuel is reaching the carburetor, or the fuel strainer drain shows significant water/contaminants, or the fuel selector valve was OFF/tanks are empty.",
+    "There is no spark at the spark plugs when grounded and cranked, or the magneto check shows no RPM drop on either magneto.",
+    "The impulse coupling does not produce a distinct 'click' sound during engine cranking.",
+    "The fuel vent line is found to be plugged or restricted when checked per paragraph 12-11.",
+    "A compression check reveals significantly low compression on one or more cylinders."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 17,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 33,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 45,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL TO CARBURETOR."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 2,
+      "context": "NOTE > NOTE > 12-12. FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 31,
+      "context": "11-9. > 11A- 14. BUILD-UP. > NOT E"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "It just cranks and cranks but nothing happens.",
+    "critical_keywords": [
+      "cranks",
+      "nothing happens"
+    ]
+  },
+  "timestamp": "2026-03-14T14:34:54.268801"
+}

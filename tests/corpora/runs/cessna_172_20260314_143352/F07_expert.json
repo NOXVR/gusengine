@@ -1,0 +1,71 @@
+{
+  "test_id": "F07_expert",
+  "fault_id": 7,
+  "variant": "expert",
+  "query": "Engine surging and misfiring intermittently. Aircraft sat outside in rain for five days untied down. Suspect contamination.",
+  "fsm_section": "\u00a712-4",
+  "fsm_trouble": "STARTING (fuel related) \u2014 Water in fuel",
+  "fsm_probable_cause": "Water in fuel",
+  "fsm_remedy": "Drain fuel tank sumps, fuel lines and fuel strainer",
+  "expected_system": "fuel",
+  "response_time_seconds": 59.95,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Given the aircraft's exposure to rain and your suspicion of contamination, the first step is to check for water in the fuel system. Water is denser than fuel and will settle at the lowest points. Open the fuel strainer drain and all fuel tank sumps to collect samples. Observe the samples for any signs of water or sediment.",
+  "gus_reasoning": "The primary suspect for engine surging and misfiring after prolonged exposure to rain is water contamination in the fuel system. The service manual's troubleshooting section for 'ENGINE STARTS BUT DIES, OR WILL NOT IDLE' and 'ENGINE RUNS ROUGHLY OR WILL NOT ACCELERATE PROPERLY' explicitly lists 'Water in fuel system' as a probable cause. This is the most direct and probable cause given the customer's description and suspicion of contamination. Other highly probable causes include fouled spark plugs and moisture in the magnetos, also directly related to rain exposure. Less likely, but still plausible, are issues with the carburetor, restricted air filter, or control linkages. The initial diagnostic step must address the most likely and easiest-to-verify cause: water in the fuel.",
+  "gus_answer_paths": [
+    "You find significant water and/or sediment in the fuel drained from the strainer and tank sumps.",
+    "You find no significant water or sediment in the fuel drained from the strainer and tank sumps, but the engine still surges and misfires.",
+    "You find no significant water or sediment, and after draining, the engine runs smoothly."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 34,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 44,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 12,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 1,
+      "context": "11-59. MAGNETO CHECK. > NOTE > 11-60. SPARK PLUGS. Two 18-mm spark plugs are"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 9,
+      "context": "NOTE > If ignition trouble should develop, spark plugs > and ignition wiring should be checked fir st. If"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 36,
+      "context": "11-9. TROUBLE SHOOTING (Cont). ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    }
+  ],
+  "gus_rag_chunk_count": 51,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Engine surging and misfiring intermittently.",
+    "critical_keywords": [
+      "surging",
+      "misfiring",
+      "sat outside in rain for five days",
+      "untied down",
+      "suspect contamination"
+    ]
+  },
+  "timestamp": "2026-03-14T14:53:10.917040"
+}

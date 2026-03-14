@@ -1,0 +1,34 @@
+{
+  "test_id": "F16_vague",
+  "fault_id": 16,
+  "variant": "vague",
+  "query": "A little red light came on while I was flying. I think it says ALT or something. And the radio started getting staticky.",
+  "fsm_section": "\u00a716-33",
+  "fsm_trouble": "ALTERNATOR NOT CHARGING",
+  "fsm_probable_cause": "Defective alternator / Broken or slipping drive belt / Faulty voltage regulator",
+  "fsm_remedy": "Replace alternator / Replace or adjust belt / Replace regulator",
+  "expected_system": "electrical",
+  "response_time_seconds": 36.06,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The 'ALT' light and radio static indicate a problem with the charging system. We need to determine if the alternator is producing power or if the system has shut it down. First, check the alternator drive belt and the ammeter indication.",
+  "gus_reasoning": "The reported 'ALT' light and staticky radio point directly to a malfunction in the aircraft's electrical power generation system. The FSM describes a 'HIGH VOLTAGE' warning light (red) that illuminates and shuts off the alternator system if an over-voltage trip occurs, leading to an ammeter discharge (Source 43). Loss of alternator output, whether due to the alternator itself, the voltage regulator, or the drive belt, would cause the battery to become the sole power source. This would lead to a voltage drop as the battery discharges, affecting sensitive electronics like the radio. My initial approach is to determine if the alternator is physically turning and if the system is attempting to charge, which will help differentiate between a mechanical drive issue and an electrical component failure.",
+  "gus_answer_paths": [
+    "The alternator drive belt is intact and tight, and the ammeter shows a discharge.",
+    "The alternator drive belt is loose or broken.",
+    "The ammeter shows a normal charge, but the radio is still staticky."
+  ],
+  "gus_sources": [],
+  "gus_rag_chunk_count": 52,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 or Skyhawk",
+    "symptom_signature": "A little red light came on while flying, thought it says 'ALT' or something. The radio started getting staticky.",
+    "critical_keywords": [
+      "red light",
+      "ALT",
+      "staticky radio",
+      "flying"
+    ]
+  },
+  "timestamp": "2026-03-14T15:14:46.517026"
+}

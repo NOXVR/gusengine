@@ -1,0 +1,80 @@
+{
+  "test_id": "F07_mechanic",
+  "fault_id": 7,
+  "variant": "mechanic",
+  "query": "Intermittent misfire and rough running after extended outdoor parking in rain. Suspect water contamination. What is the FSM procedure?",
+  "fsm_section": "\u00a712-4",
+  "fsm_trouble": "STARTING (fuel related) \u2014 Water in fuel",
+  "fsm_probable_cause": "Water in fuel",
+  "fsm_remedy": "Drain fuel tank sumps, fuel lines and fuel strainer",
+  "expected_system": "fuel",
+  "response_time_seconds": 60.73,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Given the intermittent misfire and rough running after rain, we need to systematically check for water contamination and ignition system integrity. Start by checking the fuel system for water, then visually inspect the ignition components, and finally perform a magneto check to assess overall ignition performance.",
+  "gus_reasoning": "The customer's complaint of intermittent misfire and rough running after rain, coupled with a suspicion of water contamination, points strongly to issues within the fuel or ignition systems. The FSM lists several probable causes for 'ENGINE WILL NOT IDLE OR RUN PROPERLY' that align with these conditions, including fouled spark plugs, defective ignition harness, defective magnetos, and issues with the impulse coupling (Source 1). Water in the fuel system is also a critical consideration (Source 2, 18, 49). The initial diagnostic path will focus on physically verifying the presence of water in the fuel system and visually inspecting the external ignition components, followed by a functional check of the ignition system via a magneto check.",
+  "gus_answer_paths": [
+    "You drain the fuel sumps and carburetor. Do you observe any water or sediment in the drained fuel?",
+    "You visually inspect the spark plug leads, spark plugs, and ignition harness for signs of moisture, corrosion, or physical damage. What do you find?",
+    "You perform an engine run-up and magneto check as per Section 11-59. What are the RPM drop readings for each magneto, and do you observe any sharp or smooth drops?"
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 17,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 20,
+      "context": "SERVICING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 21,
+      "context": "11-59. MAGNETO CHECK."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 41,
+      "context": "NOTE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 39,
+      "context": "11A- 48. IGNITION SYSTEM."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 42,
+      "context": "a. Moisture Check."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 26,
+      "context": "11-79. HOT WEATHER. Engine starting in hot"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 22,
+      "context": "2-22. ENGINE INDUCTION AIR FILTER."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 31,
+      "context": "llA-18A. STATIC RUN-UP PROCEDURES."
+    }
+  ],
+  "gus_rag_chunk_count": 52,
+  "gus_complaint_echo": {
+    "vehicle_config": "not_stated (assuming 1975 Cessna 172 & Skyhawk based on context)",
+    "symptom_signature": "Intermittent misfire and rough running after extended outdoor parking in rain",
+    "critical_keywords": [
+      "Intermittent misfire",
+      "rough running",
+      "rain",
+      "water contamination"
+    ]
+  },
+  "timestamp": "2026-03-14T14:54:13.154217"
+}

@@ -1,0 +1,81 @@
+{
+  "test_id": "F05_expert",
+  "fault_id": 5,
+  "variant": "expert",
+  "query": "Gradual power loss in cruise at 5,000 feet. Applied carb heat with momentary further power loss then partial recovery. Outside temp around 40F, visible moisture.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE LOSES POWER IN FLIGHT",
+  "fsm_probable_cause": "Carburetor icing / Plugged fuel strainer / Defective magneto",
+  "fsm_remedy": "Apply carburetor heat / Clean strainer / Replace magneto",
+  "expected_system": "engine/fuel",
+  "response_time_seconds": 61.66,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The symptoms strongly suggest carburetor icing, but we need to confirm this and rule out other fuel/air system issues. Perform the following checks:",
+  "gus_reasoning": "The reported symptoms, particularly the environmental conditions (40F, visible moisture) and the specific response to carburetor heat (momentary further power loss then partial recovery), are highly indicative of carburetor icing. This is a classic presentation. However, a gradual power loss could also be caused by fuel starvation due to an iced or restricted fuel tank vent line, which is also plausible under these conditions. Other possibilities include a restricted induction air filter, ignition system issues, or a lean mixture, all of which can cause power loss but do not fit the carb heat response as precisely as icing. The initial diagnostic steps should focus on confirming or ruling out carburetor icing and checking the fuel vent system, as these are the most probable causes given the specific details.",
+  "gus_answer_paths": [
+    "Re-apply carburetor heat and observe the engine RPM and manifold pressure (if equipped). Does the RPM/MP drop further momentarily, then recover or increase?",
+    "Inspect the fuel tank vent line, especially the portion protruding beneath the wing. Is there any visible ice accumulation or other blockage?",
+    "Visually inspect the induction air filter for any signs of blockage, dirt, or damage. Is it clean and unobstructed?"
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 38,
+      "context": "ENGINE FUEL SYSTEM."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 3,
+      "context": "FUEL SELECTOR VALVE."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 22,
+      "context": "ENGINE INDUCTION AIR FILTER."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 17,
+      "context": "INDUCTION AIR SYSTEM."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 31,
+      "context": "STATIC RUN-UP PROCEDURES."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 39,
+      "context": "AIRBOX."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 10,
+      "context": "STATIC RUN-UP PROCEDURES."
+    }
+  ],
+  "gus_rag_chunk_count": 49,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION), carbureted engine",
+    "symptom_signature": "Gradual power loss in cruise at 5,000 feet. Outside temp around 40F, visible moisture. Applied carb heat with momentary further power loss then partial recovery.",
+    "critical_keywords": [
+      "power loss",
+      "cruise",
+      "carb heat",
+      "40F",
+      "visible moisture"
+    ]
+  },
+  "timestamp": "2026-03-14T14:47:14.790978"
+}

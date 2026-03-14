@@ -1,0 +1,59 @@
+{
+  "test_id": "F10_mechanic",
+  "fault_id": 10,
+  "variant": "mechanic",
+  "query": "Zero oil pressure indication in flight, oil temp rising. What does the FSM troubleshooting list for a no-oil-pressure condition?",
+  "fsm_section": "\u00a711A-31",
+  "fsm_trouble": "NO OIL PRESSURE",
+  "fsm_probable_cause": "Insufficient oil / Defective pressure relief valve / Defective oil pump",
+  "fsm_remedy": "Service oil / Replace relief valve / Replace or repair pump",
+  "expected_system": "engine/oil",
+  "response_time_seconds": 63.67,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "Given the critical nature of zero oil pressure and rising oil temperature, immediate action is required. We need to determine if this is an actual engine issue or an instrumentation fault. First, verify the actual oil level and check for any external oil leaks. Then, we need to confirm the accuracy of the oil pressure gauge.",
+  "gus_reasoning": "The combination of zero oil pressure and rising oil temperature is a critical indication of a severe engine lubrication or cooling issue. My primary suspicion is a mechanical failure within the engine oil system, such as a defective oil pump, critically low oil supply, or a major restriction/leak. These conditions would directly lead to both symptoms. A secondary, but less probable, cause is a simultaneous failure of both the oil pressure and oil temperature gauges. The FSM troubleshooting guides for 'NO OIL PRESSURE' and 'HIGH OIL TEMPERATURE' list several overlapping causes, which I've used to form the differential. The initial diagnostic steps must prioritize verifying the actual oil level and the accuracy of the gauges before proceeding to more invasive engine checks.",
+  "gus_answer_paths": [
+    "I have checked the oil dipstick, and the oil level is critically low or empty. I also see a significant external oil leak.",
+    "I have checked the oil dipstick, and the oil level is normal. There are no visible external oil leaks.",
+    "I have substituted a known-good oil pressure gauge, and it also reads zero. The oil temperature gauge still shows rising temperature."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 12,
+      "context": "11-31. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 13,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 14,
+      "context": "11-31. TROUBLE SHOOTING (Cont)."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 34,
+      "context": "11A- 3 1. TROUBLE SHOOTING."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part05_p201-250.pdf",
+      "page": 35,
+      "context": "15 -37. TROUBLE SHOOTING. (C ont)."
+    }
+  ],
+  "gus_rag_chunk_count": 53,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "Zero oil pressure indication in flight, oil temp rising.",
+    "critical_keywords": [
+      "Zero oil pressure",
+      "oil temp rising",
+      "in flight"
+    ]
+  },
+  "timestamp": "2026-03-14T15:02:26.827860"
+}

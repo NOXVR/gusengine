@@ -1,0 +1,65 @@
+{
+  "test_id": "F20_mechanic",
+  "fault_id": 20,
+  "variant": "mechanic",
+  "query": "Nose wheel shimmy during ground ops. Dampener serviced recently. What does the FSM landing gear troubleshooting say about shimmy?",
+  "fsm_section": "\u00a75",
+  "fsm_trouble": "NOSE WHEEL SHIMMY",
+  "fsm_probable_cause": "Shimmy dampener low on fluid / Worn steering components / Tire flat-spotted",
+  "fsm_remedy": "Service dampener / Replace worn parts / Replace tire",
+  "expected_system": "landing gear",
+  "response_time_seconds": 59.73,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The FSM troubleshooting points to several potential causes for nose wheel shimmy. We need to systematically check for mechanical play and wheel integrity. Begin by inspecting the nose wheel assembly for any obvious looseness or damage.",
+  "gus_reasoning": "The FSM troubleshooting guide for the landing gear (Source 28, 34, 50, 51) identifies several probable causes for nose gear instability, including 'WHEEL BOUNCE EVIDENT EVEN ON SMOOTH SURFACE' and 'NOSE STRUT WILL NOT HOLD AIR PRESSURE,' which are directly related to nose wheel shimmy. Despite recent servicing of the dampener, a defect or improper service is still a possibility. However, other common mechanical issues such as wheel balance, loose torque links, loose wheel bearings, loose steering linkage, loose strut clamps, incorrect tire pressure, or a bent axle are also highly probable causes for shimmy. My initial approach will focus on verifying the most common and easily observable mechanical looseness and wheel condition.",
+  "gus_answer_paths": [
+    "The nose wheel has excessive play when rocked side-to-side, or the tire pressure is incorrect.",
+    "The nose wheel torque links (Figure 5-12, Source 14) show visible looseness or wear at their attachment points.",
+    "The nose wheel steering rods or their connections to the steering arm (Figure 5-11, Source 2) have noticeable play.",
+    "The nose strut itself is loose in its attaching clamps to the firewall (Figure 5-6, Source 41), or the shimmy dampener still feels ineffective despite recent service."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 24,
+      "context": "5-3. > TROUBLE SHOOTING. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 40,
+      "context": "NOSE STRUT WILL NOT HOLD > AIR PRESSURE. > HYDRAULIC FLUID LEAKAGE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part02_p51-100.pdf",
+      "page": 51,
+      "context": "PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 1,
+      "context": "NOTE > 1243030-5 . . . . . . . . . .  0.006 inch > 1243030-6 . . . . . . . . . .  0.012 inch"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part03_p101-150.pdf",
+      "page": 2,
+      "context": "5-37. NOSE WHEEL STEERING SYSTEM. Nose > 5-38. STEERING ROD ASSEMBLY. The steering > 5-39. NOSE WHEEL STEERING ADJUSTMENT."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part01_p1-50.pdf",
+      "page": 23,
+      "context": "NOTE > NOTE > NOTE"
+    }
+  ],
+  "gus_rag_chunk_count": 54,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk",
+    "symptom_signature": "Nose wheel shimmy during ground ops. Dampener serviced recently.",
+    "critical_keywords": [
+      "Nose wheel shimmy",
+      "ground ops",
+      "Dampener serviced recently"
+    ]
+  },
+  "timestamp": "2026-03-14T15:25:33.296080"
+}

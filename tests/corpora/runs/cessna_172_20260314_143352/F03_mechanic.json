@@ -1,0 +1,61 @@
+{
+  "test_id": "F03_mechanic",
+  "fault_id": 3,
+  "variant": "mechanic",
+  "query": "Engine starts, runs briefly, dies. Repeatable condition. What does the FSM list for engine starts but dies?",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE STARTS BUT DIES",
+  "fsm_probable_cause": "Mixture control not in full rich / Idle speed set too low",
+  "fsm_remedy": "Set mixture to full rich / Adjust idle speed",
+  "expected_system": "engine",
+  "response_time_seconds": 63.78,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The engine starts briefly and then dies, which is a classic symptom of a fuel delivery issue preventing sustained operation. We need to determine if the carburetor is capable of maintaining the engine once the initial prime is consumed, or if there's a more fundamental fuel supply, air, or ignition problem. Perform the following checks and report your observations:",
+  "gus_reasoning": "The FSM directly addresses the symptom 'ENGINE STARTS BUT DIES, OR WILL NOT IDLE' (Source 18, 9). The most probable causes revolve around the fuel system's ability to provide a sustained, correct mixture after the initial prime. This includes carburetor defects, fuel supply issues, and air leaks. Ignition problems and severe engine mechanical issues are also plausible. The initial diagnostic path should focus on the most common and easily verifiable fuel system issues, particularly the carburetor's function after priming, as this is a specific diagnostic step outlined in the FSM.",
+  "gus_answer_paths": [
+    "The engine starts when primed, but dies immediately when priming is stopped, even with the mixture control in the full RICH position.",
+    "The engine does not start at all, even with priming, or the fuel strainer drain shows water or significant debris.",
+    "The engine starts, but runs very rough, and a magneto drop check (per paragraph 11-59) shows an excessive RPM drop on one magneto.",
+    "A visual inspection reveals obvious induction air leaks (e.g., loose hoses, cracked gaskets) or a compression check shows low readings on one or more cylinders."
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 4,
+      "context": "11-9. TROUBLE SHOOTING. > ENGINE WILL NOT START. > TROUBLE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 16,
+      "context": "11-37. DISASSEMBLY, INSPECTION AND RE- > 11-38. INSTALLATION. > 11-39. OIL COOLER."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 17,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 26,
+      "context": "11-79. HOT WEATHER. Engine starting in hot > 11-26 > 11-80. DUSTY CONDITIONS. Dust induced into the"
+    }
+  ],
+  "gus_rag_chunk_count": 56,
+  "gus_complaint_echo": {
+    "vehicle_config": "1975 Cessna 172 & Skyhawk (AVIATION)",
+    "symptom_signature": "Engine starts, runs briefly, dies. Repeatable condition.",
+    "critical_keywords": [
+      "starts",
+      "runs briefly",
+      "dies",
+      "repeatable"
+    ]
+  },
+  "timestamp": "2026-03-14T14:42:14.555200"
+}

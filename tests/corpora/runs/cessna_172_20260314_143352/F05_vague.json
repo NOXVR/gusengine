@@ -1,0 +1,66 @@
+{
+  "test_id": "F05_vague",
+  "fault_id": 5,
+  "variant": "vague",
+  "query": "I was flying and the engine just got weaker and weaker. Like it was losing its strength.",
+  "fsm_section": "\u00a711-9",
+  "fsm_trouble": "ENGINE LOSES POWER IN FLIGHT",
+  "fsm_probable_cause": "Carburetor icing / Plugged fuel strainer / Defective magneto",
+  "fsm_remedy": "Apply carburetor heat / Clean strainer / Replace magneto",
+  "expected_system": "engine/fuel",
+  "response_time_seconds": 60.07,
+  "gus_phase": "PHASE_A_TRIAGE",
+  "gus_confidence": "verified",
+  "gus_diagnosis": "The engine losing strength progressively during flight indicates a reduction in power output. We need to narrow down whether this is a fuel delivery issue, an ignition problem, an air intake restriction, or something more severe. To start, observe the engine's response to controls and check for basic system functionality.",
+  "gus_reasoning": "The progressive loss of engine strength points to a fundamental issue affecting power production. The most probable causes involve the fuel, ignition, or induction systems, as these directly control combustion efficiency. A restriction in the fuel system (lines, vent, carburetor) would progressively starve the engine, leading to weakening. Similarly, degrading ignition components (spark plugs, harness, magnetos) or a restricted air filter would reduce combustion efficiency and power output. Less common but still plausible are internal engine mechanical issues (low compression) or a restricted exhaust system. I will start by asking about observable symptoms related to fuel delivery, ignition performance, and air intake, as these are the most common and often easiest to verify without extensive disassembly.",
+  "gus_answer_paths": [
+    "When you slowly pull the mixture control to idle cut-off, does the RPM rise slightly before dropping, or does it drop immediately and sharply?",
+    "During a magneto check (if performed), was there an excessive RPM drop on either magneto, or a rough running condition?",
+    "Was there any indication of carburetor icing, and did applying carburetor heat have any effect on engine power or smoothness?",
+    "Were there any unusual engine noises, vibrations, or abnormal gauge readings (oil pressure, oil temperature, cylinder head temperature) when the power loss began?"
+  ],
+  "gus_sources": [
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 5,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > TROUBLE > ENGINE STARTS BUT"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 18,
+      "context": "TROUBLE > ENGINE FAILS TO START. > PROBABLE CAUSE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 6,
+      "context": "11-9. TROUBLE SHOOTING (Cont). > ENGINE RUNS ROUGHLY > OR WILL NOT ACCELERATE"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 46,
+      "context": "12-4. TROUBLE SHOOTING. > TROUBLE > NO FUEL TO CARBURETOR."
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 24,
+      "context": "11-71. STARTER MOTOR. > 11-72. REMOVAL AND INSTALLATION. > 11-73. EXHAUST SYSTEM. (Refer to figure 11-6.)"
+    },
+    {
+      "source": "1975_cessna_172_skyhawk_aviation/.splits_Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)/Cessna 172 & Skyhawk Series Service Manual (1969 - 1976)_part04_p151-200.pdf",
+      "page": 21,
+      "context": "11-59. MAGNETO CHECK. > NOTE > 11-60. SPARK PLUGS. Two 18-mm spark plugs are"
+    }
+  ],
+  "gus_rag_chunk_count": 54,
+  "gus_complaint_echo": {
+    "vehicle_config": "not_stated",
+    "symptom_signature": "engine just got weaker and weaker, losing its strength",
+    "critical_keywords": [
+      "flying",
+      "engine",
+      "weaker",
+      "losing its strength"
+    ]
+  },
+  "timestamp": "2026-03-14T14:46:11.631980"
+}
