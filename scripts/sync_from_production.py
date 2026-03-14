@@ -73,7 +73,7 @@ def main():
             print(f"    - {vid}")
 
     if not new_ids and not removed_ids:
-        print("\n  ✅ Local registry matches production — no changes needed.")
+        print("\n  [OK] Local registry matches production -- no changes needed.")
         return
 
     if args.dry_run:
@@ -103,7 +103,7 @@ def main():
     with open(REGISTRY_PATH, "w") as f:
         json.dump(updated_reg, f, indent=4)
 
-    print(f"\n  ✅ Updated {REGISTRY_PATH}")
+    print(f"\n  [OK] Updated {REGISTRY_PATH}")
     print(f"     {len(updated_vehicles)} vehicles synced from production.")
     print(f"     Remember to commit this change!")
 

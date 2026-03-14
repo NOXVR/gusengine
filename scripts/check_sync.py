@@ -40,7 +40,7 @@ def _local_vehicle_ids() -> set:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Check local ↔ production vehicle sync")
+    parser = argparse.ArgumentParser(description="Check local <-> production vehicle sync")
     parser.add_argument("--url", default=DEFAULT_API, help="Production API URL")
     parser.add_argument("--no-prompt", action="store_true", help="Fail on mismatch without prompting")
     args = parser.parse_args()
@@ -51,11 +51,11 @@ def main():
         r.raise_for_status()
         prod_data = r.json()
     except requests.exceptions.ConnectionError:
-        print("⚠️  Cannot reach production API — skipping sync check.")
+        print("[!] Cannot reach production API -- skipping sync check.")
         print(f"   (tried {args.url}/api/sync/hash)")
         sys.exit(0)  # Don't block if server is down
     except Exception as e:
-        print(f"⚠️  Sync check failed: {e}")
+        print(f"[!] Sync check failed: {e}")
         sys.exit(0)  # Don't block on unexpected errors
 
     prod_count = prod_data["vehicle_count"]
@@ -63,7 +63,7 @@ def main():
     local_count = len(local_ids)
 
     if prod_count == local_count:
-        print(f"✅ Sync OK: {local_count} vehicles locally, {prod_count} in production.")
+        print(f"[OK] Sync OK: {local_count} vehicles locally, {prod_count} in production.")
         sys.exit(0)
 
     # Mismatch detected — get full details
@@ -80,7 +80,7 @@ def main():
     missing_from_prod = local_ids - prod_ids
 
     print("=" * 60)
-    print("⚠️  VEHICLE DATA MISMATCH DETECTED")
+    print("[!] VEHICLE DATA MISMATCH DETECTED")
     print("=" * 60)
     print(f"  Local:      {local_count} vehicles")
     print(f"  Production: {prod_count} vehicles")
