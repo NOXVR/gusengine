@@ -258,7 +258,11 @@ async def _expand_queries(user_query: str) -> tuple[list[str], dict]:
                 {"role": "system", "content": _EXPANSION_PROMPT},
                 {"role": "user", "content": user_query},
             ],
-            "max_tokens": 800,
+            # Gemini 2.5 Flash's thinking process consumes tokens from max_tokens.
+            # With max_tokens=800, the model spent ~750 tokens thinking and only had
+            # ~35 tokens for output → finish_reason='length', truncated JSON.
+            # Use 8192 to match generate_response() budget.
+            "max_tokens": 8192,
             "temperature": 0.3,
             # NO response_format — we need a bare JSON array, not a json_object
         }
