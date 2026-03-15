@@ -617,6 +617,43 @@
             opacity: 1;
         }
 
+        /* Context Health Bar */
+        .context-health-bar {
+            display: none;
+            height: 4px;
+            border-radius: 2px;
+            background: var(--bg-tertiary);
+            margin-bottom: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .context-health-bar.visible {
+            display: block;
+        }
+
+        .context-health-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.4s ease, background 0.4s ease;
+        }
+
+        .context-health-fill.healthy { background: rgb(34, 197, 94); }
+        .context-health-fill.advisory { background: rgb(234, 179, 8); }
+        .context-health-fill.critical { background: rgb(239, 68, 68); }
+
+        .context-health-label {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            text-align: right;
+            display: none;
+        }
+
+        .context-health-label.visible {
+            display: block;
+        }
+
         /* Citations */
         .citations {
             margin-top: 12px;
@@ -1544,6 +1581,8 @@
             </div>
 
             <div class="input-area">
+                <div class="context-health-label" id="contextHealthLabel"></div>
+                <div class="context-health-bar" id="contextHealthBar"><div class="context-health-fill" id="contextHealthFill"></div></div>
                 <div class="input-wrapper">
                     <textarea id="userInput" placeholder="Describe the symptom or issue..." rows="1"
                         onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"></textarea>
@@ -2110,6 +2149,11 @@
                 // Render DAG response
                 renderAssistantResponse(resp, data);
 
+                // Context Health Bar — Claim #11
+                if (data.context_health) {
+                    renderContextHealth(data.context_health);
+                }
+
                 // Track last query for vehicle mismatch bypass
                 if (resp.current_state === 'VEHICLE_MISMATCH') {
                     _lastMismatchQuery = text;
@@ -2325,6 +2369,40 @@
             await autoSaveSession();
             document.getElementById('userInput').value = 'Switch to Issue #' + issueNumber;
             sendMessage();
+        }
+
+        // ═══════════════════════════════════════════
+        // Context Health Bar — Claim #11
+        // ═══════════════════════════════════════════
+        function renderContextHealth(health) {
+            const bar = document.getElementById('contextHealthBar');
+            const fill = document.getElementById('contextHealthFill');
+            const label = document.getElementById('contextHealthLabel');
+            if (!bar || !fill || !label) return;
+
+            const pct = health.utilization_pct || 0;
+            const status = health.status || 'healthy';
+
+            // Only show bar when utilization is notable (above 40%)
+            if (pct < 40) {
+                bar.className = 'context-health-bar';
+                label.className = 'context-health-label';
+                return;
+            }
+
+            bar.className = 'context-health-bar visible';
+            fill.className = 'context-health-fill ' + status;
+            fill.style.width = Math.min(pct, 100) + '%';
+
+            if (status === 'critical') {
+                label.className = 'context-health-label visible';
+                label.textContent = 'Context: ' + pct + '% — checkpoint recommended';
+            } else if (status === 'advisory') {
+                label.className = 'context-health-label visible';
+                label.textContent = 'Context: ' + pct + '%';
+            } else {
+                label.className = 'context-health-label';
+            }
         }
 
         // Vehicle mismatch bypass — store the blocked query and re-send with bypass flag

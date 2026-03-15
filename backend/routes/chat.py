@@ -886,13 +886,44 @@ async def chat(request: Request):
             "page_numbers": chunk.get("page_numbers", []),
             "headings": chunk.get("headings", []),
         })
+
+    # CLAIM #11: Token-Aware Context Health
+    rag_tokens_used = sum(c.get("token_count", 0) for c in used_chunks)
+    total_tokens_used = (
+        _actual_prompt_tokens
+        + ledger_tokens
+        + chat_history_tokens
+        + rag_tokens_used
+        + _RESPONSE_BUDGET_TOKENS
+    )
+    utilization_pct = round((total_tokens_used / _MAX_CONTEXT_TOKENS) * 100)
+    if utilization_pct >= 90:
+        health_status = "critical"
+    elif utilization_pct >= 75:
+        health_status = "advisory"
+    else:
+        health_status = "healthy"
+
     return {
         "response": response,
         "rag_context": {
             "chunk_count": len(used_chunks),
-            "total_tokens_used": sum(c.get("token_count", 0) for c in used_chunks),
+            "total_tokens_used": rag_tokens_used,
             "sources": rag_sources,
         },
         "expansion_info": expansion_info,
+        "context_health": {
+            "tokens_used": total_tokens_used,
+            "tokens_max": _MAX_CONTEXT_TOKENS,
+            "utilization_pct": utilization_pct,
+            "status": health_status,
+            "breakdown": {
+                "system_prompt": _actual_prompt_tokens,
+                "ledger": ledger_tokens,
+                "chat_history": chat_history_tokens,
+                "rag_context": rag_tokens_used,
+                "response_budget": _RESPONSE_BUDGET_TOKENS,
+            },
+        },
     }
 
