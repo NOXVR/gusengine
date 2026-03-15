@@ -535,6 +535,88 @@
             flex-shrink: 0;
         }
 
+        /* Issue Queue Tiles */
+        .issue-tiles-container {
+            display: flex;
+            gap: 8px;
+            padding: 8px 0 0 0;
+            flex-wrap: wrap;
+        }
+
+        .issue-tile {
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .issue-tile.active {
+            background: var(--accent);
+            border: 2px solid var(--accent);
+            color: white;
+            box-shadow: 0 0 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .issue-tile.pending {
+            background: transparent;
+            border: 2px dashed var(--accent);
+            color: var(--accent);
+        }
+
+        .issue-tile.resolved {
+            background: rgba(34, 197, 94, 0.15);
+            border: 2px solid rgba(34, 197, 94, 0.5);
+            color: rgb(34, 197, 94);
+        }
+
+        .issue-tile:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .issue-tile .tile-number {
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .issue-tile .tile-check {
+            font-size: 20px;
+        }
+
+        .issue-tile-tooltip {
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 400;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 10;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .issue-tile:hover .issue-tile-tooltip {
+            opacity: 1;
+        }
+
         /* Citations */
         .citations {
             margin-top: 12px;
@@ -1467,6 +1549,7 @@
                         onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"></textarea>
                     <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
                 </div>
+                <div class="issue-tiles-container" id="issueTiles"></div>
             </div>
         </div>
     </div>
@@ -2136,6 +2219,15 @@
                 html += '</div>';
             }
 
+            // Issue Queue Tiles — render from pending_issues
+            if (resp.pending_issues && resp.pending_issues.length > 0) {
+                window._currentPendingIssues = resp.pending_issues;
+                renderIssueTiles(resp.pending_issues);
+            } else {
+                window._currentPendingIssues = null;
+                document.getElementById('issueTiles').innerHTML = '';
+            }
+
             // Citations — clickable with context labels
             const citations = resp.source_citations || rawData.citations || [];
             if (citations.length) {
@@ -2170,6 +2262,68 @@
 
         function selectPath(pathText) {
             document.getElementById('userInput').value = pathText;
+            sendMessage();
+        }
+
+        // ═══════════════════════════════════════════
+        // Issue Queue Tiles — Claim #10
+        // ═══════════════════════════════════════════
+        function renderIssueTiles(pendingIssues) {
+            const container = document.getElementById('issueTiles');
+            if (!container) return;
+            if (!pendingIssues || pendingIssues.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+            let html = '';
+            pendingIssues.forEach(issue => {
+                const num = issue.issue_number || '?';
+                const summary = issue.summary || 'Issue ' + num;
+                const status = (issue.status || 'PENDING').toUpperCase();
+                const cssClass = status === 'ACTIVE' ? 'active'
+                    : status === 'RESOLVED' ? 'resolved' : 'pending';
+                const inner = status === 'RESOLVED'
+                    ? '<span class="tile-check">\u2713</span>'
+                    : '<span class="tile-number">' + num + '</span>';
+                const tooltip = '<span class="issue-tile-tooltip">' + escapeHtml(summary) + '</span>';
+                html += '<div class="issue-tile ' + cssClass + '" onclick="switchToIssue(' + num + ')">' + inner + tooltip + '</div>';
+            });
+            container.innerHTML = html;
+        }
+
+        async function autoSaveSession() {
+            try {
+                const chatHistory = [];
+                const msgEls = document.querySelectorAll('#messages .message');
+                msgEls.forEach(el => {
+                    const role = el.classList.contains('assistant') ? 'assistant' : 'user';
+                    const textEl = el.querySelector('.message-text');
+                    if (textEl) chatHistory.push({ role: role, content: textEl.textContent });
+                });
+                const vehicleSelect = document.getElementById('vehicleSelect');
+                const payload = {
+                    session_id: window._currentSessionId || undefined,
+                    vehicle_id: vehicleSelect ? vehicleSelect.value : '',
+                    vehicle_label: vehicleSelect && vehicleSelect.selectedIndex >= 0 ? vehicleSelect.options[vehicleSelect.selectedIndex].text : '',
+                    chat_history: chatHistory,
+                    pending_issues: window._currentPendingIssues || [],
+                    status: 'IN_PROGRESS',
+                };
+                const res = await fetch('/api/session/save', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                const data = await res.json();
+                window._currentSessionId = data.session_id;
+            } catch (e) {
+                console.warn('Auto-save failed:', e);
+            }
+        }
+
+        async function switchToIssue(issueNumber) {
+            await autoSaveSession();
+            document.getElementById('userInput').value = 'Switch to Issue #' + issueNumber;
             sendMessage();
         }
 
