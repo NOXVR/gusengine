@@ -2163,6 +2163,8 @@
                 if (resp.current_state !== 'VEHICLE_MISMATCH') {
                     const assistantContent = resp.mechanic_instructions || resp.response || JSON.stringify(resp);
                     chatHistory.push({ role: 'assistant', content: assistantContent });
+                    // Auto-save session after every response (single-issue or multi-diag)
+                    autoSaveSession();
                 }
 
             } catch (e) {
